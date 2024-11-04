@@ -4,8 +4,8 @@ project(LayingGrass)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(LayingGrass src/main.cpp
-        src/Tiles.cpp
-        include/Tiles.h
+        src/Tile.cpp
+        include/Tile.h
         src/Game.cpp
         include/Game.h
         src/Player.cpp

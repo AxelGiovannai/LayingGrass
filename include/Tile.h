@@ -7,7 +7,7 @@
 
 
 
-class Tiles {
+class Tile {
 
 };
 
