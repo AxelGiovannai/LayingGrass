@@ -1,0 +1,8 @@
+# ninja log v6
+4	385	7524341381485130	build.ninja	49166a326dfc18bb
+4	172	7524327757083855	CMakeFiles/LayingGrass.dir/src/main.cpp.obj.ddi	32177782bb6688b7
+172	192	7524327758770433	CMakeFiles/LayingGrass.dir/CXX.dd	50967e27971b6d7c
+192	957	7524327758972250	CMakeFiles/LayingGrass.dir/src/main.cpp.obj	987697ab1b4d6485
+172	192	7524327758770433	C:/Users/Axel/CLionProjects/LayingGrass/cmake-build-debug/CMakeFiles/LayingGrass.dir/CXXModules.json	50967e27971b6d7c
+172	192	7524327758770433	CMakeFiles/LayingGrass.dir/src/main.cpp.obj.modmap	50967e27971b6d7c
+959	1120	7524327766632485	LayingGrass.exe	50eb18e0f213fd0b
