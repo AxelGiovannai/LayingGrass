@@ -8,6 +8,14 @@
 
 
 class Player {
+public:
+    char name[20];
+    char color; // changer ca c'est de la merde séquences d’échappement ANSI
+    int tile_exchange;
+    bool stone = true;
+    bool Robbery = true;
+private:
+
 
 };
 

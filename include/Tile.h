@@ -4,11 +4,16 @@
 
 #ifndef TILES_H
 #define TILES_H
-
+#include <vector>
 
 
 class Tile {
-
+private:
+    std::pair <int, int> position;
+    std::vector<std::vector<bool>> shape;
+public:
+    void set_position(int a, int b);
+    void rotate();
 };
 
 
