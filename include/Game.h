@@ -10,13 +10,13 @@
 #include <vector>
 
 class Game {
-public:
-    int nb_players;
-    int nb_rounds;
+private:
+    int nb_players = 0;
+    int nb_rounds = 0;
     Board game_board;
     std::vector<Player> players;
     std::vector<Tile> tiles;
-private:
+public:
 
 };
 

@@ -9,14 +9,14 @@
 
 
 class Player {
-public:
-    char name[20];
-    char color; // changer ca c'est de la merde séquences d’échappement ANSI
-    int tile_exchange;
+private:
+    char name[20] = "Default name";
+    char color[10] = "cacao"; // changer ca c'est de la merde séquences d’échappement ANSI
+    int tile_exchange = 0;
     bool stone = true;
     bool Robbery = true;
     std::vector<Tile> tiles;
-private:
+public:
     [[nodiscard]] char getter_name() const;
     void getter_color(); // changer ca c'est de la merde séquences d’échappement ANSI
     [[nodiscard]] int getter_tile_exchange() const;

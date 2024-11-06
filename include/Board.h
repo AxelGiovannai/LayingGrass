@@ -8,9 +8,9 @@
 
 
 class Board {
-public:
-    std::vector<std::vector<char>> board;
 private:
+    std::vector<std::vector<char>> board;
+public:
 
 
 
