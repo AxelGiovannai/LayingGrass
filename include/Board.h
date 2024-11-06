@@ -11,6 +11,9 @@ class Board {
 public:
     std::vector<std::vector<char>> board;
 private:
+
+
+
     void setter_case();
 };
 

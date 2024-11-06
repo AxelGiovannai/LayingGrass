@@ -11,15 +11,15 @@ void Tile::set_position(const int a, const int b) {
     this->position.second = b;
 };
 
-void Tile::rotate() {
-    std::vector<std::vector<bool>> new_shape(this->shape[0].size(), std::vector<bool>(this->shape.size()));
-    for (int i = 0; i < this->shape.size(); i++) {
-        for (int j = 0; j < this->shape[i].size(); j++) {
-            new_shape[j][i] = this->shape[i][j];
-        }
+void Tile::rotate() {    // vraiment approximative
+    std::vector<std::pair<int, int>> new_shape;
+    for (auto &[fst, snd] : this->shape) {
+        new_shape.emplace_back(snd, -fst);
     }
     this->shape = new_shape;
+
 };
+
 
 
 
