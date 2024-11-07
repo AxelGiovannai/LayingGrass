@@ -11,10 +11,11 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
+    std::vector<std::vector<char>> getter_board();
 
-
-
-    void setter_case();
+    [[nodiscard]] char getter_case(int x, int y) const;
+    void setter_board();
+    void setter_case(int x , int y, char c);
 };
 
 
