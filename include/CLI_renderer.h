@@ -11,7 +11,8 @@ class CLI_renderer {
 public:
     static void display_board(Game &game);
     static void refresh_terminal();
-    
+    static void display_menu(Game &game);
+    static void
 };
 
 

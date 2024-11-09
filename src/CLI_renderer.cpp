@@ -40,3 +40,16 @@ void CLI_renderer::refresh_terminal() {
 #endif
 }
 
+void CLI_renderer::display_menu(Game &game) {
+    int  x;
+    std::count << "Welcome to Laying Grass !" << std::endl;
+    std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
+    game.setter_nb_players(x);
+    for (int i = 0; i < x; ++i) {
+        char name[20];
+        std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
+        game.setter_players(Player(name));
+    }
+}
+
+

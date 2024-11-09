@@ -5,7 +5,9 @@
 #include "../include/Player.h"
 
 
-Player::Player(char name[20], char color[10], int tile_exchange, bool stone, bool Robbery, std::vector<Tile>& tiles){};
+Player::Player(const char * str) {
+    
+}
 
 
 
