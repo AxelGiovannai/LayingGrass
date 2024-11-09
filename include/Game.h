@@ -17,6 +17,8 @@ private:
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
+
+
     [[nodiscard]] int getter_nb_players() const;
     [[nodiscard]] int getter_nb_rounds() const;
     [[nodiscard]] Board getter_game_board();

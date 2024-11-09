@@ -11,6 +11,9 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
+
+
+
     std::vector<std::vector<char>> getter_board();
 
     [[nodiscard]] char getter_case(int x, int y) const;

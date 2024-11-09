@@ -12,6 +12,9 @@ private:
     std::pair <int, int> position;
     std::vector<std::pair<int,int>> shape;
 public:
+
+    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+
     void set_position(int a, int b);
     void rotate();
 };

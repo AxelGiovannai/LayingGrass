@@ -9,3 +9,5 @@ build CMakeFiles/LayingGrass.dir/src/Player.cpp.obj: dyndep
 
 build CMakeFiles/LayingGrass.dir/src/Board.cpp.obj: dyndep
 
+build CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj: dyndep
+

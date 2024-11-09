@@ -124,7 +124,22 @@ build CMakeFiles/LayingGrass.dir/src/Board.cpp.obj: CXX_COMPILER__LayingGrass_sc
   OBJECT_FILE_DIR = CMakeFiles\LayingGrass.dir\src
   dyndep = CMakeFiles/LayingGrass.dir/CXX.dd
 
-build CMakeFiles/LayingGrass.dir/CXX.dd | C$:/Users/Axel/CLionProjects/LayingGrass/cmake-build-debug/CMakeFiles/LayingGrass.dir/CXXModules.json CMakeFiles/LayingGrass.dir/src/main.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Game.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Player.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Board.cpp.obj.modmap: CXX_DYNDEP__LayingGrass_Debug CMakeFiles/LayingGrass.dir/src/main.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Game.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Player.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Board.cpp.obj.ddi | C$:/Users/Axel/CLionProjects/LayingGrass/cmake-build-debug/CMakeFiles/LayingGrass.dir/CXXDependInfo.json
+build CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj.ddi: CXX_SCAN__LayingGrass_Debug C$:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp || cmake_object_order_depends_target_LayingGrass
+  DEP_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj.ddi.d
+  DYNDEP_INTERMEDIATE_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj.ddi
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJ_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj
+  PREPROCESSED_OUTPUT_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj.ddi.i
+
+build CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj: CXX_COMPILER__LayingGrass_scanned_Debug C$:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp | CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj.modmap || cmake_object_order_depends_target_LayingGrass CMakeFiles/LayingGrass.dir/CXX.dd
+  DEP_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj.d
+  DYNDEP_MODULE_MAP_FILE = CMakeFiles\LayingGrass.dir\src\CLI_renderer.cpp.obj.modmap
+  FLAGS = -g -std=gnu++23 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\LayingGrass.dir
+  OBJECT_FILE_DIR = CMakeFiles\LayingGrass.dir\src
+  dyndep = CMakeFiles/LayingGrass.dir/CXX.dd
+
+build CMakeFiles/LayingGrass.dir/CXX.dd | C$:/Users/Axel/CLionProjects/LayingGrass/cmake-build-debug/CMakeFiles/LayingGrass.dir/CXXModules.json CMakeFiles/LayingGrass.dir/src/main.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Game.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Player.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/Board.cpp.obj.modmap CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj.modmap: CXX_DYNDEP__LayingGrass_Debug CMakeFiles/LayingGrass.dir/src/main.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Game.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Player.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/Board.cpp.obj.ddi CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj.ddi | C$:/Users/Axel/CLionProjects/LayingGrass/cmake-build-debug/CMakeFiles/LayingGrass.dir/CXXDependInfo.json
 
 
 # =============================================================================
@@ -134,7 +149,7 @@ build CMakeFiles/LayingGrass.dir/CXX.dd | C$:/Users/Axel/CLionProjects/LayingGra
 #############################################
 # Link the executable LayingGrass.exe
 
-build LayingGrass.exe: CXX_EXECUTABLE_LINKER__LayingGrass_Debug CMakeFiles/LayingGrass.dir/src/main.cpp.obj CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj CMakeFiles/LayingGrass.dir/src/Game.cpp.obj CMakeFiles/LayingGrass.dir/src/Player.cpp.obj CMakeFiles/LayingGrass.dir/src/Board.cpp.obj
+build LayingGrass.exe: CXX_EXECUTABLE_LINKER__LayingGrass_Debug CMakeFiles/LayingGrass.dir/src/main.cpp.obj CMakeFiles/LayingGrass.dir/src/Tile.cpp.obj CMakeFiles/LayingGrass.dir/src/Game.cpp.obj CMakeFiles/LayingGrass.dir/src/Player.cpp.obj CMakeFiles/LayingGrass.dir/src/Board.cpp.obj CMakeFiles/LayingGrass.dir/src/CLI_renderer.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\LayingGrass.dir

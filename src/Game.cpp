@@ -35,7 +35,7 @@ void Game::setter_nb_rounds(const int nb) {
 }
 
 void Game::setter_game_board() {
-    game_board.setter_case();
+   // game_board.setter_case();
 }
 
 void Game::setter_players(const Player& p) {

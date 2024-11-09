@@ -11,4 +11,6 @@ add_executable(LayingGrass src/main.cpp
         src/Player.cpp
         include/Player.h
         src/Board.cpp
-        include/Board.h)
+        include/Board.h
+        src/CLI_renderer.cpp
+        include/CLI_renderer.h)

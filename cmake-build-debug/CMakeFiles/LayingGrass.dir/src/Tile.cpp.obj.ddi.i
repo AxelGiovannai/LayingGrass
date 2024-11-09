@@ -72104,7 +72104,7 @@ namespace std
 class Tile {
 private:
     std::pair <int, int> position;
-    std::vector<std::vector<bool>> shape;
+    std::vector<std::pair<int,int>> shape;
 public:
     void set_position(int a, int b);
     void rotate();
@@ -72119,11 +72119,10 @@ void Tile::set_position(const int a, const int b) {
 };
 
 void Tile::rotate() {
-    std::vector<std::vector<bool>> new_shape(this->shape[0].size(), std::vector<bool>(this->shape.size()));
-    for (int i = 0; i < this->shape.size(); i++) {
-        for (int j = 0; j < this->shape[i].size(); j++) {
-            new_shape[j][i] = this->shape[i][j];
-        }
+    std::vector<std::pair<int, int>> new_shape;
+    for (auto &[fst, snd] : this->shape) {
+        new_shape.emplace_back(snd, -fst);
     }
     this->shape = new_shape;
+
 };
