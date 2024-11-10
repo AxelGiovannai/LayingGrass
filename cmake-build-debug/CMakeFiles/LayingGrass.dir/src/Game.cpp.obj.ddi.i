@@ -28182,10 +28182,13 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
+
+
+
     std::vector<std::vector<char>> getter_board();
 
     [[nodiscard]] char getter_case(int x, int y) const;
-    void setter_board();
+    void setter_board(int x, int y);
     void setter_case(int x , int y, char c);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
@@ -28204,6 +28207,9 @@ private:
     std::pair <int, int> position;
     std::vector<std::pair<int,int>> shape;
 public:
+
+    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+
     void set_position(int a, int b);
     void rotate();
 };
@@ -28219,11 +28225,14 @@ private:
     bool Robbery = true;
     std::vector<Tile> tiles;
 public:
+    explicit Player(const char * str);
+
     [[nodiscard]] char getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
+
 
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
@@ -28233,17 +28242,22 @@ public:
 class Game {
 private:
     int nb_players = 0;
+    int player_turn = 0;
     int nb_rounds = 0;
     Board game_board;
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
+
+
     [[nodiscard]] int getter_nb_players() const;
+    [[nodiscard]] int getter_player_turn() const;
     [[nodiscard]] int getter_nb_rounds() const;
     [[nodiscard]] Board getter_game_board();
     [[nodiscard]] Player getter_players(int i);
     [[nodiscard]] Tile getter_tiles(int i);
     void setter_nb_players(int nb);
+    void setter_player_turn();
     void setter_nb_rounds(int nb);
     void setter_game_board();
     void setter_players(const Player &p);
@@ -72169,6 +72183,10 @@ int Game::getter_nb_players() const {
     return nb_players;
 }
 
+int Game::getter_player_turn() const {
+    return player_turn;
+}
+
 int Game::getter_nb_rounds() const {
     return nb_rounds;
 }
@@ -72189,12 +72207,20 @@ void Game::setter_nb_players(const int nb) {
     nb_players = nb;
 }
 
+void Game::setter_player_turn() {
+    player_turn = (player_turn % nb_players) + 1;
+}
+
 void Game::setter_nb_rounds(const int nb) {
     nb_rounds = nb;
 }
 
 void Game::setter_game_board() {
-
+   if (nb_players < 5) {
+       game_board.setter_board(20, 20);
+   } else {
+       game_board.setter_board(30, 30);
+   }
 }
 
 void Game::setter_players(const Player& p) {
@@ -72204,6 +72230,9 @@ void Game::setter_players(const Player& p) {
 void Game::setter_tiles(const Tile& t) {
     tiles.push_back(t);
 }
+
+
+
 
 void Game::display_board() {
     for (const std::vector<std::vector<char>> board = game_board.getter_board(); const auto & i : board) {

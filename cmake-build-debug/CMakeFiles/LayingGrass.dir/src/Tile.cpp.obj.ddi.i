@@ -72106,6 +72106,9 @@ private:
     std::pair <int, int> position;
     std::vector<std::pair<int,int>> shape;
 public:
+
+    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+
     void set_position(int a, int b);
     void rotate();
 };
@@ -72117,6 +72120,9 @@ void Tile::set_position(const int a, const int b) {
     this->position.first = a;
     this->position.second = b;
 };
+
+Tile::Tile(int x, int y, const std::vector<std::pair<int, int>>& shape) : position(x, y), shape(shape) {}
+
 
 void Tile::rotate() {
     std::vector<std::pair<int, int>> new_shape;

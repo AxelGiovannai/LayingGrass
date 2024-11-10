@@ -28175,18 +28175,35 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
+
+
+
     std::vector<std::vector<char>> getter_board();
 
     [[nodiscard]] char getter_case(int x, int y) const;
-    void setter_board();
+    void setter_board(int x, int y);
     void setter_case(int x , int y, char c);
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
+
+
+
 
 std::vector<std::vector<char>> Board::getter_board() {
     return board;
 }
 
-char Board::getter_case(int x, int y) const {
+char Board::getter_case(const int x, const int y) const {
     return board[x][y];
+}
+
+void Board::setter_board(const int x, const int y) {
+    board.resize(x);
+    for (int i = 0; i < x; ++i) {
+        board[i].resize(y, '.');
+    }
+}
+
+void Board::setter_case(const int x, const int y, const char c) {
+    board[x][y] = c;
 }

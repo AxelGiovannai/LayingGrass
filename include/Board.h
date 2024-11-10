@@ -17,7 +17,7 @@ public:
     std::vector<std::vector<char>> getter_board();
 
     [[nodiscard]] char getter_case(int x, int y) const;
-    void setter_board();
+    void setter_board(int x, int y);
     void setter_case(int x , int y, char c);
 };
 

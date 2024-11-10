@@ -28176,6 +28176,9 @@ private:
     std::pair <int, int> position;
     std::vector<std::pair<int,int>> shape;
 public:
+
+    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+
     void set_position(int a, int b);
     void rotate();
 };
@@ -28191,14 +28194,25 @@ private:
     bool Robbery = true;
     std::vector<Tile> tiles;
 public:
+    explicit Player(const char * str);
+
     [[nodiscard]] char getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
 
+
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
+
+
+Player::Player(const char * str) {
+
+}
+
+
+
 
 char Player::getter_name() const {
     return *name;
