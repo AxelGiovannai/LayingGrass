@@ -11,7 +11,11 @@ void Tile::set_position(const int a, const int b) {
     this->position.second = b;
 };
 // Constructor implementation
-Tile::Tile(int x, int y, const std::vector<std::pair<int, int>>& shape) : position(x, y), shape(shape) {}
+Tile::Tile(const int x, const int y, const std::vector<std::vector<int>> &shape) {
+    this->position.first = x;
+    this->position.second = y;
+    this->shape = shape;
+};
 
 
 void Tile::rotate() {    // vraiment approximative

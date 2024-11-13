@@ -3,6 +3,8 @@
 //
 
 #include "../include/Player.h"
+#include "../include/Tile.h"
+#include <vector>
 
 
 Player::Player(const char * str) {
@@ -28,5 +30,7 @@ bool Player::getter_Robbery() const {
     return Robbery;
 }
 
-
+std::vector<std::vector<int>> getter_tiles_shape(int i) const {
+    return tiles[i].getter_shape();
+}
 

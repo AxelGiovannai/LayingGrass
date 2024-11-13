@@ -1,5 +1,8 @@
 #include <iostream>
 #include "../include/Game.h"
+#include "../include/Board.h"
+#include "../include/Player.h"
+#include "../include/Tile.h"
 #include "../include/CLI_renderer.h"
 
 int main() {

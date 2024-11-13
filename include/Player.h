@@ -24,6 +24,7 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
 
 
 };

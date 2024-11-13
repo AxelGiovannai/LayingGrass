@@ -182,5 +182,8 @@ CMakeFiles\LayingGrass.dir\src\main.cpp.obj.ddi: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h \
+ C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h \
+ C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h \
+ C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h \
  C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h

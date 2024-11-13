@@ -72194,6 +72194,17 @@ namespace std
 }
 # 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
 
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 3
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 2 3
 # 1 "C:/msys64/mingw64/include/string.h" 1 3
 # 21 "C:/msys64/mingw64/include/string.h" 3
 extern "C" {
@@ -72331,6 +72342,64 @@ extern "C" {
 # 103 "C:/msys64/mingw64/include/sec_api/string_s.h" 3
 }
 # 195 "C:/msys64/mingw64/include/string.h" 2 3
+# 44 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 2 3
+# 72 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 3
+extern "C++"
+{
+namespace std
+{
+
+
+  using ::memchr;
+  using ::memcmp;
+  using ::memcpy;
+  using ::memmove;
+  using ::memset;
+  using ::strcat;
+  using ::strcmp;
+  using ::strcoll;
+  using ::strcpy;
+  using ::strcspn;
+  using ::strerror;
+  using ::strlen;
+  using ::strncat;
+  using ::strncmp;
+  using ::strncpy;
+  using ::strspn;
+
+  using ::strtok;
+
+  using ::strxfrm;
+  using ::strchr;
+  using ::strpbrk;
+  using ::strrchr;
+  using ::strstr;
+
+
+  inline void*
+  memchr(void* __s, int __c, size_t __n)
+  { return __builtin_memchr(__s, __c, __n); }
+
+  inline char*
+  strchr(char* __s, int __n)
+  { return __builtin_strchr(__s, __n); }
+
+  inline char*
+  strpbrk(char* __s1, const char* __s2)
+  { return __builtin_strpbrk(__s1, __s2); }
+
+  inline char*
+  strrchr(char* __s, int __n)
+  { return __builtin_strrchr(__s, __n); }
+
+  inline char*
+  strstr(char* __s1, const char* __s2)
+  { return __builtin_strstr(__s1, __s2); }
+
+
+
+}
+}
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 1 3
 # 39 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
@@ -72383,14 +72452,43 @@ void CLI_renderer::display_menu(Game &game) {
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
         char name[20]="";
-
-        while (strlen(name) == 0 || strlen(name) > 20 || name[0] == ' ') {
+        do {
             std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
-        }
+        } while (strlen(name) == 0 || strlen(name) > 20 || name[0] == ' ') ;
         game.setter_players(Player(name));
     }
 }
 
 void CLI_renderer::display_game(Game &game) {
+    display_board(game);
+    std::cout << "Player  :" << game.getter_players(game.getter_player_turn() -1).getter_name() << " turn" << std::endl;
+    std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< game.getter_players(game.getter_player_turn() -1).getter_tile_exchange() <<") | [S] Stone | [V] Robbery |" << std::endl;
+    int action;
+    do {
+        std::cout << "Invalid action" << std::endl;
+        std::cin >> action;
+    } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
+    switch (action) {
+        case 'P':
 
+            break;
+        case 'R':
+
+            break;
+        case 'F':
+
+            break;
+        case 'E':
+
+            break;
+        case 'S':
+
+            break;
+        case 'V':
+
+            break;
+        default:
+            std::cout << "Invalid action" << std::endl;
+            break;
+    }
 }

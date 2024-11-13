@@ -72192,6 +72192,12 @@ public:
     void display_board();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
+# 4 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
+# 5 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
+# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 1
 
 
@@ -72211,7 +72217,7 @@ public:
     static void display_game(Game &game);
 
 };
-# 4 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
+# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 
 int main() {
     Game game;
