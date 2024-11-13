@@ -5,6 +5,13 @@
 #include "../include/Tile.h"
 #include <vector>
 
+std::vector<std::vector<int>> Tile::getter_shape() const {
+    return shape;
+};
+
+
+
+
 
 void Tile::set_position(const int a, const int b) {
     this->position.first = a;
@@ -18,14 +25,17 @@ Tile::Tile(const int x, const int y, const std::vector<std::vector<int>> &shape)
 };
 
 
-void Tile::rotate() {    // vraiment approximative
-    std::vector<std::pair<int, int>> new_shape;
-    for (auto &[fst, snd] : this->shape) {
-        new_shape.emplace_back(snd, -fst);
+void Tile::rotate() {
+    const std::size_t n = shape.size();
+    for (std::size_t i = 0; i < n / 2; ++i) {
+        for (std::size_t j = i; j < n - i - 1; ++j) {
+            const int temp = shape[i][j]; shape[i][j] = shape[n - j - 1][i];
+            shape[n - j - 1][i] = shape[n - i - 1][n - j - 1];
+            shape[n - i - 1][n - j - 1] = shape[j][n - i - 1];
+            shape[j][n - i - 1] = temp;
+        }
     }
-    this->shape = new_shape;
-
-};
+}
 
 
 

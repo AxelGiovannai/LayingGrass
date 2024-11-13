@@ -28174,13 +28174,18 @@ namespace std
 class Tile {
 private:
     std::pair <int, int> position;
-    std::vector<std::pair<int,int>> shape;
+    std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
 
+    [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    [[nodiscard]] std::pair<int, int> getter_position() const;
     void set_position(int a, int b);
     void rotate();
+
+
+
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
 
@@ -28201,10 +28206,14 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
+    [[nodiscard]] Tile getter_tiles_shape(int i);
 
 
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
+# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
+
 
 
 Player::Player(const char * str) {
@@ -28228,4 +28237,8 @@ bool Player::getter_stone() const {
 
 bool Player::getter_Robbery() const {
     return Robbery;
+}
+
+tile getter_tiles_shape(int i) {
+    return tiles[i].getter_shape();
 }

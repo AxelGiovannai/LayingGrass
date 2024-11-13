@@ -15,13 +15,13 @@ public:
 
     Tile(int x, int y, const std::vector<std::vector<int>> &shape);
 
-
+    [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    [[nodiscard]] std::pair<int, int> getter_position() const;
     void set_position(int a, int b);
-
-
-
-
     void rotate();
+
+
+
 };
 
 

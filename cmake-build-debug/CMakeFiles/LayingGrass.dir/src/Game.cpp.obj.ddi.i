@@ -28205,13 +28205,18 @@ public:
 class Tile {
 private:
     std::pair <int, int> position;
-    std::vector<std::pair<int,int>> shape;
+    std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
 
+    [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    [[nodiscard]] std::pair<int, int> getter_position() const;
     void set_position(int a, int b);
     void rotate();
+
+
+
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
 
@@ -28232,6 +28237,7 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
+    [[nodiscard]] Tile getter_tiles_shape(int i);
 
 
 };

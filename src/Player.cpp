@@ -30,7 +30,8 @@ bool Player::getter_Robbery() const {
     return Robbery;
 }
 
-std::vector<std::vector<int>> getter_tiles_shape(int i) const {
+std::vector<std::vector<int>> Player::getter_tiles_shape(const int i) const {
     return tiles[i].getter_shape();
 }
+
 

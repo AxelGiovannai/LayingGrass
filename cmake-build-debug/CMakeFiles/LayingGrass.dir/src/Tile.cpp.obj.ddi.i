@@ -72104,15 +72104,27 @@ namespace std
 class Tile {
 private:
     std::pair <int, int> position;
-    std::vector<std::pair<int,int>> shape;
+    std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::pair<int, int>>& shape);
+    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
 
+    [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    [[nodiscard]] std::pair<int, int> getter_position() const;
     void set_position(int a, int b);
     void rotate();
+
+
+
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Tile.cpp" 2
+
+
+std::vector<std::vector<int>> Tile::getter_shape() const {
+    return shape;
+};
+
+
 
 
 
@@ -72121,14 +72133,21 @@ void Tile::set_position(const int a, const int b) {
     this->position.second = b;
 };
 
-Tile::Tile(int x, int y, const std::vector<std::pair<int, int>>& shape) : position(x, y), shape(shape) {}
+Tile::Tile(const int x, const int y, const std::vector<std::vector<int>> &shape) {
+    this->position.first = x;
+    this->position.second = y;
+    this->shape = shape;
+};
 
 
 void Tile::rotate() {
-    std::vector<std::pair<int, int>> new_shape;
-    for (auto &[fst, snd] : this->shape) {
-        new_shape.emplace_back(snd, -fst);
+    const std::size_t n = shape.size();
+    for (std::size_t i = 0; i < n / 2; ++i) {
+        for (std::size_t j = i; j < n - i - 1; ++j) {
+            const int temp = shape[i][j]; shape[i][j] = shape[n - j - 1][i];
+            shape[n - j - 1][i] = shape[n - i - 1][n - j - 1];
+            shape[n - i - 1][n - j - 1] = shape[j][n - i - 1];
+            shape[j][n - i - 1] = temp;
+        }
     }
-    this->shape = new_shape;
-
-};
+}
