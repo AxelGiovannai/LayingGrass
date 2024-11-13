@@ -28244,7 +28244,7 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
-    [[nodiscard]] Tile getter_tiles_shape(int i);
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
 
 
 };
@@ -72416,6 +72416,14 @@ namespace std
 
 
 # 12 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp"
+void CLI_renderer::refresh_terminal() {
+
+    std::system("cls");
+
+
+
+}
+
 void CLI_renderer::display_board(Game &game) {
 
     Board board = game.getter_game_board();
@@ -72440,16 +72448,10 @@ void CLI_renderer::display_board(Game &game) {
     }
 }
 
-void CLI_renderer::refresh_terminal() {
 
-    std::system("cls");
-
-
-
-}
 
 void CLI_renderer::display_menu(Game &game) {
-    int x;
+    int x = 0;
     std::cout << "Welcome to Laying Grass !" << std::endl;
     while (x < 1 || x > 9) {
         std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
@@ -72457,19 +72459,27 @@ void CLI_renderer::display_menu(Game &game) {
 
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
-        char name[20]="";
+        char name[20] = "";
         do {
             std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
-        } while (strlen(name) == 0 || strlen(name) > 20 || name[0] == ' ') ;
+        } while (strlen(name) == 0 || strlen(name) > 20 || name[0] == ' ');
+        std::cout << "before attribution name at display_menu " << std::endl;
         game.setter_players(Player(name));
+        std::cout << "after attribution name at display_menu " << std::endl;
     }
 }
 
 void CLI_renderer::display_game(Game &game) {
-    display_board(game);
+    std::cout << " Enter display_game " << std::endl;
     std::cout << "Player  :" << game.getter_players(game.getter_player_turn() -1).getter_name() << " turn" << std::endl;
-    for (i=0) {
-
+    for (int i = 0; i < 3; ++i) {
+        std::cout << "Tile " << i + 1 << " : " << std::endl;
+        for (const auto &row : game.getter_players(game.getter_player_turn() -1).getter_tiles_shape(i)) {
+            for (const auto &cell : row) {
+                std::cout << cell << " ";
+            }
+            std::cout << std::endl;
+        }
     };
     std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< game.getter_players(game.getter_player_turn() -1).getter_tile_exchange() <<") | [S] Stone | [V] Robbery |" << std::endl;
     int action;

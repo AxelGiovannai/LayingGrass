@@ -72164,7 +72164,7 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
-    [[nodiscard]] Tile getter_tiles_shape(int i);
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
 
 
 };
@@ -72228,6 +72228,9 @@ public:
 int main() {
     Game game;
     CLI_renderer::display_menu(game);
+    std::cout << "before refresh " << std::endl;
     CLI_renderer::refresh_terminal();
+    std::cout << "after refresh " << std::endl;
     CLI_renderer::display_game(game);
+    return 0;
 }

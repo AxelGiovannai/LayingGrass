@@ -28206,7 +28206,7 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] bool getter_stone() const;
     [[nodiscard]] bool getter_Robbery() const;
-    [[nodiscard]] Tile getter_tiles_shape(int i);
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
 
 
 };
@@ -28239,6 +28239,6 @@ bool Player::getter_Robbery() const {
     return Robbery;
 }
 
-tile getter_tiles_shape(int i) {
+std::vector<std::vector<int>> Player::getter_tiles_shape(const int i) const {
     return tiles[i].getter_shape();
 }
