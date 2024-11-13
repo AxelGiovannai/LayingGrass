@@ -64,22 +64,33 @@ void CLI_renderer::display_menu(Game &game) {
 
 void CLI_renderer::display_game(Game &game) {
     std::cout << " Enter display_game " <<  std::endl;
-    std::cout << "Player  :" << game.getter_players(game.getter_player_turn() -1).getter_name() << " turn" << std::endl;
+    const int player_turn = game.getter_player_turn();
+    if (player_turn < 0 || player_turn >= game.getter_nb_players()) {
+        std::cerr << "Invalid player turn" << std::endl;
+        return;
+    }
+
+    const Player current_player = game.getter_players(player_turn - 1);
+    std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
+
     for (int i = 0; i < 3; ++i) {
-        std::cout << "Tile " << i + 1 << " : " << std::endl;
-        for (const auto &row : game.getter_players(game.getter_player_turn() -1).getter_tiles_shape(i)) {
+        std::cout << "   "  << std::endl;
+        const auto &tile_shape = current_player.getter_tiles_shape(i);
+        for (const auto &row : tile_shape) {
             for (const auto &cell : row) {
                 std::cout << cell << " ";
             }
             std::cout << std::endl;
         }
-    };
-    std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< game.getter_players(game.getter_player_turn() -1).getter_tile_exchange() <<") | [S] Stone | [V] Robbery |" << std::endl;
-    int action;
+    }
+
+    std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<") | [S] Stone | [V] Robbery |" << std::endl;
+    char action;
     do {
         std::cout << "Invalid action" << std::endl;
         std::cin >> action;
     } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
+
     switch (action) {
         case 'P':
             //place
