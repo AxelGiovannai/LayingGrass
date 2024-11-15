@@ -12,7 +12,7 @@ class Player {
 private:
     char name;
     char color{}; // changer ca c'est de la merde séquences d’échappement ANSI
-    int tile_exchange = 0;
+    int tile_exchange = 1;
     int stone = 0;
     int Robbery = 0;
     std::vector<Tile> tiles;
