@@ -7,7 +7,7 @@
 #include <vector>
 
 
-Player::Player(const std::string &name) {
+Player::Player(const char name) {
     this->name = name;
 
 }
@@ -15,7 +15,7 @@ Player::Player(const std::string &name) {
 
 
 
-std::string Player::getter_name() const {
+char Player::getter_name() const {
     return name;
 }
 
