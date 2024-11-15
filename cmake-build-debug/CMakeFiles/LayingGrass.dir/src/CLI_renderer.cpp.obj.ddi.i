@@ -72435,7 +72435,8 @@ void CLI_renderer::display_board(Game &game) {
 
     Board board = game.getter_game_board();
 
-    std::cout << "  ";
+
+    std::cout << "   ";
     for (int col = 1; col <= board.getter_board()[0].size(); ++col) {
         if (col < 10) {
             std::cout << col << "  ";
@@ -72445,13 +72446,19 @@ void CLI_renderer::display_board(Game &game) {
     }
     std::cout << std::endl;
 
-    char row_label = 'A';
+
+    int row_number = 1;
     for (const auto &row : board.getter_board()) {
-        std::cout << row_label++ << ' ';
+        if (row_number < 10) {
+            std::cout << " " << row_number << ' ';
+        } else {
+            std::cout << row_number << ' ';
+        }
         for (const auto &cell : row) {
             std::cout << cell << "  ";
         }
         std::cout << std::endl;
+        ++row_number;
     }
 }
 
