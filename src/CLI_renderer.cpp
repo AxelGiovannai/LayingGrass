@@ -57,12 +57,15 @@ void CLI_renderer::display_menu(Game &game) {
         do {
             std::cout << "Player " << i + 1 << " name : ";
             std::cin >> name;
-        } while (name.empty() || name.length() > 20 || name.find(' ') != std::string::npos);
+        } while (name.empty() || name.length() > 20);
         std::cout << "before attribution name at display_menu " <<  std::endl;
         game.setter_players(Player(name));
         std::cout << "after attribution name at display_menu " <<  std::endl;
     }
-}
+    game.setter_game_board();
+    }
+
+
 
 void CLI_renderer::display_game(Game &game) {
     std::cout << " Enter display_game " <<  std::endl;
