@@ -28223,21 +28223,25 @@ public:
 
 class Player {
 private:
-    char name[20] = "Default name";
-    char color[10] = "cacao";
-    int tile_exchange = 0;
-    bool stone = true;
-    bool Robbery = true;
+    char name;
+    char color{};
+    int tile_exchange = 1;
+    int stone = 0;
+    int Robbery = 0;
     std::vector<Tile> tiles;
 public:
-    explicit Player(const char * str);
+    explicit Player(char name);
+
+
+
 
     [[nodiscard]] char getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] bool getter_stone() const;
-    [[nodiscard]] bool getter_Robbery() const;
+    [[nodiscard]] int getter_stone() const;
+    [[nodiscard]] int getter_Robbery() const;
     [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
+
 
 
 };

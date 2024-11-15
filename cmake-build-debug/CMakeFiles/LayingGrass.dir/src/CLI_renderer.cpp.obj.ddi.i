@@ -28230,21 +28230,25 @@ public:
 
 class Player {
 private:
-    char name[20] = "Default name";
-    char color[10] = "cacao";
-    int tile_exchange = 0;
-    bool stone = true;
-    bool Robbery = true;
+    char name;
+    char color{};
+    int tile_exchange = 1;
+    int stone = 0;
+    int Robbery = 0;
     std::vector<Tile> tiles;
 public:
-    explicit Player(const char * str);
+    explicit Player(char name);
+
+
+
 
     [[nodiscard]] char getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] bool getter_stone() const;
-    [[nodiscard]] bool getter_Robbery() const;
+    [[nodiscard]] int getter_stone() const;
+    [[nodiscard]] int getter_Robbery() const;
     [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
+
 
 
 };
@@ -72457,12 +72461,13 @@ void CLI_renderer::display_menu(Game &game) {
         std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
     }
 
+
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
-        char name[20] = "";
+        char name = *"";
         do {
             std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
-        } while (strlen(name) == 0 || strlen(name) > 20 || name[0] == ' ');
+        } while (name == 0 || name > 20 || name == ' ');
         std::cout << "before attribution name at display_menu " << std::endl;
         game.setter_players(Player(name));
         std::cout << "after attribution name at display_menu " << std::endl;
@@ -72477,12 +72482,13 @@ void CLI_renderer::display_game(Game &game) {
         return;
     }
 
-    const Player current_player = game.getter_players(player_turn);
+    const Player current_player = game.getter_players(player_turn - 1);
     std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
 
     for (int i = 0; i < 3; ++i) {
         std::cout << "   " << std::endl;
-        for (const auto &tile_shape = current_player.getter_tiles_shape(i); const auto &row : tile_shape) {
+        const auto &tile_shape = current_player.getter_tiles_shape(i);
+        for (const auto &row : tile_shape) {
             for (const auto &cell : row) {
                 std::cout << cell << " ";
             }
