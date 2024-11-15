@@ -28226,73 +28226,6 @@ public:
 
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
-
-
-class Player {
-private:
-    char name;
-    char color{};
-    int tile_exchange = 1;
-    int stone = 0;
-    int Robbery = 0;
-    std::vector<Tile> tiles;
-public:
-    explicit Player(char name);
-
-
-
-
-    [[nodiscard]] char getter_name() const;
-    void getter_color();
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_Robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
-
-
-
-};
-# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
-
-
-
-class Game {
-private:
-    int nb_players = 0;
-    int player_turn = 0;
-    int nb_rounds = 0;
-    Board game_board;
-    std::vector<Player> players;
-    std::vector<Tile> tiles;
-public:
-
-
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
-    void setter_nb_players(int nb);
-    void setter_player_turn();
-    void setter_nb_rounds(int nb);
-    void setter_game_board();
-    void setter_players(const Player &p);
-    void setter_tiles(const Tile &t);
-    void display_board();
-};
-# 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
-
-
-class CLI_renderer {
-public:
-    static void display_board(Game &game);
-    static void refresh_terminal();
-    static void display_menu(Game &game);
-    static void display_game(Game &game);
-
-};
-# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 1 3
 # 36 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 3
        
@@ -72202,7 +72135,76 @@ namespace std
 # 85 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 3
 
 }
-# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
+# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
+
+
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h"
+class Player {
+private:
+    std::string name;
+    char color{};
+    int tile_exchange = 1;
+    int stone = 0;
+    int Robbery = 0;
+    std::vector<Tile> tiles;
+public:
+    explicit Player(const std::string &name);
+
+
+
+
+    [[nodiscard]] std::string getter_name() const;
+    void getter_color();
+    [[nodiscard]] int getter_tile_exchange() const;
+    [[nodiscard]] int getter_stone() const;
+    [[nodiscard]] int getter_Robbery() const;
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
+
+
+
+};
+# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
+
+
+
+class Game {
+private:
+    int nb_players = 0;
+    int player_turn = 0;
+    int nb_rounds = 0;
+    Board game_board;
+    std::vector<Player> players;
+    std::vector<Tile> tiles;
+public:
+
+
+    [[nodiscard]] int getter_nb_players() const;
+    [[nodiscard]] int getter_player_turn() const;
+    [[nodiscard]] int getter_nb_rounds() const;
+    [[nodiscard]] Board getter_game_board();
+    [[nodiscard]] Player getter_players(int i);
+    [[nodiscard]] Tile getter_tiles(int i);
+    void setter_nb_players(int nb);
+    void setter_player_turn();
+    void setter_nb_rounds(int nb);
+    void setter_game_board();
+    void setter_players(const Player &p);
+    void setter_tiles(const Tile &t);
+    void display_board();
+};
+# 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
+
+
+class CLI_renderer {
+public:
+    static void display_board(Game &game);
+    static void refresh_terminal();
+    static void display_menu(Game &game);
+    static void display_game(Game &game);
+
+};
+# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
+
 
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 1 3
 # 39 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 3
@@ -72216,6 +72218,8 @@ namespace std
 # 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
 # 43 "C:/msys64/mingw64/include/c++/14.2.0/cstring" 2 3
 # 1 "C:/msys64/mingw64/include/string.h" 1 3
+# 21 "C:/msys64/mingw64/include/string.h" 3
+
 # 21 "C:/msys64/mingw64/include/string.h" 3
 extern "C" {
 # 45 "C:/msys64/mingw64/include/string.h" 3
@@ -72458,16 +72462,17 @@ void CLI_renderer::display_menu(Game &game) {
     int x = 0;
     std::cout << "Welcome to Laying Grass !" << std::endl;
     while (x < 1 || x > 9) {
-        std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
+        std::cout << "choose a number of player(1 to 9) : ";
+        std::cin >> x;
     }
-
 
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
-        char name = *"";
+        std::string name;
         do {
-            std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
-        } while (name == 0 || name > 20 || name == ' ');
+            std::cout << "Player " << i + 1 << " name : ";
+            std::cin >> name;
+        } while (name.empty() || name.length() > 20 || name.find(' ') != std::string::npos);
         std::cout << "before attribution name at display_menu " << std::endl;
         game.setter_players(Player(name));
         std::cout << "after attribution name at display_menu " << std::endl;

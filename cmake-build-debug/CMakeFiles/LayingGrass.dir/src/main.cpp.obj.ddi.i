@@ -72150,19 +72150,19 @@ public:
 
 class Player {
 private:
-    char name;
+    std::string name;
     char color{};
     int tile_exchange = 1;
     int stone = 0;
     int Robbery = 0;
     std::vector<Tile> tiles;
 public:
-    explicit Player(char name);
+    explicit Player(const std::string &name);
 
 
 
 
-    [[nodiscard]] char getter_name() const;
+    [[nodiscard]] std::string getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;

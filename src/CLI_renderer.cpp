@@ -47,16 +47,17 @@ void CLI_renderer::display_menu(Game &game) {
     int x = 0;
     std::cout << "Welcome to Laying Grass !" << std::endl;
     while (x < 1 || x > 9) {
-        std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
+        std::cout << "choose a number of player(1 to 9) : ";
+        std::cin >> x;
     }
-
 
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
-        char name = *"";
+        std::string name;
         do {
-            std::cout << "Player " << i + 1 << " name : "; std::cin >> name;
-        } while (name == 0 || name > 20 || name == ' ');
+            std::cout << "Player " << i + 1 << " name : ";
+            std::cin >> name;
+        } while (name.empty() || name.length() > 20 || name.find(' ') != std::string::npos);
         std::cout << "before attribution name at display_menu " <<  std::endl;
         game.setter_players(Player(name));
         std::cout << "after attribution name at display_menu " <<  std::endl;

@@ -28219,63 +28219,6 @@ public:
 
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
-
-
-class Player {
-private:
-    char name;
-    char color{};
-    int tile_exchange = 1;
-    int stone = 0;
-    int Robbery = 0;
-    std::vector<Tile> tiles;
-public:
-    explicit Player(char name);
-
-
-
-
-    [[nodiscard]] char getter_name() const;
-    void getter_color();
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_Robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
-
-
-
-};
-# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
-
-
-
-class Game {
-private:
-    int nb_players = 0;
-    int player_turn = 0;
-    int nb_rounds = 0;
-    Board game_board;
-    std::vector<Player> players;
-    std::vector<Tile> tiles;
-public:
-
-
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
-    void setter_nb_players(int nb);
-    void setter_player_turn();
-    void setter_nb_rounds(int nb);
-    void setter_game_board();
-    void setter_players(const Player &p);
-    void setter_tiles(const Tile &t);
-    void display_board();
-};
-# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
-
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 1 3
 # 36 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 3
        
@@ -72185,10 +72128,67 @@ namespace std
 # 85 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 3
 
 }
-# 8 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
 
 
-# 9 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp"
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h"
+class Player {
+private:
+    std::string name;
+    char color{};
+    int tile_exchange = 1;
+    int stone = 0;
+    int Robbery = 0;
+    std::vector<Tile> tiles;
+public:
+    explicit Player(const std::string &name);
+
+
+
+
+    [[nodiscard]] std::string getter_name() const;
+    void getter_color();
+    [[nodiscard]] int getter_tile_exchange() const;
+    [[nodiscard]] int getter_stone() const;
+    [[nodiscard]] int getter_Robbery() const;
+    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
+
+
+
+};
+# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
+
+
+
+class Game {
+private:
+    int nb_players = 0;
+    int player_turn = 0;
+    int nb_rounds = 0;
+    Board game_board;
+    std::vector<Player> players;
+    std::vector<Tile> tiles;
+public:
+
+
+    [[nodiscard]] int getter_nb_players() const;
+    [[nodiscard]] int getter_player_turn() const;
+    [[nodiscard]] int getter_nb_rounds() const;
+    [[nodiscard]] Board getter_game_board();
+    [[nodiscard]] Player getter_players(int i);
+    [[nodiscard]] Tile getter_tiles(int i);
+    void setter_nb_players(int nb);
+    void setter_player_turn();
+    void setter_nb_rounds(int nb);
+    void setter_game_board();
+    void setter_players(const Player &p);
+    void setter_tiles(const Tile &t);
+    void display_board();
+};
+# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+
+
+
 int Game::getter_nb_players() const {
     return nb_players;
 }
