@@ -29,7 +29,7 @@ public:
     void setter_nb_players(int nb);
     void setter_player_turn();
     void setter_nb_rounds(int nb);
-    void setter_game_board();
+    void setter_game_board(); //gameboard
     void setter_players(const Player &p);
     void setter_tiles(const Tile &t);
     void display_board();
