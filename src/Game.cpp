@@ -80,7 +80,7 @@ void Game::place_initial_stones() {
 
 void Game::place_initial_tile_exchanges() {
     std::srand(std::time(nullptr));
-    int num_tile_exchanges = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 tile exchange per player, rounded up
+    int num_tile_exchanges = static_cast<int>(std::ceil(nb_players * 1.5)); // 1.5 tile exchange per player, rounded up
     for (int i = 0; i < num_tile_exchanges; ++i) {
         int x, y;
         do {
@@ -93,7 +93,7 @@ void Game::place_initial_tile_exchanges() {
 
 void Game::place_initial_robberies() {
     std::srand(std::time(nullptr));
-    int num_robberies = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 robbery per player, rounded up
+    int num_robberies = static_cast<int>(std::ceil(nb_players * 1)); // 1 robbery per player, rounded up
     for (int i = 0; i < num_robberies; ++i) {
         int x, y;
         do {
