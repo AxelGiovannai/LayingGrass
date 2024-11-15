@@ -75,10 +75,9 @@ void CLI_renderer::display_game(Game &game) {
     const Player current_player = game.getter_players(player_turn - 1);
     std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 1; i < 7; ++i) {
         std::cout << "   "  << std::endl;
-        const auto &tile_shape = 0; //current_player.getter_tiles_shape(i);
-        for (const auto &row : tile_shape) {
+        for (const auto &tile_shape = game.getter_tiles(i).getter_shape(); const auto &row : tile_shape) {
             for (const auto &cell : row) {
                 std::cout << cell << " ";
             }
@@ -117,5 +116,3 @@ void CLI_renderer::display_game(Game &game) {
             break;
     }
 }
-
-

@@ -107,6 +107,15 @@ void Game::place_initial_robberies() {
     }
 }
 
+void Game::place_Rock(Player &player, const int x, const int y) {
+    if (player.getter_stone() > 0 && game_board.getter_case(x, y) == '.') {
+        game_board.setter_case(x, y, 'S');
+        player.setter_stone(player.getter_stone() - 1);
+    } else {
+        std::cout << "Cannot place stone" << std::endl;
+    }
+}
+
 
 
 

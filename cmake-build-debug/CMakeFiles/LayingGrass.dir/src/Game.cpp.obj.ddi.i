@@ -79513,17 +79513,14 @@ public:
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
 class Tile {
 private:
-    std::pair <int, int> position;
     std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
-
+    explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
-    [[nodiscard]] std::pair<int, int> getter_position() const;
-    void set_position(int a, int b);
-    void rotate();
 
+    void rotate();
+    void flip();
 
 
 };
@@ -79536,7 +79533,6 @@ private:
     int tile_exchange = 1;
     int stone = 0;
     int robbery = 0;
-    std::vector<Tile> tiles;
 public:
     explicit Player(const std::string& name);
 
@@ -79545,11 +79541,10 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
     [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
-
     void setter_tile_exchange(int tile_exchange);
     void setter_stone(int stone);
     void setter_robbery(int robbery);
+
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -79581,6 +79576,7 @@ public:
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
+    void place_Rock(Player &player, int x, int y);
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
@@ -79680,5 +79676,14 @@ void Game::place_initial_robberies() {
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'R');
+    }
+}
+
+void Game::place_Rock(Player &player, const int x, const int y) {
+    if (player.getter_stone() > 0 && game_board.getter_case(x, y) == '.') {
+        game_board.setter_case(x, y, 'S');
+        player.setter_stone(player.getter_stone() - 1);
+    } else {
+        std::cout << "Cannot place stone" << std::endl;
     }
 }

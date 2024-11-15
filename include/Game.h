@@ -35,6 +35,7 @@ public:
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
+    void place_Rock(Player &player, int x, int y);
 };
 
 

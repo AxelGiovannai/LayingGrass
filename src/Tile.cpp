@@ -24,3 +24,13 @@ void Tile::rotate() {
         }
     }
 }
+
+void Tile::flip() {
+    const std::size_t n = shape.size();
+    for (std::size_t i = 0; i < n; ++i) {
+        for (std::size_t j = 0; j < n / 2; ++j) {
+            const int temp = shape[i][j]; shape[i][j] = shape[i][n - j - 1];
+            shape[i][n - j - 1] = temp;
+        }
+    }
+}

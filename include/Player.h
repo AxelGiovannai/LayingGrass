@@ -19,11 +19,10 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
     [[nodiscard]] int getter_robbery() const;
-
-
     void setter_tile_exchange(int tile_exchange);
     void setter_stone(int stone);
     void setter_robbery(int robbery);
+
 };
 
 #endif //PLAYER_H

@@ -16,7 +16,7 @@ public:
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
 
     void rotate();
-
+    void flip();
 
 
 };

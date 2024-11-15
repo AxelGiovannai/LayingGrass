@@ -37726,17 +37726,14 @@ namespace std
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
 class Tile {
 private:
-    std::pair <int, int> position;
     std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
-
+    explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
-    [[nodiscard]] std::pair<int, int> getter_position() const;
-    void set_position(int a, int b);
-    void rotate();
 
+    void rotate();
+    void flip();
 
 
 };
@@ -37749,7 +37746,6 @@ private:
     int tile_exchange = 1;
     int stone = 0;
     int robbery = 0;
-    std::vector<Tile> tiles;
 public:
     explicit Player(const std::string& name);
 
@@ -37758,11 +37754,10 @@ public:
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
     [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
-
     void setter_tile_exchange(int tile_exchange);
     void setter_stone(int stone);
     void setter_robbery(int robbery);
+
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -37794,6 +37789,7 @@ public:
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
+    void place_Rock(Player &player, int x, int y);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
 
@@ -72493,10 +72489,9 @@ void CLI_renderer::display_game(Game &game) {
     const Player current_player = game.getter_players(player_turn - 1);
     std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
 
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 1; i < 7; ++i) {
         std::cout << "   " << std::endl;
-        const auto &tile_shape = current_player.getter_tiles_shape(i);
-        for (const auto &row : tile_shape) {
+        for (const auto &tile_shape = game.getter_tiles(i).getter_shape(); const auto &row : tile_shape) {
             for (const auto &cell : row) {
                 std::cout << cell << " ";
             }

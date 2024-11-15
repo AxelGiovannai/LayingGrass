@@ -72103,17 +72103,14 @@ namespace std
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
 class Tile {
 private:
-    std::pair <int, int> position;
     std::vector<std::vector<int>> shape;
 public:
 
-    Tile(int x, int y, const std::vector<std::vector<int>> &shape);
-
+    explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
-    [[nodiscard]] std::pair<int, int> getter_position() const;
-    void set_position(int a, int b);
-    void rotate();
 
+    void rotate();
+    void flip();
 
 
 };
@@ -72124,21 +72121,9 @@ std::vector<std::vector<int>> Tile::getter_shape() const {
     return shape;
 };
 
-
-
-
-
-void Tile::set_position(const int a, const int b) {
-    this->position.first = a;
-    this->position.second = b;
-};
-
-Tile::Tile(const int x, const int y, const std::vector<std::vector<int>> &shape) {
-    this->position.first = x;
-    this->position.second = y;
+Tile::Tile(const std::vector<std::vector<int>> &shape) {
     this->shape = shape;
 };
-
 
 void Tile::rotate() {
     const std::size_t n = shape.size();
@@ -72148,6 +72133,16 @@ void Tile::rotate() {
             shape[n - j - 1][i] = shape[n - i - 1][n - j - 1];
             shape[n - i - 1][n - j - 1] = shape[j][n - i - 1];
             shape[j][n - i - 1] = temp;
+        }
+    }
+}
+
+void Tile::flip() {
+    const std::size_t n = shape.size();
+    for (std::size_t i = 0; i < n; ++i) {
+        for (std::size_t j = 0; j < n / 2; ++j) {
+            const int temp = shape[i][j]; shape[i][j] = shape[i][n - j - 1];
+            shape[i][n - j - 1] = temp;
         }
     }
 }
