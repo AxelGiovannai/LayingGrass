@@ -79571,12 +79571,13 @@ public:
     void setter_player_turn();
     void setter_nb_rounds(int nb);
     void setter_game_board();
-    void setter_players(const Player &p);
-    void setter_tiles(const Tile &t);
+    void setter_players(const Player &player);
+    void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
     void place_Rock(Player &player, int x, int y);
+    static void generate_tile(Game &game);
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
@@ -79630,12 +79631,12 @@ void Game::setter_game_board() {
     place_initial_robberies();
 }
 
-void Game::setter_players(const Player& p) {
-    players.push_back(p);
+void Game::setter_players(const Player& player) {
+    players.push_back(player);
 }
 
-void Game::setter_tiles(const Tile& t) {
-    tiles.push_back(t);
+void Game::setter_tiles(const Tile& tile) {
+    tiles.push_back(tile);
 }
 
 
@@ -79686,4 +79687,683 @@ void Game::place_Rock(Player &player, const int x, const int y) {
     } else {
         std::cout << "Cannot place stone" << std::endl;
     }
+}
+
+
+void Game::generate_tile(Game &game) {
+    std::vector<Tile> All_Shapes;
+    All_Shapes.push_back(Tile{{
+        {1,0,0},
+        {1,1,1},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {0,1,0},
+        {1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,1},
+        {0,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1},
+        {1,1,1},
+        {1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,1},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1},
+        {1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,1},
+        {1,1,1},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1},
+        {0,0,0},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,0},
+        {1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0},
+        {1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1},
+        {0,1,1},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1},
+        {0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,0,1,0},
+        {0,0,0,1,0},
+        {0,0,0,1,1},
+        {0,1,1,1,0},
+        {1,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,0,1},
+        {0,0,1,1},
+        {0,1,1,0},
+        {0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,1},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1},
+        {0,0,0},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,1,0,0},
+        {1,0,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1},
+        {1,1,0},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,0},
+        {1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {0,1,0,0},
+        {1,1,1,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0},
+        {1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0},
+        {1,1,0},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,0},
+        {0,1,0,0},
+        {0,1,0,0},
+        {0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,1,0,0},
+        {0,1,1,0},
+        {0,0,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,1,1,0},
+        {0,0,1,0},
+        {0,0,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,1,0,0},
+        {1,1,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {1,1,1,0,0},
+        {1,0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1},
+        {0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,0,0},
+        {1,0,0,0},
+        {1,1,1,0},
+        {1,0,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0,0},
+        {0,1,0,0,0},
+        {0,1,1,1,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,0,0,0},
+        {1,1,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,0},
+        {1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,1},
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,0,1,1},
+        {1,0,0,0,1},
+        {1,1,1,1,1},
+        {0,0,0,0,0},
+        {0,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,0,0,0},
+        {1,1,0,0},
+        {0,1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0,0},
+        {0,1,1,0,0},
+        {1,1,0,0,0},
+        {0,1,1,0,0},
+        {0,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0},
+        {1,1,0},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {0,1,0,0},
+        {1,1,1,1},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1},
+        {1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {1,1,0,0},
+        {1,1,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1},
+        {0,1,0},
+        {1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,1},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,0,0,0},
+        {1,1,1,1},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {1,1,0,0},
+        {1,0,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0},
+        {1,1,1},
+        {0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,1,1},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {1,1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0,0},
+        {0,1,0,0,0,0},
+        {1,1,0,0,0,0},
+        {1,0,0,0,0,0},
+        {1,1,0,0,0,0},
+        {1,0,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0},
+        {0,1,0,0},
+        {0,1,1,1},
+        {0,0,0,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {1,1,1,0,0},
+        {0,1,0,0,0},
+        {0,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1},
+        {0,0,1},
+        {1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {0,0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,1,0},
+        {1,1,1,0},
+        {0,1,0,0},
+        {1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,0},
+        {1,1,1,0},
+        {0,1,1,1},
+        {0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,1},
+        {0,1,0,0},
+        {0,1,0,0},
+        {1,1,1,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0},
+        {0,1,0,0},
+        {0,1,0,1},
+        {1,1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,0,0},
+        {0,1,1,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,0,0,0},
+        {0,1,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,1,0,0,0,0},
+        {1,1,0,0,0,0},
+        {1,0,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,1,0},
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0},
+        {0,1,0,1},
+        {0,1,0,1},
+        {0,1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0,0},
+        {1,0,1,0,0},
+        {1,1,1,1,0},
+        {0,1,0,0,0},
+        {0,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0,0,0,0},
+        {1,0,0,0,0,0,0},
+        {1,0,0,0,0,0,0},
+        {1,0,0,0,0,0,0},
+        {1,0,0,0,0,0,0},
+        {1,0,0,0,0,0,0},
+        {1,0,0,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {1,1,1,0},
+        {1,0,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1},
+        {0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1},
+        {1,0,1},
+        {1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0},
+        {1,1,1},
+        {1,0,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,0,0},
+        {0,0,1,0,0},
+        {1,1,1,1,1},
+        {0,0,1,0,0},
+        {0,0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,0,1,0,0},
+        {0,0,1,1,0,0},
+        {0,0,1,0,0,0},
+        {0,0,1,0,0,0},
+        {0,1,1,0,0,0},
+        {1,1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {0,1,0,0,0},
+        {1,1,1,1,1},
+        {0,1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0,0},
+        {1,1,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0},
+        {1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,0},
+        {0,1,0,0},
+        {1,1,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,0,0,0},
+        {0,1,0,0,0,0},
+        {1,1,0,0,0,0},
+        {0,1,1,0,0,0},
+        {0,1,0,0,0,0},
+        {0,1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0,0,0},
+        {1,1,0,0,0,0},
+        {0,1,0,0,0,0},
+        {0,1,1,0,0,0},
+        {0,1,0,0,0,0},
+        {0,1,0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {0,1,1,0},
+        {1,1,0,0},
+        {0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0},
+        {1,1,1,1},
+        {0,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,0,1,1},
+        {1,1,1,0},
+        {1,0,0,0},
+        {1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,0},
+        {0,1,0,0},
+        {0,1,0,0},
+        {1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {0,1,0,0},
+        {1,1,1,0},
+        {0,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,1,1,0},
+        {1,0,1,0},
+        {1,0,0,0},
+        {1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {0,1,1,0},
+        {1,1,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0},
+        {1,1,0},
+        {1,1,1}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {1,0,0,0},
+        {1,0,0,0},
+        {1,0,0,0},
+        {1,1,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {1,1,1,1},
+        {1,0,0,0},
+        {0,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,1,0},
+        {1,1,0,0},
+        {1,0,0,0},
+        {1,0,0,0}
+    }});
+
+    All_Shapes.push_back(Tile{{
+        {0,1,0,0},
+        {1,1,0,0},
+        {1,0,0,0},
+        {1,1,0,0}
+    }});
+    All_Shapes.push_back(Tile{{
+        {1,1,0,0},
+        {1,0,0,0},
+        {1,1,0,0},
+        {0,1,0,0}
+    }});
+
+    const int num_tiles = static_cast<int>(std::ceil(game.getter_nb_players() * 10.67));
+    for (int i = 0; i < num_tiles; ++i) {
+        const int random = std::rand() % All_Shapes.size();
+        game.setter_tiles(All_Shapes[random]);
+    }
+
 }

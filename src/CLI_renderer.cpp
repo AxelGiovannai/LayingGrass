@@ -82,6 +82,18 @@ void CLI_renderer::display_game(Game &game) {
     const Player current_player = game.getter_players(player_turn - 1);
     std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
 
+    std::cout << "Current Tile : " << std::endl;
+    for (const auto tile_shape = game.getter_tiles(0).getter_shape(); const auto &row : tile_shape) {
+        for (const auto &cell : row) {
+            if (cell == 1) {
+                std::cout << "■";
+            } else {
+                std::cout << cell << " ";
+            }
+        }
+        std::cout << std::endl;
+    }
+
     for (int i = 1; i < 7; ++i) {
         std::cout << "   "  << std::endl;
         for (const auto &tile_shape = game.getter_tiles(i).getter_shape(); const auto &row : tile_shape) {

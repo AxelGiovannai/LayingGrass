@@ -72186,12 +72186,13 @@ public:
     void setter_player_turn();
     void setter_nb_rounds(int nb);
     void setter_game_board();
-    void setter_players(const Player &p);
-    void setter_tiles(const Tile &t);
+    void setter_players(const Player &player);
+    void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
     void place_Rock(Player &player, int x, int y);
+    static void generate_tile(Game &game);
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
