@@ -21,7 +21,7 @@ void CLI_renderer::display_board(Game &game) {
 
     Board board = game.getter_game_board();
 
-    std::cout << "   ";
+    std::cout << "  ";
     for (int col = 1; col <= board.getter_board()[0].size(); ++col) {
         if (col < 10) {
             std::cout << col << "  ";
@@ -58,9 +58,7 @@ void CLI_renderer::display_menu(Game &game) {
             std::cout << "Player " << i + 1 << " name : ";
             std::cin >> name;
         } while (name.empty() || name.length() > 20);
-        std::cout << "before attribution name at display_menu " <<  std::endl;
         game.setter_players(Player(name));
-        std::cout << "after attribution name at display_menu " <<  std::endl;
     }
     game.setter_game_board();
     }
@@ -68,13 +66,12 @@ void CLI_renderer::display_menu(Game &game) {
 
 
 void CLI_renderer::display_game(Game &game) {
-    std::cout << " Enter display_game " <<  std::endl;
     const int player_turn = game.getter_player_turn();
     if (player_turn < 0 || player_turn >= game.getter_nb_players()) {
         std::cerr << "Invalid player turn" << std::endl;
         return;
     }
-
+    display_board(game);
     const Player current_player = game.getter_players(player_turn - 1);
     std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
 

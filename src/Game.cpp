@@ -108,12 +108,5 @@ void Game::place_initial_robberies() {
 }
 
 
-void Game::display_board() {
-    for (const std::vector<std::vector<char>> board = game_board.getter_board(); const auto & i : board) {
-        for (const char j : i) {
-            std::cout << j;
-        }
-        std::cout << std::endl;
-    }
-}
+
 
