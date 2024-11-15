@@ -32,6 +32,9 @@ public:
     void setter_game_board(); //gameboard
     void setter_players(const Player &p);
     void setter_tiles(const Tile &t);
+    void place_initial_stones();
+    void place_initial_tile_exchanges();
+    void place_initial_robberies();
     void display_board();
 };
 

@@ -2,9 +2,11 @@
 // Created by Axel on 04/11/2024.
 //
 
-#include "../include/Game.h"
-
+#include <cmath>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include "../include/Game.h"
 
 int Game::getter_nb_players() const {
     return nb_players;
@@ -48,6 +50,9 @@ void Game::setter_game_board() {
    } else {
        game_board.setter_board(30, 30);
    }
+    place_initial_stones();
+    place_initial_tile_exchanges();
+    place_initial_robberies();
 }
 
 void Game::setter_players(const Player& p) {
@@ -59,6 +64,45 @@ void Game::setter_tiles(const Tile& t) {
 }
 
 
+
+void Game::place_initial_stones() {
+    std::srand(std::time(nullptr));
+    int num_stones = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 stone per player, rounded up
+    for (int i = 0; i < num_stones; ++i) {
+        int x, y;
+        do {
+            x = std::rand() % game_board.getter_board().size();
+            y = std::rand() % game_board.getter_board()[0].size();
+        } while (game_board.getter_case(x, y) != '.');
+        game_board.setter_case(x, y, 'S');
+    }
+}
+
+void Game::place_initial_tile_exchanges() {
+    std::srand(std::time(nullptr));
+    int num_tile_exchanges = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 tile exchange per player, rounded up
+    for (int i = 0; i < num_tile_exchanges; ++i) {
+        int x, y;
+        do {
+            x = std::rand() % game_board.getter_board().size();
+            y = std::rand() % game_board.getter_board()[0].size();
+        } while (game_board.getter_case(x, y) != '.');
+        game_board.setter_case(x, y, 'T');
+    }
+}
+
+void Game::place_initial_robberies() {
+    std::srand(std::time(nullptr));
+    int num_robberies = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 robbery per player, rounded up
+    for (int i = 0; i < num_robberies; ++i) {
+        int x, y;
+        do {
+            x = std::rand() % game_board.getter_board().size();
+            y = std::rand() % game_board.getter_board()[0].size();
+        } while (game_board.getter_case(x, y) != '.');
+        game_board.setter_case(x, y, 'R');
+    }
+}
 
 
 void Game::display_board() {
