@@ -50,6 +50,9 @@ void Game::setter_game_board() {
    } else {
        game_board.setter_board(30, 30);
    }
+    for (auto &row : game_board.getter_board()) {
+        std::ranges::fill(row, '.');
+    }
     place_initial_stones();
     place_initial_tile_exchanges();
     place_initial_robberies();
@@ -67,7 +70,7 @@ void Game::setter_tiles(const Tile& t) {
 
 void Game::place_initial_stones() {
     std::srand(std::time(nullptr));
-    int num_stones = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 stone per player, rounded up
+    const int num_stones = static_cast<int>(std::ceil(nb_players * 0.5)); // 0.5 stone per player, rounded up
     for (int i = 0; i < num_stones; ++i) {
         int x, y;
         do {
@@ -80,7 +83,7 @@ void Game::place_initial_stones() {
 
 void Game::place_initial_tile_exchanges() {
     std::srand(std::time(nullptr));
-    int num_tile_exchanges = static_cast<int>(std::ceil(nb_players * 1.5)); // 1.5 tile exchange per player, rounded up
+    const int num_tile_exchanges = static_cast<int>(std::ceil(nb_players * 1.5)); // 1.5 tile exchange per player, rounded up
     for (int i = 0; i < num_tile_exchanges; ++i) {
         int x, y;
         do {
@@ -93,7 +96,7 @@ void Game::place_initial_tile_exchanges() {
 
 void Game::place_initial_robberies() {
     std::srand(std::time(nullptr));
-    int num_robberies = static_cast<int>(std::ceil(nb_players * 1)); // 1 robbery per player, rounded up
+    const int num_robberies = static_cast<int>(std::ceil(nb_players * 1)); // 1 robbery per player, rounded up
     for (int i = 0; i < num_robberies; ++i) {
         int x, y;
         do {
