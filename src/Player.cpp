@@ -7,8 +7,9 @@
 #include <vector>
 
 
-Player::Player(const char * str) {
-    //prout
+Player::Player(const char name) {
+    this->name = name;
+
 }
 
 

@@ -49,6 +49,7 @@ void CLI_renderer::display_menu(Game &game) {
     while (x < 1 || x > 9) {
         std::cout << "choose a number of player(1 to 9) : "; std::cin >> x;
     }
+    int tile_exchange = x;
 
     game.setter_nb_players(x);
     for (int i = 0; i < x; ++i) {
