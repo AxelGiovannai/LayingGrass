@@ -77,7 +77,7 @@ void CLI_renderer::display_game(Game &game) {
 
     for (int i = 0; i < 3; ++i) {
         std::cout << "   "  << std::endl;
-        const auto &tile_shape = current_player.getter_tiles_shape(i);
+        const auto &tile_shape = 0; //current_player.getter_tiles_shape(i);
         for (const auto &row : tile_shape) {
             for (const auto &cell : row) {
                 std::cout << cell << " ";

@@ -72124,9 +72124,6 @@ public:
 
 
 
-
-
-
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
 class Tile {
@@ -72145,8 +72142,7 @@ public:
 
 
 };
-# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
-
+# 6 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
 
 class Player {
 private:
@@ -72154,23 +72150,21 @@ private:
     char color{};
     int tile_exchange = 1;
     int stone = 0;
-    int Robbery = 0;
+    int robbery = 0;
     std::vector<Tile> tiles;
 public:
-    explicit Player(const std::string &name);
-
-
-
+    explicit Player(const std::string& name);
 
     [[nodiscard]] std::string getter_name() const;
     void getter_color();
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_Robbery() const;
+    [[nodiscard]] int getter_robbery() const;
     [[nodiscard]] std::vector<std::vector<int>> getter_tiles_shape(int i) const;
 
-
-
+    void setter_tile_exchange(int tile_exchange);
+    void setter_stone(int stone);
+    void setter_robbery(int robbery);
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -72199,7 +72193,9 @@ public:
     void setter_game_board();
     void setter_players(const Player &p);
     void setter_tiles(const Tile &t);
-    void display_board();
+    void place_initial_stones();
+    void place_initial_tile_exchanges();
+    void place_initial_robberies();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72232,9 +72228,7 @@ public:
 int main() {
     Game game;
     CLI_renderer::display_menu(game);
-    std::cout << "before refresh " << std::endl;
     CLI_renderer::refresh_terminal();
-    std::cout << "after refresh " << std::endl;
     CLI_renderer::display_game(game);
     return 0;
 }

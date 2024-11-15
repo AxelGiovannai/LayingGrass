@@ -9,21 +9,9 @@ std::vector<std::vector<int>> Tile::getter_shape() const {
     return shape;
 };
 
-
-
-
-
-void Tile::set_position(const int a, const int b) {
-    this->position.first = a;
-    this->position.second = b;
-};
-// Constructor implementation
-Tile::Tile(const int x, const int y, const std::vector<std::vector<int>> &shape) {
-    this->position.first = x;
-    this->position.second = y;
+Tile::Tile(const std::vector<std::vector<int>> &shape) {
     this->shape = shape;
 };
-
 
 void Tile::rotate() {
     const std::size_t n = shape.size();
@@ -36,12 +24,3 @@ void Tile::rotate() {
         }
     }
 }
-
-
-
-
-
-
-
-
-//char a la place des booléens
