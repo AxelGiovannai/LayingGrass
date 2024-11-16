@@ -79494,8 +79494,8 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-    std::vector<std::vector<char>> getter_board();
-    [[nodiscard]] char getter_case(int x, int y) const;
+    std::vector<std::vector<char>>& getter_board();
+    [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
@@ -79515,6 +79515,7 @@ public:
 
     explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
 
     void rotate();
     void flip();
@@ -79528,21 +79529,15 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    int stone = 0;
-    int robbery = 0;
     std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    Player(const std::string& name, char color);
+    Player(std::string name, char color);
 
-    [[nodiscard]] std::string getter_name() const;
+    [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
+    [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
     void setter_tile_exchange(int tile_exchange);
-    void setter_stone(int stone);
-    void setter_robbery(int robbery);
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -79557,15 +79552,15 @@ private:
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
+    [[nodiscard]] int& getter_nb_players();
+    [[nodiscard]] int& getter_player_turn();
+    [[nodiscard]] int& getter_nb_rounds();
+    [[nodiscard]] Board& getter_game_board();
+    [[nodiscard]] Player& getter_players(int i);
+    Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds(int nb);
+    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
@@ -79575,43 +79570,47 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void setter_stone();
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
-int Game::getter_nb_players() const {
+int& Game::getter_nb_players(){
     return nb_players;
 }
 
-int Game::getter_player_turn() const {
+int& Game::getter_player_turn(){
     return player_turn;
 }
 
-int Game::getter_nb_rounds() const {
+int& Game::getter_nb_rounds(){
     return nb_rounds;
 }
 
-Board Game::getter_game_board() {
+Board& Game::getter_game_board() {
     return game_board;
 }
 
-Player Game::getter_players(const int i) {
+Player& Game::getter_players(const int i) {
     return players[i];
 }
 
-Tile Game::getter_tiles(const int i) {
+Tile& Game::getter_tiles(const int i) {
     return tiles[i];
 }
 
 void Game::setter_nb_players(const int nb) {
-    this->nb_players = nb;
+    nb_players = nb;
 }
 
 void Game::setter_player_turn() {
     player_turn = (player_turn % nb_players) + 1;
 }
 
-void Game::setter_nb_rounds(const int nb) {
-    nb_rounds = nb;
+void Game::setter_nb_rounds() {
+    if ((nb_players = player_turn)) {
+        player_turn = 1;
+        nb_rounds++;
+    }
 }
 
 void Game::setter_game_board() {
@@ -79629,11 +79628,11 @@ void Game::setter_game_board() {
 }
 
 void Game::setter_players(const Player& player) {
-    this->players.push_back(player);
+    players.push_back(player);
 }
 
 void Game::setter_tiles(const Tile& tile) {
-    this->tiles.push_back(tile);
+    tiles.push_back(tile);
 }
 
 void Game::initialize_game() {
@@ -79688,14 +79687,6 @@ void Game::place_initial_robberies() {
     }
 }
 
-void Game::place_Rock(Player &player, const int x, const int y) {
-    if (player.getter_stone() > 0 && game_board.getter_case(x, y) == '.') {
-        game_board.setter_case(x, y, 'S');
-        player.setter_stone(player.getter_stone() - 1);
-    } else {
-        std::cout << "Cannot place stone" << std::endl;
-    }
-}
 
 
 void Game::generate_tile(Game &game) {

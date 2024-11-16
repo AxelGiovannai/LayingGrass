@@ -37685,6 +37685,7 @@ public:
 
     explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
 
     void rotate();
     void flip();
@@ -37698,25 +37699,187 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    int stone = 0;
-    int robbery = 0;
     std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    Player(const std::string& name, char color);
+    Player(std::string name, char color);
 
-    [[nodiscard]] std::string getter_name() const;
+    [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
+    [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
     void setter_tile_exchange(int tile_exchange);
-    void setter_stone(int stone);
-    void setter_robbery(int robbery);
 };
 # 2 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/utility" 1 3
+# 58 "C:/msys64/mingw64/include/c++/14.2.0/utility" 3
+       
+# 59 "C:/msys64/mingw64/include/c++/14.2.0/utility" 3
+# 68 "C:/msys64/mingw64/include/c++/14.2.0/utility" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 1 3
+# 62 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+
+# 62 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+namespace std
+{
+
+
+  namespace rel_ops
+  {
+# 86 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+    template <class _Tp>
+      inline bool
+      operator!=(const _Tp& __x, const _Tp& __y)
+      { return !(__x == __y); }
+# 99 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+    template <class _Tp>
+      inline bool
+      operator>(const _Tp& __x, const _Tp& __y)
+      { return __y < __x; }
+# 112 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+    template <class _Tp>
+      inline bool
+      operator<=(const _Tp& __x, const _Tp& __y)
+      { return !(__y < __x); }
+# 125 "C:/msys64/mingw64/include/c++/14.2.0/bits/stl_relops.h" 3
+    template <class _Tp>
+      inline bool
+      operator>=(const _Tp& __x, const _Tp& __y)
+      { return !(__x < __y); }
+  }
+
+
+}
+# 69 "C:/msys64/mingw64/include/c++/14.2.0/utility" 2 3
+# 96 "C:/msys64/mingw64/include/c++/14.2.0/utility" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+# 97 "C:/msys64/mingw64/include/c++/14.2.0/utility" 2 3
+
+namespace std
+{
+
+
+
+
+  template <typename _Tp, typename _Up = _Tp>
+    constexpr
+    inline _Tp
+    exchange(_Tp& __obj, _Up&& __new_val)
+    noexcept(__and_<is_nothrow_move_constructible<_Tp>,
+      is_nothrow_assignable<_Tp&, _Up>>::value)
+    { return std::__exchange(__obj, std::forward<_Up>(__new_val)); }
+
+
+
+  template<typename _Tp>
+    [[nodiscard]]
+    constexpr add_const_t<_Tp>&
+    as_const(_Tp& __t) noexcept
+    { return __t; }
+
+  template<typename _Tp>
+    void as_const(const _Tp&&) = delete;
+
+
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_equal(_Tp __t, _Up __u) noexcept
+    {
+      static_assert(__is_standard_integer<_Tp>::value);
+      static_assert(__is_standard_integer<_Up>::value);
+
+      if constexpr (is_signed_v<_Tp> == is_signed_v<_Up>)
+ return __t == __u;
+      else if constexpr (is_signed_v<_Tp>)
+ return __t >= 0 && make_unsigned_t<_Tp>(__t) == __u;
+      else
+ return __u >= 0 && __t == make_unsigned_t<_Up>(__u);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_not_equal(_Tp __t, _Up __u) noexcept
+    { return !std::cmp_equal(__t, __u); }
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_less(_Tp __t, _Up __u) noexcept
+    {
+      static_assert(__is_standard_integer<_Tp>::value);
+      static_assert(__is_standard_integer<_Up>::value);
+
+      if constexpr (is_signed_v<_Tp> == is_signed_v<_Up>)
+ return __t < __u;
+      else if constexpr (is_signed_v<_Tp>)
+ return __t < 0 || make_unsigned_t<_Tp>(__t) < __u;
+      else
+ return __u >= 0 && __t < make_unsigned_t<_Up>(__u);
+    }
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_greater(_Tp __t, _Up __u) noexcept
+    { return std::cmp_less(__u, __t); }
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_less_equal(_Tp __t, _Up __u) noexcept
+    { return !std::cmp_less(__u, __t); }
+
+  template<typename _Tp, typename _Up>
+    constexpr bool
+    cmp_greater_equal(_Tp __t, _Up __u) noexcept
+    { return !std::cmp_less(__t, __u); }
+
+  template<typename _Res, typename _Tp>
+    constexpr bool
+    in_range(_Tp __t) noexcept
+    {
+      static_assert(__is_standard_integer<_Res>::value);
+      static_assert(__is_standard_integer<_Tp>::value);
+      using __gnu_cxx::__int_traits;
+
+      if constexpr (is_signed_v<_Tp> == is_signed_v<_Res>)
+ return __int_traits<_Res>::__min <= __t
+   && __t <= __int_traits<_Res>::__max;
+      else if constexpr (is_signed_v<_Tp>)
+ return __t >= 0
+   && make_unsigned_t<_Tp>(__t) <= __int_traits<_Res>::__max;
+      else
+ return __t <= make_unsigned_t<_Res>(__int_traits<_Res>::__max);
+    }
+
+
+
+
+  template<typename _Tp>
+    [[nodiscard]]
+    constexpr underlying_type_t<_Tp>
+    to_underlying(_Tp __value) noexcept
+    { return static_cast<underlying_type_t<_Tp>>(__value); }
+# 216 "C:/msys64/mingw64/include/c++/14.2.0/utility" 3
+  [[noreturn,__gnu__::__always_inline__]]
+  inline void
+  unreachable()
+  {
+
+
+
+
+
+    __builtin_unreachable();
+
+  }
+
+
+
+}
+# 4 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
 
 
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 1 3
@@ -37757,8 +37920,6 @@ public:
 # 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
 # 40 "C:/msys64/mingw64/include/c++/14.2.0/exception" 2 3
 
-
-# 41 "C:/msys64/mingw64/include/c++/14.2.0/exception" 3
 extern "C++" {
 
 namespace std
@@ -72121,45 +72282,28 @@ namespace std
 # 85 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 3
 
 }
-# 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
+# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
 
 
-# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp"
-Player::Player(const std::string& name, char color) : name(name), color(color) {}
+# 8 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp"
+Player::Player(std::string name, char color) : name(std::move(name)), color(color) {}
 
 char Player::getter_color() const {
     return color;
 }
 
-std::vector<std::vector<int>> Player::getter_starting_tile() const {
+std::vector<std::vector<int>>& Player::getter_starting_tile(){
     return starting_tile;
 }
 
-std::string Player::getter_name() const {
+std::string& Player::getter_name(){
     return name;
 }
 
-int Player::getter_tile_exchange() const {
+int& Player::getter_tile_exchange(){
     return tile_exchange;
 }
 
-int Player::getter_stone() const {
-    return stone;
-}
-
-int Player::getter_robbery() const {
-    return robbery;
-}
-
-
 void Player::setter_tile_exchange(const int tile_exchange) {
-    this->tile_exchange = tile_exchange;
-}
-
-void Player::setter_stone(const int stone) {
-    this->stone = stone;
-}
-
-void Player::setter_robbery(const int robbery) {
-    this->robbery = robbery;
+    this->tile_exchange = tile_exchange -1;
 }

@@ -28189,8 +28189,8 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-    std::vector<std::vector<char>> getter_board();
-    [[nodiscard]] char getter_case(int x, int y) const;
+    std::vector<std::vector<char>>& getter_board();
+    [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
@@ -37728,6 +37728,7 @@ public:
 
     explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
 
     void rotate();
     void flip();
@@ -37741,21 +37742,15 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    int stone = 0;
-    int robbery = 0;
     std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    Player(const std::string& name, char color);
+    Player(std::string name, char color);
 
-    [[nodiscard]] std::string getter_name() const;
+    [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
+    [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
     void setter_tile_exchange(int tile_exchange);
-    void setter_stone(int stone);
-    void setter_robbery(int robbery);
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -37770,15 +37765,15 @@ private:
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
+    [[nodiscard]] int& getter_nb_players();
+    [[nodiscard]] int& getter_player_turn();
+    [[nodiscard]] int& getter_nb_rounds();
+    [[nodiscard]] Board& getter_game_board();
+    [[nodiscard]] Player& getter_players(int i);
+    Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds(int nb);
+    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
@@ -37788,6 +37783,7 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void setter_stone();
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
 
@@ -72491,7 +72487,7 @@ void CLI_renderer::display_game(Game &game) {
     }
 
     display_board(game);
-    const Player current_player = game.getter_players(player_turn - 1);
+    Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
     std::cout << "Player turn :" << player_name << std::endl;
 
@@ -72536,26 +72532,36 @@ void CLI_renderer::display_game(Game &game) {
         do {
             std::cout << "Choice :" << std::endl;
             std::cin >> action;
-        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
+        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q');
 
         switch (action) {
             case 'P':
-
+                int x, y;
+                do {
+                    std::cout << "X :" << std::endl;
+                    std::cin >> x;
+                } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                do {
+                    std::cout << "Y :" << std::endl;
+                    std::cin >> y;
+                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_color());
                     break;
             case 'R':
-
+                game.getter_tiles(0).rotate();
+                refresh_terminal();
+                display_game(game);
                     break;
             case 'F':
-
+            game.getter_tiles(0).flip();
+            refresh_terminal();
+            display_game(game);
                     break;
             case 'E':
 
                     break;
-            case 'S':
-
-                    break;
-            case 'V':
-
+            case 'Q':
+                exit(0);
                     break;
             default:
                 std::cout << "Invalid action" << std::endl;

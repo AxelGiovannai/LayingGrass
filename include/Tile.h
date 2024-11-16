@@ -14,6 +14,7 @@ public:
 
     explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
 
     void rotate();
     void flip();

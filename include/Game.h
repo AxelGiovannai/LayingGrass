@@ -18,15 +18,15 @@ private:
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
+    [[nodiscard]] int& getter_nb_players();
+    [[nodiscard]] int& getter_player_turn();
+    [[nodiscard]] int& getter_nb_rounds();
+    [[nodiscard]] Board& getter_game_board();
+    [[nodiscard]] Player& getter_players(int i);
+    Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds(int nb);
+    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
@@ -36,6 +36,7 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void setter_stone();
 };
 
 

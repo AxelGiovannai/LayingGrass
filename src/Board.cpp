@@ -7,11 +7,11 @@
 
 
 
-std::vector<std::vector<char>> Board::getter_board() {
+std::vector<std::vector<char>>& Board::getter_board() {
     return board;
 }
 
-char Board::getter_case(const int x, const int y) const {
+char& Board::getter_case(int x, int y){
     return board[x][y];
 }
 

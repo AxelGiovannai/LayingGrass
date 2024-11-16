@@ -72109,8 +72109,8 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-    std::vector<std::vector<char>> getter_board();
-    [[nodiscard]] char getter_case(int x, int y) const;
+    std::vector<std::vector<char>>& getter_board();
+    [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
@@ -72130,6 +72130,7 @@ public:
 
     explicit Tile(const std::vector<std::vector<int>> &shape);
     [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
 
     void rotate();
     void flip();
@@ -72143,21 +72144,15 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    int stone = 0;
-    int robbery = 0;
     std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    Player(const std::string& name, char color);
+    Player(std::string name, char color);
 
-    [[nodiscard]] std::string getter_name() const;
+    [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
-    [[nodiscard]] int getter_tile_exchange() const;
-    [[nodiscard]] int getter_stone() const;
-    [[nodiscard]] int getter_robbery() const;
-    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
+    [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
     void setter_tile_exchange(int tile_exchange);
-    void setter_stone(int stone);
-    void setter_robbery(int robbery);
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -72172,15 +72167,15 @@ private:
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
-    [[nodiscard]] int getter_nb_players() const;
-    [[nodiscard]] int getter_player_turn() const;
-    [[nodiscard]] int getter_nb_rounds() const;
-    [[nodiscard]] Board getter_game_board();
-    [[nodiscard]] Player getter_players(int i);
-    [[nodiscard]] Tile getter_tiles(int i);
+    [[nodiscard]] int& getter_nb_players();
+    [[nodiscard]] int& getter_player_turn();
+    [[nodiscard]] int& getter_nb_rounds();
+    [[nodiscard]] Board& getter_game_board();
+    [[nodiscard]] Player& getter_players(int i);
+    Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds(int nb);
+    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
@@ -72190,6 +72185,7 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void setter_stone();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72221,8 +72217,16 @@ public:
 
 int main() {
     Game game;
+    const int number_rounds = 10;
     CLI_renderer::display_menu(game);
-    CLI_renderer::refresh_terminal();
-    CLI_renderer::display_game(game);
-    return 0;
+    while(game.getter_nb_rounds()< number_rounds){ {
+        CLI_renderer::refresh_terminal();
+        CLI_renderer::display_game(game);
+        game.setter_player_turn();
+        game.setter_nb_rounds();
+    }
+        std::cout << "PROUT FINI ! :p" << std::endl;
+
+        return 0;
+    }
 }

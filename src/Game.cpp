@@ -8,40 +8,43 @@
 #include <ctime>
 #include "../include/Game.h"
 
-int Game::getter_nb_players() const {
+int& Game::getter_nb_players(){
     return nb_players;
 }
 
-int Game::getter_player_turn() const {
+int& Game::getter_player_turn(){
     return player_turn;
 }
 
-int Game::getter_nb_rounds() const {
+int& Game::getter_nb_rounds(){
     return nb_rounds;
 }
 
-Board Game::getter_game_board() {
+Board& Game::getter_game_board() {
     return game_board;
 }
 
-Player Game::getter_players(const int i) {
+Player& Game::getter_players(const int i) {
     return players[i];
 }
 
-Tile Game::getter_tiles(const int i) {
+Tile& Game::getter_tiles(const int i) {
     return tiles[i];
 }
 
 void Game::setter_nb_players(const int nb) {
-    this->nb_players = nb;
+    nb_players = nb;
 }
 
 void Game::setter_player_turn() {
     player_turn = (player_turn % nb_players) + 1;
 }
 
-void Game::setter_nb_rounds(const int nb) {
-    nb_rounds = nb;
+void Game::setter_nb_rounds() {
+    if ((nb_players = player_turn)) {
+        player_turn = 1;
+        nb_rounds++;
+    }
 }
 
 void Game::setter_game_board() {
@@ -59,11 +62,11 @@ void Game::setter_game_board() {
 }
 
 void Game::setter_players(const Player& player) {
-    this->players.push_back(player);
+    players.push_back(player);
 }
 
 void Game::setter_tiles(const Tile& tile) {
-    this->tiles.push_back(tile);
+    tiles.push_back(tile);
 }
 
 void Game::initialize_game() {
@@ -118,14 +121,6 @@ void Game::place_initial_robberies() {
     }
 }
 
-void Game::place_Rock(Player &player, const int x, const int y) {
-    if (player.getter_stone() > 0 && game_board.getter_case(x, y) == '.') {
-        game_board.setter_case(x, y, 'S');
-        player.setter_stone(player.getter_stone() - 1);
-    } else {
-        std::cout << "Cannot place stone" << std::endl;
-    }
-}
 
 
 void Game::generate_tile(Game &game) {

@@ -4,25 +4,32 @@
 #include <iostream>
 #include "../include/Tile.h"
 #include <vector>
+#include <algorithm>
 
 std::vector<std::vector<int>> Tile::getter_shape() const {
     return shape;
+};
+
+void Tile::setter_shape(const std::vector<std::vector<int>> &shape) {
+    this->shape = shape;
 };
 
 Tile::Tile(const std::vector<std::vector<int>> &shape) {
     this->shape = shape;
 };
 
+
+
 void Tile::rotate() {
-    const std::size_t n = shape.size();
-    for (std::size_t i = 0; i < n / 2; ++i) {
-        for (std::size_t j = i; j < n - i - 1; ++j) {
-            const int temp = shape[i][j]; shape[i][j] = shape[n - j - 1][i];
-            shape[n - j - 1][i] = shape[n - i - 1][n - j - 1];
-            shape[n - i - 1][n - j - 1] = shape[j][n - i - 1];
-            shape[j][n - i - 1] = temp;
+    const std::size_t rows = shape.size();
+    const std::size_t cols = shape[0].size();
+    std::vector<std::vector<int>> rotated(cols, std::vector<int>(rows));
+    for (std::size_t i = 0; i < rows; ++i) {
+        for (std::size_t j = 0; j < cols; ++j) {
+            rotated[j][rows - 1 - i] = shape[i][j];
         }
     }
+    shape = rotated;
 }
 
 void Tile::flip() {

@@ -79,7 +79,7 @@ void CLI_renderer::display_game(Game &game) {
     }
 
     display_board(game);
-    const Player current_player = game.getter_players(player_turn - 1);
+    Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
     std::cout << "Player turn :" << player_name << std::endl;
 
@@ -124,26 +124,36 @@ void CLI_renderer::display_game(Game &game) {
         do {
             std::cout << "Choice :" << std::endl;
             std::cin >> action;
-        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
+        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q');
 
         switch (action) {
             case 'P':
-                //place
+                int x, y;
+                do {
+                    std::cout << "X :" << std::endl;
+                    std::cin >> x;
+                } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                do {
+                    std::cout << "Y :" << std::endl;
+                    std::cin >> y;
+                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_color());
                     break;
             case 'R':
-                //rotate
+                game.getter_tiles(0).rotate();
+                refresh_terminal();
+                display_game(game);
                     break;
             case 'F':
-                //flip
+            game.getter_tiles(0).flip();
+            refresh_terminal();
+            display_game(game);
                     break;
             case 'E':
                 //exchange
                     break;
-            case 'S':
-                //stone
-                    break;
-            case 'V':
-                //robbery
+            case 'Q':
+                exit(0);
                     break;
             default:
                 std::cout << "Invalid action" << std::endl;

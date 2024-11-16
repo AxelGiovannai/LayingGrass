@@ -28175,8 +28175,8 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-    std::vector<std::vector<char>> getter_board();
-    [[nodiscard]] char getter_case(int x, int y) const;
+    std::vector<std::vector<char>>& getter_board();
+    [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
@@ -28186,11 +28186,11 @@ public:
 
 
 
-std::vector<std::vector<char>> Board::getter_board() {
+std::vector<std::vector<char>>& Board::getter_board() {
     return board;
 }
 
-char Board::getter_case(const int x, const int y) const {
+char& Board::getter_case(int x, int y){
     return board[x][y];
 }
 
