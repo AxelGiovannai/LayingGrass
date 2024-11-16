@@ -37742,14 +37742,13 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    std::vector<std::vector<int>> starting_tile = {{1}};
 public:
     Player(std::string name, char color);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
     [[nodiscard]] int& getter_tile_exchange();
-    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
+
     void setter_tile_exchange(int tile_exchange);
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
@@ -37794,7 +37793,7 @@ public:
     static void refresh_terminal();
     static void display_menu(Game &game);
     static void display_game(Game &game);
-
+    static void first_turn(Game &game);
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/iostream" 1 3
@@ -72568,3 +72567,6 @@ void CLI_renderer::display_game(Game &game) {
             break;
         }
     }
+void CLI_renderer::first_turn(Game &game) {
+
+}

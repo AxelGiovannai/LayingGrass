@@ -13,7 +13,7 @@ public:
     static void refresh_terminal();
     static void display_menu(Game &game);
     static void display_game(Game &game);
-
+    static void first_turn(Game &game);
 };
 
 

@@ -37699,14 +37699,13 @@ private:
     std::string name;
     char color;
     int tile_exchange = 1;
-    std::vector<std::vector<int>> starting_tile = {{1}};
 public:
     Player(std::string name, char color);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
     [[nodiscard]] int& getter_tile_exchange();
-    [[nodiscard]] std::vector<std::vector<int>>& getter_starting_tile();
+
     void setter_tile_exchange(int tile_exchange);
 };
 # 2 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
@@ -72286,14 +72285,10 @@ namespace std
 
 
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp"
-Player::Player(std::string name, char color) : name(std::move(name)), color(color) {}
+Player::Player(std::string name, const char color) : name(std::move(name)), color(color) {}
 
 char Player::getter_color() const {
     return color;
-}
-
-std::vector<std::vector<int>>& Player::getter_starting_tile(){
-    return starting_tile;
 }
 
 std::string& Player::getter_name(){

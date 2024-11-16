@@ -5,14 +5,10 @@
 #include <string>
 #include <iostream>
 
-Player::Player(std::string name, char color) : name(std::move(name)), color(color) {}
+Player::Player(std::string name, const char color) : name(std::move(name)), color(color) {}
 
 char Player::getter_color() const {
     return color;
-}
-
-std::vector<std::vector<int>>& Player::getter_starting_tile(){
-    return starting_tile;
 }
 
 std::string& Player::getter_name(){

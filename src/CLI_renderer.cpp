@@ -160,4 +160,6 @@ void CLI_renderer::display_game(Game &game) {
             break;
         }
     }
+void CLI_renderer::first_turn(Game &game) {
 
+}
