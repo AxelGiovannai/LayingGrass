@@ -33,7 +33,7 @@ Tile Game::getter_tiles(const int i) {
 }
 
 void Game::setter_nb_players(const int nb) {
-    nb_players = nb;
+    this->nb_players = nb;
 }
 
 void Game::setter_player_turn() {
@@ -59,11 +59,11 @@ void Game::setter_game_board() {
 }
 
 void Game::setter_players(const Player& player) {
-    players.push_back(player);
+    this->players.push_back(player);
 }
 
 void Game::setter_tiles(const Tile& tile) {
-    tiles.push_back(tile);
+    this->tiles.push_back(tile);
 }
 
 void Game::initialize_game() {

@@ -28175,14 +28175,11 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-
-
-
     std::vector<std::vector<char>> getter_board();
-
     [[nodiscard]] char getter_case(int x, int y) const;
     void setter_board(int x, int y);
-    void setter_case(int x , int y, char c);
+    void setter_case(int x, int y, char c);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
 
@@ -28198,12 +28195,31 @@ char Board::getter_case(const int x, const int y) const {
 }
 
 void Board::setter_board(const int x, const int y) {
-    board.resize(x);
-    for (int i = 0; i < x; ++i) {
-        board[i].resize(y, '.');
-    }
+    board.clear();
+    board.resize(x, std::vector<char>(y, '.'));
 }
 
 void Board::setter_case(const int x, const int y, const char c) {
     board[x][y] = c;
+}
+
+
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color) {
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                if (board[x + i][y + j] != '.') {
+                    return false;
+                }
+            }
+        }
+    }
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                board[x + i][y + j] = player_color;
+            }
+        }
+    }
+    return true;
 }

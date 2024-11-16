@@ -72109,14 +72109,11 @@ class Board {
 private:
     std::vector<std::vector<char>> board;
 public:
-
-
-
     std::vector<std::vector<char>> getter_board();
-
     [[nodiscard]] char getter_case(int x, int y) const;
     void setter_board(int x, int y);
-    void setter_case(int x , int y, char c);
+    void setter_case(int x, int y, char c);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -72144,22 +72141,23 @@ public:
 class Player {
 private:
     std::string name;
-    char color{};
+    char color;
     int tile_exchange = 1;
     int stone = 0;
     int robbery = 0;
+    std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    explicit Player(const std::string& name);
+    Player(const std::string& name, char color);
 
     [[nodiscard]] std::string getter_name() const;
-    void getter_color();
+    [[nodiscard]] char getter_color() const;
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
     [[nodiscard]] int getter_robbery() const;
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
     void setter_tile_exchange(int tile_exchange);
     void setter_stone(int stone);
     void setter_robbery(int robbery);
-
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -72168,14 +72166,12 @@ public:
 class Game {
 private:
     int nb_players = 0;
-    int player_turn = 0;
+    int player_turn = 1;
     int nb_rounds = 0;
     Board game_board;
     std::vector<Player> players;
     std::vector<Tile> tiles;
 public:
-
-
     [[nodiscard]] int getter_nb_players() const;
     [[nodiscard]] int getter_player_turn() const;
     [[nodiscard]] int getter_nb_rounds() const;
@@ -72186,13 +72182,14 @@ public:
     void setter_player_turn();
     void setter_nb_rounds(int nb);
     void setter_game_board();
-    void setter_players(const Player &player);
+    void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
+    void initialize_game();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1

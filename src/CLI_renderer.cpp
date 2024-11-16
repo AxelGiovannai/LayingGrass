@@ -21,7 +21,7 @@ void CLI_renderer::display_board(Game &game) {
 
     Board board = game.getter_game_board();
 
-    // Afficher les numéros de colonnes en haut
+
     std::cout << "   ";
     for (int col = 1; col <= board.getter_board()[0].size(); ++col) {
         if (col < 10) {
@@ -32,7 +32,7 @@ void CLI_renderer::display_board(Game &game) {
     }
     std::cout << std::endl;
 
-    // Afficher les lignes avec des numéros au lieu de lettres
+
     int row_number = 1;
     for (const auto &row : board.getter_board()) {
         if (row_number < 10) {
@@ -52,21 +52,21 @@ void CLI_renderer::display_board(Game &game) {
 
 void CLI_renderer::display_menu(Game &game) {
     int x = 0;
-    std::cout << "Welcome to Laying Grass !" << std::endl;
+    std::cout << "Welcome to Laying Grass!" << std::endl;
     while (x < 1 || x > 9) {
-        std::cout << "choose a number of player(1 to 9) : ";
+        std::cout << "Choose a number of players (1 to 9): ";
         std::cin >> x;
     }
-
     game.setter_nb_players(x);
-    std::vector<char> colors = {'R', 'G', 'B', 'Y', 'M', 'C', 'W', 'O', 'P'}; // Predefined list of colors
+    const std::vector<char> colors = {'R', 'G', 'B', 'Y', 'M', 'C', 'W', 'O', 'P'}; // Predefined list of colors
     for (int i = 0; i < x; ++i) {
         std::string name;
-        std::cout << "Player " << i + 1 << " name : ";
+        std::cout << "Player " << i + 1 << " name: ";
         std::cin >> name;
         game.setter_players(Player(name, colors[i]));
     }
     game.setter_game_board();
+    Game::generate_tile(game);
 }
 
 
@@ -77,60 +77,77 @@ void CLI_renderer::display_game(Game &game) {
         std::cerr << "Invalid player turn" << std::endl;
         return;
     }
+
     display_board(game);
     const Player current_player = game.getter_players(player_turn - 1);
-    std::cout << "Player  :" << current_player.getter_name() << " turn" << std::endl;
+    const std::string player_name = current_player.getter_name();
+    std::cout << "Player turn :" << player_name << std::endl;
 
-    std::cout << "Current Tile : " << std::endl;
+    std::cout << "playable Tile : " << std::endl;
     for (const auto tile_shape = game.getter_tiles(0).getter_shape(); const auto &row : tile_shape) {
         for (const auto &cell : row) {
             if (cell == 1) {
-                std::cout << "■";
+                std::cout << "1 ";
             } else {
                 std::cout << cell << " ";
             }
         }
         std::cout << std::endl;
     }
+    std::cout << "Current Tile : " << std::endl;
+    size_t max_height = 0;
+    for (int i = 1; i < 6; ++i) {
+        max_height = std::max(max_height, game.getter_tiles(i).getter_shape().size());
+    }
 
-    for (int i = 1; i < 7; ++i) {
-        std::cout << "   "  << std::endl;
-        for (const auto &tile_shape = game.getter_tiles(i).getter_shape(); const auto &row : tile_shape) {
-            for (const auto &cell : row) {
-                std::cout << cell << " ";
+    // Display the tiles horizontally
+    for (size_t row = 0; row < max_height; ++row) {
+        for (int i = 1; i < 6; ++i) {
+            const auto &tile_shape = game.getter_tiles(i).getter_shape();
+            if (row < tile_shape.size()) {
+                for (const auto &cell : tile_shape[row]) {
+                    std::cout << cell << " ";
+                }
+            } else {
+                for (size_t col = 0; col < tile_shape[0].size(); ++col) {
+                    std::cout << "  ";
+                }
             }
-            std::cout << std::endl;
+            std::cout << " "; // Space between tiles
+        }
+        std::cout << std::endl;
+    }
+
+        std::cout << std::endl;
+        std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<") |" << std::endl;
+        char action;
+        do {
+            std::cout << "Choice :" << std::endl;
+            std::cin >> action;
+        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
+
+        switch (action) {
+            case 'P':
+                //place
+                    break;
+            case 'R':
+                //rotate
+                    break;
+            case 'F':
+                //flip
+                    break;
+            case 'E':
+                //exchange
+                    break;
+            case 'S':
+                //stone
+                    break;
+            case 'V':
+                //robbery
+                    break;
+            default:
+                std::cout << "Invalid action" << std::endl;
+            break;
         }
     }
 
-    std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<") | [S] Stone | [V] Robbery |" << std::endl;
-    char action;
-    do {
-        std::cout << "Invalid action" << std::endl;
-        std::cin >> action;
-    } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V');
-
-    switch (action) {
-        case 'P':
-            //place
-            break;
-        case 'R':
-            //rotate
-            break;
-        case 'F':
-            //flip
-            break;
-        case 'E':
-            //exchange
-            break;
-        case 'S':
-            //stone
-            break;
-        case 'V':
-            //robbery
-            break;
-        default:
-            std::cout << "Invalid action" << std::endl;
-            break;
-    }
-}

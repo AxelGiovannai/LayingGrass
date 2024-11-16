@@ -12,12 +12,11 @@
 class Game {
 private:
     int nb_players = 0;
-    int player_turn = 0;
+    int player_turn = 1;
     int nb_rounds = 0;
     Board game_board;
     std::vector<Player> players;
     std::vector<Tile> tiles;
-    std::vector<Tile> upcoming_tiles;
 public:
     [[nodiscard]] int getter_nb_players() const;
     [[nodiscard]] int getter_player_turn() const;
@@ -29,7 +28,7 @@ public:
     void setter_player_turn();
     void setter_nb_rounds(int nb);
     void setter_game_board();
-    void setter_players(const Player &player);
+    void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();

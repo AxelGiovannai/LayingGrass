@@ -37696,22 +37696,23 @@ public:
 class Player {
 private:
     std::string name;
-    char color{};
+    char color;
     int tile_exchange = 1;
     int stone = 0;
     int robbery = 0;
+    std::vector<std::vector<int>> starting_tile = {{1}};
 public:
-    explicit Player(const std::string& name);
+    Player(const std::string& name, char color);
 
     [[nodiscard]] std::string getter_name() const;
-    void getter_color();
+    [[nodiscard]] char getter_color() const;
     [[nodiscard]] int getter_tile_exchange() const;
     [[nodiscard]] int getter_stone() const;
     [[nodiscard]] int getter_robbery() const;
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
     void setter_tile_exchange(int tile_exchange);
     void setter_stone(int stone);
     void setter_robbery(int robbery);
-
 };
 # 2 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
@@ -72124,8 +72125,14 @@ namespace std
 
 
 # 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp"
-Player::Player(const std::string& name) {
-    this->name = name;
+Player::Player(const std::string& name, char color) : name(name), color(color) {}
+
+char Player::getter_color() const {
+    return color;
+}
+
+std::vector<std::vector<int>> Player::getter_starting_tile() const {
+    return starting_tile;
 }
 
 std::string Player::getter_name() const {
