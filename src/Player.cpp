@@ -4,8 +4,14 @@
 #include <string>
 #include <iostream>
 
-Player::Player(const std::string& name) {
-    this->name = name;
+Player::Player(const std::string& name, char color) : name(name), color(color) {}
+
+char Player::getter_color() const {
+    return color;
+}
+
+std::vector<std::vector<int>> Player::getter_starting_tile() const {
+    return starting_tile;
 }
 
 std::string Player::getter_name() const {

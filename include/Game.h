@@ -17,9 +17,8 @@ private:
     Board game_board;
     std::vector<Player> players;
     std::vector<Tile> tiles;
+    std::vector<Tile> upcoming_tiles;
 public:
-
-
     [[nodiscard]] int getter_nb_players() const;
     [[nodiscard]] int getter_player_turn() const;
     [[nodiscard]] int getter_nb_rounds() const;
@@ -37,6 +36,7 @@ public:
     void place_initial_robberies();
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
+    void initialize_game();
 };
 
 

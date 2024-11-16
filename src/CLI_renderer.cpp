@@ -59,16 +59,15 @@ void CLI_renderer::display_menu(Game &game) {
     }
 
     game.setter_nb_players(x);
+    std::vector<char> colors = {'R', 'G', 'B', 'Y', 'M', 'C', 'W', 'O', 'P'}; // Predefined list of colors
     for (int i = 0; i < x; ++i) {
         std::string name;
-        do {
-            std::cout << "Player " << i + 1 << " name : ";
-            std::cin >> name;
-        } while (name.empty() || name.length() > 20);
-        game.setter_players(Player(name));
+        std::cout << "Player " << i + 1 << " name : ";
+        std::cin >> name;
+        game.setter_players(Player(name, colors[i]));
     }
     game.setter_game_board();
-    }
+}
 
 
 

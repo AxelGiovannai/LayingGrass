@@ -16,10 +16,8 @@ char Board::getter_case(const int x, const int y) const {
 }
 
 void Board::setter_board(const int x, const int y) {
-    board.resize(x);
-    for (int i = 0; i < x; ++i) {
-        board[i].resize(y, '.');
-    }
+    board.clear(); // Clear any existing data
+    board.resize(x, std::vector<char>(y, '.')); // Resize and initialize with '.'
 }
 
 void Board::setter_case(const int x, const int y, const char c) {
@@ -27,3 +25,22 @@ void Board::setter_case(const int x, const int y, const char c) {
 }
 
 
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color) {
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                if (board[x + i][y + j] != '.') {
+                    return false; // Tile cannot be placed
+                }
+            }
+        }
+    }
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                board[x + i][y + j] = player_color;
+            }
+        }
+    }
+    return true;
+}

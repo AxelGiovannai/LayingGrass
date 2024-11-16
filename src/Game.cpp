@@ -51,7 +51,7 @@ void Game::setter_game_board() {
        game_board.setter_board(30, 30);
    }
     for (auto &row : game_board.getter_board()) {
-        std::ranges::fill(row, '.');
+        std::fill(row.begin(), row.end(), '.');
     }
     place_initial_stones();
     place_initial_tile_exchanges();
@@ -66,7 +66,18 @@ void Game::setter_tiles(const Tile& tile) {
     tiles.push_back(tile);
 }
 
-
+void Game::initialize_game() {
+    setter_game_board();
+    for (auto &player : players) {
+        int x, y;
+        do {
+            x = std::rand() % game_board.getter_board().size();
+            y = std::rand() % game_board.getter_board()[0].size();
+        } while (game_board.getter_case(x, y) != '.');
+        game_board.setter_case(x, y, player.getter_color());
+    }
+    generate_tile(*this);
+}
 
 void Game::place_initial_stones() {
     std::srand(std::time(nullptr));
