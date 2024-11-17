@@ -119,10 +119,10 @@ void CLI_renderer::display_game(Game &game) {
     }
 
         std::cout << std::endl;
-        std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<") |" << std::endl;
+        std::cout <<"[P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<")" << std::endl;
         char action;
         do {
-            std::cout << "Choice :" << std::endl;
+            std::cout << "Choice: ";
             std::cin >> action;
         } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
@@ -131,11 +131,11 @@ void CLI_renderer::display_game(Game &game) {
             case 'P':
                 int x, y;
                 do {
-                    std::cout << "X :" << std::endl;
+                    std::cout << "X: ";
                     std::cin >> x;
                 } while (x < 1 || x > game.getter_game_board().getter_board().size());
                 do {
-                    std::cout << "Y :" << std::endl;
+                    std::cout << "Y: ";
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
                 game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
