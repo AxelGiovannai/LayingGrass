@@ -4,7 +4,7 @@
 
 #include "../include/Board.h"
 #include "../include/Game.h"
-
+#include <unordered_map>
 
 
 std::vector<std::vector<char>>& Board::getter_board() {
@@ -24,7 +24,20 @@ void Board::setter_case(const int x, const int y, const char c) {
     board[x][y] = c;
 }
 
-
+std::string Board::get_color_code(char player_id) {
+    static std::unordered_map<char, std::string> color_map = {
+        {'1', "\033[31m"}, // Red
+        {'2', "\033[32m"}, // Green
+        {'3', "\033[34m"}, // Blue
+        {'4', "\033[33m"}, // Yellow
+        {'5', "\033[35m"}, // Magenta
+        {'6', "\033[36m"}, // Cyan
+        {'7', "\033[93m"}, // Bright Yellow
+        {'8', "\033[91m"}, // Bright Red
+        {'9', "\033[92m"}  // Bright Green
+    };
+    return color_map[player_id];
+}
 
 
 

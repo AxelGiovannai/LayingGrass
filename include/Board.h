@@ -5,6 +5,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include <vector>
+#include <string>
 
 
 class Board {
@@ -18,8 +19,7 @@ public:
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    std::string get_color_code(char player_id); // Add this method
 };
-
-
 
 #endif //BOARD_H

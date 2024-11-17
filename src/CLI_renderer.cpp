@@ -18,10 +18,7 @@ void CLI_renderer::refresh_terminal() {
 }
 
 void CLI_renderer::display_board(Game &game) {
-
-    Board board = game.getter_game_board();
-
-
+    Board &board = game.getter_game_board();
     std::cout << "   ";
     for (int col = 1; col <= board.getter_board()[0].size(); ++col) {
         if (col < 10) {
@@ -32,7 +29,6 @@ void CLI_renderer::display_board(Game &game) {
     }
     std::cout << std::endl;
 
-
     int row_number = 1;
     for (const auto &row : board.getter_board()) {
         if (row_number < 10) {
@@ -41,7 +37,11 @@ void CLI_renderer::display_board(Game &game) {
             std::cout << row_number << ' ';
         }
         for (const auto &cell : row) {
-            std::cout << cell << "  ";
+            if (cell != '.') {
+                std::cout << board.get_color_code(cell) << cell << "\033[0m" << "  ";
+            } else {
+                std::cout << cell << "  ";
+            }
         }
         std::cout << std::endl;
         ++row_number;
@@ -58,7 +58,17 @@ void CLI_renderer::display_menu(Game &game) {
         std::cin >> x;
     }
     game.setter_nb_players(x);
-    const std::vector<char> colors = {'R', 'G', 'B', 'Y', 'M', 'C', 'W', 'O', 'P'}; // Predefined list of colors
+    const std::vector<std::string> colors = {
+        "\033[31m", // Red
+        "\033[32m", // Green
+        "\033[34m", // Blue
+        "\033[33m", // Yellow
+        "\033[35m", // Magenta
+        "\033[36m", // Cyan
+        "\033[93m", // Bright Yellow
+        "\033[91m", // Bright Red
+        "\033[92m"  // Bright Green
+    };
     for (int i = 0; i < x; ++i) {
         std::string name;
         std::cout << "Player " << i + 1 << " name: ";
@@ -69,8 +79,6 @@ void CLI_renderer::display_menu(Game &game) {
     Game::generate_tile(game);
 }
 
-
-
 void CLI_renderer::display_game(Game &game) {
     const int player_turn = game.getter_player_turn();
     if (player_turn < 1 || player_turn > game.getter_nb_players()) {
@@ -78,12 +86,12 @@ void CLI_renderer::display_game(Game &game) {
         return;
     }
 
-    const std::string RED = "\033[31m";
     const std::string RESET = "\033[0m";
 
     Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
-    std::cout << RED << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() << RESET << std::endl;
+    const std::string player_color = current_player.getter_color();
+    std::cout << player_color << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() << RESET << std::endl;
     std::cout << " " << std::endl;
     display_board(game);
 
@@ -124,59 +132,59 @@ void CLI_renderer::display_game(Game &game) {
         std::cout << std::endl;
     }
 
-        std::cout << std::endl;
-        std::cout <<"[P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<")" << std::endl;
-        char action;
-        do {
-            std::cout << "Choice: ";
-            std::cin >> action;
-        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
+    std::cout << std::endl;
+    std::cout << "[P] Place | [R] Rotate | [F] Flip | [E] Exchange(" << current_player.getter_tile_exchange() << ")" << std::endl;
+    char action;
+    do {
+        std::cout << "Choice: ";
+        std::cin >> action;
+    } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
-        switch (action) {
-            case 'p':
-            case 'P':
-                int x, y;
-                do {
-                    std::cout << "X: ";
-                    std::cin >> x;
-                } while (x < 1 || x > game.getter_game_board().getter_board().size());
-                do {
-                    std::cout << "Y: ";
-                    std::cin >> y;
-                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
-                    game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
-                    game.remove_tile(0);
-                } else {
-                    refresh_terminal();
-                    display_game(game);
-                }
-            break;
-            case 'r':
-            case 'R':
-                game.getter_tiles(0).rotate();
+    switch (action) {
+        case 'p':
+        case 'P':
+            int x, y;
+            do {
+                std::cout << "X: ";
+                std::cin >> x;
+            } while (x < 1 || x > game.getter_game_board().getter_board().size());
+            do {
+                std::cout << "Y: ";
+                std::cin >> y;
+            } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+            if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                game.remove_tile(0);
+            } else {
                 refresh_terminal();
                 display_game(game);
-                    break;
-            case 'f':
-            case 'F':
+            }
+            break;
+        case 'r':
+        case 'R':
+            game.getter_tiles(0).rotate();
+            refresh_terminal();
+            display_game(game);
+            break;
+        case 'f':
+        case 'F':
             game.getter_tiles(0).flip();
             refresh_terminal();
             display_game(game);
-                    break;
-            case 'e':
-            case 'E':
-                //exchange
-                    break;
-            case 'q':
-            case 'Q':
-                exit(0);
-                    break;
-            default:
-                std::cout << "Invalid action" << std::endl;
             break;
-        }
+        case 'e':
+        case 'E':
+            // exchange
+            break;
+        case 'q':
+        case 'Q':
+            exit(0);
+            break;
+        default:
+            std::cout << "Invalid action" << std::endl;
+            break;
     }
+}
 
 
 void CLI_renderer::first_turn(Game &game) {

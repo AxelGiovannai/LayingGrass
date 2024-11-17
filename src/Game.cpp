@@ -79,7 +79,7 @@ void Game::initialize_game() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, player.getter_color());
+        game_board.setter_case(x, y, player.getter_color()[0]); // Use the first character of the color string
     }
     generate_tile(*this);
 }
