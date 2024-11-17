@@ -63,7 +63,7 @@ void CLI_renderer::display_menu(Game &game) {
         std::string name;
         std::cout << "Player " << i + 1 << " name: ";
         std::cin >> name;
-        game.setter_players(Player(name, colors[i]));
+        game.setter_players(Player(name, colors[i], i + 1));
     }
     game.setter_game_board();
     Game::generate_tile(game);
@@ -137,8 +137,7 @@ void CLI_renderer::display_game(Game &game) {
                     std::cout << "Y :" << std::endl;
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_color());
-                    break;
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_id());                    break;
             case 'R':
                 game.getter_tiles(0).rotate();
                 refresh_terminal();
@@ -160,6 +159,30 @@ void CLI_renderer::display_game(Game &game) {
             break;
         }
     }
-void CLI_renderer::first_turn(Game &game) {
 
+
+void CLI_renderer::first_turn(Game &game) {
+    refresh_terminal();
+    display_board(game);
+
+    for (int i = 0; i < game.getter_nb_players(); ++i) {
+        Player &player = game.getter_players(i);
+        std::cout << "Player " << player.getter_name() << " (" << player.getter_id() << "), place your starting tile." << std::endl;
+        int x, y;
+        do {
+            std::cout << "X: ";
+            std::cin >> x;
+        } while (x < 1 || x > game.getter_game_board().getter_board().size());
+        do {
+            std::cout << "Y: ";
+            std::cin >> y;
+        } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+        if (game.getter_game_board().place_tile(player.getter_starting_tile(), x - 1, y - 1, player.getter_id())) {
+            refresh_terminal();
+            display_board(game);
+        } else {
+            std::cout << "Invalid placement. Try again." << std::endl;
+            --i; // Retry the same player
+        }
+    }
 }

@@ -25,7 +25,7 @@ void Board::setter_case(const int x, const int y, const char c) {
 }
 
 
-bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color) {
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
@@ -38,7 +38,7 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
-                board[x + i][y + j] = player_color;
+                board[x + i][y + j] = '0' + player_id;
             }
         }
     }

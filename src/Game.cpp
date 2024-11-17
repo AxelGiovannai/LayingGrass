@@ -91,7 +91,7 @@ void Game::place_initial_stones() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'S');
+        game_board.setter_case(x, y, 'P');
     }
 }
 
@@ -104,7 +104,7 @@ void Game::place_initial_tile_exchanges() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'T');
+        game_board.setter_case(x, y, 'E');
     }
 }
 
@@ -117,7 +117,7 @@ void Game::place_initial_robberies() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'R');
+        game_board.setter_case(x, y, 'V');
     }
 }
 
