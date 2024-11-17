@@ -79489,7 +79489,8 @@ namespace std
 
 
 
-# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h"
+
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h"
 class Board {
 private:
     std::vector<std::vector<char>> board;
@@ -79501,6 +79502,8 @@ public:
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    std::string get_color_code(char player_id);
+
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -79529,20 +79532,20 @@ public:
 class Player {
 private:
     std::string name;
-    char color;
+    std::string color;
     int id;
     int tile_exchange = 1;
     std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color, int id);
+    Player(std::string name, std::string color, int id);
 
     [[nodiscard]] std::string& getter_name();
-    [[nodiscard]] char getter_color() const;
+    [[nodiscard]] std::string getter_color() const;
     [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
     [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
-
     void setter_tile_exchange(int tile_exchange);
+    void increase_tile_exchange();
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -79577,8 +79580,8 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
-    void player_turn_round();
-
+    void use_tile_exchange(int tile_index);
+    void apply_bonus_effects();
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
@@ -79611,22 +79614,14 @@ void Game::setter_nb_players(const int nb) {
 }
 
 void Game::setter_player_turn() {
-    this->player_turn;
-
+    player_turn = (player_turn % nb_players) + 1;
+    if (player_turn == 1) {
+        nb_rounds++;
+    }
 }
 
 void Game::setter_nb_rounds() {
     this->nb_rounds;
-}
-
-void Game::player_turn_round() {
-
-    player_turn = (player_turn % nb_players) + 1;
-
-
-    if (player_turn == 1) {
-        nb_rounds++;
-    }
 }
 
 
@@ -79661,7 +79656,7 @@ void Game::initialize_game() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, player.getter_color());
+        game_board.setter_case(x, y, player.getter_color()[0]);
     }
     generate_tile(*this);
 }
@@ -79708,6 +79703,67 @@ void Game::place_initial_robberies() {
 void Game::remove_tile(int index) {
     if (index >= 0 && index < tiles.size()) {
         tiles.erase(tiles.begin() + index);
+    }
+}
+
+void Game::use_tile_exchange(int tile_index) {
+    if (tile_index < 0 || tile_index >= tiles.size()) {
+        std::cout << "Invalid tile index!" << std::endl;
+        return;
+    }
+
+    std::vector<Tile> new_tiles;
+    for (int i = tile_index + 1; i < tiles.size(); ++i) {
+        new_tiles.push_back(tiles[i]);
+    }
+    for (int i = 0; i <= tile_index; ++i) {
+        new_tiles.push_back(tiles[i]);
+    }
+    tiles = new_tiles;
+}
+
+void Game::apply_bonus_effects() {
+    for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
+        for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {
+            if (game_board.getter_case(i, j) == 'E' || game_board.getter_case(i, j) == 'V' || game_board.getter_case(i, j) == 'P') {
+                char bonus = game_board.getter_case(i, j);
+                char surrounding_char = game_board.getter_case(i-1, j);
+                bool surrounded_by_same_char = true;
+
+                for (int x = -1; x <= 1; ++x) {
+                    for (int y = -1; y <= 1; ++y) {
+                        if (x != 0 || y != 0) {
+                            if (game_board.getter_case(i + x, j + y) != surrounding_char) {
+                                surrounded_by_same_char = false;
+                                break;
+                            }
+                        }
+                    }
+                    if (!surrounded_by_same_char) break;
+                }
+
+                if (surrounded_by_same_char) {
+                    game_board.setter_case(i, j, surrounding_char);
+
+                    switch (bonus) {
+                        case 'E':
+                            getter_players(surrounding_char - '0' - 1).increase_tile_exchange();
+                            break;
+                        case 'V':
+
+                            break;
+                        case 'P':
+                            int x, y;
+                            do {
+                                std::cout << "Enter the coordinates of the empty cell to transform into 'S' (x y): ";
+                                std::cin >> x >> y;
+                            } while (x < 1 || x > game_board.getter_board().size() || y < 1 || y > game_board.getter_board()[0].size() || game_board.getter_case(x-1, y-1) != '.');
+                            game_board.setter_case(x-1, y-1, 'S');
+                            break;
+                    }
+                }
+            }
+        }
     }
 }
 

@@ -34,3 +34,7 @@ void Player::setter_tile_exchange(const int tile_exchange) {
 std::vector<std::vector<int>> Player::getter_starting_tile() const {
     return starting_tile;
 }
+
+void Player::increase_tile_exchange() {
+    tile_exchange++;
+}

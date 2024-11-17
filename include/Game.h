@@ -38,7 +38,8 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
-
+    void use_tile_exchange(int tile_index);
+    void apply_bonus_effects();
 };
 
 

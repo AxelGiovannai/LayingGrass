@@ -72104,7 +72104,8 @@ namespace std
 
 
 
-# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h"
+
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h"
 class Board {
 private:
     std::vector<std::vector<char>> board;
@@ -72116,6 +72117,8 @@ public:
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    std::string get_color_code(char player_id);
+
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -72144,20 +72147,20 @@ public:
 class Player {
 private:
     std::string name;
-    char color;
+    std::string color;
     int id;
     int tile_exchange = 1;
     std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color, int id);
+    Player(std::string name, std::string color, int id);
 
     [[nodiscard]] std::string& getter_name();
-    [[nodiscard]] char getter_color() const;
+    [[nodiscard]] std::string getter_color() const;
     [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
     [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
-
     void setter_tile_exchange(int tile_exchange);
+    void increase_tile_exchange();
 };
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 
@@ -72192,8 +72195,8 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
-    void player_turn_round();
-
+    void use_tile_exchange(int tile_index);
+    void apply_bonus_effects();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72231,7 +72234,7 @@ int main() {
     while (game.getter_nb_rounds() < number_rounds) {
         CLI_renderer::refresh_terminal();
         CLI_renderer::display_game(game);
-        game.player_turn_round();
+        game.setter_player_turn();
     }
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;

@@ -5,7 +5,7 @@
 #include "../include/Board.h"
 #include "../include/Game.h"
 #include <unordered_map>
-
+#include <iostream>
 
 std::vector<std::vector<char>>& Board::getter_board() {
     return board;
@@ -105,3 +105,5 @@ bool Board::place_first_tile(const std::vector<std::vector<int>> &tile, int x, i
     }
     return true;
 }
+
+
