@@ -37,22 +37,14 @@ void Game::setter_nb_players(const int nb) {
 }
 
 void Game::setter_player_turn() {
-    this->player_turn;
-
+    player_turn = (player_turn % nb_players) + 1;
+    if (player_turn == 1) {
+        nb_rounds++;
+    }
 }
 
 void Game::setter_nb_rounds() {
     this->nb_rounds;
-}
-
-void Game::player_turn_round() {
-
-    player_turn = (player_turn % nb_players) + 1;
-
-
-    if (player_turn == 1) {
-        nb_rounds++;
-    }
 }
 
 

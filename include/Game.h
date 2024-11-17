@@ -38,7 +38,6 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
-    void player_turn_round();
 
 };
 
