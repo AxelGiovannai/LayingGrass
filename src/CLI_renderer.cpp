@@ -73,17 +73,17 @@ void CLI_renderer::display_menu(Game &game) {
 
 void CLI_renderer::display_game(Game &game) {
     const int player_turn = game.getter_player_turn();
-    if (player_turn < 0 || player_turn >= game.getter_nb_players()) {
+    if (player_turn < 1 || player_turn > game.getter_nb_players()) {
         std::cerr << "Invalid player turn" << std::endl;
         return;
     }
-    std::cout << "player_turn: " << game.getter_nb_players() << std::endl;
-    std:: cout << "nb_turn: " << game.getter_nb_rounds() << std::endl;
+    std::cout << "Player turn: " << player_turn << std::endl;
+    std::cout << "Number of rounds: " << game.getter_nb_rounds() << std::endl;
 
     display_board(game);
     Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
-    std::cout << "Player turn :" << player_name << std::endl;
+    std::cout << "Player turn: " << player_name << std::endl;
 
     std::cout << "playable Tile : " << std::endl;
     for (const auto tile_shape = game.getter_tiles(0).getter_shape(); const auto &row : tile_shape) {
