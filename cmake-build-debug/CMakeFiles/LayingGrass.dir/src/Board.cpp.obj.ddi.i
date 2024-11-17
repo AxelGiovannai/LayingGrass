@@ -28179,10 +28179,9614 @@ public:
     [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
-    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 1
 
+
+
+
+
+
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
+# 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/string" 1 3
+# 36 "C:/msys64/mingw64/include/c++/14.2.0/string" 3
+       
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/string" 3
+
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h" 1 3
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h" 3
+       
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h" 3
+
+
+
+
+
+# 42 "C:/msys64/mingw64/include/c++/14.2.0/bits/stringfwd.h" 3
+namespace std
+{
+
+
+
+
+
+
+
+
+  template<class _CharT>
+    struct char_traits;
+
+  template<> struct char_traits<char>;
+
+  template<> struct char_traits<wchar_t>;
+
+
+  template<> struct char_traits<char8_t>;
+
+
+
+  template<> struct char_traits<char16_t>;
+  template<> struct char_traits<char32_t>;
+
+
+namespace __cxx11 {
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+           typename _Alloc = allocator<_CharT> >
+    class basic_string;
+
+}
+
+
+  typedef basic_string<char> string;
+
+
+  typedef basic_string<wchar_t> wstring;
+
+
+
+  typedef basic_string<char8_t> u8string;
+
+
+
+
+  typedef basic_string<char16_t> u16string;
+
+
+  typedef basic_string<char32_t> u32string;
+
+
+
+
+
+}
+# 42 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 1 3
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+       
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 1 3
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 3
+       
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 3
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+
+
+
+
+# 1 "C:/msys64/mingw64/include/wchar.h" 1 3
+# 10 "C:/msys64/mingw64/include/wchar.h" 3
+# 1 "C:/msys64/mingw64/include/corecrt_stdio_config.h" 1 3
+# 11 "C:/msys64/mingw64/include/wchar.h" 2 3
+# 1 "C:/msys64/mingw64/include/corecrt_wstdlib.h" 1 3
+# 12 "C:/msys64/mingw64/include/corecrt_wstdlib.h" 3
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itow_s (int _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _itow_s(int _Val, wchar_t (&_DstBuf)[__size], int _Radix) { return _itow_s(_Val, _DstBuf, __size, _Radix); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltow_s (long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _ltow_s(long _Val, wchar_t (&_DstBuf)[__size], int _Radix) { return _ltow_s(_Val, _DstBuf, __size, _Radix); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultow_s (unsigned long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _ultow_s(unsigned long _Val, wchar_t (&_DstBuf)[__size], int _Radix) { return _ultow_s(_Val, _DstBuf, __size, _Radix); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wgetenv_s(size_t *_ReturnSize,wchar_t *_DstBuf,size_t _DstSizeInWords,const wchar_t *_VarName);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wgetenv_s(size_t* _ReturnSize, wchar_t (&_DstBuf)[__size], const wchar_t* _VarName) { return _wgetenv_s(_ReturnSize, _DstBuf, __size, _VarName); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wdupenv_s(wchar_t **_Buffer,size_t *_BufferSizeInWords,const wchar_t *_VarName);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64tow_s(long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64tow_s(unsigned long long _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wmakepath_s(wchar_t *_PathResult,size_t _SizeInWords,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wmakepath_s(wchar_t (&_PathResult)[__size], const wchar_t* _Drive, const wchar_t* _Dir, const wchar_t* _Filename, const wchar_t* _Ext) { return _wmakepath_s(_PathResult,__size,_Drive,_Dir,_Filename,_Ext); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wputenv_s(const wchar_t *_Name,const wchar_t *_Value);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsearchenv_s(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wsearchenv_s(const wchar_t* _Filename, const wchar_t* _EnvVar, wchar_t (&_ResultPath)[__size]) { return _wsearchenv_s(_Filename, _EnvVar, _ResultPath, __size); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_FullPath,wchar_t *_Drive,size_t _DriveSizeInWords,wchar_t *_Dir,size_t _DirSizeInWords,wchar_t *_Filename,size_t _FilenameSizeInWords,wchar_t *_Ext,size_t _ExtSizeInWords);
+  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _wsplitpath_s(const wchar_t *_Dest, wchar_t (&__drive)[__drive_size], wchar_t (&__dir)[__dir_size], wchar_t (&__name)[__name_size], wchar_t (&__ext)[__ext_size]) { return _wsplitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
+
+
+}
+# 12 "C:/msys64/mingw64/include/wchar.h" 2 3
+# 26 "C:/msys64/mingw64/include/wchar.h" 3
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 42 "C:/msys64/mingw64/include/wchar.h" 3
+  struct _iobuf {
+    char *_ptr;
+    int _cnt;
+    char *_base;
+    int _flag;
+    int _file;
+    int _charbuf;
+    int _bufsiz;
+    char *_tmpfname;
+  };
+  typedef struct _iobuf FILE;
+
+
+
+__attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) __acrt_iob_func(unsigned index);
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) __iob_func(void);
+# 70 "C:/msys64/mingw64/include/wchar.h" 3
+  typedef unsigned long _fsize_t;
+
+
+
+
+  struct _wfinddata32_t {
+    unsigned attrib;
+    __time32_t time_create;
+    __time32_t time_access;
+    __time32_t time_write;
+    _fsize_t size;
+    wchar_t name[260];
+  };
+
+  struct _wfinddata32i64_t {
+    unsigned attrib;
+    __time32_t time_create;
+    __time32_t time_access;
+    __time32_t time_write;
+    __extension__ long long size;
+    wchar_t name[260];
+  };
+
+  struct _wfinddata64i32_t {
+    unsigned attrib;
+    __time64_t time_create;
+    __time64_t time_access;
+    __time64_t time_write;
+    _fsize_t size;
+    wchar_t name[260];
+  };
+
+  struct _wfinddata64_t {
+    unsigned attrib;
+    __time64_t time_create;
+    __time64_t time_access;
+    __time64_t time_write;
+    __extension__ long long size;
+    wchar_t name[260];
+  };
+# 157 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) const unsigned short* __pctype_func(void);
+# 170 "C:/msys64/mingw64/include/wchar.h" 3
+  extern const unsigned short ** __imp__wctype;
+
+
+
+  __attribute__ ((__dllimport__)) const wctype_t * __attribute__((__cdecl__)) __pwctype_func(void);
+# 198 "C:/msys64/mingw64/include/wchar.h" 3
+  int __attribute__((__cdecl__)) iswalpha(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalpha_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswupper(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswupper_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswlower(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswlower_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswdigit(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswdigit_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswxdigit(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswxdigit_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswspace(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswspace_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswpunct(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswpunct_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswalnum(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswalnum_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswprint(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswprint_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswgraph(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswgraph_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswcntrl(wint_t _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iswcntrl_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswascii(wint_t _C);
+
+  int __attribute__((__cdecl__)) isleadbyte(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isleadbyte_l(int _C,_locale_t _Locale);
+
+  wint_t __attribute__((__cdecl__)) towupper(wint_t _C);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towupper_l(wint_t _C,_locale_t _Locale);
+  wint_t __attribute__((__cdecl__)) towlower(wint_t _C);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _towlower_l(wint_t _C,_locale_t _Locale);
+  int __attribute__((__cdecl__)) iswctype(wint_t _C,wctype_t _Type);
+# 238 "C:/msys64/mingw64/include/wchar.h" 3
+  int __attribute__((__cdecl__)) is_wctype(wint_t _C,wctype_t _Type);
+
+
+
+  int __attribute__((__cdecl__)) iswblank(wint_t _C);
+
+
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wgetcwd(wchar_t *_DstBuf,int _SizeInWords);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wgetdcwd(int _Drive,wchar_t *_DstBuf,int _SizeInWords);
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wchdir(const wchar_t *_Path);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wmkdir(const wchar_t *_Path);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wrmdir(const wchar_t *_Path);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _waccess(const wchar_t *_Filename,int _AccessMode);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wchmod(const wchar_t *_Filename,int _Mode);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcreat(const wchar_t *_Filename,int _PermissionMode) ;
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst32(const wchar_t *_Filename,struct _wfinddata32_t *_FindData);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext32(intptr_t _FindHandle,struct _wfinddata32_t *_FindData);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wunlink(const wchar_t *_Filename);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wrename(const wchar_t *_OldFilename,const wchar_t *_NewFilename);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wmktemp(wchar_t *_TemplateName) ;
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst32i64(const wchar_t *_Filename,struct _wfinddata32i64_t *_FindData);
+  intptr_t __attribute__((__cdecl__)) _wfindfirst64i32(const wchar_t *_Filename,struct _wfinddata64i32_t *_FindData);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wfindfirst64(const wchar_t *_Filename,struct _wfinddata64_t *_FindData);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext32i64(intptr_t _FindHandle,struct _wfinddata32i64_t *_FindData);
+  int __attribute__((__cdecl__)) _wfindnext64i32(intptr_t _FindHandle,struct _wfinddata64i32_t *_FindData);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wfindnext64(intptr_t _FindHandle,struct _wfinddata64_t *_FindData);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wsopen_s(int *_FileHandle,const wchar_t *_Filename,int _OpenFlag,int _ShareFlag,int _PermissionFlag);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wopen(const wchar_t *_Filename,int _OpenFlag,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wsopen(const wchar_t *_Filename,int _OpenFlag,int _ShareFlag,...) ;
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wsetlocale(int _Category,const wchar_t *_Locale);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecl(const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecle(const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexeclp(const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexeclpe(const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecv(const wchar_t *_Filename,const wchar_t *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecve(const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecvp(const wchar_t *_Filename,const wchar_t *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wexecvpe(const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
+
+
+
+
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnl(int _Mode,const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnle(int _Mode,const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnlp(int _Mode,const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnlpe(int _Mode,const wchar_t *_Filename,const wchar_t *_ArgList,...);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnv(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnve(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnvp(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _wspawnvpe(int _Mode,const wchar_t *_Filename,const wchar_t *const *_ArgList,const wchar_t *const *_Env);
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wsystem(const wchar_t *_Command);
+# 355 "C:/msys64/mingw64/include/wchar.h" 3
+  typedef unsigned short _ino_t;
+
+  typedef unsigned short ino_t;
+
+
+
+
+
+  typedef unsigned int _dev_t;
+
+  typedef unsigned int dev_t;
+
+
+
+# 1 "C:/msys64/mingw64/include/_mingw_off_t.h" 1 3
+
+
+
+
+  typedef long _off_t;
+
+  typedef long off32_t;
+
+
+
+
+
+  __extension__ typedef long long _off64_t;
+
+  __extension__ typedef long long off64_t;
+# 26 "C:/msys64/mingw64/include/_mingw_off_t.h" 3
+typedef off32_t off_t;
+# 370 "C:/msys64/mingw64/include/wchar.h" 2 3
+# 1 "C:/msys64/mingw64/include/_mingw_stat64.h" 1 3
+# 19 "C:/msys64/mingw64/include/_mingw_stat64.h" 3
+  struct _stat32 {
+    _dev_t st_dev;
+   _ino_t st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    _dev_t st_rdev;
+    _off_t st_size;
+    __time32_t st_atime;
+    __time32_t st_mtime;
+    __time32_t st_ctime;
+  };
+
+
+  struct stat {
+    _dev_t st_dev;
+    _ino_t st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    _dev_t st_rdev;
+    _off_t st_size;
+    time_t st_atime;
+    time_t st_mtime;
+    time_t st_ctime;
+  };
+
+
+  struct _stat32i64 {
+    _dev_t st_dev;
+    _ino_t st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    _dev_t st_rdev;
+    __extension__ long long st_size;
+    __time32_t st_atime;
+    __time32_t st_mtime;
+    __time32_t st_ctime;
+  };
+
+  struct _stat64i32 {
+    _dev_t st_dev;
+    _ino_t st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    _dev_t st_rdev;
+    _off_t st_size;
+    __time64_t st_atime;
+    __time64_t st_mtime;
+    __time64_t st_ctime;
+  };
+
+  struct _stat64 {
+    _dev_t st_dev;
+    _ino_t st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    _dev_t st_rdev;
+    __extension__ long long st_size;
+    __time64_t st_atime;
+    __time64_t st_mtime;
+    __time64_t st_ctime;
+  };
+# 371 "C:/msys64/mingw64/include/wchar.h" 2 3
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat32(const wchar_t *_Name,struct _stat32 *_Stat);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat32i64(const wchar_t *_Name,struct _stat32i64 *_Stat);
+  int __attribute__((__cdecl__)) _wstat64i32(const wchar_t *_Name,struct _stat64i32 *_Stat);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wstat64(const wchar_t *_Name,struct _stat64 *_Stat);
+# 389 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) wchar_t *_cgetws(wchar_t *_Buffer) ;
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _getwch(void);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _getwche(void);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _putwch(wchar_t _WCh);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _ungetwch(wint_t _WCh);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cputws(const wchar_t *_String);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwprintf(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwscanf(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwscanf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwprintf_p(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcwprintf_p(const wchar_t * __restrict__ _Format,va_list _ArgList);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcwprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcwprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+# 422 "C:/msys64/mingw64/include/wchar.h" 3
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_swscanf(const wchar_t * __restrict__ _Src,const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vswscanf (const wchar_t * __restrict__ _Str,const wchar_t * __restrict__ Format,va_list argp);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_wscanf(const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vwscanf(const wchar_t * __restrict__ Format, va_list argp);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fwscanf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfwscanf (FILE * __restrict__ fp, const wchar_t * __restrict__ Format,va_list argp);
+
+
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+                                                      __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_wprintf(const wchar_t * __restrict__ _Format,...);
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                      __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_snwprintf (wchar_t * __restrict__ s, size_t n, const wchar_t * __restrict__ format, ...);
+                                                      __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_vsnwprintf (wchar_t * __restrict__ , size_t, const wchar_t * __restrict__ , va_list);
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_swprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ , ...);
+                                                      __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vswprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ ,va_list);
+
+                                                    __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_swscanf(const wchar_t * __restrict__ _Src,const wchar_t * __restrict__ _Format,...);
+                                                    __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_wscanf(const wchar_t * __restrict__ _Format,...);
+                                                    __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_fwscanf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_fwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+                                                     __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_wprintf(const wchar_t * __restrict__ _Format,...);
+                                                    __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_vfwprintf(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                    __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_vwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_swprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ , ...);
+                                                     __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_vswprintf(wchar_t * __restrict__ , const wchar_t * __restrict__ ,va_list);
+# 485 "C:/msys64/mingw64/include/wchar.h" 3
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (2)))
+int swscanf(const wchar_t *__source, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vswscanf( __source, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (1)))
+int wscanf(const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfwscanf( (__acrt_iob_func(0)), __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (2)))
+int fwscanf(FILE *__stream, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfwscanf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (2)))
+int vswscanf (const wchar_t *__source, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vswscanf( __source, __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (1)))
+int vwscanf(const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfwscanf( (__acrt_iob_func(0)), __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+                                                     __attribute__ ((__nonnull__ (2)))
+int vfwscanf (FILE *__stream, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfwscanf( __stream, __format, __local_argv );
+}
+
+
+
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int fwprintf (FILE *__stream, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfwprintf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (1)))
+int wprintf (const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfwprintf( (__acrt_iob_func(1)), __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int vfwprintf (FILE *__stream, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfwprintf( __stream, __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (1)))
+int vwprintf (const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfwprintf( (__acrt_iob_func(1)), __format, __local_argv );
+}
+
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int snwprintf (wchar_t *__stream, size_t __n, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vsnwprintf( __stream, __n, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int vsnwprintf (wchar_t *__stream, size_t __n, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vsnwprintf( __stream, __n, __format, __local_argv );
+}
+# 719 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfsopen(const wchar_t *_Filename,const wchar_t *_Mode,int _ShFlag);
+
+
+  wint_t __attribute__((__cdecl__)) fgetwc(FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fgetwchar(void);
+  wint_t __attribute__((__cdecl__)) fputwc(wchar_t _Ch,FILE *_File);
+  __attribute__ ((__dllimport__)) wint_t __attribute__((__cdecl__)) _fputwchar(wchar_t _Ch);
+  wint_t __attribute__((__cdecl__)) getwc(FILE *_File);
+  wint_t __attribute__((__cdecl__)) getwchar(void);
+  wint_t __attribute__((__cdecl__)) putwc(wchar_t _Ch,FILE *_File);
+  wint_t __attribute__((__cdecl__)) putwchar(wchar_t _Ch);
+  wint_t __attribute__((__cdecl__)) ungetwc(wint_t _Ch,FILE *_File);
+  wchar_t *__attribute__((__cdecl__)) fgetws(wchar_t * __restrict__ _Dst,int _SizeInWords,FILE * __restrict__ _File);
+  int __attribute__((__cdecl__)) fputws(const wchar_t * __restrict__ _Str,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _getws(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putws(const wchar_t *_Str);
+# 774 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_l(wchar_t * __restrict__ ,size_t _SizeInWords,const wchar_t * __restrict__ _Format,_locale_t _Locale,... ) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_c(wchar_t * __restrict__ _DstBuf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_c(wchar_t * __restrict__ _DstBuf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf(wchar_t * __restrict__ _Dest,size_t _Count,const wchar_t * __restrict__ _Format,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf(wchar_t * __restrict__ _Dest,size_t _Count,const wchar_t * __restrict__ _Format,va_list _Args) ;
+# 1091 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_p(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_p(const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_p(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_p(const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_p(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vswprintf_p(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_p(const wchar_t * __restrict__ _Format,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vscwprintf_p(const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_l(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_p_l(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_l(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_p_l(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_c_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_p_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_c_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_p_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scwprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf_p_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_l(wchar_t * __restrict__ _DstBuf,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,va_list _Args);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __swprintf_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,_locale_t _Plocinfo,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_l(wchar_t * __restrict__ _Dest,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __vswprintf_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Format,_locale_t _Plocinfo,va_list _Args) ;
+
+
+
+# 1 "C:/msys64/mingw64/include/swprintf.inl" 1 3
+# 12 "C:/msys64/mingw64/include/swprintf.inl" 3
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int vswprintf (wchar_t *__stream, size_t __count, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+  return vsnwprintf( __stream, __count, __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (3)))
+int swprintf (wchar_t *__stream, size_t __count, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv;
+
+  __builtin_va_start( __local_argv, __format );
+  __retval = vswprintf( __stream, __count, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+
+extern "C++" {
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int vswprintf (wchar_t *__stream, const wchar_t *__format, __builtin_va_list __local_argv)
+{
+
+  return __mingw_vswprintf( __stream, __format, __local_argv );
+
+
+
+}
+
+inline __attribute__((__cdecl__))
+                                                      __attribute__ ((__nonnull__ (2)))
+int swprintf (wchar_t *__stream, const wchar_t *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv;
+
+  __builtin_va_start( __local_argv, __format );
+  __retval = vswprintf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+}
+# 1125 "C:/msys64/mingw64/include/wchar.h" 2 3
+# 1134 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wtempnam(const wchar_t *_Directory,const wchar_t *_FilePrefix);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf(const wchar_t * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscwprintf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwscanf_l(FILE * __restrict__ _File,const wchar_t * __restrict__ _Format,_locale_t _Locale,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swscanf_l(const wchar_t * __restrict__ _Src,const wchar_t * __restrict__ _Format,_locale_t _Locale,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf(const wchar_t * __restrict__ _Src,size_t _MaxCount,const wchar_t * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_l(const wchar_t * __restrict__ _Src,size_t _MaxCount,const wchar_t * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wscanf_l(const wchar_t * __restrict__ _Format,_locale_t _Locale,...) ;
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfdopen(int _FileHandle ,const wchar_t *_Mode);
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfopen(const wchar_t * __restrict__ _Filename,const wchar_t * __restrict__ _Mode) ;
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wfreopen(const wchar_t * __restrict__ _Filename,const wchar_t * __restrict__ _Mode,FILE * __restrict__ _OldFile) ;
+
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wperror(const wchar_t *_ErrMsg);
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _wpopen(const wchar_t *_Command,const wchar_t *_Mode);
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wremove(const wchar_t *_Filename);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wtmpnam(wchar_t *_Buffer);
+# 1185 "C:/msys64/mingw64/include/wchar.h" 3
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _itow(int _Value,wchar_t *_Dest,int _Radix) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ltow(long _Value,wchar_t *_Dest,int _Radix) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ultow(unsigned long _Value,wchar_t *_Dest,int _Radix) ;
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wcstod_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,_locale_t _Locale);
+
+  double __attribute__((__cdecl__)) __mingw_wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr);
+  float __attribute__((__cdecl__)) __mingw_wcstof(const wchar_t * __restrict__ nptr, wchar_t ** __restrict__ endptr);
+  long double __attribute__((__cdecl__)) __mingw_wcstold(const wchar_t * __restrict__, wchar_t ** __restrict__);
+
+
+  inline __attribute__((__cdecl__))
+  double __attribute__((__cdecl__)) wcstod(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr){
+    return __mingw_wcstod(_Str,_EndPtr);
+  }
+  inline __attribute__((__cdecl__))
+  float __attribute__((__cdecl__)) wcstof(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr){
+    return __mingw_wcstof(_Str,_EndPtr);
+  }
+
+
+
+
+
+
+  long double __attribute__((__cdecl__)) wcstold (const wchar_t * __restrict__, wchar_t ** __restrict__);
+
+  long __attribute__((__cdecl__)) wcstol(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wcstol_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  unsigned long __attribute__((__cdecl__)) wcstoul(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _wcstoul_l(const wchar_t * __restrict__ _Str,wchar_t ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wgetenv(const wchar_t *_VarName) ;
+
+
+
+
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _wtof_l(const wchar_t *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wtoi_l(const wchar_t *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol(const wchar_t *_Str);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _wtol_l(const wchar_t *_Str,_locale_t _Locale);
+
+  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _i64tow(long long _Val,wchar_t *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _ui64tow(unsigned long long _Val,wchar_t *_DstBuf,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64(const wchar_t *_Str);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wtoi64_l(const wchar_t *_Str,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _wcstoi64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _wcstoui64_l(const wchar_t *_Str,wchar_t **_EndPtr,int _Radix,_locale_t _Locale);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wfullpath(wchar_t *_FullPath,const wchar_t *_Path,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wmakepath(wchar_t *_ResultPath,const wchar_t *_Drive,const wchar_t *_Dir,const wchar_t *_Filename,const wchar_t *_Ext);
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wputenv(const wchar_t *_EnvString);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsearchenv(const wchar_t *_Filename,const wchar_t *_EnvVar,wchar_t *_ResultPath) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _wsplitpath(const wchar_t *_FullPath,wchar_t *_Drive,wchar_t *_Dir,wchar_t *_Filename,wchar_t *_Ext) ;
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsdup(const wchar_t *_Str);
+  wchar_t *__attribute__((__cdecl__)) wcscat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  wchar_t *__attribute__((__cdecl__)) wcschr(const wchar_t *_Str,wchar_t _Ch);
+  int __attribute__((__cdecl__)) wcscmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  wchar_t *__attribute__((__cdecl__)) wcscpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source) ;
+  size_t __attribute__((__cdecl__)) wcscspn(const wchar_t *_Str,const wchar_t *_Control);
+  size_t __attribute__((__cdecl__)) wcslen(const wchar_t *_Str);
+  size_t __attribute__((__cdecl__)) wcsnlen(const wchar_t *_Src,size_t _MaxCount);
+  wchar_t *__attribute__((__cdecl__)) wcsncat(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  int __attribute__((__cdecl__)) wcsncmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  wchar_t *__attribute__((__cdecl__)) wcsncpy(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count) ;
+  wchar_t *__attribute__((__cdecl__)) _wcsncpy_l(wchar_t * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _Count,_locale_t _Locale) ;
+  wchar_t *__attribute__((__cdecl__)) wcspbrk(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsrchr(const wchar_t *_Str,wchar_t _Ch);
+  size_t __attribute__((__cdecl__)) wcsspn(const wchar_t *_Str,const wchar_t *_Control);
+  wchar_t *__attribute__((__cdecl__)) wcsstr(const wchar_t *_Str,const wchar_t *_SubStr);
+
+
+
+  wchar_t *__attribute__((__cdecl__)) wcstok(wchar_t * __restrict__ _Str,const wchar_t * __restrict__ _Delim) ;
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcserror(int _ErrNum) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) __wcserror(const wchar_t *_Str) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicmp_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsrev(wchar_t *_Str);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsset(wchar_t *_Str,wchar_t _Val) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcslwr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcslwr_l(wchar_t *_String,_locale_t _Locale) ;
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcsupr(wchar_t *_String) ;
+  __attribute__ ((__dllimport__)) wchar_t *_wcsupr_l(wchar_t *_String,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) wcsxfrm(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsxfrm_l(wchar_t * __restrict__ _Dst,const wchar_t * __restrict__ _Src,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) wcscoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcscoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsncoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wcsnicoll_l(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale);
+
+
+  wchar_t *__attribute__((__cdecl__)) wcsdup(const wchar_t *_Str) ;
+
+  int __attribute__((__cdecl__)) wcsicmp(const wchar_t *_Str1,const wchar_t *_Str2) ;
+  int __attribute__((__cdecl__)) wcsnicmp(const wchar_t *_Str1,const wchar_t *_Str2,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsnset(wchar_t *_Str,wchar_t _Val,size_t _MaxCount) ;
+  wchar_t *__attribute__((__cdecl__)) wcsrev(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsset(wchar_t *_Str,wchar_t _Val) ;
+  wchar_t *__attribute__((__cdecl__)) wcslwr(wchar_t *_Str) ;
+  wchar_t *__attribute__((__cdecl__)) wcsupr(wchar_t *_Str) ;
+  int __attribute__((__cdecl__)) wcsicoll(const wchar_t *_Str1,const wchar_t *_Str2) ;
+
+
+
+
+
+  struct tm {
+    int tm_sec;
+    int tm_min;
+    int tm_hour;
+    int tm_mday;
+    int tm_mon;
+    int tm_year;
+    int tm_wday;
+    int tm_yday;
+    int tm_isdst;
+  };
+
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wasctime(const struct tm *_Tm);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wasctime_s (wchar_t *_Buf,size_t _SizeInWords,const struct tm *_Tm);
+  wchar_t *__attribute__((__cdecl__)) _wctime32(const __time32_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime32_s (wchar_t *_Buf,size_t _SizeInWords,const __time32_t *_Time);
+  size_t __attribute__((__cdecl__)) wcsftime(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcsftime_l(wchar_t * __restrict__ _Buf,size_t _SizeInWords,const wchar_t * __restrict__ _Format,const struct tm * __restrict__ _Tm,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wstrdate(wchar_t *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrdate_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wstrtime(wchar_t *_Buffer) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrtime_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wctime64(const __time64_t *_Time) ;
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime64_s (wchar_t *_Buf,size_t _SizeInWords,const __time64_t *_Time);
+
+
+
+  wchar_t *__attribute__((__cdecl__)) _wctime(const time_t *_Time) ;
+# 1358 "C:/msys64/mingw64/include/wchar.h" 3
+  errno_t __attribute__((__cdecl__)) _wctime_s(wchar_t *, size_t, const time_t *);
+# 1377 "C:/msys64/mingw64/include/wchar.h" 3
+  typedef int mbstate_t;
+
+  typedef wchar_t _Wint_t;
+
+  wint_t __attribute__((__cdecl__)) btowc(int);
+  size_t __attribute__((__cdecl__)) mbrlen(const char * __restrict__ _Ch,size_t _SizeInBytes,mbstate_t * __restrict__ _State);
+  size_t __attribute__((__cdecl__)) mbrtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SizeInBytes,mbstate_t * __restrict__ _State);
+  size_t __attribute__((__cdecl__)) mbsrtowcs(wchar_t * __restrict__ _Dest,const char ** __restrict__ _PSrc,size_t _Count,mbstate_t * __restrict__ _State) ;
+  size_t __attribute__((__cdecl__)) wcrtomb(char * __restrict__ _Dest,wchar_t _Source,mbstate_t * __restrict__ _State) ;
+  size_t __attribute__((__cdecl__)) wcsrtombs(char * __restrict__ _Dest,const wchar_t ** __restrict__ _PSource,size_t _Count,mbstate_t * __restrict__ _State) ;
+  int __attribute__((__cdecl__)) wctob(wint_t _WCh);
+
+
+  wchar_t *__attribute__((__cdecl__)) wmemset(wchar_t *s, wchar_t c, size_t n);
+  wchar_t *__attribute__((__cdecl__)) wmemchr(const wchar_t *s, wchar_t c, size_t n);
+  int __attribute__((__cdecl__)) wmemcmp(const wchar_t *s1, const wchar_t *s2,size_t n);
+  wchar_t *__attribute__((__cdecl__)) wmemcpy(wchar_t * __restrict__ s1,const wchar_t * __restrict__ s2,size_t n) ;
+  wchar_t * __attribute__((__cdecl__)) wmempcpy (wchar_t *_Dst, const wchar_t *_Src, size_t _Size);
+  wchar_t *__attribute__((__cdecl__)) wmemmove(wchar_t *s1, const wchar_t *s2, size_t n) ;
+  int __attribute__((__cdecl__)) fwide(FILE *stream,int mode);
+
+
+
+
+  int __attribute__((__cdecl__)) mbsinit(const mbstate_t *ps);
+
+  __extension__ long long __attribute__((__cdecl__)) wcstoll(const wchar_t * __restrict__ nptr,wchar_t ** __restrict__ endptr, int base);
+  __extension__ unsigned long long __attribute__((__cdecl__)) wcstoull(const wchar_t * __restrict__ nptr,wchar_t ** __restrict__ endptr, int base);
+
+
+  void *__attribute__((__cdecl__)) memmove(void *_Dst,const void *_Src,size_t _MaxCount);
+  void *__attribute__((__cdecl__)) memcpy(void * __restrict__ _Dst,const void * __restrict__ _Src,size_t _MaxCount) ;
+# 1460 "C:/msys64/mingw64/include/wchar.h" 3
+int __attribute__((__cdecl__)) __mingw_str_wide_utf8 (const wchar_t * const wptr, char **mbptr, size_t * buflen);
+# 1474 "C:/msys64/mingw64/include/wchar.h" 3
+int __attribute__((__cdecl__)) __mingw_str_utf8_wide (const char *const mbptr, wchar_t ** wptr, size_t * buflen);
+# 1483 "C:/msys64/mingw64/include/wchar.h" 3
+void __attribute__((__cdecl__)) __mingw_str_free(void *ptr);
+
+
+
+
+}
+
+
+#pragma pack(pop)
+
+# 1 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 1 3
+# 9 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 3
+# 1 "C:/msys64/mingw64/include/wchar.h" 1 3
+# 10 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 2 3
+# 21 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 3
+extern "C" {
+
+
+
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _waccess_s (const wchar_t *_Filename,int _AccessMode);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wmktemp_s (wchar_t *_TemplateName,size_t _SizeInWords);
+
+
+
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _cgetws_s (wchar_t *_Buffer,size_t _SizeInWords,size_t *_SizeRead);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cwprintf_s (const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwscanf_s(const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cwscanf_s_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcwprintf_s (const wchar_t *_Format,va_list _ArgList);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cwprintf_s_l (const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcwprintf_s_l (const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _getws_s(wchar_t *_Str,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline wchar_t* __attribute__((__cdecl__)) _getws_s(wchar_t (&_DstBuf)[__size]) { return _getws_s(_DstBuf,__size); } }
+# 270 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 3
+  int __attribute__((__cdecl__)) fwprintf_s(FILE *_File,const wchar_t *_Format,...);
+  int __attribute__((__cdecl__)) wprintf_s(const wchar_t *_Format,...);
+  int __attribute__((__cdecl__)) vfwprintf_s(FILE *_File,const wchar_t *_Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vwprintf_s(const wchar_t *_Format,va_list _ArgList);
+
+  int __attribute__((__cdecl__)) vswprintf_s(wchar_t *_Dst,size_t _SizeInWords,const wchar_t *_Format,va_list _ArgList);
+
+  int __attribute__((__cdecl__)) swprintf_s(wchar_t *_Dst,size_t _SizeInWords,const wchar_t *_Format,...);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_s(wchar_t *_DstBuf,size_t _DstSizeInWords,size_t _MaxCount,const wchar_t *_Format,va_list _ArgList);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_s(wchar_t *_DstBuf,size_t _DstSizeInWords,size_t _MaxCount,const wchar_t *_Format,...);
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wprintf_s_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vwprintf_s_l(const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwprintf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfwprintf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vswprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnwprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fwscanf_s_l(FILE *_File,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) fwscanf_s(FILE *_File, const wchar_t *_Format, ...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _swscanf_s_l(const wchar_t *_Src,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) swscanf_s(const wchar_t *_Src,const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_s(const wchar_t *_Src,size_t _MaxCount,const wchar_t *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snwscanf_s_l(const wchar_t *_Src,size_t _MaxCount,const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wscanf_s_l(const wchar_t *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) wscanf_s(const wchar_t *_Format, ...);
+
+
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vswprintf_s(wchar_t (&_Dst)[__size], const wchar_t* _Format, va_list _ArgList) { return vswprintf_s(_Dst,__size,_Format,_ArgList); } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) swprintf_s(wchar_t (&_Dst)[__size], const wchar_t* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = vswprintf_s(_Dst,__size,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _vsnwprintf_s(wchar_t (&_DstBuf)[__size], size_t _MaxCount, const wchar_t* _Format, va_list _ArgList) { return _vsnwprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _snwprintf_s(wchar_t (&_DstBuf)[__size], size_t _MaxCount, const wchar_t* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = _vsnwprintf_s(_DstBuf,__size,_MaxCount,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wfopen_s(FILE **_File,const wchar_t *_Filename,const wchar_t *_Mode);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wfreopen_s(FILE **_File,const wchar_t *_Filename,const wchar_t *_Mode,FILE *_OldFile);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wtmpnam_s(wchar_t *_DstBuf,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wtmpnam_s(wchar_t (&_DstBuf)[__size]) { return _wtmpnam_s(_DstBuf,__size); } }
+
+
+
+
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) wcstok_s(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t *_Buf,size_t _SizeInWords,int _ErrNum);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcserror_s(wchar_t (&_Buf)[__size], int _ErrNum) { return _wcserror_s(_Buf,__size,_ErrNum); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t *_Buffer,size_t _SizeInWords,const wchar_t *_ErrMsg);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) __wcserror_s(wchar_t (&_Buffer)[__size], const wchar_t * _ErrMsg) { return __wcserror_s(_Buffer,__size,_ErrMsg); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t *_Dst,size_t _DstSizeInWords,wchar_t _Val,size_t _MaxCount);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsnset_s(wchar_t (&_Dst)[__size], wchar_t _Val, size_t _MaxCount) { return _wcsnset_s(_Dst,__size,_Val,_MaxCount); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t *_Str,size_t _SizeInWords,wchar_t _Val);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsset_s(wchar_t (&_Str)[__size], wchar_t _Val) { return _wcsset_s(_Str,__size,_Val); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t *_Str,size_t _SizeInWords);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcslwr_s(wchar_t (&_Str)[__size]) { return _wcslwr_s(_Str,__size); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t *_Str,size_t _SizeInWords,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcslwr_s_l(wchar_t (&_Str)[__size], _locale_t _Locale) { return _wcslwr_s_l(_Str,__size,_Locale); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t *_Str,size_t _Size);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsupr_s(wchar_t (&_Str)[__size]) { return _wcsupr_s(_Str,__size); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t *_Str,size_t _Size,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsupr_s_l(wchar_t (&_Str)[__size], _locale_t _Locale) { return _wcsupr_s_l(_Str,__size,_Locale); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t *_Dst, rsize_t _DstSize, const wchar_t *_Src);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscat_s(wchar_t (&_Dest)[__size], const wchar_t * _Source) { return wcscat_s(_Dest,__size,_Source); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t *_Dst, rsize_t _DstSize, const wchar_t *_Src);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcscpy_s(wchar_t (&_Dest)[__size], const wchar_t * _Source) { return wcscpy_s(_Dest,__size,_Source); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcsncat_s(wchar_t (&_Dst)[__size], const wchar_t * _Src, size_t _MaxCount) { return wcsncat_s(_Dst,__size,_Src,_MaxCount); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsncat_s_l(wchar_t (&_Dst)[__size], const wchar_t * _Src, size_t _MaxCount, _locale_t _Locale) { return _wcsncat_s_l(_Dst,__size,_Src,_MaxCount,_Locale); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcsncpy_s(wchar_t (&_Dst)[__size], const wchar_t * _Src, size_t _MaxCount) { return wcsncpy_s(_Dst,__size,_Src,_MaxCount); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t *_Dst,size_t _DstSizeInChars,const wchar_t *_Src,size_t _MaxCount,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsncpy_s_l(wchar_t (&_Dst)[__size], const wchar_t * _Src, size_t _MaxCount, _locale_t _Locale) { return _wcsncpy_s_l(_Dst,__size,_Src,_MaxCount,_Locale); } }
+  __attribute__ ((__dllimport__)) wchar_t *__attribute__((__cdecl__)) _wcstok_s_l(wchar_t *_Str,const wchar_t *_Delim,wchar_t **_Context,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t *_Str,size_t _SizeInChars,wchar_t _Val,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsset_s_l(wchar_t (&_Str)[__size], wchar_t _Val, _locale_t _Locale) { return _wcsset_s_l(_Str,__size,_Val,_Locale); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t *_Str,size_t _SizeInChars,wchar_t _Val, size_t _Count,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcsnset_s_l(wchar_t (&_Str)[__size], wchar_t _Val, size_t _Count, _locale_t _Locale) { return _wcsnset_s_l(_Str,__size,_Val,_Count,_Locale); } }
+
+  inline __attribute__((__always_inline__)) size_t __attribute__((__cdecl__)) wcsnlen_s(const wchar_t * _src, size_t _count) {
+    return _src ? wcsnlen(_src, _count) : 0;
+  }
+
+
+
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wasctime_s (wchar_t *_Buf,size_t _SizeInWords,const struct tm *_Tm);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime32_s (wchar_t *_Buf,size_t _SizeInWords,const __time32_t *_Time);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrdate_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wstrtime_s (wchar_t *_Buf,size_t _SizeInWords);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _wctime64_s (wchar_t *_Buf,size_t _SizeInWords,const __time64_t *_Time);
+# 375 "C:/msys64/mingw64/include/sec_api/wchar_s.h" 3
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) mbsrtowcs_s(size_t *_Retval,wchar_t *_Dst,size_t _SizeInWords,const char **_PSrc,size_t _N,mbstate_t *_State);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) mbsrtowcs_s(size_t* _Retval, wchar_t (&_Dst)[__size], const char** _PSrc, size_t _N, mbstate_t _State) { return mbsrtowcs_s(_Retval, _Dst, __size, _PSrc, _N, _State); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcrtomb_s(size_t *_Retval,char *_Dst,size_t _SizeInBytes,wchar_t _Ch,mbstate_t *_State);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcrtomb_s(size_t* _Retval, char (&_Dst)[__size], wchar_t _Ch, mbstate_t _State) { return wcrtomb_s(_Retval, _Dst, __size, _Ch, _State); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcsrtombs_s(size_t *_Retval,char *_Dst,size_t _SizeInBytes,const wchar_t **_Src,size_t _Size,mbstate_t *_State);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcsrtombs_s(size_t _Retval, char (&_Dst)[__size], const wchar_t** _Src, size_t _Size, mbstate_t _State) { return wcsrtombs_s(_Retval, _Dst, __size, _Src, _Size, _State); } }
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) wmemcpy_s (wchar_t *_dest,size_t _numberOfElements,const wchar_t *_src,size_t _count);
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) wmemmove_s(wchar_t *_dest,size_t _numberOfElements,const wchar_t *_src,size_t _count);
+
+
+
+}
+# 1494 "C:/msys64/mingw64/include/wchar.h" 2 3
+# 45 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 2 3
+# 62 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+namespace std
+{
+  using ::mbstate_t;
+}
+# 135 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+extern "C++"
+{
+namespace std
+{
+
+
+  using ::wint_t;
+
+  using ::btowc;
+  using ::fgetwc;
+  using ::fgetws;
+  using ::fputwc;
+  using ::fputws;
+  using ::fwide;
+  using ::fwprintf;
+  using ::fwscanf;
+  using ::getwc;
+  using ::getwchar;
+  using ::mbrlen;
+  using ::mbrtowc;
+  using ::mbsinit;
+  using ::mbsrtowcs;
+  using ::putwc;
+  using ::putwchar;
+
+  using ::swprintf;
+
+  using ::swscanf;
+  using ::ungetwc;
+  using ::vfwprintf;
+
+  using ::vfwscanf;
+
+
+  using ::vswprintf;
+
+
+  using ::vswscanf;
+
+  using ::vwprintf;
+
+  using ::vwscanf;
+
+  using ::wcrtomb;
+  using ::wcscat;
+  using ::wcscmp;
+  using ::wcscoll;
+  using ::wcscpy;
+  using ::wcscspn;
+  using ::wcsftime;
+  using ::wcslen;
+  using ::wcsncat;
+  using ::wcsncmp;
+  using ::wcsncpy;
+  using ::wcsrtombs;
+  using ::wcsspn;
+  using ::wcstod;
+
+  using ::wcstof;
+
+  using ::wcstok;
+  using ::wcstol;
+  using ::wcstoul;
+  using ::wcsxfrm;
+  using ::wctob;
+  using ::wmemcmp;
+  using ::wmemcpy;
+  using ::wmemmove;
+  using ::wmemset;
+  using ::wprintf;
+  using ::wscanf;
+  using ::wcschr;
+  using ::wcspbrk;
+  using ::wcsrchr;
+  using ::wcsstr;
+  using ::wmemchr;
+
+
+  inline wchar_t*
+  wcschr(wchar_t* __p, wchar_t __c)
+  { return wcschr(const_cast<const wchar_t*>(__p), __c); }
+
+  inline wchar_t*
+  wcspbrk(wchar_t* __s1, const wchar_t* __s2)
+  { return wcspbrk(const_cast<const wchar_t*>(__s1), __s2); }
+
+  inline wchar_t*
+  wcsrchr(wchar_t* __p, wchar_t __c)
+  { return wcsrchr(const_cast<const wchar_t*>(__p), __c); }
+
+  inline wchar_t*
+  wcsstr(wchar_t* __s1, const wchar_t* __s2)
+  { return wcsstr(const_cast<const wchar_t*>(__s1), __s2); }
+
+  inline wchar_t*
+  wmemchr(wchar_t* __p, wchar_t __c, size_t __n)
+  { return wmemchr(const_cast<const wchar_t*>(__p), __c, __n); }
+
+
+
+}
+}
+
+
+
+
+
+
+
+namespace __gnu_cxx
+{
+
+
+
+
+
+  using ::wcstold;
+# 260 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+  using ::wcstoll;
+  using ::wcstoull;
+
+}
+
+namespace std
+{
+  using ::__gnu_cxx::wcstold;
+  using ::__gnu_cxx::wcstoll;
+  using ::__gnu_cxx::wcstoull;
+}
+# 280 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+namespace std
+{
+
+  using std::wcstof;
+
+
+  using std::vfwscanf;
+
+
+  using std::vswscanf;
+
+
+  using std::vwscanf;
+
+
+
+  using std::wcstold;
+  using std::wcstoll;
+  using std::wcstoull;
+
+}
+# 41 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 2 3
+
+namespace std
+{
+
+# 62 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 3
+  typedef long long int streamoff;
+
+
+
+
+
+  typedef ptrdiff_t streamsize;
+# 81 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 3
+  template<typename _StateT>
+    class fpos
+    {
+    private:
+      streamoff _M_off;
+      _StateT _M_state;
+
+    public:
+
+
+
+
+      fpos()
+      : _M_off(0), _M_state() { }
+# 103 "C:/msys64/mingw64/include/c++/14.2.0/bits/postypes.h" 3
+      fpos(streamoff __off)
+      : _M_off(__off), _M_state() { }
+
+
+      fpos(const fpos&) = default;
+      fpos& operator=(const fpos&) = default;
+      ~fpos() = default;
+
+
+
+      operator streamoff() const { return _M_off; }
+
+
+      void
+      state(_StateT __st)
+      { _M_state = __st; }
+
+
+      _StateT
+      state() const
+      { return _M_state; }
+
+
+
+
+
+      fpos&
+      operator+=(streamoff __off)
+      {
+ _M_off += __off;
+ return *this;
+      }
+
+
+
+
+
+      fpos&
+      operator-=(streamoff __off)
+      {
+ _M_off -= __off;
+ return *this;
+      }
+
+
+
+
+
+
+
+      fpos
+      operator+(streamoff __off) const
+      {
+ fpos __pos(*this);
+ __pos += __off;
+ return __pos;
+      }
+
+
+
+
+
+
+
+      fpos
+      operator-(streamoff __off) const
+      {
+ fpos __pos(*this);
+ __pos -= __off;
+ return __pos;
+      }
+
+
+
+
+
+
+      streamoff
+      operator-(const fpos& __other) const
+      { return _M_off - __other._M_off; }
+    };
+
+
+
+
+
+
+  template<typename _StateT>
+    inline bool
+    operator==(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+    { return streamoff(__lhs) == streamoff(__rhs); }
+
+  template<typename _StateT>
+    inline bool
+    operator!=(const fpos<_StateT>& __lhs, const fpos<_StateT>& __rhs)
+    { return streamoff(__lhs) != streamoff(__rhs); }
+
+
+
+
+
+  typedef fpos<mbstate_t> streampos;
+
+  typedef fpos<mbstate_t> wstreampos;
+
+
+
+  typedef fpos<mbstate_t> u8streampos;
+
+
+
+
+  typedef fpos<mbstate_t> u16streampos;
+
+  typedef fpos<mbstate_t> u32streampos;
+
+
+
+}
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 2 3
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 2 3
+# 64 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+namespace __gnu_cxx
+{
+
+
+ 
+# 68 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstringop-overflow"
+#pragma GCC diagnostic ignored "-Wstringop-overread"
+#pragma GCC diagnostic ignored "-Warray-bounds"
+# 83 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+  template<typename _CharT>
+    struct _Char_types
+    {
+      typedef unsigned long int_type;
+
+      typedef std::streampos pos_type;
+      typedef std::streamoff off_type;
+      typedef std::mbstate_t state_type;
+
+    };
+# 110 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+  template<typename _CharT>
+    struct char_traits
+    {
+      typedef _CharT char_type;
+      typedef typename _Char_types<_CharT>::int_type int_type;
+
+      typedef typename _Char_types<_CharT>::pos_type pos_type;
+      typedef typename _Char_types<_CharT>::off_type off_type;
+      typedef typename _Char_types<_CharT>::state_type state_type;
+
+
+      using comparison_category = std::strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2)
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2)
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2)
+      { return __c1 < __c2; }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, std::size_t __n);
+
+      static constexpr std::size_t
+      length(const char_type* __s);
+
+      static constexpr const char_type*
+      find(const char_type* __s, std::size_t __n, const char_type& __a);
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, std::size_t __n);
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, std::size_t __n);
+
+      static constexpr char_type*
+      assign(char_type* __s, std::size_t __n, char_type __a);
+
+      static constexpr char_type
+      to_char_type(const int_type& __c)
+      { return static_cast<char_type>(__c); }
+
+      static constexpr int_type
+      to_int_type(const char_type& __c)
+      { return static_cast<int_type>(__c); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2)
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      eof()
+      { return static_cast<int_type>(-1); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c)
+      { return !eq_int_type(__c, eof()) ? __c : to_int_type(char_type()); }
+
+    };
+
+  template<typename _CharT>
+    constexpr int
+    char_traits<_CharT>::
+    compare(const char_type* __s1, const char_type* __s2, std::size_t __n)
+    {
+      for (std::size_t __i = 0; __i < __n; ++__i)
+ if (lt(__s1[__i], __s2[__i]))
+   return -1;
+ else if (lt(__s2[__i], __s1[__i]))
+   return 1;
+      return 0;
+    }
+
+  template<typename _CharT>
+    constexpr std::size_t
+    char_traits<_CharT>::
+    length(const char_type* __p)
+    {
+      std::size_t __i = 0;
+      while (!eq(__p[__i], char_type()))
+        ++__i;
+      return __i;
+    }
+
+  template<typename _CharT>
+    constexpr const typename char_traits<_CharT>::char_type*
+    char_traits<_CharT>::
+    find(const char_type* __s, std::size_t __n, const char_type& __a)
+    {
+      for (std::size_t __i = 0; __i < __n; ++__i)
+        if (eq(__s[__i], __a))
+          return __s + __i;
+      return 0;
+    }
+
+  template<typename _CharT>
+    constexpr
+    typename char_traits<_CharT>::char_type*
+    char_traits<_CharT>::
+    move(char_type* __s1, const char_type* __s2, std::size_t __n)
+    {
+      if (__n == 0)
+ return __s1;
+
+      if (std::__is_constant_evaluated())
+ {
+
+   if (__builtin_constant_p(__s2 < __s1)
+  && __s1 > __s2 && __s1 < (__s2 + __n))
+     {
+       do
+  {
+    --__n;
+    assign(__s1[__n], __s2[__n]);
+  }
+       while (__n > 0);
+     }
+   else
+     copy(__s1, __s2, __n);
+   return __s1;
+ }
+
+      __builtin_memmove(__s1, __s2, __n * sizeof(char_type));
+      return __s1;
+    }
+
+  template<typename _CharT>
+    constexpr
+    typename char_traits<_CharT>::char_type*
+    char_traits<_CharT>::
+    copy(char_type* __s1, const char_type* __s2, std::size_t __n)
+    {
+      if (__n == 0)
+ return __s1;
+
+      if (std::__is_constant_evaluated())
+ {
+   for (std::size_t __i = 0; __i < __n; ++__i)
+     std::construct_at(__s1 + __i, __s2[__i]);
+   return __s1;
+ }
+
+      __builtin_memcpy(__s1, __s2, __n * sizeof(char_type));
+      return __s1;
+    }
+
+  template<typename _CharT>
+    constexpr
+    typename char_traits<_CharT>::char_type*
+    char_traits<_CharT>::
+    assign(char_type* __s, std::size_t __n, char_type __a)
+    {
+
+      if (std::__is_constant_evaluated())
+ {
+   for (std::size_t __i = 0; __i < __n; ++__i)
+     std::construct_at(__s + __i, __a);
+   return __s;
+ }
+
+
+      if constexpr (sizeof(_CharT) == 1 && __is_trivial(_CharT))
+ {
+   if (__n)
+     {
+       unsigned char __c;
+       __builtin_memcpy(&__c, __builtin_addressof(__a), 1);
+       __builtin_memset(__s, __c, __n);
+     }
+ }
+      else
+ {
+   for (std::size_t __i = 0; __i < __n; ++__i)
+     __s[__i] = __a;
+ }
+      return __s;
+    }
+
+
+}
+
+namespace std
+{
+
+# 322 "C:/msys64/mingw64/include/c++/14.2.0/bits/char_traits.h" 3
+  template<typename _CharT>
+    struct char_traits : public __gnu_cxx::char_traits<_CharT>
+    { };
+
+
+
+  template<>
+    struct char_traits<char>
+    {
+      typedef char char_type;
+      typedef int int_type;
+
+      typedef streampos pos_type;
+      typedef streamoff off_type;
+      typedef mbstate_t state_type;
+
+
+      using comparison_category = strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ return (static_cast<unsigned char>(__c1)
+  < static_cast<unsigned char>(__c2));
+      }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   {
+     for (size_t __i = 0; __i < __n; ++__i)
+       if (lt(__s1[__i], __s2[__i]))
+  return -1;
+       else if (lt(__s2[__i], __s1[__i]))
+  return 1;
+     return 0;
+   }
+
+ return __builtin_memcmp(__s1, __s2, __n);
+      }
+
+      static constexpr size_t
+      length(const char_type* __s)
+      {
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::length(__s);
+
+ return __builtin_strlen(__s);
+      }
+
+      static constexpr const char_type*
+      find(const char_type* __s, size_t __n, const char_type& __a)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::find(__s, __n, __a);
+
+ return static_cast<const char_type*>(__builtin_memchr(__s, __a, __n));
+      }
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+
+ return static_cast<char_type*>(__builtin_memmove(__s1, __s2, __n));
+      }
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+
+ return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+      }
+
+      static constexpr char_type*
+      assign(char_type* __s, size_t __n, char_type __a)
+      {
+ if (__n == 0)
+   return __s;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::assign(__s, __n, __a);
+
+ return static_cast<char_type*>(__builtin_memset(__s, __a, __n));
+      }
+
+      static constexpr char_type
+      to_char_type(const int_type& __c) noexcept
+      { return static_cast<char_type>(__c); }
+
+
+
+      static constexpr int_type
+      to_int_type(const char_type& __c) noexcept
+      { return static_cast<int_type>(static_cast<unsigned char>(__c)); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      eof() noexcept
+      { return static_cast<int_type>(-1); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c) noexcept
+      { return (__c == eof()) ? 0 : __c; }
+
+  };
+
+
+
+
+  template<>
+    struct char_traits<wchar_t>
+    {
+      typedef wchar_t char_type;
+      typedef wint_t int_type;
+
+      typedef streamoff off_type;
+      typedef wstreampos pos_type;
+      typedef mbstate_t state_type;
+
+
+      using comparison_category = strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 < __c2; }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::compare(__s1, __s2, __n);
+
+ return wmemcmp(__s1, __s2, __n);
+      }
+
+      static constexpr size_t
+      length(const char_type* __s)
+      {
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::length(__s);
+
+ return wcslen(__s);
+      }
+
+      static constexpr const char_type*
+      find(const char_type* __s, size_t __n, const char_type& __a)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::find(__s, __n, __a);
+
+ return wmemchr(__s, __a, __n);
+      }
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+
+ return wmemmove(__s1, __s2, __n);
+      }
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+
+ return wmemcpy(__s1, __s2, __n);
+      }
+
+      static constexpr char_type*
+      assign(char_type* __s, size_t __n, char_type __a)
+      {
+ if (__n == 0)
+   return __s;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::assign(__s, __n, __a);
+
+ return wmemset(__s, __a, __n);
+      }
+
+      static constexpr char_type
+      to_char_type(const int_type& __c) noexcept
+      { return char_type(__c); }
+
+      static constexpr int_type
+      to_int_type(const char_type& __c) noexcept
+      { return int_type(__c); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      eof() noexcept
+      { return static_cast<int_type>((wint_t)(0xFFFF)); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c) noexcept
+      { return eq_int_type(__c, eof()) ? 0 : __c; }
+
+  };
+
+
+
+
+
+
+
+  template<>
+    struct char_traits<char8_t>
+    {
+      typedef char8_t char_type;
+      typedef unsigned int int_type;
+
+      typedef u8streampos pos_type;
+      typedef streamoff off_type;
+      typedef mbstate_t state_type;
+
+
+      using comparison_category = strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 < __c2; }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::compare(__s1, __s2, __n);
+
+ return __builtin_memcmp(__s1, __s2, __n);
+      }
+
+      static constexpr size_t
+      length(const char_type* __s)
+      {
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::length(__s);
+
+ size_t __i = 0;
+ while (!eq(__s[__i], char_type()))
+   ++__i;
+ return __i;
+      }
+
+      static constexpr const char_type*
+      find(const char_type* __s, size_t __n, const char_type& __a)
+      {
+ if (__n == 0)
+   return 0;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::find(__s, __n, __a);
+
+ return static_cast<const char_type*>(__builtin_memchr(__s, __a, __n));
+      }
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+
+ return static_cast<char_type*>(__builtin_memmove(__s1, __s2, __n));
+      }
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+
+ return static_cast<char_type*>(__builtin_memcpy(__s1, __s2, __n));
+      }
+
+      static constexpr char_type*
+      assign(char_type* __s, size_t __n, char_type __a)
+      {
+ if (__n == 0)
+   return __s;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::assign(__s, __n, __a);
+
+ return static_cast<char_type*>(__builtin_memset(__s, __a, __n));
+      }
+
+      static constexpr char_type
+      to_char_type(const int_type& __c) noexcept
+      { return char_type(__c); }
+
+      static constexpr int_type
+      to_int_type(const char_type& __c) noexcept
+      { return int_type(__c); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      eof() noexcept
+      { return static_cast<int_type>(-1); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c) noexcept
+      { return eq_int_type(__c, eof()) ? 0 : __c; }
+
+    };
+
+
+
+}
+
+
+
+namespace std
+{
+
+
+  template<>
+    struct char_traits<char16_t>
+    {
+      typedef char16_t char_type;
+
+      typedef short unsigned int int_type;
+
+
+
+
+      typedef streamoff off_type;
+      typedef u16streampos pos_type;
+      typedef mbstate_t state_type;
+
+
+      using comparison_category = strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 < __c2; }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   if (lt(__s1[__i], __s2[__i]))
+     return -1;
+   else if (lt(__s2[__i], __s1[__i]))
+     return 1;
+ return 0;
+      }
+
+      static constexpr size_t
+      length(const char_type* __s)
+      {
+ size_t __i = 0;
+ while (!eq(__s[__i], char_type()))
+   ++__i;
+ return __i;
+      }
+
+      static constexpr const char_type*
+      find(const char_type* __s, size_t __n, const char_type& __a)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   if (eq(__s[__i], __a))
+     return __s + __i;
+ return 0;
+      }
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+
+ return (static_cast<char_type*>
+  (__builtin_memmove(__s1, __s2, __n * sizeof(char_type))));
+      }
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+
+ return (static_cast<char_type*>
+  (__builtin_memcpy(__s1, __s2, __n * sizeof(char_type))));
+      }
+
+      static constexpr char_type*
+      assign(char_type* __s, size_t __n, char_type __a)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   assign(__s[__i], __a);
+ return __s;
+      }
+
+      static constexpr char_type
+      to_char_type(const int_type& __c) noexcept
+      { return char_type(__c); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      to_int_type(const char_type& __c) noexcept
+      { return __c == eof() ? int_type(0xfffd) : int_type(__c); }
+
+      static constexpr int_type
+      eof() noexcept
+      { return static_cast<int_type>(-1); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c) noexcept
+      { return eq_int_type(__c, eof()) ? 0 : __c; }
+
+
+
+
+
+    };
+
+  template<>
+    struct char_traits<char32_t>
+    {
+      typedef char32_t char_type;
+
+      typedef unsigned int int_type;
+
+
+
+
+      typedef streamoff off_type;
+      typedef u32streampos pos_type;
+      typedef mbstate_t state_type;
+
+
+      using comparison_category = strong_ordering;
+
+
+      static constexpr void
+      assign(char_type& __c1, const char_type& __c2) noexcept
+      {
+
+ if (std::__is_constant_evaluated())
+   std::construct_at(__builtin_addressof(__c1), __c2);
+ else
+
+ __c1 = __c2;
+      }
+
+      static constexpr bool
+      eq(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+      static constexpr bool
+      lt(const char_type& __c1, const char_type& __c2) noexcept
+      { return __c1 < __c2; }
+
+      static constexpr int
+      compare(const char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   if (lt(__s1[__i], __s2[__i]))
+     return -1;
+   else if (lt(__s2[__i], __s1[__i]))
+     return 1;
+ return 0;
+      }
+
+      static constexpr size_t
+      length(const char_type* __s)
+      {
+ size_t __i = 0;
+ while (!eq(__s[__i], char_type()))
+   ++__i;
+ return __i;
+      }
+
+      static constexpr const char_type*
+      find(const char_type* __s, size_t __n, const char_type& __a)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   if (eq(__s[__i], __a))
+     return __s + __i;
+ return 0;
+      }
+
+      static constexpr char_type*
+      move(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::move(__s1, __s2, __n);
+
+ return (static_cast<char_type*>
+  (__builtin_memmove(__s1, __s2, __n * sizeof(char_type))));
+      }
+
+      static constexpr char_type*
+      copy(char_type* __s1, const char_type* __s2, size_t __n)
+      {
+ if (__n == 0)
+   return __s1;
+
+ if (std::__is_constant_evaluated())
+   return __gnu_cxx::char_traits<char_type>::copy(__s1, __s2, __n);
+
+ return (static_cast<char_type*>
+  (__builtin_memcpy(__s1, __s2, __n * sizeof(char_type))));
+      }
+
+      static constexpr char_type*
+      assign(char_type* __s, size_t __n, char_type __a)
+      {
+ for (size_t __i = 0; __i < __n; ++__i)
+   assign(__s[__i], __a);
+ return __s;
+      }
+
+      static constexpr char_type
+      to_char_type(const int_type& __c) noexcept
+      { return char_type(__c); }
+
+      static constexpr int_type
+      to_int_type(const char_type& __c) noexcept
+      { return int_type(__c); }
+
+      static constexpr bool
+      eq_int_type(const int_type& __c1, const int_type& __c2) noexcept
+      { return __c1 == __c2; }
+
+
+      static constexpr int_type
+      eof() noexcept
+      { return static_cast<int_type>(-1); }
+
+      static constexpr int_type
+      not_eof(const int_type& __c) noexcept
+      { return eq_int_type(__c, eof()) ? 0 : __c; }
+
+    };
+
+
+  namespace __detail
+  {
+    template<typename _ChTraits>
+      constexpr auto
+      __char_traits_cmp_cat(int __cmp) noexcept
+      {
+ if constexpr (requires { typename _ChTraits::comparison_category; })
+   {
+     using _Cat = typename _ChTraits::comparison_category;
+     static_assert( !is_void_v<common_comparison_category_t<_Cat>> );
+     return static_cast<_Cat>(__cmp <=> 0);
+   }
+ else
+   return static_cast<weak_ordering>(__cmp <=> 0);
+      }
+  }
+
+
+#pragma GCC diagnostic pop
+
+
+}
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 1 3
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 3
+       
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 3
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++locale.h" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++locale.h" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++locale.h" 3
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/clocale" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/clocale" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/clocale" 3
+
+
+# 1 "C:/msys64/mingw64/include/locale.h" 1 3
+# 12 "C:/msys64/mingw64/include/locale.h" 3
+# 1 "C:/msys64/mingw64/include/stdio.h" 1 3
+# 11 "C:/msys64/mingw64/include/stdio.h" 3
+#pragma pack(push,_CRT_PACKING)
+
+       
+
+       
+
+       
+
+       
+
+
+
+extern "C" {
+# 101 "C:/msys64/mingw64/include/stdio.h" 3
+__attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) __acrt_iob_func(unsigned index);
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) __iob_func(void);
+# 112 "C:/msys64/mingw64/include/stdio.h" 3
+  __extension__ typedef long long fpos_t;
+# 156 "C:/msys64/mingw64/include/stdio.h" 3
+extern
+  __attribute__((__format__(__gnu_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_sscanf(const char * __restrict__ _Src,const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__(__gnu_scanf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vsscanf (const char * __restrict__ _Str,const char * __restrict__ Format,va_list argp);
+extern
+  __attribute__((__format__(__gnu_scanf__, 1,2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_scanf(const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__(__gnu_scanf__, 1,0))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vscanf(const char * __restrict__ Format, va_list argp);
+extern
+  __attribute__((__format__(__gnu_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fscanf(FILE * __restrict__ _File,const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__(__gnu_scanf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfscanf (FILE * __restrict__ fp, const char * __restrict__ Format,va_list argp);
+
+extern
+  __attribute__((__format__(__gnu_printf__,3,0))) __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_vsnprintf(char * __restrict__ _DstBuf,size_t _MaxCount,const char * __restrict__ _Format,
+                               va_list _ArgList);
+extern
+  __attribute__((__format__(__gnu_printf__,3,4))) __attribute__ ((__nonnull__ (3)))
+  int __attribute__((__cdecl__)) __mingw_snprintf(char * __restrict__ s, size_t n, const char * __restrict__ format, ...);
+extern
+  __attribute__((__format__(__gnu_printf__,1,2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_printf(const char * __restrict__ , ... ) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,1,0))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __mingw_vprintf (const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_fprintf (FILE * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vfprintf (FILE * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_sprintf (char * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __mingw_vsprintf (char * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,3))) __attribute__((nonnull (1,2)))
+  int __attribute__((__cdecl__)) __mingw_asprintf(char ** __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__gnu_printf__,2,0))) __attribute__((nonnull (1,2)))
+  int __attribute__((__cdecl__)) __mingw_vasprintf(char ** __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+
+extern
+  __attribute__((__format__(__ms_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_sscanf(const char * __restrict__ _Src,const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__(__ms_scanf__, 1,2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_scanf(const char * __restrict__ _Format,...);
+extern
+  __attribute__((__format__(__ms_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_fscanf(FILE * __restrict__ _File,const char * __restrict__ _Format,...);
+
+extern
+  __attribute__((__format__(__ms_printf__, 1,2))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_printf(const char * __restrict__ , ... ) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__ms_printf__, 1,0))) __attribute__ ((__nonnull__ (1)))
+  int __attribute__((__cdecl__)) __ms_vprintf (const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__ms_printf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_fprintf (FILE * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__ms_printf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_vfprintf (FILE * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__ms_printf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_sprintf (char * __restrict__ , const char * __restrict__ , ...) __attribute__ ((__nothrow__));
+extern
+  __attribute__((__format__(__ms_printf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+  int __attribute__((__cdecl__)) __ms_vsprintf (char * __restrict__ , const char * __restrict__ , va_list) __attribute__ ((__nothrow__));
+# 285 "C:/msys64/mingw64/include/stdio.h" 3
+extern "C++" {
+
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+int sscanf(const char *__source, const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vsscanf( __source, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 1,2))) __attribute__ ((__nonnull__ (1)))
+int scanf(const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfscanf( (__acrt_iob_func(0)), __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 2,3))) __attribute__ ((__nonnull__ (2)))
+int fscanf(FILE *__stream, const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfscanf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wshadow"
+
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+int vsscanf (const char *__source, const char *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vsscanf( __source, __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 1,0))) __attribute__ ((__nonnull__ (1)))
+int vscanf(const char *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfscanf( (__acrt_iob_func(0)), __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_scanf__, 2,0))) __attribute__ ((__nonnull__ (2)))
+int vfscanf (FILE *__stream, const char *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfscanf( __stream, __format, __local_argv );
+}
+
+
+#pragma GCC diagnostic pop
+
+
+
+
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,2,3))) __attribute__ ((__nonnull__ (2)))
+int fprintf (FILE *__stream, const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfprintf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,1,2))) __attribute__ ((__nonnull__ (1)))
+int printf (const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vfprintf( (__acrt_iob_func(1)), __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+# 396 "C:/msys64/mingw64/include/stdio.h" 3
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,2,3))) __attribute__ ((__nonnull__ (2)))
+int sprintf (char *__stream, const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vsprintf( __stream, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,2,0))) __attribute__ ((__nonnull__ (2)))
+int vfprintf (FILE *__stream, const char *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfprintf( __stream, __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,1,0))) __attribute__ ((__nonnull__ (1)))
+int vprintf (const char *__format, __builtin_va_list __local_argv)
+{
+  return __mingw_vfprintf( (__acrt_iob_func(1)), __format, __local_argv );
+}
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,2,0))) __attribute__ ((__nonnull__ (2)))
+int vsprintf (char *__stream, const char *__format, __builtin_va_list __local_argv)
+{
+# 435 "C:/msys64/mingw64/include/stdio.h" 3
+  return __mingw_vsprintf( __stream, __format, __local_argv );
+}
+# 453 "C:/msys64/mingw64/include/stdio.h" 3
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,3,4))) __attribute__ ((__nonnull__ (3)))
+int snprintf (char *__stream, size_t __n, const char *__format, ...)
+{
+  int __retval;
+  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+  __retval = __mingw_vsnprintf( __stream, __n, __format, __local_argv );
+  __builtin_va_end( __local_argv );
+  return __retval;
+}
+
+
+
+inline __attribute__((__cdecl__))
+__attribute__((__format__(__gnu_printf__,3,0))) __attribute__ ((__nonnull__ (3)))
+int vsnprintf (char *__stream, size_t __n, const char *__format, __builtin_va_list __local_argv)
+{
+
+
+
+  return __mingw_vsnprintf( __stream, __n, __format, __local_argv );
+}
+# 483 "C:/msys64/mingw64/include/stdio.h" 3
+}
+# 607 "C:/msys64/mingw64/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _filbuf(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _flsbuf(int _Ch,FILE *_File);
+
+
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _fsopen(const char *_Filename,const char *_Mode,int _ShFlag);
+
+  void __attribute__((__cdecl__)) clearerr(FILE *_File);
+  int __attribute__((__cdecl__)) fclose(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fcloseall(void);
+
+
+
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _fdopen(int _FileHandle,const char *_Mode);
+
+  int __attribute__((__cdecl__)) feof(FILE *_File);
+  int __attribute__((__cdecl__)) ferror(FILE *_File);
+  int __attribute__((__cdecl__)) fflush(FILE *_File);
+  int __attribute__((__cdecl__)) fgetc(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fgetchar(void);
+  int __attribute__((__cdecl__)) fgetpos(FILE * __restrict__ _File ,fpos_t * __restrict__ _Pos);
+  int __attribute__((__cdecl__)) fgetpos64(FILE * __restrict__ _File ,fpos_t * __restrict__ _Pos);
+  char *__attribute__((__cdecl__)) fgets(char * __restrict__ _Buf,int _MaxCount,FILE * __restrict__ _File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fileno(FILE *_File);
+
+
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _tempnam(const char *_DirName,const char *_FilePrefix);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _flushall(void);
+  FILE *__attribute__((__cdecl__)) fopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode) ;
+  FILE *fopen64(const char * __restrict__ filename,const char * __restrict__ mode);
+  int __attribute__((__cdecl__)) fputc(int _Ch,FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fputchar(int _Ch);
+  int __attribute__((__cdecl__)) fputs(const char * __restrict__ _Str,FILE * __restrict__ _File);
+  size_t __attribute__((__cdecl__)) fread(void * __restrict__ _DstBuf,size_t _ElementSize,size_t _Count,FILE * __restrict__ _File);
+  FILE *__attribute__((__cdecl__)) freopen(const char * __restrict__ _Filename,const char * __restrict__ _Mode,FILE * __restrict__ _File) ;
+  int __attribute__((__cdecl__)) fsetpos(FILE *_File,const fpos_t *_Pos);
+  int __attribute__((__cdecl__)) fsetpos64(FILE *_File,const fpos_t *_Pos);
+  int __attribute__((__cdecl__)) fseek(FILE *_File,long _Offset,int _Origin);
+  long __attribute__((__cdecl__)) ftell(FILE *_File);
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fseeki64(FILE *_File,long long _Offset,int _Origin);
+  __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _ftelli64(FILE *_File);
+# 666 "C:/msys64/mingw64/include/stdio.h" 3
+  int fseeko64(FILE* stream, _off64_t offset, int whence);
+  int fseeko(FILE* stream, _off_t offset, int whence);
+
+  _off_t ftello(FILE * stream);
+  _off64_t ftello64(FILE * stream);
+# 687 "C:/msys64/mingw64/include/stdio.h" 3
+  size_t __attribute__((__cdecl__)) fwrite(const void * __restrict__ _Str,size_t _Size,size_t _Count,FILE * __restrict__ _File);
+  int __attribute__((__cdecl__)) getc(FILE *_File);
+  int __attribute__((__cdecl__)) getchar(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getmaxstdio(void);
+  char *__attribute__((__cdecl__)) gets(char *_Buffer)
+    __attribute__((__warning__("Using gets() is always unsafe - use fgets() instead")));
+  int __attribute__((__cdecl__)) _getw(FILE *_File);
+
+
+  void __attribute__((__cdecl__)) perror(const char *_ErrMsg);
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _pclose(FILE *_File);
+  __attribute__ ((__dllimport__)) FILE *__attribute__((__cdecl__)) _popen(const char *_Command,const char *_Mode);
+
+
+
+
+
+  int __attribute__((__cdecl__)) putc(int _Ch,FILE *_File);
+  int __attribute__((__cdecl__)) putchar(int _Ch);
+  int __attribute__((__cdecl__)) puts(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putw(int _Word,FILE *_File);
+
+
+  int __attribute__((__cdecl__)) remove(const char *_Filename);
+  int __attribute__((__cdecl__)) rename(const char *_OldFilename,const char *_NewFilename);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _unlink(const char *_Filename);
+
+  int __attribute__((__cdecl__)) unlink(const char *_Filename) ;
+
+
+  void __attribute__((__cdecl__)) rewind(FILE *_File);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _rmtmp(void);
+  void __attribute__((__cdecl__)) setbuf(FILE * __restrict__ _File,char * __restrict__ _Buffer) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _setmaxstdio(int _Max);
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_output_format(unsigned int _Format);
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _get_output_format(void);
+  int __attribute__((__cdecl__)) setvbuf(FILE * __restrict__ _File,char * __restrict__ _Buf,int _Mode,size_t _Size);
+
+
+
+
+
+
+
+  __attribute__ ((__pure__))
+  __attribute__((__format__(__ms_printf__, 1,2))) __attribute__ ((__nonnull__ (1)))
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf(const char * __restrict__ _Format,...);
+  __attribute__((__format__(__ms_scanf__, 3,4))) __attribute__ ((__nonnull__ (3)))
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf(const char * __restrict__ _Src,size_t _MaxCount,const char * __restrict__ _Format,...) ;
+
+  __attribute__ ((__pure__))
+  __attribute__((__format__(__ms_printf__, 1,0))) __attribute__ ((__nonnull__ (1)))
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf(const char * __restrict__ _Format,va_list _ArgList);
+  FILE *__attribute__((__cdecl__)) tmpfile(void) ;
+  char *__attribute__((__cdecl__)) tmpnam(char *_Buffer);
+  int __attribute__((__cdecl__)) ungetc(int _Ch,FILE *_File);
+
+
+
+
+
+
+
+  __attribute__((__format__(__ms_printf__, 3,4))) __attribute__ ((__nonnull__ (3)))
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf(char * __restrict__ _Dest,size_t _Count,const char * __restrict__ _Format,...) ;
+  __attribute__((__format__(__ms_printf__, 3,0))) __attribute__ ((__nonnull__ (3)))
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf(char * __restrict__ _Dest,size_t _Count,const char * __restrict__ _Format,va_list _Args) ;
+# 977 "C:/msys64/mingw64/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_printf_count_output(int _Value);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _get_printf_count_output(void);
+# 1477 "C:/msys64/mingw64/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _lock_file(FILE *_File);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _unlock_file(FILE *_File);
+# 1495 "C:/msys64/mingw64/include/stdio.h" 3
+  char *__attribute__((__cdecl__)) tempnam(const char *_Directory,const char *_FilePrefix) ;
+  int __attribute__((__cdecl__)) fcloseall(void) ;
+  FILE *__attribute__((__cdecl__)) fdopen(int _FileHandle,const char *_Format) ;
+  int __attribute__((__cdecl__)) fgetchar(void) ;
+  int __attribute__((__cdecl__)) fileno(FILE *_File) ;
+  int __attribute__((__cdecl__)) flushall(void) ;
+  int __attribute__((__cdecl__)) fputchar(int _Ch) ;
+  int __attribute__((__cdecl__)) getw(FILE *_File) ;
+  int __attribute__((__cdecl__)) putw(int _Ch,FILE *_File) ;
+  int __attribute__((__cdecl__)) rmtmp(void) ;
+# 1575 "C:/msys64/mingw64/include/stdio.h" 3
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnv(int _Mode,const char *_Filename,const char *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnve(int _Mode,const char *_Filename,const char *const *_ArgList,const char *const *_Env);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnvp(int _Mode,const char *_Filename,const char *const *_ArgList);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _spawnvpe(int _Mode,const char *_Filename,const char *const *_ArgList,const char *const *_Env);
+
+
+
+
+}
+
+
+       
+       
+       
+       
+
+#pragma pack(pop)
+
+# 1 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 1 3
+# 9 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 3
+# 1 "C:/msys64/mingw64/include/stdio.h" 1 3
+# 10 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 2 3
+# 21 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 3
+extern "C" {
+
+
+
+
+
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) clearerr_s(FILE *_File);
+
+  size_t __attribute__((__cdecl__)) fread_s(void *_DstBuf,size_t _DstSize,size_t _ElementSize,size_t _Count,FILE *_File);
+# 515 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 3
+  int __attribute__((__cdecl__)) fprintf_s(FILE *_File,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fscanf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) fscanf_s(FILE *_File, const char *_Format, ...);
+  int __attribute__((__cdecl__)) printf_s(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scanf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scanf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) scanf_s(const char *_Format, ...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_c(char *_DstBuf,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_c(char *_DstBuf,size_t _MaxCount,const char *_Format,va_list _ArgList);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fscanf_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sscanf_l(const char *_Src,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sscanf_s_l(const char *_Src,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) sscanf_s(const char *_Src,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_s(const char *_Src,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_l(const char *_Src,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snscanf_s_l(const char *_Src,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  int __attribute__((__cdecl__)) vfprintf_s(FILE *_File,const char *_Format,va_list _ArgList);
+  int __attribute__((__cdecl__)) vprintf_s(const char *_Format,va_list _ArgList);
+
+  int __attribute__((__cdecl__)) vsnprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,va_list _ArgList);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,va_list _ArgList);
+
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) vsprintf_s(char *_DstBuf,size_t _Size,const char *_Format,va_list _ArgList);
+
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) sprintf_s(char *_DstBuf,size_t _DstSize,const char *_Format,...);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_s(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,...);
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_p(FILE *_File,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_p(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_p(char *_Dst,size_t _MaxCount,const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_p(FILE *_File,const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_p(const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_p(char *_Dst,size_t _MaxCount,const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_p(const char *_Format,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vscprintf_p(const char *_Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_p_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_p_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_p_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_p_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_l(char *_DstBuf,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_p_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_l(char *_DstBuf,const char *_Format,_locale_t,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_p_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _scprintf_p_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vscprintf_p_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _printf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vprintf_s_l(const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _fprintf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vfprintf_s_l(FILE *_File,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _sprintf_s_l(char *_DstBuf,size_t _DstSize,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsprintf_s_l(char *_DstBuf,size_t _DstSize,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_s_l(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_s_l(char *_DstBuf,size_t _DstSize,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _snprintf_c_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_l(char *_DstBuf,size_t _MaxCount,const char *_Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vsnprintf_c_l(char *_DstBuf,size_t _MaxCount,const char *,_locale_t _Locale,va_list _ArgList);
+
+
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vsnprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, va_list _ArgList) { return vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _vsnprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, va_list _ArgList) { return _vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,_ArgList); } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) vsprintf_s(char (&_DstBuf)[__size], const char* _Format, va_list _ArgList) { return vsprintf_s(_DstBuf,__size,_Format,_ArgList); } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) sprintf_s(char (&_DstBuf)[__size], const char* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = vsprintf_s(_DstBuf,__size,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+  extern "C++" { template <size_t __size> inline int __attribute__((__cdecl__)) _snprintf_s(char (&_DstBuf)[__size], size_t _MaxCount, const char* _Format, ...) { va_list __vaargs; __builtin_va_start(__vaargs,_Format); int __retval = _vsnprintf_s(_DstBuf,__size,_MaxCount,_Format,__vaargs); __builtin_va_end(__vaargs); return __retval; } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) fopen_s(FILE **_File,const char *_Filename,const char *_Mode);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) freopen_s(FILE** _File, const char *_Filename, const char *_Mode, FILE *_Stream);
+
+  __attribute__ ((__dllimport__)) char* __attribute__((__cdecl__)) gets_s(char*,rsize_t);
+  extern "C++" { template <size_t __size> inline char* __attribute__((__cdecl__)) get_s(char (&_DstBuf)[__size]) { return get_s(_DstBuf,__size); } }
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) tmpfile_s(FILE **_File);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) tmpnam_s(char*,rsize_t);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) tmpnam_s(char (&_DstBuf)[__size]) { return tmpnam_s(_DstBuf,__size); } }
+# 916 "C:/msys64/mingw64/include/sec_api/stdio_s.h" 3
+}
+# 1594 "C:/msys64/mingw64/include/stdio.h" 2 3
+# 13 "C:/msys64/mingw64/include/locale.h" 2 3
+
+
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 45 "C:/msys64/mingw64/include/locale.h" 3
+  struct lconv {
+    char *decimal_point;
+    char *thousands_sep;
+    char *grouping;
+    char *int_curr_symbol;
+    char *currency_symbol;
+    char *mon_decimal_point;
+    char *mon_thousands_sep;
+    char *mon_grouping;
+    char *positive_sign;
+    char *negative_sign;
+    char int_frac_digits;
+    char frac_digits;
+    char p_cs_precedes;
+    char p_sep_by_space;
+    char n_cs_precedes;
+    char n_sep_by_space;
+    char p_sign_posn;
+    char n_sign_posn;
+
+    wchar_t* _W_decimal_point;
+    wchar_t* _W_thousands_sep;
+    wchar_t* _W_int_curr_symbol;
+    wchar_t* _W_currency_symbol;
+    wchar_t* _W_mon_decimal_point;
+    wchar_t* _W_mon_thousands_sep;
+    wchar_t* _W_positive_sign;
+    wchar_t* _W_negative_sign;
+
+  };
+# 89 "C:/msys64/mingw64/include/locale.h" 3
+  int __attribute__((__cdecl__)) _configthreadlocale(int _Flag);
+  char *__attribute__((__cdecl__)) setlocale(int _Category,const char *_Locale);
+  __attribute__ ((__dllimport__)) struct lconv *__attribute__((__cdecl__)) localeconv(void);
+  __attribute__ ((__dllimport__)) _locale_t __attribute__((__cdecl__)) _get_current_locale(void);
+  __attribute__ ((__dllimport__)) _locale_t __attribute__((__cdecl__)) _create_locale(int _Category,const char *_Locale);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _free_locale(_locale_t _Locale);
+  _locale_t __attribute__((__cdecl__)) __get_current_locale(void);
+  _locale_t __attribute__((__cdecl__)) __create_locale(int _Category,const char *_Locale);
+  void __attribute__((__cdecl__)) __free_locale(_locale_t _Locale);
+
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) ___lc_codepage_func(void);
+# 113 "C:/msys64/mingw64/include/locale.h" 3
+}
+
+
+#pragma pack(pop)
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/clocale" 2 3
+# 51 "C:/msys64/mingw64/include/c++/14.2.0/clocale" 3
+namespace std
+{
+  using ::lconv;
+  using ::setlocale;
+  using ::localeconv;
+}
+# 42 "C:/msys64/mingw64/include/c++/14.2.0/x86_64-w64-mingw32/bits/c++locale.h" 2 3
+
+
+
+namespace std
+{
+
+
+  typedef int* __c_locale;
+
+
+
+
+
+  inline int
+  __convert_from_v(const __c_locale&, char* __out,
+     const int __size __attribute__((__unused__)),
+     const char* __fmt, ...)
+  {
+    char* __old = std::setlocale(4, 0);
+    char* __sav = 0;
+    if (__builtin_strcmp(__old, "C"))
+      {
+ const size_t __len = __builtin_strlen(__old) + 1;
+ __sav = new char[__len];
+ __builtin_memcpy(__sav, __old, __len);
+ std::setlocale(4, "C");
+      }
+
+    __builtin_va_list __args;
+    __builtin_va_start(__args, __fmt);
+
+
+    const int __ret = __mingw_vsnprintf(__out, __size, __fmt, __args);
+
+
+
+
+    __builtin_va_end(__args);
+
+    if (__sav)
+      {
+ std::setlocale(4, __sav);
+ delete [] __sav;
+      }
+    return __ret;
+  }
+
+
+}
+# 41 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/iosfwd" 1 3
+# 36 "C:/msys64/mingw64/include/c++/14.2.0/iosfwd" 3
+       
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/iosfwd" 3
+
+
+
+
+
+
+
+namespace std
+{
+
+# 76 "C:/msys64/mingw64/include/c++/14.2.0/iosfwd" 3
+  class ios_base;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_ios;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_streambuf;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_istream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_ostream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_iostream;
+
+
+namespace __cxx11 {
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+     typename _Alloc = allocator<_CharT> >
+    class basic_stringbuf;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+    typename _Alloc = allocator<_CharT> >
+    class basic_istringstream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+    typename _Alloc = allocator<_CharT> >
+    class basic_ostringstream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+    typename _Alloc = allocator<_CharT> >
+    class basic_stringstream;
+
+}
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_filebuf;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_ifstream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_ofstream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class basic_fstream;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class istreambuf_iterator;
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT> >
+    class ostreambuf_iterator;
+
+
+
+  typedef basic_ios<char> ios;
+
+
+  typedef basic_streambuf<char> streambuf;
+
+
+  typedef basic_istream<char> istream;
+
+
+  typedef basic_ostream<char> ostream;
+
+
+  typedef basic_iostream<char> iostream;
+
+
+  typedef basic_stringbuf<char> stringbuf;
+
+
+  typedef basic_istringstream<char> istringstream;
+
+
+  typedef basic_ostringstream<char> ostringstream;
+
+
+  typedef basic_stringstream<char> stringstream;
+
+
+  typedef basic_filebuf<char> filebuf;
+
+
+  typedef basic_ifstream<char> ifstream;
+
+
+  typedef basic_ofstream<char> ofstream;
+
+
+  typedef basic_fstream<char> fstream;
+
+
+
+  typedef basic_ios<wchar_t> wios;
+
+
+  typedef basic_streambuf<wchar_t> wstreambuf;
+
+
+  typedef basic_istream<wchar_t> wistream;
+
+
+  typedef basic_ostream<wchar_t> wostream;
+
+
+  typedef basic_iostream<wchar_t> wiostream;
+
+
+  typedef basic_stringbuf<wchar_t> wstringbuf;
+
+
+  typedef basic_istringstream<wchar_t> wistringstream;
+
+
+  typedef basic_ostringstream<wchar_t> wostringstream;
+
+
+  typedef basic_stringstream<wchar_t> wstringstream;
+
+
+  typedef basic_filebuf<wchar_t> wfilebuf;
+
+
+  typedef basic_ifstream<wchar_t> wifstream;
+
+
+  typedef basic_ofstream<wchar_t> wofstream;
+
+
+  typedef basic_fstream<wchar_t> wfstream;
+
+
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+           typename _Allocator = allocator<_CharT>>
+    class basic_syncbuf;
+  template<typename _CharT, typename _Traits = char_traits<_CharT>,
+           typename _Allocator = allocator<_CharT>>
+    class basic_osyncstream;
+
+  using syncbuf = basic_syncbuf<char>;
+  using osyncstream = basic_osyncstream<char>;
+
+
+  using wsyncbuf = basic_syncbuf<wchar_t>;
+  using wosyncstream = basic_osyncstream<wchar_t>;
+
+
+
+
+  template<typename _CharT, typename _Traits = char_traits<_CharT>>
+    class basic_spanbuf;
+  template<typename _CharT, typename _Traits = char_traits<_CharT>>
+    class basic_ispanstream;
+  template<typename _CharT, typename _Traits = char_traits<_CharT>>
+    class basic_ospanstream;
+  template<typename _CharT, typename _Traits = char_traits<_CharT>>
+    class basic_spanstream;
+
+  using spanbuf = basic_spanbuf<char>;
+  using ispanstream = basic_ispanstream<char>;
+  using ospanstream = basic_ospanstream<char>;
+  using spanstream = basic_spanstream<char>;
+
+
+  using wspanbuf = basic_spanbuf<wchar_t>;
+  using wispanstream = basic_ispanstream<wchar_t>;
+  using wospanstream = basic_ospanstream<wchar_t>;
+  using wspanstream = basic_spanstream<wchar_t>;
+
+
+
+
+
+
+}
+# 42 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cctype" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cctype" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cctype" 3
+
+
+# 1 "C:/msys64/mingw64/include/ctype.h" 1 3
+# 12 "C:/msys64/mingw64/include/ctype.h" 3
+extern "C" {
+# 52 "C:/msys64/mingw64/include/ctype.h" 3
+  extern const unsigned char __newclmap[];
+  extern const unsigned char __newcumap[];
+  extern pthreadlocinfo __ptlocinfo;
+  extern pthreadmbcinfo __ptmbcinfo;
+  extern int __globallocalestatus;
+  extern int __locale_changed;
+  extern struct threadlocaleinfostruct __initiallocinfo;
+  extern _locale_tstruct __initiallocalestructinfo;
+  pthreadlocinfo __attribute__((__cdecl__)) __updatetlocinfo(void);
+  pthreadmbcinfo __attribute__((__cdecl__)) __updatetmbcinfo(void);
+# 80 "C:/msys64/mingw64/include/ctype.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype(int _C,int _Type);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isctype_l(int _C,int _Type,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalpha(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalpha_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isupper_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) islower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _islower_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isdigit(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isdigit_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isxdigit(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isxdigit_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isspace(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isspace_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ispunct(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ispunct_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isalnum(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isalnum_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isprint(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isprint_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) isgraph(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _isgraph_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) iscntrl(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _iscntrl_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) toupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) tolower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _tolower_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _toupper_l(int _C,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __isascii(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __toascii(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsymf(int _C);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) __iscsym(int _C);
+
+
+int __attribute__((__cdecl__)) isblank(int _C);
+# 178 "C:/msys64/mingw64/include/ctype.h" 3
+__attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) ___mb_cur_max_func(void);
+# 261 "C:/msys64/mingw64/include/ctype.h" 3
+}
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/cctype" 2 3
+# 62 "C:/msys64/mingw64/include/c++/14.2.0/cctype" 3
+namespace std
+{
+  using ::isalnum;
+  using ::isalpha;
+  using ::iscntrl;
+  using ::isdigit;
+  using ::isgraph;
+  using ::islower;
+  using ::isprint;
+  using ::ispunct;
+  using ::isspace;
+  using ::isupper;
+  using ::isxdigit;
+  using ::tolower;
+  using ::toupper;
+}
+
+
+
+
+
+
+
+namespace std
+{
+  using ::isblank;
+}
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 2 3
+
+namespace std
+{
+
+# 55 "C:/msys64/mingw64/include/c++/14.2.0/bits/localefwd.h" 3
+  class locale;
+
+  template<typename _Facet>
+    bool
+    has_facet(const locale&) throw();
+
+  template<typename _Facet>
+    const _Facet&
+    use_facet(const locale&);
+
+
+  template<typename _CharT>
+    bool
+    isspace(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isprint(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    iscntrl(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isupper(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    islower(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isalpha(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isdigit(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    ispunct(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isxdigit(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isalnum(_CharT, const locale&);
+
+  template<typename _CharT>
+    bool
+    isgraph(_CharT, const locale&);
+
+
+  template<typename _CharT>
+    bool
+    isblank(_CharT, const locale&);
+
+
+  template<typename _CharT>
+    _CharT
+    toupper(_CharT, const locale&);
+
+  template<typename _CharT>
+    _CharT
+    tolower(_CharT, const locale&);
+
+
+  struct ctype_base;
+  template<typename _CharT>
+    class ctype;
+  template<> class ctype<char>;
+
+  template<> class ctype<wchar_t>;
+
+  template<typename _CharT>
+    class ctype_byname;
+
+
+  class codecvt_base;
+  template<typename _InternT, typename _ExternT, typename _StateT>
+    class codecvt;
+  template<> class codecvt<char, char, mbstate_t>;
+
+  template<> class codecvt<wchar_t, char, mbstate_t>;
+
+
+  template<> class codecvt<char16_t, char, mbstate_t>;
+  template<> class codecvt<char32_t, char, mbstate_t>;
+
+  template<> class codecvt<char16_t, char8_t, mbstate_t>;
+  template<> class codecvt<char32_t, char8_t, mbstate_t>;
+
+
+  template<typename _InternT, typename _ExternT, typename _StateT>
+    class codecvt_byname;
+
+
+
+  template<typename _CharT, typename _InIter = istreambuf_iterator<_CharT> >
+    class num_get;
+  template<typename _CharT, typename _OutIter = ostreambuf_iterator<_CharT> >
+    class num_put;
+
+namespace __cxx11 {
+  template<typename _CharT> class numpunct;
+  template<typename _CharT> class numpunct_byname;
+}
+
+namespace __cxx11 {
+
+  template<typename _CharT>
+    class collate;
+  template<typename _CharT>
+    class collate_byname;
+}
+
+
+  class time_base;
+namespace __cxx11 {
+  template<typename _CharT, typename _InIter = istreambuf_iterator<_CharT> >
+    class time_get;
+  template<typename _CharT, typename _InIter = istreambuf_iterator<_CharT> >
+    class time_get_byname;
+}
+  template<typename _CharT, typename _OutIter = ostreambuf_iterator<_CharT> >
+    class time_put;
+  template<typename _CharT, typename _OutIter = ostreambuf_iterator<_CharT> >
+    class time_put_byname;
+
+
+  class money_base;
+namespace __cxx11 {
+  template<typename _CharT, typename _InIter = istreambuf_iterator<_CharT> >
+    class money_get;
+  template<typename _CharT, typename _OutIter = ostreambuf_iterator<_CharT> >
+    class money_put;
+}
+namespace __cxx11 {
+  template<typename _CharT, bool _Intl = false>
+    class moneypunct;
+  template<typename _CharT, bool _Intl = false>
+    class moneypunct_byname;
+}
+
+
+  struct messages_base;
+namespace __cxx11 {
+  template<typename _CharT>
+    class messages;
+  template<typename _CharT>
+    class messages_byname;
+}
+
+
+}
+# 46 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/ostream_insert.h" 1 3
+# 33 "C:/msys64/mingw64/include/c++/14.2.0/bits/ostream_insert.h" 3
+       
+# 34 "C:/msys64/mingw64/include/c++/14.2.0/bits/ostream_insert.h" 3
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/cxxabi_forced.h" 1 3
+# 34 "C:/msys64/mingw64/include/c++/14.2.0/bits/cxxabi_forced.h" 3
+       
+# 35 "C:/msys64/mingw64/include/c++/14.2.0/bits/cxxabi_forced.h" 3
+
+#pragma GCC visibility push(default)
+
+
+namespace __cxxabiv1
+{
+
+
+
+
+
+
+
+  class __forced_unwind
+  {
+    virtual ~__forced_unwind() throw();
+
+
+    virtual void __pure_dummy() = 0;
+  };
+}
+
+
+#pragma GCC visibility pop
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/ostream_insert.h" 2 3
+
+
+namespace std
+{
+
+
+
+
+  template<typename _CharT, typename _Traits>
+    inline void
+    __ostream_write(basic_ostream<_CharT, _Traits>& __out,
+      const _CharT* __s, streamsize __n)
+    {
+      typedef basic_ostream<_CharT, _Traits> __ostream_type;
+      typedef typename __ostream_type::ios_base __ios_base;
+
+      const streamsize __put = __out.rdbuf()->sputn(__s, __n);
+      if (__put != __n)
+ __out.setstate(__ios_base::badbit);
+    }
+
+  template<typename _CharT, typename _Traits>
+    inline void
+    __ostream_fill(basic_ostream<_CharT, _Traits>& __out, streamsize __n)
+    {
+      typedef basic_ostream<_CharT, _Traits> __ostream_type;
+      typedef typename __ostream_type::ios_base __ios_base;
+
+      const _CharT __c = __out.fill();
+      for (; __n > 0; --__n)
+ {
+   const typename _Traits::int_type __put = __out.rdbuf()->sputc(__c);
+   if (_Traits::eq_int_type(__put, _Traits::eof()))
+     {
+       __out.setstate(__ios_base::badbit);
+       break;
+     }
+ }
+    }
+
+  template<typename _CharT, typename _Traits>
+    basic_ostream<_CharT, _Traits>&
+    __ostream_insert(basic_ostream<_CharT, _Traits>& __out,
+       const _CharT* __s, streamsize __n)
+    {
+      typedef basic_ostream<_CharT, _Traits> __ostream_type;
+      typedef typename __ostream_type::ios_base __ios_base;
+
+      typename __ostream_type::sentry __cerb(__out);
+      if (__cerb)
+ {
+   try
+     {
+       const streamsize __w = __out.width();
+       if (__w > __n)
+  {
+    const bool __left = ((__out.flags()
+     & __ios_base::adjustfield)
+           == __ios_base::left);
+    if (!__left)
+      __ostream_fill(__out, __w - __n);
+    if (__out.good())
+      __ostream_write(__out, __s, __n);
+    if (__left && __out.good())
+      __ostream_fill(__out, __w - __n);
+  }
+       else
+  __ostream_write(__out, __s, __n);
+       __out.width(0);
+     }
+   catch(__cxxabiv1::__forced_unwind&)
+     {
+       __out._M_setstate(__ios_base::badbit);
+       throw;
+     }
+   catch(...)
+     { __out._M_setstate(__ios_base::badbit); }
+ }
+      return __out;
+    }
+
+
+
+
+  extern template ostream& __ostream_insert(ostream&, const char*, streamsize);
+
+
+  extern template wostream& __ostream_insert(wostream&, const wchar_t*,
+          streamsize);
+
+
+
+
+
+
+}
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+
+
+
+
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 1 3
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+       
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 1 3
+# 36 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+       
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+
+
+
+
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+# 45 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 2 3
+# 64 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+namespace std
+{
+
+
+
+  constexpr size_t
+  __sv_check(size_t __size, size_t __pos, const char* __s)
+  {
+    if (__pos > __size)
+      __throw_out_of_range_fmt(("%s: __pos (which is %zu) > __size " "(which is %zu)")
+                        , __s, __pos, __size);
+    return __pos;
+  }
+
+
+
+  constexpr size_t
+  __sv_limit(size_t __size, size_t __pos, size_t __off) noexcept
+  {
+   const bool __testoff = __off < __size - __pos;
+   return __testoff ? __off : __size - __pos;
+  }
+# 105 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+  template<typename _CharT, typename _Traits = std::char_traits<_CharT>>
+    class basic_string_view
+    {
+      static_assert(!is_array_v<_CharT>);
+      static_assert(is_trivial_v<_CharT> && is_standard_layout_v<_CharT>);
+      static_assert(is_same_v<_CharT, typename _Traits::char_type>);
+
+    public:
+
+
+      using traits_type = _Traits;
+      using value_type = _CharT;
+      using pointer = value_type*;
+      using const_pointer = const value_type*;
+      using reference = value_type&;
+      using const_reference = const value_type&;
+      using const_iterator = const value_type*;
+      using iterator = const_iterator;
+      using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+      using reverse_iterator = const_reverse_iterator;
+      using size_type = size_t;
+      using difference_type = ptrdiff_t;
+      static constexpr size_type npos = size_type(-1);
+
+
+
+      constexpr
+      basic_string_view() noexcept
+      : _M_len{0}, _M_str{nullptr}
+      { }
+
+      constexpr basic_string_view(const basic_string_view&) noexcept = default;
+
+      [[__gnu__::__nonnull__]]
+      constexpr
+      basic_string_view(const _CharT* __str) noexcept
+      : _M_len{traits_type::length(__str)},
+ _M_str{__str}
+      { }
+
+      constexpr
+      basic_string_view(const _CharT* __str, size_type __len) noexcept
+      : _M_len{__len}, _M_str{__str}
+      { }
+
+
+      template<contiguous_iterator _It, sized_sentinel_for<_It> _End>
+ requires same_as<iter_value_t<_It>, _CharT>
+   && (!convertible_to<_End, size_type>)
+ constexpr
+ basic_string_view(_It __first, _End __last)
+ noexcept(noexcept(__last - __first))
+ : _M_len(__last - __first), _M_str(std::to_address(__first))
+ { }
+
+
+      template<typename _Range, typename _DRange = remove_cvref_t<_Range>>
+ requires (!is_same_v<_DRange, basic_string_view>)
+   && ranges::contiguous_range<_Range>
+   && ranges::sized_range<_Range>
+   && is_same_v<ranges::range_value_t<_Range>, _CharT>
+   && (!is_convertible_v<_Range, const _CharT*>)
+   && (!requires (_DRange& __d) {
+  __d.operator ::std::basic_string_view<_CharT, _Traits>();
+       })
+ constexpr explicit
+ basic_string_view(_Range&& __r)
+ noexcept(noexcept(ranges::size(__r)) && noexcept(ranges::data(__r)))
+ : _M_len(ranges::size(__r)), _M_str(ranges::data(__r))
+ { }
+
+      basic_string_view(nullptr_t) = delete;
+
+
+
+      constexpr basic_string_view&
+      operator=(const basic_string_view&) noexcept = default;
+
+
+
+      [[nodiscard]]
+      constexpr const_iterator
+      begin() const noexcept
+      { return this->_M_str; }
+
+      [[nodiscard]]
+      constexpr const_iterator
+      end() const noexcept
+      { return this->_M_str + this->_M_len; }
+
+      [[nodiscard]]
+      constexpr const_iterator
+      cbegin() const noexcept
+      { return this->_M_str; }
+
+      [[nodiscard]]
+      constexpr const_iterator
+      cend() const noexcept
+      { return this->_M_str + this->_M_len; }
+
+      [[nodiscard]]
+      constexpr const_reverse_iterator
+      rbegin() const noexcept
+      { return const_reverse_iterator(this->end()); }
+
+      [[nodiscard]]
+      constexpr const_reverse_iterator
+      rend() const noexcept
+      { return const_reverse_iterator(this->begin()); }
+
+      [[nodiscard]]
+      constexpr const_reverse_iterator
+      crbegin() const noexcept
+      { return const_reverse_iterator(this->end()); }
+
+      [[nodiscard]]
+      constexpr const_reverse_iterator
+      crend() const noexcept
+      { return const_reverse_iterator(this->begin()); }
+
+
+
+      [[nodiscard]]
+      constexpr size_type
+      size() const noexcept
+      { return this->_M_len; }
+
+      [[nodiscard]]
+      constexpr size_type
+      length() const noexcept
+      { return _M_len; }
+
+      [[nodiscard]]
+      constexpr size_type
+      max_size() const noexcept
+      {
+ return (npos - sizeof(size_type) - sizeof(void*))
+  / sizeof(value_type) / 4;
+      }
+
+      [[nodiscard]]
+      constexpr bool
+      empty() const noexcept
+      { return this->_M_len == 0; }
+
+
+
+      [[nodiscard]]
+      constexpr const_reference
+      operator[](size_type __pos) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__pos < this->_M_len), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *(this->_M_str + __pos);
+      }
+
+      [[nodiscard]]
+      constexpr const_reference
+      at(size_type __pos) const
+      {
+ if (__pos >= _M_len)
+   __throw_out_of_range_fmt(("basic_string_view::at: __pos " "(which is %zu) >= this->size() " "(which is %zu)")
+
+                            , __pos, this->size());
+ return *(this->_M_str + __pos);
+      }
+
+      [[nodiscard]]
+      constexpr const_reference
+      front() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_len > 0), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *this->_M_str;
+      }
+
+      [[nodiscard]]
+      constexpr const_reference
+      back() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_len > 0), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *(this->_M_str + this->_M_len - 1);
+      }
+
+      [[nodiscard]]
+      constexpr const_pointer
+      data() const noexcept
+      { return this->_M_str; }
+
+
+
+      constexpr void
+      remove_prefix(size_type __n) noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_len >= __n), false)) std::__glibcxx_assert_fail(); } while (false);
+ this->_M_str += __n;
+ this->_M_len -= __n;
+      }
+
+      constexpr void
+      remove_suffix(size_type __n) noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(this->_M_len >= __n), false)) std::__glibcxx_assert_fail(); } while (false);
+ this->_M_len -= __n;
+      }
+
+      constexpr void
+      swap(basic_string_view& __sv) noexcept
+      {
+ auto __tmp = *this;
+ *this = __sv;
+ __sv = __tmp;
+      }
+
+
+
+      constexpr
+      size_type
+      copy(_CharT* __str, size_type __n, size_type __pos = 0) const
+      {
+ ;
+ __pos = std::__sv_check(size(), __pos, "basic_string_view::copy");
+ const size_type __rlen = std::min<size_t>(__n, _M_len - __pos);
+
+
+ traits_type::copy(__str, data() + __pos, __rlen);
+ return __rlen;
+      }
+
+      [[nodiscard]]
+      constexpr basic_string_view
+      substr(size_type __pos = 0, size_type __n = npos) const noexcept(false)
+      {
+ __pos = std::__sv_check(size(), __pos, "basic_string_view::substr");
+ const size_type __rlen = std::min<size_t>(__n, _M_len - __pos);
+ return basic_string_view{_M_str + __pos, __rlen};
+      }
+
+      [[nodiscard]]
+      constexpr int
+      compare(basic_string_view __str) const noexcept
+      {
+ const size_type __rlen = std::min(this->_M_len, __str._M_len);
+ int __ret = traits_type::compare(this->_M_str, __str._M_str, __rlen);
+ if (__ret == 0)
+   __ret = _S_compare(this->_M_len, __str._M_len);
+ return __ret;
+      }
+
+      [[nodiscard]]
+      constexpr int
+      compare(size_type __pos1, size_type __n1, basic_string_view __str) const
+      { return this->substr(__pos1, __n1).compare(__str); }
+
+      [[nodiscard]]
+      constexpr int
+      compare(size_type __pos1, size_type __n1,
+       basic_string_view __str, size_type __pos2, size_type __n2) const
+      {
+ return this->substr(__pos1, __n1).compare(__str.substr(__pos2, __n2));
+      }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr int
+      compare(const _CharT* __str) const noexcept
+      { return this->compare(basic_string_view{__str}); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr int
+      compare(size_type __pos1, size_type __n1, const _CharT* __str) const
+      { return this->substr(__pos1, __n1).compare(basic_string_view{__str}); }
+
+      [[nodiscard]]
+      constexpr int
+      compare(size_type __pos1, size_type __n1,
+       const _CharT* __str, size_type __n2) const noexcept(false)
+      {
+ return this->substr(__pos1, __n1)
+     .compare(basic_string_view(__str, __n2));
+      }
+
+
+      [[nodiscard]]
+      constexpr bool
+      starts_with(basic_string_view __x) const noexcept
+      { return this->substr(0, __x.size()) == __x; }
+
+      [[nodiscard]]
+      constexpr bool
+      starts_with(_CharT __x) const noexcept
+      { return !this->empty() && traits_type::eq(this->front(), __x); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      starts_with(const _CharT* __x) const noexcept
+      { return this->starts_with(basic_string_view(__x)); }
+
+      [[nodiscard]]
+      constexpr bool
+      ends_with(basic_string_view __x) const noexcept
+      {
+ const auto __len = this->size();
+ const auto __xlen = __x.size();
+ return __len >= __xlen
+   && traits_type::compare(end() - __xlen, __x.data(), __xlen) == 0;
+      }
+
+      [[nodiscard]]
+      constexpr bool
+      ends_with(_CharT __x) const noexcept
+      { return !this->empty() && traits_type::eq(this->back(), __x); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      ends_with(const _CharT* __x) const noexcept
+      { return this->ends_with(basic_string_view(__x)); }
+# 427 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+      [[nodiscard]]
+      constexpr bool
+      contains(basic_string_view __x) const noexcept
+      { return this->find(__x) != npos; }
+
+      [[nodiscard]]
+      constexpr bool
+      contains(_CharT __x) const noexcept
+      { return this->find(__x) != npos; }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      contains(const _CharT* __x) const noexcept
+      { return this->find(__x) != npos; }
+
+
+
+
+      [[nodiscard]]
+      constexpr size_type
+      find(basic_string_view __str, size_type __pos = 0) const noexcept
+      { return this->find(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find(_CharT __c, size_type __pos = 0) const noexcept;
+
+      [[nodiscard]]
+      constexpr size_type
+      find(const _CharT* __str, size_type __pos, size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      find(const _CharT* __str, size_type __pos = 0) const noexcept
+      { return this->find(__str, __pos, traits_type::length(__str)); }
+
+      [[nodiscard]]
+      constexpr size_type
+      rfind(basic_string_view __str, size_type __pos = npos) const noexcept
+      { return this->rfind(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      rfind(_CharT __c, size_type __pos = npos) const noexcept;
+
+      [[nodiscard]]
+      constexpr size_type
+      rfind(const _CharT* __str, size_type __pos, size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      rfind(const _CharT* __str, size_type __pos = npos) const noexcept
+      { return this->rfind(__str, __pos, traits_type::length(__str)); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_of(basic_string_view __str, size_type __pos = 0) const noexcept
+      { return this->find_first_of(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_of(_CharT __c, size_type __pos = 0) const noexcept
+      { return this->find(__c, __pos); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_of(const _CharT* __str, size_type __pos,
+      size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      find_first_of(const _CharT* __str, size_type __pos = 0) const noexcept
+      { return this->find_first_of(__str, __pos, traits_type::length(__str)); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_of(basic_string_view __str,
+     size_type __pos = npos) const noexcept
+      { return this->find_last_of(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_of(_CharT __c, size_type __pos=npos) const noexcept
+      { return this->rfind(__c, __pos); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_of(const _CharT* __str, size_type __pos,
+     size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      find_last_of(const _CharT* __str, size_type __pos = npos) const noexcept
+      { return this->find_last_of(__str, __pos, traits_type::length(__str)); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_not_of(basic_string_view __str,
+   size_type __pos = 0) const noexcept
+      { return this->find_first_not_of(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_not_of(_CharT __c, size_type __pos = 0) const noexcept;
+
+      [[nodiscard]]
+      constexpr size_type
+      find_first_not_of(const _CharT* __str,
+   size_type __pos, size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      find_first_not_of(const _CharT* __str, size_type __pos = 0) const noexcept
+      {
+ return this->find_first_not_of(__str, __pos,
+           traits_type::length(__str));
+      }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_not_of(basic_string_view __str,
+         size_type __pos = npos) const noexcept
+      { return this->find_last_not_of(__str._M_str, __pos, __str._M_len); }
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_not_of(_CharT __c, size_type __pos = npos) const noexcept;
+
+      [[nodiscard]]
+      constexpr size_type
+      find_last_not_of(const _CharT* __str,
+         size_type __pos, size_type __n) const noexcept;
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr size_type
+      find_last_not_of(const _CharT* __str,
+         size_type __pos = npos) const noexcept
+      {
+ return this->find_last_not_of(__str, __pos,
+          traits_type::length(__str));
+      }
+
+    private:
+
+      static constexpr int
+      _S_compare(size_type __n1, size_type __n2) noexcept
+      {
+ using __limits = __gnu_cxx::__int_traits<int>;
+ const difference_type __diff = __n1 - __n2;
+ if (__diff > __limits::__max)
+   return __limits::__max;
+ if (__diff < __limits::__min)
+   return __limits::__min;
+ return static_cast<int>(__diff);
+      }
+
+      size_t _M_len;
+      const _CharT* _M_str;
+    };
+
+
+  template<contiguous_iterator _It, sized_sentinel_for<_It> _End>
+    basic_string_view(_It, _End) -> basic_string_view<iter_value_t<_It>>;
+
+
+  template<ranges::contiguous_range _Range>
+    basic_string_view(_Range&&)
+      -> basic_string_view<ranges::range_value_t<_Range>>;
+# 606 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+  template<typename _CharT, typename _Traits>
+    [[nodiscard]]
+    constexpr bool
+    operator==(basic_string_view<_CharT, _Traits> __x,
+        type_identity_t<basic_string_view<_CharT, _Traits>> __y)
+    noexcept
+    { return __x.size() == __y.size() && __x.compare(__y) == 0; }
+
+  template<typename _CharT, typename _Traits>
+    [[nodiscard]]
+    constexpr auto
+    operator<=>(basic_string_view<_CharT, _Traits> __x,
+  __type_identity_t<basic_string_view<_CharT, _Traits>> __y)
+    noexcept
+    -> decltype(__detail::__char_traits_cmp_cat<_Traits>(0))
+    { return __detail::__char_traits_cmp_cat<_Traits>(__x.compare(__y)); }
+# 758 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 3
+  template<typename _CharT, typename _Traits>
+    inline basic_ostream<_CharT, _Traits>&
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+        basic_string_view<_CharT,_Traits> __str)
+    { return __ostream_insert(__os, __str.data(), __str.size()); }
+
+
+
+
+  using string_view = basic_string_view<char>;
+  using wstring_view = basic_string_view<wchar_t>;
+
+  using u8string_view = basic_string_view<char8_t>;
+
+  using u16string_view = basic_string_view<char16_t>;
+  using u32string_view = basic_string_view<char32_t>;
+
+
+
+  template<typename _Tp>
+    struct hash;
+
+  template<>
+    struct hash<string_view>
+    : public __hash_base<size_t, string_view>
+    {
+      [[nodiscard]]
+      size_t
+      operator()(const string_view& __str) const noexcept
+      { return std::_Hash_impl::hash(__str.data(), __str.length()); }
+    };
+
+  template<>
+    struct __is_fast_hash<hash<string_view>> : std::false_type
+    { };
+
+  template<>
+    struct hash<wstring_view>
+    : public __hash_base<size_t, wstring_view>
+    {
+      [[nodiscard]]
+      size_t
+      operator()(const wstring_view& __s) const noexcept
+      { return std::_Hash_impl::hash(__s.data(),
+                                     __s.length() * sizeof(wchar_t)); }
+    };
+
+  template<>
+    struct __is_fast_hash<hash<wstring_view>> : std::false_type
+    { };
+
+
+  template<>
+    struct hash<u8string_view>
+    : public __hash_base<size_t, u8string_view>
+    {
+      [[nodiscard]]
+      size_t
+      operator()(const u8string_view& __str) const noexcept
+      { return std::_Hash_impl::hash(__str.data(), __str.length()); }
+    };
+
+  template<>
+    struct __is_fast_hash<hash<u8string_view>> : std::false_type
+    { };
+
+
+  template<>
+    struct hash<u16string_view>
+    : public __hash_base<size_t, u16string_view>
+    {
+      [[nodiscard]]
+      size_t
+      operator()(const u16string_view& __s) const noexcept
+      { return std::_Hash_impl::hash(__s.data(),
+                                     __s.length() * sizeof(char16_t)); }
+    };
+
+  template<>
+    struct __is_fast_hash<hash<u16string_view>> : std::false_type
+    { };
+
+  template<>
+    struct hash<u32string_view>
+    : public __hash_base<size_t, u32string_view>
+    {
+      [[nodiscard]]
+      size_t
+      operator()(const u32string_view& __s) const noexcept
+      { return std::_Hash_impl::hash(__s.data(),
+                                     __s.length() * sizeof(char32_t)); }
+    };
+
+  template<>
+    struct __is_fast_hash<hash<u32string_view>> : std::false_type
+    { };
+
+  inline namespace literals
+  {
+  inline namespace string_view_literals
+  {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wliteral-suffix"
+    inline constexpr basic_string_view<char>
+    operator""sv(const char* __str, size_t __len) noexcept
+    { return basic_string_view<char>{__str, __len}; }
+
+    inline constexpr basic_string_view<wchar_t>
+    operator""sv(const wchar_t* __str, size_t __len) noexcept
+    { return basic_string_view<wchar_t>{__str, __len}; }
+
+
+    inline constexpr basic_string_view<char8_t>
+    operator""sv(const char8_t* __str, size_t __len) noexcept
+    { return basic_string_view<char8_t>{__str, __len}; }
+
+
+    inline constexpr basic_string_view<char16_t>
+    operator""sv(const char16_t* __str, size_t __len) noexcept
+    { return basic_string_view<char16_t>{__str, __len}; }
+
+    inline constexpr basic_string_view<char32_t>
+    operator""sv(const char32_t* __str, size_t __len) noexcept
+    { return basic_string_view<char32_t>{__str, __len}; }
+
+#pragma GCC diagnostic pop
+  }
+  }
+
+
+  namespace ranges
+  {
+
+    template<typename _CharT, typename _Traits>
+      inline constexpr bool
+ enable_borrowed_range<basic_string_view<_CharT, _Traits>> = true;
+
+
+    template<typename _CharT, typename _Traits>
+      inline constexpr bool
+ enable_view<basic_string_view<_CharT, _Traits>> = true;
+  }
+
+
+}
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/string_view.tcc" 1 3
+# 37 "C:/msys64/mingw64/include/c++/14.2.0/bits/string_view.tcc" 3
+       
+# 38 "C:/msys64/mingw64/include/c++/14.2.0/bits/string_view.tcc" 3
+
+
+
+namespace std
+{
+
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find(const _CharT* __str, size_type __pos, size_type __n) const noexcept
+    {
+      ;
+
+      if (__n == 0)
+ return __pos <= _M_len ? __pos : npos;
+      if (__pos >= _M_len)
+ return npos;
+
+      const _CharT __elem0 = __str[0];
+      const _CharT* __first = _M_str + __pos;
+      const _CharT* const __last = _M_str + _M_len;
+      size_type __len = _M_len - __pos;
+
+      while (__len >= __n)
+ {
+
+   __first = traits_type::find(__first, __len - __n + 1, __elem0);
+   if (!__first)
+     return npos;
+
+
+
+   if (traits_type::compare(__first, __str, __n) == 0)
+     return __first - _M_str;
+   __len = __last - ++__first;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __ret = npos;
+      if (__pos < this->_M_len)
+ {
+   const size_type __n = this->_M_len - __pos;
+   const _CharT* __p = traits_type::find(this->_M_str + __pos, __n, __c);
+   if (__p)
+     __ret = __p - this->_M_str;
+ }
+      return __ret;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    rfind(const _CharT* __str, size_type __pos, size_type __n) const noexcept
+    {
+      ;
+
+      if (__n <= this->_M_len)
+ {
+   __pos = std::min(size_type(this->_M_len - __n), __pos);
+   do
+     {
+       if (traits_type::compare(this->_M_str + __pos, __str, __n) == 0)
+  return __pos;
+     }
+   while (__pos-- > 0);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    rfind(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __size = this->_M_len;
+      if (__size > 0)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   for (++__size; __size-- > 0; )
+     if (traits_type::eq(this->_M_str[__size], __c))
+       return __size;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_first_of(const _CharT* __str, size_type __pos,
+    size_type __n) const noexcept
+    {
+      ;
+      for (; __n && __pos < this->_M_len; ++__pos)
+ {
+   const _CharT* __p = traits_type::find(__str, __n,
+      this->_M_str[__pos]);
+   if (__p)
+     return __pos;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_last_of(const _CharT* __str, size_type __pos,
+   size_type __n) const noexcept
+    {
+      ;
+      size_type __size = this->size();
+      if (__size && __n)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (traits_type::find(__str, __n, this->_M_str[__size]))
+  return __size;
+     }
+   while (__size-- != 0);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_first_not_of(const _CharT* __str, size_type __pos,
+        size_type __n) const noexcept
+    {
+      ;
+      for (; __pos < this->_M_len; ++__pos)
+ if (!traits_type::find(__str, __n, this->_M_str[__pos]))
+   return __pos;
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_first_not_of(_CharT __c, size_type __pos) const noexcept
+    {
+      for (; __pos < this->_M_len; ++__pos)
+ if (!traits_type::eq(this->_M_str[__pos], __c))
+   return __pos;
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_last_not_of(const _CharT* __str, size_type __pos,
+       size_type __n) const noexcept
+    {
+      ;
+      size_type __size = this->_M_len;
+      if (__size)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (!traits_type::find(__str, __n, this->_M_str[__size]))
+  return __size;
+     }
+   while (__size--);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits>
+    constexpr typename basic_string_view<_CharT, _Traits>::size_type
+    basic_string_view<_CharT, _Traits>::
+    find_last_not_of(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __size = this->_M_len;
+      if (__size)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (!traits_type::eq(this->_M_str[__size], __c))
+  return __size;
+     }
+   while (__size--);
+ }
+      return npos;
+    }
+
+
+}
+# 905 "C:/msys64/mingw64/include/c++/14.2.0/string_view" 2 3
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 2 3
+
+
+
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+# 55 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 2 3
+
+
+
+
+
+namespace std
+{
+
+namespace __cxx11 {
+# 85 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    class basic_string
+    {
+
+      static_assert(is_same_v<_CharT, typename _Traits::char_type>);
+      static_assert(is_same_v<_CharT, typename _Alloc::value_type>);
+      using _Char_alloc_type = _Alloc;
+
+
+
+
+
+      typedef __gnu_cxx::__alloc_traits<_Char_alloc_type> _Alloc_traits;
+
+
+    public:
+      typedef _Traits traits_type;
+      typedef typename _Traits::char_type value_type;
+      typedef _Char_alloc_type allocator_type;
+      typedef typename _Alloc_traits::size_type size_type;
+      typedef typename _Alloc_traits::difference_type difference_type;
+      typedef typename _Alloc_traits::reference reference;
+      typedef typename _Alloc_traits::const_reference const_reference;
+      typedef typename _Alloc_traits::pointer pointer;
+      typedef typename _Alloc_traits::const_pointer const_pointer;
+      typedef __gnu_cxx::__normal_iterator<pointer, basic_string> iterator;
+      typedef __gnu_cxx::__normal_iterator<const_pointer, basic_string>
+       const_iterator;
+      typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
+      typedef std::reverse_iterator<iterator> reverse_iterator;
+
+
+      static const size_type npos = static_cast<size_type>(-1);
+
+    protected:
+
+
+
+
+      typedef const_iterator __const_iterator;
+
+
+    private:
+      static constexpr pointer
+      _S_allocate(_Char_alloc_type& __a, size_type __n)
+      {
+ pointer __p = _Alloc_traits::allocate(__a, __n);
+
+
+
+ if constexpr (!is_same_v<_Traits, char_traits<_CharT>>)
+   if (std::__is_constant_evaluated())
+
+     for (size_type __i = 0; __i < __n; ++__i)
+       std::construct_at(__builtin_addressof(__p[__i]));
+
+ return __p;
+      }
+
+
+
+      typedef basic_string_view<_CharT, _Traits> __sv_type;
+
+      template<typename _Tp, typename _Res>
+ using _If_sv = enable_if_t<
+   __and_<is_convertible<const _Tp&, __sv_type>,
+   __not_<is_convertible<const _Tp*, const basic_string*>>,
+   __not_<is_convertible<const _Tp&, const _CharT*>>>::value,
+   _Res>;
+
+
+      constexpr
+      static __sv_type
+      _S_to_string_view(__sv_type __svt) noexcept
+      { return __svt; }
+
+
+
+
+
+      struct __sv_wrapper
+      {
+ constexpr explicit
+ __sv_wrapper(__sv_type __sv) noexcept : _M_sv(__sv) { }
+
+ __sv_type _M_sv;
+      };
+
+
+
+
+
+
+
+      constexpr
+      explicit
+      basic_string(__sv_wrapper __svw, const _Alloc& __a)
+      : basic_string(__svw._M_sv.data(), __svw._M_sv.size(), __a) { }
+
+
+
+      struct _Alloc_hider : allocator_type
+      {
+
+
+
+
+ constexpr
+ _Alloc_hider(pointer __dat, const _Alloc& __a)
+ : allocator_type(__a), _M_p(__dat) { }
+
+ constexpr
+ _Alloc_hider(pointer __dat, _Alloc&& __a = _Alloc())
+ : allocator_type(std::move(__a)), _M_p(__dat) { }
+
+
+ pointer _M_p;
+      };
+
+      _Alloc_hider _M_dataplus;
+      size_type _M_string_length;
+
+      enum { _S_local_capacity = 15 / sizeof(_CharT) };
+
+      union
+      {
+ _CharT _M_local_buf[_S_local_capacity + 1];
+ size_type _M_allocated_capacity;
+      };
+
+      constexpr
+      void
+      _M_data(pointer __p)
+      { _M_dataplus._M_p = __p; }
+
+      constexpr
+      void
+      _M_length(size_type __length)
+      { _M_string_length = __length; }
+
+      constexpr
+      pointer
+      _M_data() const
+      { return _M_dataplus._M_p; }
+
+      constexpr
+      pointer
+      _M_local_data()
+      {
+
+ return std::pointer_traits<pointer>::pointer_to(*_M_local_buf);
+
+
+
+      }
+
+      constexpr
+      const_pointer
+      _M_local_data() const
+      {
+
+ return std::pointer_traits<const_pointer>::pointer_to(*_M_local_buf);
+
+
+
+      }
+
+      constexpr
+      void
+      _M_capacity(size_type __capacity)
+      { _M_allocated_capacity = __capacity; }
+
+      constexpr
+      void
+      _M_set_length(size_type __n)
+      {
+ _M_length(__n);
+ traits_type::assign(_M_data()[__n], _CharT());
+      }
+
+      constexpr
+      bool
+      _M_is_local() const
+      {
+ if (_M_data() == _M_local_data())
+   {
+     if (_M_string_length > _S_local_capacity)
+       __builtin_unreachable();
+     return true;
+   }
+ return false;
+      }
+
+
+      constexpr
+      pointer
+      _M_create(size_type&, size_type);
+
+      constexpr
+      void
+      _M_dispose()
+      {
+ if (!_M_is_local())
+   _M_destroy(_M_allocated_capacity);
+      }
+
+      constexpr
+      void
+      _M_destroy(size_type __size) throw()
+      { _Alloc_traits::deallocate(_M_get_allocator(), _M_data(), __size + 1); }
+# 321 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _InIterator>
+ constexpr
+        void
+        _M_construct(_InIterator __beg, _InIterator __end,
+       std::input_iterator_tag);
+
+
+
+      template<typename _FwdIterator>
+ constexpr
+        void
+        _M_construct(_FwdIterator __beg, _FwdIterator __end,
+       std::forward_iterator_tag);
+
+      constexpr
+      void
+      _M_construct(size_type __req, _CharT __c);
+
+      constexpr
+      allocator_type&
+      _M_get_allocator()
+      { return _M_dataplus; }
+
+      constexpr
+      const allocator_type&
+      _M_get_allocator() const
+      { return _M_dataplus; }
+
+
+      __attribute__((__always_inline__))
+      constexpr
+      void
+      _M_init_local_buf() noexcept
+      {
+
+ if (std::is_constant_evaluated())
+   for (size_type __i = 0; __i <= _S_local_capacity; ++__i)
+     _M_local_buf[__i] = _CharT();
+
+      }
+
+      __attribute__((__always_inline__))
+      constexpr
+      pointer
+      _M_use_local_data() noexcept
+      {
+
+ _M_init_local_buf();
+
+ return _M_local_data();
+      }
+
+    private:
+# 389 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      size_type
+      _M_check(size_type __pos, const char* __s) const
+      {
+ if (__pos > this->size())
+   __throw_out_of_range_fmt(("%s: __pos (which is %zu) > " "this->size() (which is %zu)")
+                                         ,
+       __s, __pos, this->size());
+ return __pos;
+      }
+
+      constexpr
+      void
+      _M_check_length(size_type __n1, size_type __n2, const char* __s) const
+      {
+ if (this->max_size() - (this->size() - __n1) < __n2)
+   __throw_length_error((__s));
+      }
+
+
+
+      constexpr
+      size_type
+      _M_limit(size_type __pos, size_type __off) const noexcept
+      {
+ const bool __testoff = __off < this->size() - __pos;
+ return __testoff ? __off : this->size() - __pos;
+      }
+
+
+      bool
+      _M_disjunct(const _CharT* __s) const noexcept
+      {
+ return (less<const _CharT*>()(__s, _M_data())
+  || less<const _CharT*>()(_M_data() + this->size(), __s));
+      }
+
+
+
+      constexpr
+      static void
+      _S_copy(_CharT* __d, const _CharT* __s, size_type __n)
+      {
+ if (__n == 1)
+   traits_type::assign(*__d, *__s);
+ else
+   traits_type::copy(__d, __s, __n);
+      }
+
+      constexpr
+      static void
+      _S_move(_CharT* __d, const _CharT* __s, size_type __n)
+      {
+ if (__n == 1)
+   traits_type::assign(*__d, *__s);
+ else
+   traits_type::move(__d, __s, __n);
+      }
+
+      constexpr
+      static void
+      _S_assign(_CharT* __d, size_type __n, _CharT __c)
+      {
+ if (__n == 1)
+   traits_type::assign(*__d, __c);
+ else
+   traits_type::assign(__d, __n, __c);
+      }
+
+
+
+      template<class _Iterator>
+ constexpr
+        static void
+        _S_copy_chars(_CharT* __p, _Iterator __k1, _Iterator __k2)
+        {
+   for (; __k1 != __k2; ++__k1, (void)++__p)
+     traits_type::assign(*__p, *__k1);
+ }
+
+      constexpr
+      static void
+      _S_copy_chars(_CharT* __p, iterator __k1, iterator __k2) noexcept
+      { _S_copy_chars(__p, __k1.base(), __k2.base()); }
+
+      constexpr
+      static void
+      _S_copy_chars(_CharT* __p, const_iterator __k1, const_iterator __k2)
+      noexcept
+      { _S_copy_chars(__p, __k1.base(), __k2.base()); }
+
+      constexpr
+      static void
+      _S_copy_chars(_CharT* __p, _CharT* __k1, _CharT* __k2) noexcept
+      { _S_copy(__p, __k1, __k2 - __k1); }
+
+      constexpr
+      static void
+      _S_copy_chars(_CharT* __p, const _CharT* __k1, const _CharT* __k2)
+      noexcept
+      { _S_copy(__p, __k1, __k2 - __k1); }
+
+      constexpr
+      static int
+      _S_compare(size_type __n1, size_type __n2) noexcept
+      {
+ const difference_type __d = difference_type(__n1 - __n2);
+
+ if (__d > __gnu_cxx::__numeric_traits<int>::__max)
+   return __gnu_cxx::__numeric_traits<int>::__max;
+ else if (__d < __gnu_cxx::__numeric_traits<int>::__min)
+   return __gnu_cxx::__numeric_traits<int>::__min;
+ else
+   return int(__d);
+      }
+
+      constexpr
+      void
+      _M_assign(const basic_string&);
+
+      constexpr
+      void
+      _M_mutate(size_type __pos, size_type __len1, const _CharT* __s,
+  size_type __len2);
+
+      constexpr
+      void
+      _M_erase(size_type __pos, size_type __n);
+
+    public:
+
+
+
+
+
+
+
+      constexpr
+      basic_string()
+      noexcept(is_nothrow_default_constructible<_Alloc>::value)
+      : _M_dataplus(_M_local_data())
+      {
+ _M_init_local_buf();
+ _M_set_length(0);
+      }
+
+
+
+
+      constexpr
+      explicit
+      basic_string(const _Alloc& __a) noexcept
+      : _M_dataplus(_M_local_data(), __a)
+      {
+ _M_init_local_buf();
+ _M_set_length(0);
+      }
+
+
+
+
+
+      constexpr
+      basic_string(const basic_string& __str)
+      : _M_dataplus(_M_local_data(),
+      _Alloc_traits::_S_select_on_copy(__str._M_get_allocator()))
+      {
+ _M_construct(__str._M_data(), __str._M_data() + __str.length(),
+       std::forward_iterator_tag());
+      }
+# 568 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string(const basic_string& __str, size_type __pos,
+     const _Alloc& __a = _Alloc())
+      : _M_dataplus(_M_local_data(), __a)
+      {
+ const _CharT* __start = __str._M_data()
+   + __str._M_check(__pos, "basic_string::basic_string");
+ _M_construct(__start, __start + __str._M_limit(__pos, npos),
+       std::forward_iterator_tag());
+      }
+
+
+
+
+
+
+
+      constexpr
+      basic_string(const basic_string& __str, size_type __pos,
+     size_type __n)
+      : _M_dataplus(_M_local_data())
+      {
+ const _CharT* __start = __str._M_data()
+   + __str._M_check(__pos, "basic_string::basic_string");
+ _M_construct(__start, __start + __str._M_limit(__pos, __n),
+       std::forward_iterator_tag());
+      }
+# 603 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string(const basic_string& __str, size_type __pos,
+     size_type __n, const _Alloc& __a)
+      : _M_dataplus(_M_local_data(), __a)
+      {
+ const _CharT* __start
+   = __str._M_data() + __str._M_check(__pos, "string::string");
+ _M_construct(__start, __start + __str._M_limit(__pos, __n),
+       std::forward_iterator_tag());
+      }
+# 623 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string(const _CharT* __s, size_type __n,
+     const _Alloc& __a = _Alloc())
+      : _M_dataplus(_M_local_data(), __a)
+      {
+
+ if (__s == 0 && __n > 0)
+   std::__throw_logic_error(("basic_string: " "construction from null is not valid")
+                                                 );
+ _M_construct(__s, __s + __n, std::forward_iterator_tag());
+      }
+# 643 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename = _RequireAllocator<_Alloc>>
+
+      constexpr
+      basic_string(const _CharT* __s, const _Alloc& __a = _Alloc())
+      : _M_dataplus(_M_local_data(), __a)
+      {
+
+ if (__s == 0)
+   std::__throw_logic_error(("basic_string: " "construction from null is not valid")
+                                                 );
+ const _CharT* __end = __s + traits_type::length(__s);
+ _M_construct(__s, __end, forward_iterator_tag());
+      }
+# 666 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename = _RequireAllocator<_Alloc>>
+
+      constexpr
+      basic_string(size_type __n, _CharT __c, const _Alloc& __a = _Alloc())
+      : _M_dataplus(_M_local_data(), __a)
+      { _M_construct(__n, __c); }
+# 681 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string(basic_string&& __str) noexcept
+      : _M_dataplus(_M_local_data(), std::move(__str._M_get_allocator()))
+      {
+ if (__str._M_is_local())
+   {
+     _M_init_local_buf();
+     traits_type::copy(_M_local_buf, __str._M_local_buf,
+         __str.length() + 1);
+   }
+ else
+   {
+     _M_data(__str._M_data());
+     _M_capacity(__str._M_allocated_capacity);
+   }
+
+
+
+
+ _M_length(__str.length());
+ __str._M_data(__str._M_use_local_data());
+ __str._M_set_length(0);
+      }
+
+
+
+
+
+
+      constexpr
+      basic_string(initializer_list<_CharT> __l, const _Alloc& __a = _Alloc())
+      : _M_dataplus(_M_local_data(), __a)
+      { _M_construct(__l.begin(), __l.end(), std::forward_iterator_tag()); }
+
+      constexpr
+      basic_string(const basic_string& __str, const _Alloc& __a)
+      : _M_dataplus(_M_local_data(), __a)
+      { _M_construct(__str.begin(), __str.end(), std::forward_iterator_tag()); }
+
+      constexpr
+      basic_string(basic_string&& __str, const _Alloc& __a)
+      noexcept(_Alloc_traits::_S_always_equal())
+      : _M_dataplus(_M_local_data(), __a)
+      {
+ if (__str._M_is_local())
+   {
+     _M_init_local_buf();
+     traits_type::copy(_M_local_buf, __str._M_local_buf,
+         __str.length() + 1);
+     _M_length(__str.length());
+     __str._M_set_length(0);
+   }
+ else if (_Alloc_traits::_S_always_equal()
+     || __str.get_allocator() == __a)
+   {
+     _M_data(__str._M_data());
+     _M_length(__str.length());
+     _M_capacity(__str._M_allocated_capacity);
+     __str._M_data(__str._M_use_local_data());
+     __str._M_set_length(0);
+   }
+ else
+   _M_construct(__str.begin(), __str.end(), std::forward_iterator_tag());
+      }
+
+
+
+      basic_string(nullptr_t) = delete;
+      basic_string& operator=(nullptr_t) = delete;
+# 759 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _InputIterator,
+        typename = std::_RequireInputIter<_InputIterator>>
+
+
+
+ constexpr
+        basic_string(_InputIterator __beg, _InputIterator __end,
+       const _Alloc& __a = _Alloc())
+ : _M_dataplus(_M_local_data(), __a), _M_string_length(0)
+ {
+
+   _M_construct(__beg, __end, std::__iterator_category(__beg));
+
+
+
+
+ }
+# 785 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp,
+        typename = enable_if_t<is_convertible_v<const _Tp&, __sv_type>>>
+ constexpr
+ basic_string(const _Tp& __t, size_type __pos, size_type __n,
+       const _Alloc& __a = _Alloc())
+ : basic_string(_S_to_string_view(__t).substr(__pos, __n), __a) { }
+
+
+
+
+
+
+      template<typename _Tp, typename = _If_sv<_Tp, void>>
+ constexpr
+ explicit
+ basic_string(const _Tp& __t, const _Alloc& __a = _Alloc())
+ : basic_string(__sv_wrapper(_S_to_string_view(__t)), __a) { }
+
+
+
+
+
+      constexpr
+      ~basic_string()
+      { _M_dispose(); }
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator=(const basic_string& __str)
+      {
+ return this->assign(__str);
+      }
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator=(const _CharT* __s)
+      { return this->assign(__s); }
+# 838 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      operator=(_CharT __c)
+      {
+ this->assign(1, __c);
+ return *this;
+      }
+# 856 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      operator=(basic_string&& __str)
+      noexcept(_Alloc_traits::_S_nothrow_move())
+      {
+ const bool __equal_allocs = _Alloc_traits::_S_always_equal()
+   || _M_get_allocator() == __str._M_get_allocator();
+ if (!_M_is_local() && _Alloc_traits::_S_propagate_on_move_assign()
+     && !__equal_allocs)
+   {
+
+     _M_destroy(_M_allocated_capacity);
+     _M_data(_M_local_data());
+     _M_set_length(0);
+   }
+
+ std::__alloc_on_move(_M_get_allocator(), __str._M_get_allocator());
+
+ if (__str._M_is_local())
+   {
+
+
+
+     if (__builtin_expect(std::__addressof(__str) != this, true))
+       {
+  if (__str.size())
+    this->_S_copy(_M_data(), __str._M_data(), __str.size());
+  _M_set_length(__str.size());
+       }
+   }
+ else if (_Alloc_traits::_S_propagate_on_move_assign() || __equal_allocs)
+   {
+
+     pointer __data = nullptr;
+     size_type __capacity;
+     if (!_M_is_local())
+       {
+  if (__equal_allocs)
+    {
+
+      __data = _M_data();
+      __capacity = _M_allocated_capacity;
+    }
+  else
+    _M_destroy(_M_allocated_capacity);
+       }
+
+     _M_data(__str._M_data());
+     _M_length(__str.length());
+     _M_capacity(__str._M_allocated_capacity);
+     if (__data)
+       {
+  __str._M_data(__data);
+  __str._M_capacity(__capacity);
+       }
+     else
+       __str._M_data(__str._M_use_local_data());
+   }
+ else
+   assign(__str);
+ __str.clear();
+ return *this;
+      }
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator=(initializer_list<_CharT> __l)
+      {
+ this->assign(__l.begin(), __l.size());
+ return *this;
+      }
+
+
+
+
+
+
+
+     template<typename _Tp>
+       constexpr
+       _If_sv<_Tp, basic_string&>
+       operator=(const _Tp& __svt)
+       { return this->assign(__svt); }
+
+
+
+
+
+      constexpr
+      operator __sv_type() const noexcept
+      { return __sv_type(data(), size()); }
+
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      iterator
+      begin() noexcept
+      { return iterator(_M_data()); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_iterator
+      begin() const noexcept
+      { return const_iterator(_M_data()); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      iterator
+      end() noexcept
+      { return iterator(_M_data() + this->size()); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_iterator
+      end() const noexcept
+      { return const_iterator(_M_data() + this->size()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      reverse_iterator
+      rbegin() noexcept
+      { return reverse_iterator(this->end()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reverse_iterator
+      rbegin() const noexcept
+      { return const_reverse_iterator(this->end()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      reverse_iterator
+      rend() noexcept
+      { return reverse_iterator(this->begin()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reverse_iterator
+      rend() const noexcept
+      { return const_reverse_iterator(this->begin()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_iterator
+      cbegin() const noexcept
+      { return const_iterator(this->_M_data()); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_iterator
+      cend() const noexcept
+      { return const_iterator(this->_M_data() + this->size()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reverse_iterator
+      crbegin() const noexcept
+      { return const_reverse_iterator(this->end()); }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reverse_iterator
+      crend() const noexcept
+      { return const_reverse_iterator(this->begin()); }
+
+
+    public:
+
+
+
+      [[__nodiscard__]] constexpr
+      size_type
+      size() const noexcept
+      { return _M_string_length; }
+
+
+
+      [[__nodiscard__]] constexpr
+      size_type
+      length() const noexcept
+      { return _M_string_length; }
+
+
+      [[__nodiscard__]] constexpr
+      size_type
+      max_size() const noexcept
+      { return (_Alloc_traits::max_size(_M_get_allocator()) - 1) / 2; }
+# 1102 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      void
+      resize(size_type __n, _CharT __c);
+# 1116 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      void
+      resize(size_type __n)
+      { this->resize(__n, _CharT()); }
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+      constexpr
+      void
+      shrink_to_fit() noexcept
+      { reserve(); }
+#pragma GCC diagnostic pop
+# 1162 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Operation>
+ constexpr void
+ resize_and_overwrite(size_type __n, _Operation __op);
+
+
+
+
+      template<typename _Operation>
+ constexpr void
+ __resize_and_overwrite(size_type __n, _Operation __op);
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      size_type
+      capacity() const noexcept
+      {
+ return _M_is_local() ? size_type(_S_local_capacity)
+                      : _M_allocated_capacity;
+      }
+# 1203 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      void
+      reserve(size_type __res_arg);
+
+
+
+
+
+      [[deprecated("use shrink_to_fit() instead")]]
+
+      constexpr
+      void
+      reserve();
+
+
+
+
+      constexpr
+      void
+      clear() noexcept
+      { _M_set_length(0); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      bool
+      empty() const noexcept
+      { return this->size() == 0; }
+# 1245 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      const_reference
+      operator[] (size_type __pos) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__pos <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return _M_data()[__pos];
+      }
+# 1263 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      reference
+      operator[](size_type __pos)
+      {
+
+
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__pos <= size()), false)) std::__glibcxx_assert_fail(); } while (false);
+
+ ;
+ return _M_data()[__pos];
+      }
+# 1285 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      const_reference
+      at(size_type __n) const
+      {
+ if (__n >= this->size())
+   __throw_out_of_range_fmt(("basic_string::at: __n " "(which is %zu) >= this->size() " "(which is %zu)")
+
+                            ,
+       __n, this->size());
+ return _M_data()[__n];
+      }
+# 1307 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      reference
+      at(size_type __n)
+      {
+ if (__n >= size())
+   __throw_out_of_range_fmt(("basic_string::at: __n " "(which is %zu) >= this->size() " "(which is %zu)")
+
+                            ,
+       __n, this->size());
+ return _M_data()[__n];
+      }
+
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      reference
+      front() noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return operator[](0);
+      }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reference
+      front() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return operator[](0);
+      }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      reference
+      back() noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return operator[](this->size() - 1);
+      }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      const_reference
+      back() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return operator[](this->size() - 1);
+      }
+# 1375 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      operator+=(const basic_string& __str)
+      { return this->append(__str); }
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator+=(const _CharT* __s)
+      { return this->append(__s); }
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator+=(_CharT __c)
+      {
+ this->push_back(__c);
+ return *this;
+      }
+
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      operator+=(initializer_list<_CharT> __l)
+      { return this->append(__l.begin(), __l.size()); }
+# 1421 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ operator+=(const _Tp& __svt)
+ { return this->append(__svt); }
+
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      append(const basic_string& __str)
+      { return this->append(__str._M_data(), __str.size()); }
+# 1451 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      append(const basic_string& __str, size_type __pos, size_type __n = npos)
+      { return this->append(__str._M_data()
+       + __str._M_check(__pos, "basic_string::append"),
+       __str._M_limit(__pos, __n)); }
+
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      append(const _CharT* __s, size_type __n)
+      {
+ ;
+ _M_check_length(size_type(0), __n, "basic_string::append");
+ return _M_append(__s, __n);
+      }
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      append(const _CharT* __s)
+      {
+ ;
+ const size_type __n = traits_type::length(__s);
+ _M_check_length(size_type(0), __n, "basic_string::append");
+ return _M_append(__s, __n);
+      }
+# 1496 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      append(size_type __n, _CharT __c)
+      { return _M_replace_aux(this->size(), size_type(0), __n, __c); }
+
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      append(initializer_list<_CharT> __l)
+      { return this->append(__l.begin(), __l.size()); }
+# 1522 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<class _InputIterator,
+        typename = std::_RequireInputIter<_InputIterator>>
+ constexpr
+
+
+
+        basic_string&
+        append(_InputIterator __first, _InputIterator __last)
+        { return this->replace(end(), end(), __first, __last); }
+
+
+
+
+
+
+
+      template<typename _Tp>
+ constexpr
+        _If_sv<_Tp, basic_string&>
+        append(const _Tp& __svt)
+        {
+          __sv_type __sv = __svt;
+          return this->append(__sv.data(), __sv.size());
+        }
+# 1554 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+        _If_sv<_Tp, basic_string&>
+ append(const _Tp& __svt, size_type __pos, size_type __n = npos)
+ {
+   __sv_type __sv = __svt;
+   return _M_append(__sv.data()
+       + std::__sv_check(__sv.size(), __pos, "basic_string::append"),
+       std::__sv_limit(__sv.size(), __pos, __n));
+ }
+
+
+
+
+
+
+      constexpr
+      void
+      push_back(_CharT __c)
+      {
+ const size_type __size = this->size();
+ if (__size + 1 > this->capacity())
+   this->_M_mutate(__size, size_type(0), 0, size_type(1));
+ traits_type::assign(this->_M_data()[__size], __c);
+ this->_M_set_length(__size + 1);
+      }
+
+
+
+
+
+
+      constexpr
+      basic_string&
+      assign(const basic_string& __str)
+      {
+
+ if (_Alloc_traits::_S_propagate_on_copy_assign())
+   {
+     if (!_Alloc_traits::_S_always_equal() && !_M_is_local()
+  && _M_get_allocator() != __str._M_get_allocator())
+       {
+
+
+  if (__str.size() <= _S_local_capacity)
+    {
+      _M_destroy(_M_allocated_capacity);
+      _M_data(_M_use_local_data());
+      _M_set_length(0);
+    }
+  else
+    {
+      const auto __len = __str.size();
+      auto __alloc = __str._M_get_allocator();
+
+      auto __ptr = _S_allocate(__alloc, __len + 1);
+      _M_destroy(_M_allocated_capacity);
+      _M_data(__ptr);
+      _M_capacity(__len);
+      _M_set_length(__len);
+    }
+       }
+     std::__alloc_on_copy(_M_get_allocator(), __str._M_get_allocator());
+   }
+
+ this->_M_assign(__str);
+ return *this;
+      }
+# 1632 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(basic_string&& __str)
+      noexcept(_Alloc_traits::_S_nothrow_move())
+      {
+
+
+ return *this = std::move(__str);
+      }
+# 1656 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(const basic_string& __str, size_type __pos, size_type __n = npos)
+      { return _M_replace(size_type(0), this->size(), __str._M_data()
+     + __str._M_check(__pos, "basic_string::assign"),
+     __str._M_limit(__pos, __n)); }
+# 1673 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(const _CharT* __s, size_type __n)
+      {
+ ;
+ return _M_replace(size_type(0), this->size(), __s, __n);
+      }
+# 1690 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(const _CharT* __s)
+      {
+ ;
+ return _M_replace(size_type(0), this->size(), __s,
+     traits_type::length(__s));
+      }
+# 1708 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(size_type __n, _CharT __c)
+      { return _M_replace_aux(size_type(0), this->size(), __n, __c); }
+# 1722 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wc++17-extensions"
+      template<class _InputIterator,
+        typename = std::_RequireInputIter<_InputIterator>>
+ constexpr
+ basic_string&
+ assign(_InputIterator __first, _InputIterator __last)
+ {
+
+   if constexpr (contiguous_iterator<_InputIterator>
+     && is_same_v<iter_value_t<_InputIterator>, _CharT>)
+
+
+
+
+     {
+       ;
+       return _M_replace(size_type(0), size(),
+    std::__to_address(__first), __last - __first);
+     }
+   else
+     return *this = basic_string(__first, __last, get_allocator());
+ }
+#pragma GCC diagnostic pop
+# 1759 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      assign(initializer_list<_CharT> __l)
+      {
+
+
+ const size_type __n = __l.size();
+ if (__n > capacity())
+   *this = basic_string(__l.begin(), __l.end(), get_allocator());
+ else
+   {
+     if (__n)
+       _S_copy(_M_data(), __l.begin(), __n);
+     _M_set_length(__n);
+   }
+ return *this;
+      }
+# 1784 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ assign(const _Tp& __svt)
+ {
+   __sv_type __sv = __svt;
+   return this->assign(__sv.data(), __sv.size());
+ }
+# 1800 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ assign(const _Tp& __svt, size_type __pos, size_type __n = npos)
+ {
+   __sv_type __sv = __svt;
+   return _M_replace(size_type(0), this->size(),
+       __sv.data()
+       + std::__sv_check(__sv.size(), __pos, "basic_string::assign"),
+       std::__sv_limit(__sv.size(), __pos, __n));
+ }
+# 1829 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      iterator
+      insert(const_iterator __p, size_type __n, _CharT __c)
+      {
+ ;
+ const size_type __pos = __p - begin();
+ this->replace(__p, __p, __n, __c);
+ return iterator(this->_M_data() + __pos);
+      }
+# 1872 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<class _InputIterator,
+        typename = std::_RequireInputIter<_InputIterator>>
+ constexpr
+ iterator
+        insert(const_iterator __p, _InputIterator __beg, _InputIterator __end)
+        {
+   ;
+   const size_type __pos = __p - begin();
+   this->replace(__p, __p, __beg, __end);
+   return iterator(this->_M_data() + __pos);
+ }
+# 1909 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      iterator
+      insert(const_iterator __p, initializer_list<_CharT> __l)
+      { return this->insert(__p, __l.begin(), __l.end()); }
+# 1937 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      insert(size_type __pos1, const basic_string& __str)
+      { return this->replace(__pos1, size_type(0),
+        __str._M_data(), __str.size()); }
+# 1961 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      insert(size_type __pos1, const basic_string& __str,
+      size_type __pos2, size_type __n = npos)
+      { return this->replace(__pos1, size_type(0), __str._M_data()
+        + __str._M_check(__pos2, "basic_string::insert"),
+        __str._M_limit(__pos2, __n)); }
+# 1985 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      insert(size_type __pos, const _CharT* __s, size_type __n)
+      { return this->replace(__pos, size_type(0), __s, __n); }
+# 2005 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      insert(size_type __pos, const _CharT* __s)
+      {
+ ;
+ return this->replace(__pos, size_type(0), __s,
+        traits_type::length(__s));
+      }
+# 2030 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      insert(size_type __pos, size_type __n, _CharT __c)
+      { return _M_replace_aux(_M_check(__pos, "basic_string::insert"),
+         size_type(0), __n, __c); }
+# 2049 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      iterator
+      insert(__const_iterator __p, _CharT __c)
+      {
+ ;
+ const size_type __pos = __p - begin();
+ _M_replace_aux(__pos, size_type(0), size_type(1), __c);
+ return iterator(_M_data() + __pos);
+      }
+# 2066 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ insert(size_type __pos, const _Tp& __svt)
+ {
+   __sv_type __sv = __svt;
+   return this->insert(__pos, __sv.data(), __sv.size());
+ }
+# 2083 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ insert(size_type __pos1, const _Tp& __svt,
+        size_type __pos2, size_type __n = npos)
+ {
+   __sv_type __sv = __svt;
+   return this->replace(__pos1, size_type(0),
+       __sv.data()
+       + std::__sv_check(__sv.size(), __pos2, "basic_string::insert"),
+       std::__sv_limit(__sv.size(), __pos2, __n));
+ }
+# 2112 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      erase(size_type __pos = 0, size_type __n = npos)
+      {
+ _M_check(__pos, "basic_string::erase");
+ if (__n == npos)
+   this->_M_set_length(__pos);
+ else if (__n != 0)
+   this->_M_erase(__pos, _M_limit(__pos, __n));
+ return *this;
+      }
+# 2132 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      iterator
+      erase(__const_iterator __position)
+      {
+
+                           ;
+ const size_type __pos = __position - begin();
+ this->_M_erase(__pos, size_type(1));
+ return iterator(_M_data() + __pos);
+      }
+# 2152 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      iterator
+      erase(__const_iterator __first, __const_iterator __last)
+      {
+
+                        ;
+        const size_type __pos = __first - begin();
+ if (__last == end())
+   this->_M_set_length(__pos);
+ else
+   this->_M_erase(__pos, __last - __first);
+ return iterator(this->_M_data() + __pos);
+      }
+
+
+
+
+
+
+
+      constexpr
+      void
+      pop_back() noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!empty()), false)) std::__glibcxx_assert_fail(); } while (false);
+ _M_erase(size() - 1, 1);
+      }
+# 2198 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(size_type __pos, size_type __n, const basic_string& __str)
+      { return this->replace(__pos, __n, __str._M_data(), __str.size()); }
+# 2221 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(size_type __pos1, size_type __n1, const basic_string& __str,
+       size_type __pos2, size_type __n2 = npos)
+      { return this->replace(__pos1, __n1, __str._M_data()
+        + __str._M_check(__pos2, "basic_string::replace"),
+        __str._M_limit(__pos2, __n2)); }
+# 2247 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(size_type __pos, size_type __n1, const _CharT* __s,
+       size_type __n2)
+      {
+ ;
+ return _M_replace(_M_check(__pos, "basic_string::replace"),
+     _M_limit(__pos, __n1), __s, __n2);
+      }
+# 2273 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(size_type __pos, size_type __n1, const _CharT* __s)
+      {
+ ;
+ return this->replace(__pos, __n1, __s, traits_type::length(__s));
+      }
+# 2298 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(size_type __pos, size_type __n1, size_type __n2, _CharT __c)
+      { return _M_replace_aux(_M_check(__pos, "basic_string::replace"),
+         _M_limit(__pos, __n1), __n2, __c); }
+# 2317 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       const basic_string& __str)
+      { return this->replace(__i1, __i2, __str._M_data(), __str.size()); }
+# 2338 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       const _CharT* __s, size_type __n)
+      {
+
+                      ;
+ return this->replace(__i1 - begin(), __i2 - __i1, __s, __n);
+      }
+# 2361 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2, const _CharT* __s)
+      {
+ ;
+ return this->replace(__i1, __i2, __s, traits_type::length(__s));
+      }
+# 2383 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2, size_type __n,
+       _CharT __c)
+      {
+
+                      ;
+ return _M_replace_aux(__i1 - begin(), __i2 - __i1, __n, __c);
+      }
+# 2409 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<class _InputIterator,
+        typename = std::_RequireInputIter<_InputIterator>>
+ constexpr
+        basic_string&
+        replace(const_iterator __i1, const_iterator __i2,
+  _InputIterator __k1, _InputIterator __k2)
+        {
+  
+                        ;
+   ;
+   return this->_M_replace_dispatch(__i1, __i2, __k1, __k2,
+        std::__false_type());
+ }
+# 2442 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       _CharT* __k1, _CharT* __k2)
+      {
+
+                      ;
+ ;
+ return this->replace(__i1 - begin(), __i2 - __i1,
+        __k1, __k2 - __k1);
+      }
+
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       const _CharT* __k1, const _CharT* __k2)
+      {
+
+                      ;
+ ;
+ return this->replace(__i1 - begin(), __i2 - __i1,
+        __k1, __k2 - __k1);
+      }
+
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       iterator __k1, iterator __k2)
+      {
+
+                      ;
+ ;
+ return this->replace(__i1 - begin(), __i2 - __i1,
+        __k1.base(), __k2 - __k1);
+      }
+
+      constexpr
+      basic_string&
+      replace(__const_iterator __i1, __const_iterator __i2,
+       const_iterator __k1, const_iterator __k2)
+      {
+
+                      ;
+ ;
+ return this->replace(__i1 - begin(), __i2 - __i1,
+        __k1.base(), __k2 - __k1);
+      }
+# 2505 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      basic_string& replace(const_iterator __i1, const_iterator __i2,
+       initializer_list<_CharT> __l)
+      { return this->replace(__i1, __i2, __l.begin(), __l.size()); }
+# 2519 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ replace(size_type __pos, size_type __n, const _Tp& __svt)
+ {
+   __sv_type __sv = __svt;
+   return this->replace(__pos, __n, __sv.data(), __sv.size());
+ }
+# 2537 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ replace(size_type __pos1, size_type __n1, const _Tp& __svt,
+  size_type __pos2, size_type __n2 = npos)
+ {
+   __sv_type __sv = __svt;
+   return this->replace(__pos1, __n1,
+       __sv.data()
+       + std::__sv_check(__sv.size(), __pos2, "basic_string::replace"),
+       std::__sv_limit(__sv.size(), __pos2, __n2));
+ }
+# 2559 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ constexpr
+ _If_sv<_Tp, basic_string&>
+ replace(const_iterator __i1, const_iterator __i2, const _Tp& __svt)
+ {
+   __sv_type __sv = __svt;
+   return this->replace(__i1 - begin(), __i2 - __i1, __sv);
+ }
+
+
+    private:
+      template<class _Integer>
+ constexpr
+ basic_string&
+ _M_replace_dispatch(const_iterator __i1, const_iterator __i2,
+       _Integer __n, _Integer __val, __true_type)
+        { return _M_replace_aux(__i1 - begin(), __i2 - __i1, __n, __val); }
+
+      template<class _InputIterator>
+ constexpr
+ basic_string&
+ _M_replace_dispatch(const_iterator __i1, const_iterator __i2,
+       _InputIterator __k1, _InputIterator __k2,
+       __false_type);
+
+      constexpr
+      basic_string&
+      _M_replace_aux(size_type __pos1, size_type __n1, size_type __n2,
+       _CharT __c);
+
+      __attribute__((__noinline__, __noclone__, __cold__)) void
+      _M_replace_cold(pointer __p, size_type __len1, const _CharT* __s,
+        const size_type __len2, const size_type __how_much);
+
+      constexpr
+      basic_string&
+      _M_replace(size_type __pos, size_type __len1, const _CharT* __s,
+   const size_type __len2);
+
+      constexpr
+      basic_string&
+      _M_append(const _CharT* __s, size_type __n);
+
+    public:
+# 2616 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      size_type
+      copy(_CharT* __s, size_type __n, size_type __pos = 0) const;
+# 2627 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      constexpr
+      void
+      swap(basic_string& __s) noexcept;
+# 2638 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      const _CharT*
+      c_str() const noexcept
+      { return _M_data(); }
+# 2651 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      const _CharT*
+      data() const noexcept
+      { return _M_data(); }
+# 2663 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      _CharT*
+      data() noexcept
+      { return _M_data(); }
+
+
+
+
+
+      [[__nodiscard__]] constexpr
+      allocator_type
+      get_allocator() const noexcept
+      { return _M_get_allocator(); }
+# 2689 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find(const _CharT* __s, size_type __pos, size_type __n) const
+      noexcept;
+# 2704 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find(const basic_string& __str, size_type __pos = 0) const
+      noexcept
+      { return this->find(__str.data(), __pos, __str.size()); }
+# 2717 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ find(const _Tp& __svt, size_type __pos = 0) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->find(__sv.data(), __pos, __sv.size());
+ }
+# 2738 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find(const _CharT* __s, size_type __pos = 0) const noexcept
+      {
+ ;
+ return this->find(__s, __pos, traits_type::length(__s));
+      }
+# 2756 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find(_CharT __c, size_type __pos = 0) const noexcept;
+# 2770 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      rfind(const basic_string& __str, size_type __pos = npos) const
+      noexcept
+      { return this->rfind(__str.data(), __pos, __str.size()); }
+# 2783 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ rfind(const _Tp& __svt, size_type __pos = npos) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->rfind(__sv.data(), __pos, __sv.size());
+ }
+# 2806 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      rfind(const _CharT* __s, size_type __pos, size_type __n) const
+      noexcept;
+# 2821 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      rfind(const _CharT* __s, size_type __pos = npos) const
+      {
+ ;
+ return this->rfind(__s, __pos, traits_type::length(__s));
+      }
+# 2839 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      rfind(_CharT __c, size_type __pos = npos) const noexcept;
+# 2854 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_of(const basic_string& __str, size_type __pos = 0) const
+      noexcept
+      { return this->find_first_of(__str.data(), __pos, __str.size()); }
+# 2868 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ find_first_of(const _Tp& __svt, size_type __pos = 0) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->find_first_of(__sv.data(), __pos, __sv.size());
+ }
+# 2891 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_of(const _CharT* __s, size_type __pos, size_type __n) const
+      noexcept;
+# 2906 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_of(const _CharT* __s, size_type __pos = 0) const
+      noexcept
+      {
+ ;
+ return this->find_first_of(__s, __pos, traits_type::length(__s));
+      }
+# 2927 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_of(_CharT __c, size_type __pos = 0) const noexcept
+      { return this->find(__c, __pos); }
+# 2943 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_of(const basic_string& __str, size_type __pos = npos) const
+      noexcept
+      { return this->find_last_of(__str.data(), __pos, __str.size()); }
+# 2957 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ find_last_of(const _Tp& __svt, size_type __pos = npos) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->find_last_of(__sv.data(), __pos, __sv.size());
+ }
+# 2980 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_of(const _CharT* __s, size_type __pos, size_type __n) const
+      noexcept;
+# 2995 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_of(const _CharT* __s, size_type __pos = npos) const
+      noexcept
+      {
+ ;
+ return this->find_last_of(__s, __pos, traits_type::length(__s));
+      }
+# 3016 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_of(_CharT __c, size_type __pos = npos) const noexcept
+      { return this->rfind(__c, __pos); }
+# 3031 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_not_of(const basic_string& __str, size_type __pos = 0) const
+      noexcept
+      { return this->find_first_not_of(__str.data(), __pos, __str.size()); }
+# 3045 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ find_first_not_of(const _Tp& __svt, size_type __pos = 0) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->find_first_not_of(__sv.data(), __pos, __sv.size());
+ }
+# 3068 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_not_of(const _CharT* __s, size_type __pos,
+   size_type __n) const noexcept;
+# 3083 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_not_of(const _CharT* __s, size_type __pos = 0) const
+      noexcept
+      {
+ ;
+ return this->find_first_not_of(__s, __pos, traits_type::length(__s));
+      }
+# 3102 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_first_not_of(_CharT __c, size_type __pos = 0) const
+      noexcept;
+# 3118 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_not_of(const basic_string& __str, size_type __pos = npos) const
+      noexcept
+      { return this->find_last_not_of(__str.data(), __pos, __str.size()); }
+# 3132 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, size_type>
+ find_last_not_of(const _Tp& __svt, size_type __pos = npos) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return this->find_last_not_of(__sv.data(), __pos, __sv.size());
+ }
+# 3155 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_not_of(const _CharT* __s, size_type __pos,
+         size_type __n) const noexcept;
+# 3170 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_not_of(const _CharT* __s, size_type __pos = npos) const
+      noexcept
+      {
+ ;
+ return this->find_last_not_of(__s, __pos, traits_type::length(__s));
+      }
+# 3189 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      size_type
+      find_last_not_of(_CharT __c, size_type __pos = npos) const
+      noexcept;
+# 3206 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      basic_string
+      substr(size_type __pos = 0, size_type __n = npos) const
+      { return basic_string(*this,
+       _M_check(__pos, "basic_string::substr"), __n); }
+# 3226 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(const basic_string& __str) const
+      {
+ const size_type __size = this->size();
+ const size_type __osize = __str.size();
+ const size_type __len = std::min(__size, __osize);
+
+ int __r = traits_type::compare(_M_data(), __str.data(), __len);
+ if (!__r)
+   __r = _S_compare(__size, __osize);
+ return __r;
+      }
+
+
+
+
+
+
+
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, int>
+ compare(const _Tp& __svt) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   const size_type __size = this->size();
+   const size_type __osize = __sv.size();
+   const size_type __len = std::min(__size, __osize);
+
+   int __r = traits_type::compare(_M_data(), __sv.data(), __len);
+   if (!__r)
+     __r = _S_compare(__size, __osize);
+   return __r;
+ }
+# 3271 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, int>
+ compare(size_type __pos, size_type __n, const _Tp& __svt) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return __sv_type(*this).substr(__pos, __n).compare(__sv);
+ }
+# 3291 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      template<typename _Tp>
+ [[__nodiscard__]] constexpr
+ _If_sv<_Tp, int>
+ compare(size_type __pos1, size_type __n1, const _Tp& __svt,
+  size_type __pos2, size_type __n2 = npos) const
+ noexcept(is_same<_Tp, __sv_type>::value)
+ {
+   __sv_type __sv = __svt;
+   return __sv_type(*this)
+     .substr(__pos1, __n1).compare(__sv.substr(__pos2, __n2));
+ }
+# 3323 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(size_type __pos, size_type __n, const basic_string& __str) const
+      {
+ _M_check(__pos, "basic_string::compare");
+ __n = _M_limit(__pos, __n);
+ const size_type __osize = __str.size();
+ const size_type __len = std::min(__n, __osize);
+ int __r = traits_type::compare(_M_data() + __pos, __str.data(), __len);
+ if (!__r)
+   __r = _S_compare(__n, __osize);
+ return __r;
+      }
+# 3360 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(size_type __pos1, size_type __n1, const basic_string& __str,
+       size_type __pos2, size_type __n2 = npos) const
+      {
+ _M_check(__pos1, "basic_string::compare");
+ __str._M_check(__pos2, "basic_string::compare");
+ __n1 = _M_limit(__pos1, __n1);
+ __n2 = __str._M_limit(__pos2, __n2);
+ const size_type __len = std::min(__n1, __n2);
+ int __r = traits_type::compare(_M_data() + __pos1,
+           __str.data() + __pos2, __len);
+ if (!__r)
+   __r = _S_compare(__n1, __n2);
+ return __r;
+      }
+# 3391 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(const _CharT* __s) const noexcept
+      {
+ ;
+ const size_type __size = this->size();
+ const size_type __osize = traits_type::length(__s);
+ const size_type __len = std::min(__size, __osize);
+ int __r = traits_type::compare(_M_data(), __s, __len);
+ if (!__r)
+   __r = _S_compare(__size, __osize);
+ return __r;
+      }
+# 3426 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(size_type __pos, size_type __n1, const _CharT* __s) const
+      {
+ ;
+ _M_check(__pos, "basic_string::compare");
+ __n1 = _M_limit(__pos, __n1);
+ const size_type __osize = traits_type::length(__s);
+ const size_type __len = std::min(__n1, __osize);
+ int __r = traits_type::compare(_M_data() + __pos, __s, __len);
+ if (!__r)
+   __r = _S_compare(__n1, __osize);
+ return __r;
+      }
+# 3465 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+      [[__nodiscard__]] constexpr
+      int
+      compare(size_type __pos, size_type __n1, const _CharT* __s,
+       size_type __n2) const
+      {
+ ;
+ _M_check(__pos, "basic_string::compare");
+ __n1 = _M_limit(__pos, __n1);
+ const size_type __len = std::min(__n1, __n2);
+ int __r = traits_type::compare(_M_data() + __pos, __s, __len);
+ if (!__r)
+   __r = _S_compare(__n1, __n2);
+ return __r;
+      }
+
+
+      [[nodiscard]]
+      constexpr bool
+      starts_with(basic_string_view<_CharT, _Traits> __x) const noexcept
+      { return __sv_type(this->data(), this->size()).starts_with(__x); }
+
+      [[nodiscard]]
+      constexpr bool
+      starts_with(_CharT __x) const noexcept
+      { return __sv_type(this->data(), this->size()).starts_with(__x); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      starts_with(const _CharT* __x) const noexcept
+      { return __sv_type(this->data(), this->size()).starts_with(__x); }
+
+      [[nodiscard]]
+      constexpr bool
+      ends_with(basic_string_view<_CharT, _Traits> __x) const noexcept
+      { return __sv_type(this->data(), this->size()).ends_with(__x); }
+
+      [[nodiscard]]
+      constexpr bool
+      ends_with(_CharT __x) const noexcept
+      { return __sv_type(this->data(), this->size()).ends_with(__x); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      ends_with(const _CharT* __x) const noexcept
+      { return __sv_type(this->data(), this->size()).ends_with(__x); }
+
+
+
+      [[nodiscard]]
+      constexpr bool
+      contains(basic_string_view<_CharT, _Traits> __x) const noexcept
+      { return __sv_type(this->data(), this->size()).contains(__x); }
+
+      [[nodiscard]]
+      constexpr bool
+      contains(_CharT __x) const noexcept
+      { return __sv_type(this->data(), this->size()).contains(__x); }
+
+      [[nodiscard, __gnu__::__nonnull__]]
+      constexpr bool
+      contains(const _CharT* __x) const noexcept
+      { return __sv_type(this->data(), this->size()).contains(__x); }
+
+
+
+      template<typename, typename, typename> friend class basic_stringbuf;
+    };
+}
+
+}
+
+
+namespace std
+{
+
+
+
+namespace __cxx11 {
+  template<typename _InputIterator, typename _CharT
+      = typename iterator_traits<_InputIterator>::value_type,
+    typename _Allocator = allocator<_CharT>,
+    typename = _RequireInputIter<_InputIterator>,
+    typename = _RequireAllocator<_Allocator>>
+    basic_string(_InputIterator, _InputIterator, _Allocator = _Allocator())
+      -> basic_string<_CharT, char_traits<_CharT>, _Allocator>;
+
+
+
+  template<typename _CharT, typename _Traits,
+    typename _Allocator = allocator<_CharT>,
+    typename = _RequireAllocator<_Allocator>>
+    basic_string(basic_string_view<_CharT, _Traits>, const _Allocator& = _Allocator())
+      -> basic_string<_CharT, _Traits, _Allocator>;
+
+  template<typename _CharT, typename _Traits,
+    typename _Allocator = allocator<_CharT>,
+    typename = _RequireAllocator<_Allocator>>
+    basic_string(basic_string_view<_CharT, _Traits>,
+   typename basic_string<_CharT, _Traits, _Allocator>::size_type,
+   typename basic_string<_CharT, _Traits, _Allocator>::size_type,
+   const _Allocator& = _Allocator())
+      -> basic_string<_CharT, _Traits, _Allocator>;
+}
+
+
+  template<typename _Str>
+    constexpr
+    inline _Str
+    __str_concat(typename _Str::value_type const* __lhs,
+   typename _Str::size_type __lhs_len,
+   typename _Str::value_type const* __rhs,
+   typename _Str::size_type __rhs_len,
+   typename _Str::allocator_type const& __a)
+    {
+      typedef typename _Str::allocator_type allocator_type;
+      typedef __gnu_cxx::__alloc_traits<allocator_type> _Alloc_traits;
+      _Str __str(_Alloc_traits::_S_select_on_copy(__a));
+      __str.reserve(__lhs_len + __rhs_len);
+      __str.append(__lhs, __lhs_len);
+      __str.append(__rhs, __rhs_len);
+      return __str;
+    }
+# 3595 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+       const basic_string<_CharT, _Traits, _Alloc>& __rhs)
+    {
+      typedef basic_string<_CharT, _Traits, _Alloc> _Str;
+      return std::__str_concat<_Str>(__lhs.c_str(), __lhs.size(),
+         __rhs.c_str(), __rhs.size(),
+         __lhs.get_allocator());
+    }
+
+
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT,_Traits,_Alloc>
+    operator+(const _CharT* __lhs,
+       const basic_string<_CharT,_Traits,_Alloc>& __rhs)
+    {
+      ;
+      typedef basic_string<_CharT, _Traits, _Alloc> _Str;
+      return std::__str_concat<_Str>(__lhs, _Traits::length(__lhs),
+         __rhs.c_str(), __rhs.size(),
+         __rhs.get_allocator());
+    }
+
+
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT,_Traits,_Alloc>
+    operator+(_CharT __lhs, const basic_string<_CharT,_Traits,_Alloc>& __rhs)
+    {
+      typedef basic_string<_CharT, _Traits, _Alloc> _Str;
+      return std::__str_concat<_Str>(__builtin_addressof(__lhs), 1,
+         __rhs.c_str(), __rhs.size(),
+         __rhs.get_allocator());
+    }
+
+
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+       const _CharT* __rhs)
+    {
+      ;
+      typedef basic_string<_CharT, _Traits, _Alloc> _Str;
+      return std::__str_concat<_Str>(__lhs.c_str(), __lhs.size(),
+         __rhs, _Traits::length(__rhs),
+         __lhs.get_allocator());
+    }
+
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs, _CharT __rhs)
+    {
+      typedef basic_string<_CharT, _Traits, _Alloc> _Str;
+      return std::__str_concat<_Str>(__lhs.c_str(), __lhs.size(),
+         __builtin_addressof(__rhs), 1,
+         __lhs.get_allocator());
+    }
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       const basic_string<_CharT, _Traits, _Alloc>& __rhs)
+    { return std::move(__lhs.append(__rhs)); }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+       basic_string<_CharT, _Traits, _Alloc>&& __rhs)
+    { return std::move(__rhs.insert(0, __lhs)); }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       basic_string<_CharT, _Traits, _Alloc>&& __rhs)
+    {
+
+      using _Alloc_traits = allocator_traits<_Alloc>;
+      bool __use_rhs = false;
+      if constexpr (typename _Alloc_traits::is_always_equal{})
+ __use_rhs = true;
+      else if (__lhs.get_allocator() == __rhs.get_allocator())
+ __use_rhs = true;
+      if (__use_rhs)
+
+ {
+   const auto __size = __lhs.size() + __rhs.size();
+   if (__size > __lhs.capacity() && __size <= __rhs.capacity())
+     return std::move(__rhs.insert(0, __lhs));
+ }
+      return std::move(__lhs.append(__rhs));
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(const _CharT* __lhs,
+       basic_string<_CharT, _Traits, _Alloc>&& __rhs)
+    { return std::move(__rhs.insert(0, __lhs)); }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(_CharT __lhs,
+       basic_string<_CharT, _Traits, _Alloc>&& __rhs)
+    { return std::move(__rhs.insert(0, 1, __lhs)); }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       const _CharT* __rhs)
+    { return std::move(__lhs.append(__rhs)); }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline basic_string<_CharT, _Traits, _Alloc>
+    operator+(basic_string<_CharT, _Traits, _Alloc>&& __lhs,
+       _CharT __rhs)
+    { return std::move(__lhs.append(1, __rhs)); }
+# 3752 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline bool
+    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+        const basic_string<_CharT, _Traits, _Alloc>& __rhs)
+    noexcept
+    {
+      return __lhs.size() == __rhs.size()
+        && !_Traits::compare(__lhs.data(), __rhs.data(), __lhs.size());
+    }
+
+
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[__nodiscard__]] constexpr
+    inline bool
+    operator==(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+        const _CharT* __rhs)
+    {
+      return __lhs.size() == _Traits::length(__rhs)
+        && !_Traits::compare(__lhs.data(), __rhs, __lhs.size());
+    }
+# 3787 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[nodiscard]]
+    constexpr auto
+    operator<=>(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+  const basic_string<_CharT, _Traits, _Alloc>& __rhs) noexcept
+    -> decltype(__detail::__char_traits_cmp_cat<_Traits>(0))
+    { return __detail::__char_traits_cmp_cat<_Traits>(__lhs.compare(__rhs)); }
+# 3802 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    [[nodiscard]]
+    constexpr auto
+    operator<=>(const basic_string<_CharT, _Traits, _Alloc>& __lhs,
+  const _CharT* __rhs) noexcept
+    -> decltype(__detail::__char_traits_cmp_cat<_Traits>(0))
+    { return __detail::__char_traits_cmp_cat<_Traits>(__lhs.compare(__rhs)); }
+# 4036 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    inline void
+    swap(basic_string<_CharT, _Traits, _Alloc>& __lhs,
+  basic_string<_CharT, _Traits, _Alloc>& __rhs)
+    noexcept(noexcept(__lhs.swap(__rhs)))
+    { __lhs.swap(__rhs); }
+# 4057 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    basic_istream<_CharT, _Traits>&
+    operator>>(basic_istream<_CharT, _Traits>& __is,
+        basic_string<_CharT, _Traits, _Alloc>& __str);
+
+  template<>
+    basic_istream<char>&
+    operator>>(basic_istream<char>& __is, basic_string<char>& __str);
+# 4075 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline basic_ostream<_CharT, _Traits>&
+    operator<<(basic_ostream<_CharT, _Traits>& __os,
+        const basic_string<_CharT, _Traits, _Alloc>& __str)
+    {
+
+
+      return __ostream_insert(__os, __str.data(), __str.size());
+    }
+# 4098 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    basic_istream<_CharT, _Traits>&
+    getline(basic_istream<_CharT, _Traits>& __is,
+     basic_string<_CharT, _Traits, _Alloc>& __str, _CharT __delim);
+# 4115 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline basic_istream<_CharT, _Traits>&
+    getline(basic_istream<_CharT, _Traits>& __is,
+     basic_string<_CharT, _Traits, _Alloc>& __str)
+    { return std::getline(__is, __str, __is.widen('\n')); }
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline basic_istream<_CharT, _Traits>&
+    getline(basic_istream<_CharT, _Traits>&& __is,
+     basic_string<_CharT, _Traits, _Alloc>& __str, _CharT __delim)
+    { return std::getline(__is, __str, __delim); }
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline basic_istream<_CharT, _Traits>&
+    getline(basic_istream<_CharT, _Traits>&& __is,
+     basic_string<_CharT, _Traits, _Alloc>& __str)
+    { return std::getline(__is, __str); }
+
+
+  template<>
+    basic_istream<char>&
+    getline(basic_istream<char>& __in, basic_string<char>& __str,
+     char __delim);
+
+
+  template<>
+    basic_istream<wchar_t>&
+    getline(basic_istream<wchar_t>& __in, basic_string<wchar_t>& __str,
+     wchar_t __delim);
+
+
+
+}
+
+
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 1 3
+# 32 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 3
+       
+# 33 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 3
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+# 79 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+# 1 "C:/msys64/mingw64/include/stdlib.h" 1 3
+# 11 "C:/msys64/mingw64/include/stdlib.h" 3
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 1 3 4
+# 34 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 3 4
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h" 1 3 4
+
+
+
+
+
+
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 1 3 4
+# 210 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 3 4
+# 1 "C:/msys64/mingw64/include/limits.h" 1 3 4
+# 211 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 2 3 4
+# 8 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h" 2 3 4
+# 35 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/limits.h" 2 3 4
+# 12 "C:/msys64/mingw64/include/stdlib.h" 2 3
+# 26 "C:/msys64/mingw64/include/stdlib.h" 3
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 50 "C:/msys64/mingw64/include/stdlib.h" 3
+  typedef int (__attribute__((__cdecl__)) *_onexit_t)(void);
+# 60 "C:/msys64/mingw64/include/stdlib.h" 3
+  typedef struct _div_t {
+    int quot;
+    int rem;
+  } div_t;
+
+  typedef struct _ldiv_t {
+    long quot;
+    long rem;
+  } ldiv_t;
+
+
+
+
+
+#pragma pack(4)
+  typedef struct {
+    unsigned char ld[10];
+  } _LDOUBLE;
+#pragma pack()
+
+
+
+  typedef struct {
+    double x;
+  } _CRT_DOUBLE;
+
+  typedef struct {
+    float f;
+  } _CRT_FLOAT;
+
+       
+
+
+  typedef struct {
+    long double x;
+  } _LONGDOUBLE;
+
+       
+
+#pragma pack(4)
+  typedef struct {
+    unsigned char ld12[12];
+  } _LDBL12;
+#pragma pack()
+# 135 "C:/msys64/mingw64/include/stdlib.h" 3
+  typedef void (__attribute__((__cdecl__)) *_purecall_handler)(void);
+
+  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _set_purecall_handler(_purecall_handler _Handler);
+  __attribute__ ((__dllimport__)) _purecall_handler __attribute__((__cdecl__)) _get_purecall_handler(void);
+
+  typedef void (__attribute__((__cdecl__)) *_invalid_parameter_handler)(const wchar_t *,const wchar_t *,const wchar_t *,unsigned int,uintptr_t);
+  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _set_invalid_parameter_handler(_invalid_parameter_handler _Handler);
+  __attribute__ ((__dllimport__)) _invalid_parameter_handler __attribute__((__cdecl__)) _get_invalid_parameter_handler(void);
+# 151 "C:/msys64/mingw64/include/stdlib.h" 3
+  __attribute__ ((__dllimport__)) unsigned long *__attribute__((__cdecl__)) __doserrno(void);
+
+  errno_t __attribute__((__cdecl__)) _set_doserrno(unsigned long _Value);
+  errno_t __attribute__((__cdecl__)) _get_doserrno(unsigned long *_Value);
+  __attribute__ ((__dllimport__)) char **__attribute__((__cdecl__)) __sys_errlist(void);
+  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __sys_nerr(void);
+
+
+
+  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p___argv(void);
+  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __p__fmode(void);
+  __attribute__ ((__dllimport__)) int *__attribute__((__cdecl__)) __p___argc(void);
+  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p___wargv(void);
+  __attribute__ ((__dllimport__)) char **__attribute__((__cdecl__)) __p__pgmptr(void);
+  __attribute__ ((__dllimport__)) wchar_t **__attribute__((__cdecl__)) __p__wpgmptr(void);
+
+  errno_t __attribute__((__cdecl__)) _get_pgmptr(char **_Value);
+  errno_t __attribute__((__cdecl__)) _get_wpgmptr(wchar_t **_Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_fmode(int _Mode);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_fmode(int *_PMode);
+# 221 "C:/msys64/mingw64/include/stdlib.h" 3
+  __attribute__ ((__dllimport__)) char ***__attribute__((__cdecl__)) __p__environ(void);
+  __attribute__ ((__dllimport__)) wchar_t ***__attribute__((__cdecl__)) __p__wenviron(void);
+# 235 "C:/msys64/mingw64/include/stdlib.h" 3
+  extern unsigned int * __imp__osplatform;
+
+
+
+
+  extern unsigned int * __imp__osver;
+
+
+
+
+  extern unsigned int * __imp__winver;
+
+
+
+
+  extern unsigned int * __imp__winmajor;
+
+
+
+
+  extern unsigned int * __imp__winminor;
+
+
+
+  errno_t __attribute__((__cdecl__)) _get_osplatform(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_osver(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winver(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winmajor(unsigned int *_Value);
+  errno_t __attribute__((__cdecl__)) _get_winminor(unsigned int *_Value);
+
+
+
+
+  extern "C++" {
+    template <typename _CountofType,size_t _SizeOfArray> char (*__countof_helper( _CountofType (&_Array)[_SizeOfArray]))[_SizeOfArray];
+
+  }
+
+
+
+
+
+  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) exit(int _Code) __attribute__ ((__noreturn__));
+  void __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) _exit(int _Code) __attribute__ ((__noreturn__));
+
+
+
+
+
+
+  void __attribute__((__cdecl__)) _Exit(int) __attribute__ ((__noreturn__));
+
+
+
+
+
+
+       
+
+  void __attribute__((__cdecl__)) __attribute__ ((__noreturn__)) abort(void);
+       
+
+
+
+  __attribute__ ((__dllimport__)) unsigned int __attribute__((__cdecl__)) _set_abort_behavior(unsigned int _Flags,unsigned int _Mask);
+
+
+
+  int __attribute__((__cdecl__)) abs(int _X);
+  long __attribute__((__cdecl__)) labs(long _X);
+
+
+  __extension__ long long __attribute__((__cdecl__)) _abs64(long long);
+
+  extern __inline__ __attribute__((__always_inline__,__gnu_inline__)) long long __attribute__((__cdecl__)) _abs64(long long x) {
+    return __builtin_llabs(x);
+  }
+
+
+  int __attribute__((__cdecl__)) atexit(void (__attribute__((__cdecl__)) *)(void));
+
+
+
+
+
+  double __attribute__((__cdecl__)) atof(const char *_String);
+  double __attribute__((__cdecl__)) _atof_l(const char *_String,_locale_t _Locale);
+
+  int __attribute__((__cdecl__)) atoi(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoi_l(const char *_Str,_locale_t _Locale);
+  long __attribute__((__cdecl__)) atol(const char *_Str);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _atol_l(const char *_Str,_locale_t _Locale);
+
+
+  void *__attribute__((__cdecl__)) bsearch(const void *_Key,const void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
+  void __attribute__((__cdecl__)) qsort(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(const void *,const void *));
+
+  unsigned short __attribute__((__cdecl__)) _byteswap_ushort(unsigned short _Short);
+  unsigned long __attribute__((__cdecl__)) _byteswap_ulong (unsigned long _Long);
+  __extension__ unsigned long long __attribute__((__cdecl__)) _byteswap_uint64(unsigned long long _Int64);
+  div_t __attribute__((__cdecl__)) div(int _Numerator,int _Denominator);
+  char *__attribute__((__cdecl__)) getenv(const char *_VarName) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _itoa(int _Value,char *_Dest,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _i64toa(long long _Val,char *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ui64toa(unsigned long long _Val,char *_DstBuf,int _Radix) ;
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64(const char *_String);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _atoi64_l(const char *_String,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64(const char *_String,char **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) long long __attribute__((__cdecl__)) _strtoi64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64(const char *_String,char **_EndPtr,int _Radix);
+  __extension__ __attribute__ ((__dllimport__)) unsigned long long __attribute__((__cdecl__)) _strtoui64_l(const char *_String,char **_EndPtr,int _Radix,_locale_t _Locale);
+  ldiv_t __attribute__((__cdecl__)) ldiv(long _Numerator,long _Denominator);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ltoa(long _Value,char *_Dest,int _Radix) ;
+  int __attribute__((__cdecl__)) mblen(const char *_Ch,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mblen_l(const char *_Ch,size_t _MaxCount,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen(const char *_Str);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrlen_l(const char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen(const char *_Str,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstrnlen_l(const char *_Str,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) mbtowc(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _mbtowc_l(wchar_t * __restrict__ _DstCh,const char * __restrict__ _SrcCh,size_t _SrcSizeInBytes,_locale_t _Locale);
+  size_t __attribute__((__cdecl__)) mbstowcs(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _mbstowcs_l(wchar_t * __restrict__ _Dest,const char * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale);
+  int __attribute__((__cdecl__)) mkstemp(char *template_name);
+  int __attribute__((__cdecl__)) rand(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_error_mode(int _Mode);
+  void __attribute__((__cdecl__)) srand(unsigned int _Seed);
+# 372 "C:/msys64/mingw64/include/stdlib.h" 3
+inline __attribute__((__cdecl__))
+double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtod(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+{
+  double __attribute__((__cdecl__)) __mingw_strtod (const char * __restrict__, char ** __restrict__);
+  return __mingw_strtod( _Str, _EndPtr);
+}
+
+inline __attribute__((__cdecl__))
+float __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtof(const char * __restrict__ _Str,char ** __restrict__ _EndPtr)
+{
+  float __attribute__((__cdecl__)) __mingw_strtof (const char * __restrict__, char ** __restrict__);
+  return __mingw_strtof( _Str, _EndPtr);
+}
+
+
+
+
+
+
+  long double __attribute__((__cdecl__)) __attribute__ ((__nothrow__)) strtold(const char * __restrict__ , char ** __restrict__ );
+
+
+  extern double __attribute__((__cdecl__)) __attribute__ ((__nothrow__))
+  __strtod (const char * __restrict__ , char ** __restrict__);
+
+
+
+
+
+
+
+  float __attribute__((__cdecl__)) __mingw_strtof (const char * __restrict__, char ** __restrict__);
+  double __attribute__((__cdecl__)) __mingw_strtod (const char * __restrict__, char ** __restrict__);
+  long double __attribute__((__cdecl__)) __mingw_strtold(const char * __restrict__, char ** __restrict__);
+
+  __attribute__ ((__dllimport__)) float __attribute__((__cdecl__)) _strtof_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) double __attribute__((__cdecl__)) _strtod_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,_locale_t _Locale);
+  long __attribute__((__cdecl__)) strtol(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) long __attribute__((__cdecl__)) _strtol_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+  unsigned long __attribute__((__cdecl__)) strtoul(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix);
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _strtoul_l(const char * __restrict__ _Str,char ** __restrict__ _EndPtr,int _Radix,_locale_t _Locale);
+
+
+  int __attribute__((__cdecl__)) system(const char *_Command);
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ultoa(unsigned long _Value,char *_Dest,int _Radix) ;
+  int __attribute__((__cdecl__)) wctomb(char *_MbCh,wchar_t _WCh) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wctomb_l(char *_MbCh,wchar_t _WCh,_locale_t _Locale) ;
+  size_t __attribute__((__cdecl__)) wcstombs(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount) ;
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _wcstombs_l(char * __restrict__ _Dest,const wchar_t * __restrict__ _Source,size_t _MaxCount,_locale_t _Locale) ;
+
+
+
+  void *__attribute__((__cdecl__)) calloc(size_t _NumOfElements,size_t _SizeOfElements);
+  void __attribute__((__cdecl__)) free(void *_Memory);
+  void *__attribute__((__cdecl__)) malloc(size_t _Size);
+  void *__attribute__((__cdecl__)) realloc(void *_Memory,size_t _NewSize);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _aligned_free(void *_Memory);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_malloc(size_t _Size,size_t _Alignment);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_malloc(size_t _Size,size_t _Alignment,size_t _Offset);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_realloc(void *_Memory,size_t _Size,size_t _Alignment);
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _aligned_offset_realloc(void *_Memory,size_t _Size,size_t _Alignment,size_t _Offset);
+# 498 "C:/msys64/mingw64/include/stdlib.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putenv(const char *_EnvString);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _wputenv(const wchar_t *_EnvString);
+
+
+
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fullpath(char *_FullPath,const char *_Path,size_t _SizeInBytes);
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
+  __attribute__ ((__dllimport__)) char *__attribute__((__cdecl__)) _gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl(_CRT_DOUBLE *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl(_LDOUBLE *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt(_CRT_FLOAT *_Result,char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atodbl_l(_CRT_DOUBLE *_Result,char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoldbl_l(_LDOUBLE *_Result,char *_Str,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _atoflt_l(_CRT_FLOAT *_Result,char *_Str,_locale_t _Locale);
+# 528 "C:/msys64/mingw64/include/stdlib.h" 3
+unsigned long __attribute__((__cdecl__)) _lrotl(unsigned long,int);
+unsigned long __attribute__((__cdecl__)) _lrotr(unsigned long,int);
+
+
+
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _makepath(char *_Path,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
+  _onexit_t __attribute__((__cdecl__)) _onexit(_onexit_t _Func);
+
+
+
+
+
+       
+       
+
+
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotl64(unsigned long long _Val,int _Shift);
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long Value,int Shift);
+       
+       
+       
+       
+
+
+  unsigned int __attribute__((__cdecl__)) _rotr(unsigned int _Val,int _Shift);
+  unsigned int __attribute__((__cdecl__)) _rotl(unsigned int _Val,int _Shift);
+       
+       
+  __extension__ unsigned long long __attribute__((__cdecl__)) _rotr64(unsigned long long _Val,int _Shift);
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _searchenv(const char *_Filename,const char *_EnvVar,char *_ResultPath) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _splitpath(const char *_FullPath,char *_Drive,char *_Dir,char *_Filename,char *_Ext) ;
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _swab(char *_Buf1,char *_Buf2,int _SizeInBytes);
+# 575 "C:/msys64/mingw64/include/stdlib.h" 3
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _beep(unsigned _Frequency,unsigned _Duration) __attribute__ ((__deprecated__));
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _seterrormode(int _Mode) __attribute__ ((__deprecated__));
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) _sleep(unsigned long _Duration) __attribute__ ((__deprecated__));
+# 599 "C:/msys64/mingw64/include/stdlib.h" 3
+  char *__attribute__((__cdecl__)) ecvt(double _Val,int _NumOfDigits,int *_PtDec,int *_PtSign) ;
+  char *__attribute__((__cdecl__)) fcvt(double _Val,int _NumOfDec,int *_PtDec,int *_PtSign) ;
+  char *__attribute__((__cdecl__)) gcvt(double _Val,int _NumOfDigits,char *_DstBuf) ;
+  char *__attribute__((__cdecl__)) itoa(int _Val,char *_DstBuf,int _Radix) ;
+  char *__attribute__((__cdecl__)) ltoa(long _Val,char *_DstBuf,int _Radix) ;
+  int __attribute__((__cdecl__)) putenv(const char *_EnvString) ;
+
+
+
+  void __attribute__((__cdecl__)) swab(char *_Buf1,char *_Buf2,int _SizeInBytes) ;
+
+
+  char *__attribute__((__cdecl__)) ultoa(unsigned long _Val,char *_Dstbuf,int _Radix) ;
+  _onexit_t __attribute__((__cdecl__)) onexit(_onexit_t _Func);
+
+
+
+
+
+  typedef struct { __extension__ long long quot, rem; } lldiv_t;
+
+  __extension__ lldiv_t __attribute__((__cdecl__)) lldiv(long long, long long);
+
+  __extension__ long long __attribute__((__cdecl__)) llabs(long long);
+
+
+
+
+  __extension__ long long __attribute__((__cdecl__)) strtoll(const char * __restrict__, char ** __restrict, int);
+  __extension__ unsigned long long __attribute__((__cdecl__)) strtoull(const char * __restrict__, char ** __restrict__, int);
+
+
+  __extension__ long long __attribute__((__cdecl__)) atoll (const char *);
+
+
+  __extension__ long long __attribute__((__cdecl__)) wtoll (const wchar_t *);
+  __extension__ char *__attribute__((__cdecl__)) lltoa (long long, char *, int);
+  __extension__ char *__attribute__((__cdecl__)) ulltoa (unsigned long long , char *, int);
+  __extension__ wchar_t *__attribute__((__cdecl__)) lltow (long long, wchar_t *, int);
+  __extension__ wchar_t *__attribute__((__cdecl__)) ulltow (unsigned long long, wchar_t *, int);
+# 653 "C:/msys64/mingw64/include/stdlib.h" 3
+}
+
+
+#pragma pack(pop)
+
+# 1 "C:/msys64/mingw64/include/sec_api/stdlib_s.h" 1 3
+# 9 "C:/msys64/mingw64/include/sec_api/stdlib_s.h" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/stdlib.h" 1 3
+# 30 "C:/msys64/mingw64/include/c++/14.2.0/stdlib.h" 3
+# 1 "C:/msys64/mingw64/include/stdlib.h" 1 3
+# 31 "C:/msys64/mingw64/include/c++/14.2.0/stdlib.h" 2 3
+# 10 "C:/msys64/mingw64/include/sec_api/stdlib_s.h" 2 3
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) void * __attribute__((__cdecl__)) bsearch_s(const void *_Key,const void *_Base,rsize_t _NumOfElements,rsize_t _SizeOfElements,int (__attribute__((__cdecl__)) * _PtFuncCompare)(void *, const void *, const void *), void *_Context);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _dupenv_s(char **_PBuffer,size_t *_PBufferSizeInBytes,const char *_VarName);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) getenv_s(size_t *_ReturnSize,char *_DstBuf,rsize_t _DstSize,const char *_VarName);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) getenv_s(size_t * _ReturnSize, char (&_Dest)[__size], const char * _VarName) { return getenv_s(_ReturnSize, _Dest, __size, _VarName); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _itoa_s(int _Value,char *_DstBuf,size_t _Size,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _itoa_s(int _Value, char (&_Dest)[__size], int _Radix) { return _itoa_s(_Value, _Dest, __size, _Radix); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _i64toa_s(long long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ui64toa_s(unsigned long long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ltoa_s(long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _ltoa_s(long _Value, char (&_Dest)[__size], int _Radix) { return _ltoa_s(_Value, _Dest, __size, _Radix); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) mbstowcs_s(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) mbstowcs_s(size_t * _PtNumOfCharConverted, wchar_t (&_Dest)[__size], const char * _Source, size_t _MaxCount) { return mbstowcs_s(_PtNumOfCharConverted, _Dest, __size, _Source, _MaxCount); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _mbstowcs_s_l(size_t *_PtNumOfCharConverted,wchar_t *_DstBuf,size_t _SizeInWords,const char *_SrcBuf,size_t _MaxCount,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _mbstowcs_s_l(size_t * _PtNumOfCharConverted, wchar_t (&_Dest)[__size], const char * _Source, size_t _MaxCount, _locale_t _Locale) { return _mbstowcs_s_l(_PtNumOfCharConverted, _Dest, __size, _Source, _MaxCount, _Locale); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ultoa_s(unsigned long _Val,char *_DstBuf,size_t _Size,int _Radix);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _ultoa_s(unsigned long _Value, char (&_Dest)[__size], int _Radix) { return _ultoa_s(_Value, _Dest, __size, _Radix); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wctomb_s(int *_SizeConverted,char *_MbCh,rsize_t _SizeInBytes,wchar_t _WCh);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wctomb_s_l(int *_SizeConverted,char *_MbCh,size_t _SizeInBytes,wchar_t _WCh,_locale_t _Locale);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) wcstombs_s(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) wcstombs_s(size_t* _PtNumOfCharConverted, char (&_Dst)[__size], const wchar_t* _Src, size_t _MaxCountInBytes) { return wcstombs_s(_PtNumOfCharConverted, _Dst, __size, _Src, _MaxCountInBytes); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _wcstombs_s_l(size_t *_PtNumOfCharConverted,char *_Dst,size_t _DstSizeInBytes,const wchar_t *_Src,size_t _MaxCountInBytes,_locale_t _Locale);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _wcstombs_s_l(size_t* _PtNumOfCharConverted, char (&_Dst)[__size], const wchar_t* _Src, size_t _MaxCountInBytes, _locale_t _Locale) { return _wcstombs_s_l(_PtNumOfCharConverted, _Dst, __size, _Src, _MaxCountInBytes, _Locale); } }
+
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _ecvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDights,int *_PtDec,int *_PtSign);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _fcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDec,int *_PtDec,int *_PtSign);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _gcvt_s(char *_DstBuf,size_t _Size,double _Val,int _NumOfDigits);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _makepath_s(char *_PathResult,size_t _Size,const char *_Drive,const char *_Dir,const char *_Filename,const char *_Ext);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _makepath_s(char (&_PathResult)[__size], const char* _Drive, const char* _Dir, const char* _Filename, const char* _Ext) { return _makepath_s(_PathResult,__size,_Drive,_Dir,_Filename,_Ext); } }
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _putenv_s(const char *_Name,const char *_Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _searchenv_s(const char *_Filename,const char *_EnvVar,char *_ResultPath,size_t _SizeInBytes);
+
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_FullPath,char *_Drive,size_t _DriveSize,char *_Dir,size_t _DirSize,char *_Filename,size_t _FilenameSize,char *_Ext,size_t _ExtSize);
+  extern "C++" { template <size_t __drive_size, size_t __dir_size, size_t __name_size, size_t __ext_size> inline errno_t __attribute__((__cdecl__)) _splitpath_s(const char *_Dest, char (&__drive)[__drive_size], char (&__dir)[__dir_size], char (&__name)[__name_size], char (&__ext)[__ext_size]) { return _splitpath_s(_Dest, __drive, __drive_size, __dir, __dir_size, __name, __name_size, __ext, __ext_size); } }
+
+
+
+  __attribute__ ((__dllimport__)) void __attribute__((__cdecl__)) qsort_s(void *_Base,size_t _NumOfElements,size_t _SizeOfElements,int (__attribute__((__cdecl__)) *_PtFuncCompare)(void *,const void *,const void *),void *_Context);
+
+
+
+
+
+}
+# 659 "C:/msys64/mingw64/include/stdlib.h" 2 3
+# 1 "C:/msys64/mingw64/include/malloc.h" 1 3
+# 11 "C:/msys64/mingw64/include/malloc.h" 3
+#pragma pack(push,_CRT_PACKING)
+
+
+extern "C" {
+# 46 "C:/msys64/mingw64/include/malloc.h" 3
+  typedef struct _heapinfo {
+    int *_pentry;
+    size_t _size;
+    int _useflag;
+  } _HEAPINFO;
+
+
+  extern unsigned int _amblksiz;
+# 77 "C:/msys64/mingw64/include/malloc.h" 3
+void * __mingw_aligned_malloc (size_t _Size, size_t _Alignment);
+void __mingw_aligned_free (void *_Memory);
+void * __mingw_aligned_offset_realloc (void *_Memory, size_t _Size, size_t _Alignment, size_t _Offset);
+void * __mingw_aligned_realloc (void *_Memory, size_t _Size, size_t _Offset);
+
+
+
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h" 1 3 4
+# 27 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h" 3 4
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/stdlib.h" 1 3 4
+# 28 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h" 2 3 4
+
+# 1 "C:/msys64/mingw64/include/errno.h" 1 3 4
+# 12 "C:/msys64/mingw64/include/errno.h" 3 4
+extern "C" {
+# 239 "C:/msys64/mingw64/include/errno.h" 3 4
+}
+# 30 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/mm_malloc.h" 2 3 4
+
+
+static __inline__ void *
+_mm_malloc (size_t __size, size_t __align)
+{
+  void * __malloc_ptr;
+  void * __aligned_ptr;
+
+
+  if (__align & (__align - 1))
+    {
+
+      (*_errno()) = 22;
+
+      return ((void *) 0);
+    }
+
+  if (__size == 0)
+    return ((void *) 0);
+
+
+
+
+
+    if (__align < 2 * sizeof (void *))
+      __align = 2 * sizeof (void *);
+
+  __malloc_ptr = malloc (__size + __align);
+  if (!__malloc_ptr)
+    return ((void *) 0);
+
+
+  __aligned_ptr = (void *) (((size_t) __malloc_ptr + __align)
+       & ~((size_t) (__align) - 1));
+
+
+  ((void **) __aligned_ptr)[-1] = __malloc_ptr;
+
+  return __aligned_ptr;
+}
+
+static __inline__ void
+_mm_free (void *__aligned_ptr)
+{
+  if (__aligned_ptr)
+    free (((void **) __aligned_ptr)[-1]);
+}
+# 85 "C:/msys64/mingw64/include/malloc.h" 2 3
+
+
+
+
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _resetstkoflw (void);
+
+  __attribute__ ((__dllimport__)) unsigned long __attribute__((__cdecl__)) _set_malloc_crt_max_wait(unsigned long _NewValue);
+
+  __attribute__ ((__dllimport__)) void *__attribute__((__cdecl__)) _expand(void *_Memory,size_t _NewSize);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _msize(void *_Memory);
+
+
+
+
+
+
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _get_sbh_threshold(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _set_sbh_threshold(size_t _NewValue);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _set_amblksiz(size_t _Value);
+  __attribute__ ((__dllimport__)) errno_t __attribute__((__cdecl__)) _get_amblksiz(size_t *_Value);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapadd(void *_Memory,size_t _Size);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapchk(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapmin(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapset(unsigned int _Fill);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _heapwalk(_HEAPINFO *_EntryInfo);
+  __attribute__ ((__dllimport__)) size_t __attribute__((__cdecl__)) _heapused(size_t *_Used,size_t *_Commit);
+  __attribute__ ((__dllimport__)) intptr_t __attribute__((__cdecl__)) _get_heap_handle(void);
+# 125 "C:/msys64/mingw64/include/malloc.h" 3
+  static __inline void *_MarkAllocaS(void *_Ptr,unsigned int _Marker) {
+    if(_Ptr) {
+      *((unsigned int*)_Ptr) = _Marker;
+      _Ptr = (char*)_Ptr + 16;
+    }
+    return _Ptr;
+  }
+# 144 "C:/msys64/mingw64/include/malloc.h" 3
+  static __inline void __attribute__((__cdecl__)) _freea(void *_Memory) {
+    unsigned int _Marker;
+    if(_Memory) {
+      _Memory = (char*)_Memory - 16;
+      _Marker = *(unsigned int *)_Memory;
+      if(_Marker==0xDDDD) {
+ free(_Memory);
+      }
+
+
+
+
+
+    }
+  }
+# 187 "C:/msys64/mingw64/include/malloc.h" 3
+}
+
+
+#pragma pack(pop)
+# 660 "C:/msys64/mingw64/include/stdlib.h" 2 3
+# 80 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 2 3
+
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 1 3
+# 33 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+       
+# 34 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+# 46 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+extern "C++"
+{
+namespace std
+{
+
+
+  using ::abs;
+
+
+  inline long
+  abs(long __i) { return __builtin_labs(__i); }
+
+
+
+  inline long long
+  abs(long long __x) { return __builtin_llabs (__x); }
+# 70 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+  inline constexpr double
+  abs(double __x)
+  { return __builtin_fabs(__x); }
+
+  inline constexpr float
+  abs(float __x)
+  { return __builtin_fabsf(__x); }
+
+  inline constexpr long double
+  abs(long double __x)
+  { return __builtin_fabsl(__x); }
+
+
+
+  __extension__ inline constexpr __int128
+  abs(__int128 __x) { return __x >= 0 ? __x : -__x; }
+# 101 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+  constexpr _Float16
+  abs(_Float16 __x)
+  { return _Float16(__builtin_fabsf(__x)); }
+
+
+
+  constexpr _Float32
+  abs(_Float32 __x)
+  { return __builtin_fabsf(__x); }
+
+
+
+  constexpr _Float64
+  abs(_Float64 __x)
+  { return __builtin_fabs(__x); }
+# 129 "C:/msys64/mingw64/include/c++/14.2.0/bits/std_abs.h" 3
+  constexpr __gnu_cxx::__bfloat16_t
+  abs(__gnu_cxx::__bfloat16_t __x)
+  { return __gnu_cxx::__bfloat16_t(__builtin_fabsf(__x)); }
+
+
+
+  __extension__ inline constexpr
+  __float128
+  abs(__float128 __x)
+  {
+
+
+
+
+
+
+    return __builtin_signbit(__x) ? -__x : __x;
+
+  }
+
+
+
+}
+}
+# 82 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 2 3
+# 125 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+extern "C++"
+{
+namespace std
+{
+
+
+  using ::div_t;
+  using ::ldiv_t;
+
+  using ::abort;
+
+
+
+  using ::atexit;
+
+
+
+
+
+  using ::atof;
+  using ::atoi;
+  using ::atol;
+  using ::bsearch;
+  using ::calloc;
+  using ::div;
+  using ::exit;
+  using ::free;
+  using ::getenv;
+  using ::labs;
+  using ::ldiv;
+  using ::malloc;
+
+  using ::mblen;
+  using ::mbstowcs;
+  using ::mbtowc;
+
+  using ::qsort;
+
+
+
+
+
+  using ::rand;
+  using ::realloc;
+  using ::srand;
+  using ::strtod;
+  using ::strtol;
+  using ::strtoul;
+  using ::system;
+
+  using ::wcstombs;
+  using ::wctomb;
+
+
+
+  inline ldiv_t
+  div(long __i, long __j) noexcept { return ldiv(__i, __j); }
+
+
+
+
+}
+# 199 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+namespace __gnu_cxx
+{
+
+
+
+  using ::lldiv_t;
+
+
+
+
+
+  using ::_Exit;
+
+
+
+  using ::llabs;
+
+  inline lldiv_t
+  div(long long __n, long long __d)
+  { lldiv_t __q; __q.quot = __n / __d; __q.rem = __n % __d; return __q; }
+
+  using ::lldiv;
+# 231 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+  using ::atoll;
+  using ::strtoll;
+  using ::strtoull;
+
+  using ::strtof;
+  using ::strtold;
+
+
+}
+
+namespace std
+{
+
+  using ::__gnu_cxx::lldiv_t;
+
+  using ::__gnu_cxx::_Exit;
+
+  using ::__gnu_cxx::llabs;
+  using ::__gnu_cxx::div;
+  using ::__gnu_cxx::lldiv;
+
+  using ::__gnu_cxx::atoll;
+  using ::__gnu_cxx::strtof;
+  using ::__gnu_cxx::strtoll;
+  using ::__gnu_cxx::strtoull;
+  using ::__gnu_cxx::strtold;
+}
+# 275 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
+}
+# 44 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cwchar" 3
+# 45 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 3
+# 96 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 3
+namespace std
+{
+  using ::FILE;
+  using ::fpos_t;
+
+  using ::clearerr;
+  using ::fclose;
+  using ::feof;
+  using ::ferror;
+  using ::fflush;
+  using ::fgetc;
+  using ::fgetpos;
+  using ::fgets;
+  using ::fopen;
+  using ::fprintf;
+  using ::fputc;
+  using ::fputs;
+  using ::fread;
+  using ::freopen;
+  using ::fscanf;
+  using ::fseek;
+  using ::fsetpos;
+  using ::ftell;
+  using ::fwrite;
+  using ::getc;
+  using ::getchar;
+
+
+
+
+  using ::perror;
+  using ::printf;
+  using ::putc;
+  using ::putchar;
+  using ::puts;
+  using ::remove;
+  using ::rename;
+  using ::rewind;
+  using ::scanf;
+  using ::setbuf;
+  using ::setvbuf;
+  using ::sprintf;
+  using ::sscanf;
+  using ::tmpfile;
+
+  using ::tmpnam;
+
+  using ::ungetc;
+  using ::vfprintf;
+  using ::vprintf;
+  using ::vsprintf;
+}
+# 157 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 3
+namespace __gnu_cxx
+{
+# 175 "C:/msys64/mingw64/include/c++/14.2.0/cstdio" 3
+  using ::snprintf;
+  using ::vfscanf;
+  using ::vscanf;
+  using ::vsnprintf;
+  using ::vsscanf;
+
+}
+
+namespace std
+{
+  using ::__gnu_cxx::snprintf;
+  using ::__gnu_cxx::vfscanf;
+  using ::__gnu_cxx::vscanf;
+  using ::__gnu_cxx::vsnprintf;
+  using ::__gnu_cxx::vsscanf;
+}
+# 46 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/cerrno" 1 3
+# 39 "C:/msys64/mingw64/include/c++/14.2.0/cerrno" 3
+       
+# 40 "C:/msys64/mingw64/include/c++/14.2.0/cerrno" 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/ext/string_conversions.h" 2 3
+
+namespace __gnu_cxx
+{
+
+
+
+  template<typename _TRet, typename _Ret = _TRet, typename _CharT,
+    typename... _Base>
+    _Ret
+    __stoa(_TRet (*__convf) (const _CharT*, _CharT**, _Base...),
+    const char* __name, const _CharT* __str, std::size_t* __idx,
+    _Base... __base)
+    {
+      _Ret __ret;
+
+      _CharT* __endptr;
+
+      struct _Save_errno {
+ _Save_errno() : _M_errno((*_errno())) { (*_errno()) = 0; }
+ ~_Save_errno() { if ((*_errno()) == 0) (*_errno()) = _M_errno; }
+ int _M_errno;
+      } const __save_errno;
+
+      struct _Range_chk {
+   static bool
+   _S_chk(_TRet, std::false_type) { return false; }
+
+   static bool
+   _S_chk(_TRet __val, std::true_type)
+   {
+     return __val < _TRet(__numeric_traits<int>::__min)
+       || __val > _TRet(__numeric_traits<int>::__max);
+   }
+      };
+
+      const _TRet __tmp = __convf(__str, &__endptr, __base...);
+
+      if (__endptr == __str)
+ std::__throw_invalid_argument(__name);
+      else if ((*_errno()) == 34
+   || _Range_chk::_S_chk(__tmp, std::is_same<_Ret, int>{}))
+ std::__throw_out_of_range(__name);
+      else
+ __ret = __tmp;
+
+      if (__idx)
+ *__idx = __endptr - __str;
+
+      return __ret;
+    }
+
+
+  template<typename _String, typename _CharT = typename _String::value_type>
+    _String
+    __to_xstring(int (*__convf) (_CharT*, std::size_t, const _CharT*,
+     __builtin_va_list), std::size_t __n,
+   const _CharT* __fmt, ...)
+    {
+
+
+      _CharT* __s = static_cast<_CharT*>(__builtin_alloca(sizeof(_CharT)
+         * __n));
+
+      __builtin_va_list __args;
+      __builtin_va_start(__args, __fmt);
+
+      const int __len = __convf(__s, __n, __fmt, __args);
+
+      __builtin_va_end(__args);
+
+      return _String(__s, __s + __len);
+    }
+
+
+}
+# 4155 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/charconv.h" 1 3
+# 33 "C:/msys64/mingw64/include/c++/14.2.0/bits/charconv.h" 3
+       
+# 34 "C:/msys64/mingw64/include/c++/14.2.0/bits/charconv.h" 3
+
+
+
+
+
+
+namespace std
+{
+
+namespace __detail
+{
+
+
+  template<typename _Tp>
+    constexpr bool __integer_to_chars_is_unsigned
+      = ! __gnu_cxx::__int_traits<_Tp>::__is_signed;
+
+
+
+  template<typename _Tp>
+    constexpr unsigned
+    __to_chars_len(_Tp __value, int __base = 10) noexcept
+    {
+
+      static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+
+
+      unsigned __n = 1;
+      const unsigned __b2 = __base * __base;
+      const unsigned __b3 = __b2 * __base;
+      const unsigned long __b4 = __b3 * __base;
+      for (;;)
+ {
+   if (__value < (unsigned)__base) return __n;
+   if (__value < __b2) return __n + 1;
+   if (__value < __b3) return __n + 2;
+   if (__value < __b4) return __n + 3;
+   __value /= __b4;
+   __n += 4;
+ }
+    }
+
+
+
+
+  template<typename _Tp>
+    constexpr void
+    __to_chars_10_impl(char* __first, unsigned __len, _Tp __val) noexcept
+    {
+
+      static_assert(__integer_to_chars_is_unsigned<_Tp>, "implementation bug");
+
+
+      constexpr char __digits[201] =
+ "0001020304050607080910111213141516171819"
+ "2021222324252627282930313233343536373839"
+ "4041424344454647484950515253545556575859"
+ "6061626364656667686970717273747576777879"
+ "8081828384858687888990919293949596979899";
+      unsigned __pos = __len - 1;
+      while (__val >= 100)
+ {
+   auto const __num = (__val % 100) * 2;
+   __val /= 100;
+   __first[__pos] = __digits[__num + 1];
+   __first[__pos - 1] = __digits[__num];
+   __pos -= 2;
+ }
+      if (__val >= 10)
+ {
+   auto const __num = __val * 2;
+   __first[1] = __digits[__num + 1];
+   __first[0] = __digits[__num];
+ }
+      else
+ __first[0] = '0' + __val;
+    }
+
+}
+
+}
+# 4156 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 2 3
+
+namespace std
+{
+
+namespace __cxx11 {
+
+
+  inline int
+  stoi(const string& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa<long, int>(&std::strtol, "stoi", __str.c_str(),
+     __idx, __base); }
+
+  inline long
+  stol(const string& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::strtol, "stol", __str.c_str(),
+        __idx, __base); }
+
+  inline unsigned long
+  stoul(const string& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::strtoul, "stoul", __str.c_str(),
+        __idx, __base); }
+
+
+  inline long long
+  stoll(const string& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::strtoll, "stoll", __str.c_str(),
+        __idx, __base); }
+
+  inline unsigned long long
+  stoull(const string& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::strtoull, "stoull", __str.c_str(),
+        __idx, __base); }
+# 4198 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  inline double
+  stod(const string& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::strtod, "stod", __str.c_str(), __idx); }
+
+
+
+  inline float
+  stof(const string& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::strtof, "stof", __str.c_str(), __idx); }
+# 4226 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  inline long double
+  stold(const string& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::strtold, "stold", __str.c_str(), __idx); }
+# 4238 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  [[__nodiscard__]]
+  inline string
+  to_string(int __val)
+
+  noexcept
+
+  {
+    const bool __neg = __val < 0;
+    const unsigned __uval = __neg ? (unsigned)~__val + 1u : __val;
+    const auto __len = __detail::__to_chars_len(__uval);
+    string __str;
+    __str.__resize_and_overwrite(__neg + __len, [=](char* __p, size_t __n) {
+      __p[0] = '-';
+      __detail::__to_chars_10_impl(__p + (int)__neg, __len, __uval);
+      return __n;
+    });
+    return __str;
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(unsigned __val)
+
+  noexcept
+
+  {
+    const auto __len = __detail::__to_chars_len(__val);
+    string __str;
+    __str.__resize_and_overwrite(__len, [__val](char* __p, size_t __n) {
+      __detail::__to_chars_10_impl(__p, __n, __val);
+      return __n;
+    });
+    return __str;
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(long __val)
+
+  noexcept
+
+  {
+    const bool __neg = __val < 0;
+    const unsigned long __uval = __neg ? (unsigned long)~__val + 1ul : __val;
+    const auto __len = __detail::__to_chars_len(__uval);
+    string __str;
+    __str.__resize_and_overwrite(__neg + __len, [=](char* __p, size_t __n) {
+      __p[0] = '-';
+      __detail::__to_chars_10_impl(__p + (int)__neg, __len, __uval);
+      return __n;
+    });
+    return __str;
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(unsigned long __val)
+
+  noexcept
+
+  {
+    const auto __len = __detail::__to_chars_len(__val);
+    string __str;
+    __str.__resize_and_overwrite(__len, [__val](char* __p, size_t __n) {
+      __detail::__to_chars_10_impl(__p, __n, __val);
+      return __n;
+    });
+    return __str;
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(long long __val)
+  {
+    const bool __neg = __val < 0;
+    const unsigned long long __uval
+      = __neg ? (unsigned long long)~__val + 1ull : __val;
+    const auto __len = __detail::__to_chars_len(__uval);
+    string __str;
+    __str.__resize_and_overwrite(__neg + __len, [=](char* __p, size_t __n) {
+      __p[0] = '-';
+      __detail::__to_chars_10_impl(__p + (int)__neg, __len, __uval);
+      return __n;
+    });
+    return __str;
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(unsigned long long __val)
+  {
+    const auto __len = __detail::__to_chars_len(__val);
+    string __str;
+    __str.__resize_and_overwrite(__len, [__val](char* __p, size_t __n) {
+      __detail::__to_chars_10_impl(__p, __n, __val);
+      return __n;
+    });
+    return __str;
+  }
+# 4399 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  [[__nodiscard__]]
+  inline string
+  to_string(float __val)
+  {
+    const int __n =
+      __gnu_cxx::__numeric_traits<float>::__max_exponent10 + 20;
+    return __gnu_cxx::__to_xstring<string>(&std::vsnprintf, __n,
+        "%f", __val);
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(double __val)
+  {
+    const int __n =
+      __gnu_cxx::__numeric_traits<double>::__max_exponent10 + 20;
+    return __gnu_cxx::__to_xstring<string>(&std::vsnprintf, __n,
+        "%f", __val);
+  }
+
+  [[__nodiscard__]]
+  inline string
+  to_string(long double __val)
+  {
+    const int __n =
+      __gnu_cxx::__numeric_traits<long double>::__max_exponent10 + 20;
+    return __gnu_cxx::__to_xstring<string>(&std::vsnprintf, __n,
+        "%Lf", __val);
+  }
+
+
+
+  inline int
+  stoi(const wstring& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa<long, int>(&std::wcstol, "stoi", __str.c_str(),
+     __idx, __base); }
+
+  inline long
+  stol(const wstring& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::wcstol, "stol", __str.c_str(),
+        __idx, __base); }
+
+  inline unsigned long
+  stoul(const wstring& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::wcstoul, "stoul", __str.c_str(),
+        __idx, __base); }
+
+  inline long long
+  stoll(const wstring& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::wcstoll, "stoll", __str.c_str(),
+        __idx, __base); }
+
+  inline unsigned long long
+  stoull(const wstring& __str, size_t* __idx = 0, int __base = 10)
+  { return __gnu_cxx::__stoa(&std::wcstoull, "stoull", __str.c_str(),
+        __idx, __base); }
+
+
+  inline float
+  stof(const wstring& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::wcstof, "stof", __str.c_str(), __idx); }
+
+  inline double
+  stod(const wstring& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::wcstod, "stod", __str.c_str(), __idx); }
+
+  inline long double
+  stold(const wstring& __str, size_t* __idx = 0)
+  { return __gnu_cxx::__stoa(&std::wcstold, "stold", __str.c_str(), __idx); }
+
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wc++17-extensions"
+  constexpr
+  inline void
+  __to_wstring_numeric(const char* __s, int __len, wchar_t* __wout)
+  {
+
+
+    if constexpr (wchar_t('0') == L'0' && wchar_t('-') == L'-'
+      && wchar_t('.') == L'.' && wchar_t('e') == L'e')
+      {
+ for (int __i = 0; __i < __len; ++__i)
+   __wout[__i] = (wchar_t) __s[__i];
+      }
+    else
+      {
+ wchar_t __wc[256];
+ for (int __i = '0'; __i <= '9'; ++__i)
+   __wc[__i] = L'0' + __i;
+ __wc['.'] = L'.';
+ __wc['+'] = L'+';
+ __wc['-'] = L'-';
+ __wc['a'] = L'a';
+ __wc['b'] = L'b';
+ __wc['c'] = L'c';
+ __wc['d'] = L'd';
+ __wc['e'] = L'e';
+ __wc['f'] = L'f';
+ __wc['n'] = L'n';
+ __wc['p'] = L'p';
+ __wc['x'] = L'x';
+ __wc['A'] = L'A';
+ __wc['B'] = L'B';
+ __wc['C'] = L'C';
+ __wc['D'] = L'D';
+ __wc['E'] = L'E';
+ __wc['F'] = L'F';
+ __wc['N'] = L'N';
+ __wc['P'] = L'P';
+ __wc['X'] = L'X';
+
+ for (int __i = 0; __i < __len; ++__i)
+   __wout[__i] = __wc[(int)__s[__i]];
+      }
+  }
+
+
+  constexpr
+
+  inline wstring
+
+  __to_wstring_numeric(string_view __s)
+
+
+
+  {
+    if constexpr (wchar_t('0') == L'0' && wchar_t('-') == L'-'
+      && wchar_t('.') == L'.' && wchar_t('e') == L'e')
+      return wstring(__s.data(), __s.data() + __s.size());
+    else
+      {
+ wstring __ws;
+ auto __f = __s.data();
+ __ws.__resize_and_overwrite(__s.size(),
+        [__f] (wchar_t* __to, int __n) {
+          std::__to_wstring_numeric(__f, __n, __to);
+          return __n;
+        });
+ return __ws;
+      }
+  }
+#pragma GCC diagnostic pop
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(int __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(unsigned __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(long __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(unsigned long __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(long long __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(unsigned long long __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(float __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(double __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+  [[__nodiscard__]]
+  inline wstring
+  to_wstring(long double __val)
+  { return std::__to_wstring_numeric(std::to_string(__val)); }
+
+
+
+}
+
+}
+
+
+
+
+
+
+
+namespace std
+{
+
+
+
+
+
+  template<typename _CharT, typename _Alloc,
+    typename _StrT = basic_string<_CharT, char_traits<_CharT>, _Alloc>>
+    struct __str_hash_base
+    : public __hash_base<size_t, _StrT>
+    {
+      [[__nodiscard__]]
+      size_t
+      operator()(const _StrT& __s) const noexcept
+      { return _Hash_impl::hash(__s.data(), __s.length() * sizeof(_CharT)); }
+    };
+
+
+
+  template<typename _Alloc>
+    struct hash<basic_string<char, char_traits<char>, _Alloc>>
+    : public __str_hash_base<char, _Alloc>
+    { };
+
+
+  template<typename _Alloc>
+    struct hash<basic_string<wchar_t, char_traits<wchar_t>, _Alloc>>
+    : public __str_hash_base<wchar_t, _Alloc>
+    { };
+
+  template<typename _Alloc>
+    struct __is_fast_hash<hash<basic_string<wchar_t, char_traits<wchar_t>,
+         _Alloc>>>
+    : std::false_type
+    { };
+
+
+
+
+  template<typename _Alloc>
+    struct hash<basic_string<char8_t, char_traits<char8_t>, _Alloc>>
+    : public __str_hash_base<char8_t, _Alloc>
+    { };
+
+
+
+  template<typename _Alloc>
+    struct hash<basic_string<char16_t, char_traits<char16_t>, _Alloc>>
+    : public __str_hash_base<char16_t, _Alloc>
+    { };
+
+
+  template<typename _Alloc>
+    struct hash<basic_string<char32_t, char_traits<char32_t>, _Alloc>>
+    : public __str_hash_base<char32_t, _Alloc>
+    { };
+
+
+
+  template<> struct __is_fast_hash<hash<string>> : std::false_type { };
+  template<> struct __is_fast_hash<hash<wstring>> : std::false_type { };
+  template<> struct __is_fast_hash<hash<u16string>> : std::false_type { };
+  template<> struct __is_fast_hash<hash<u32string>> : std::false_type { };
+
+  template<> struct __is_fast_hash<hash<u8string>> : std::false_type { };
+# 4678 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.h" 3
+  inline namespace literals
+  {
+  inline namespace string_literals
+  {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wliteral-suffix"
+
+
+
+
+
+
+
+    __attribute ((__abi_tag__ ("cxx11"))) constexpr
+    inline basic_string<char>
+    operator""s(const char* __str, size_t __len)
+    { return basic_string<char>{__str, __len}; }
+
+    __attribute ((__abi_tag__ ("cxx11"))) constexpr
+    inline basic_string<wchar_t>
+    operator""s(const wchar_t* __str, size_t __len)
+    { return basic_string<wchar_t>{__str, __len}; }
+
+
+    __attribute ((__abi_tag__ ("cxx11"))) constexpr
+    inline basic_string<char8_t>
+    operator""s(const char8_t* __str, size_t __len)
+    { return basic_string<char8_t>{__str, __len}; }
+
+
+    __attribute ((__abi_tag__ ("cxx11"))) constexpr
+    inline basic_string<char16_t>
+    operator""s(const char16_t* __str, size_t __len)
+    { return basic_string<char16_t>{__str, __len}; }
+
+    __attribute ((__abi_tag__ ("cxx11"))) constexpr
+    inline basic_string<char32_t>
+    operator""s(const char32_t* __str, size_t __len)
+    { return basic_string<char32_t>{__str, __len}; }
+
+
+#pragma GCC diagnostic pop
+  }
+  }
+
+
+
+  namespace __detail::__variant
+  {
+    template<typename> struct _Never_valueless_alt;
+
+
+
+    template<typename _Tp, typename _Traits, typename _Alloc>
+      struct _Never_valueless_alt<std::basic_string<_Tp, _Traits, _Alloc>>
+      : __and_<
+ is_nothrow_move_constructible<std::basic_string<_Tp, _Traits, _Alloc>>,
+ is_nothrow_move_assignable<std::basic_string<_Tp, _Traits, _Alloc>>
+ >::type
+      { };
+  }
+
+
+
+}
+# 55 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 1 3
+# 42 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 3
+       
+# 43 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 3
+
+
+
+namespace std
+{
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    const typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::npos;
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    swap(basic_string& __s) noexcept
+    {
+      if (this == std::__addressof(__s))
+ return;
+
+      _Alloc_traits::_S_on_swap(_M_get_allocator(), __s._M_get_allocator());
+
+      if (_M_is_local())
+ if (__s._M_is_local())
+   {
+     if (length() && __s.length())
+       {
+  _CharT __tmp_data[_S_local_capacity + 1];
+  traits_type::copy(__tmp_data, __s._M_local_buf,
+      __s.length() + 1);
+  traits_type::copy(__s._M_local_buf, _M_local_buf,
+      length() + 1);
+  traits_type::copy(_M_local_buf, __tmp_data,
+      __s.length() + 1);
+       }
+     else if (__s.length())
+       {
+  _M_init_local_buf();
+  traits_type::copy(_M_local_buf, __s._M_local_buf,
+      __s.length() + 1);
+  _M_length(__s.length());
+  __s._M_set_length(0);
+  return;
+       }
+     else if (length())
+       {
+  __s._M_init_local_buf();
+  traits_type::copy(__s._M_local_buf, _M_local_buf,
+      length() + 1);
+  __s._M_length(length());
+  _M_set_length(0);
+  return;
+       }
+   }
+ else
+   {
+     const size_type __tmp_capacity = __s._M_allocated_capacity;
+     __s._M_init_local_buf();
+     traits_type::copy(__s._M_local_buf, _M_local_buf,
+         length() + 1);
+     _M_data(__s._M_data());
+     __s._M_data(__s._M_local_buf);
+     _M_capacity(__tmp_capacity);
+   }
+      else
+ {
+   const size_type __tmp_capacity = _M_allocated_capacity;
+   if (__s._M_is_local())
+     {
+       _M_init_local_buf();
+       traits_type::copy(_M_local_buf, __s._M_local_buf,
+    __s.length() + 1);
+       __s._M_data(_M_data());
+       _M_data(_M_local_buf);
+     }
+   else
+     {
+       pointer __tmp_ptr = _M_data();
+       _M_data(__s._M_data());
+       __s._M_data(__tmp_ptr);
+       _M_capacity(__s._M_allocated_capacity);
+     }
+   __s._M_capacity(__tmp_capacity);
+ }
+
+      const size_type __tmp_length = length();
+      _M_length(__s.length());
+      __s._M_length(__tmp_length);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::pointer
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_create(size_type& __capacity, size_type __old_capacity)
+    {
+
+
+      if (__capacity > max_size())
+ std::__throw_length_error(("basic_string::_M_create"));
+
+
+
+
+      if (__capacity > __old_capacity && __capacity < 2 * __old_capacity)
+ {
+   __capacity = 2 * __old_capacity;
+
+   if (__capacity > max_size())
+     __capacity = max_size();
+ }
+
+
+
+      return _S_allocate(_M_get_allocator(), __capacity + 1);
+    }
+
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    template<typename _InIterator>
+      constexpr
+      void
+      basic_string<_CharT, _Traits, _Alloc>::
+      _M_construct(_InIterator __beg, _InIterator __end,
+     std::input_iterator_tag)
+      {
+ size_type __len = 0;
+ size_type __capacity = size_type(_S_local_capacity);
+
+ _M_init_local_buf();
+
+ while (__beg != __end && __len < __capacity)
+   {
+     _M_local_buf[__len++] = *__beg;
+     ++__beg;
+   }
+
+ struct _Guard
+ {
+   constexpr
+   explicit _Guard(basic_string* __s) : _M_guarded(__s) { }
+
+   constexpr
+   ~_Guard() { if (_M_guarded) _M_guarded->_M_dispose(); }
+
+   basic_string* _M_guarded;
+ } __guard(this);
+
+ while (__beg != __end)
+   {
+     if (__len == __capacity)
+       {
+
+  __capacity = __len + 1;
+  pointer __another = _M_create(__capacity, __len);
+  this->_S_copy(__another, _M_data(), __len);
+  _M_dispose();
+  _M_data(__another);
+  _M_capacity(__capacity);
+       }
+     traits_type::assign(_M_data()[__len++], *__beg);
+     ++__beg;
+   }
+
+ __guard._M_guarded = 0;
+
+ _M_set_length(__len);
+      }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    template<typename _InIterator>
+      constexpr
+      void
+      basic_string<_CharT, _Traits, _Alloc>::
+      _M_construct(_InIterator __beg, _InIterator __end,
+     std::forward_iterator_tag)
+      {
+ size_type __dnew = static_cast<size_type>(std::distance(__beg, __end));
+
+ if (__dnew > size_type(_S_local_capacity))
+   {
+     _M_data(_M_create(__dnew, size_type(0)));
+     _M_capacity(__dnew);
+   }
+ else
+   _M_init_local_buf();
+
+
+ struct _Guard
+ {
+   constexpr
+   explicit _Guard(basic_string* __s) : _M_guarded(__s) { }
+
+   constexpr
+   ~_Guard() { if (_M_guarded) _M_guarded->_M_dispose(); }
+
+   basic_string* _M_guarded;
+ } __guard(this);
+
+ this->_S_copy_chars(_M_data(), __beg, __end);
+
+ __guard._M_guarded = 0;
+
+ _M_set_length(__dnew);
+      }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_construct(size_type __n, _CharT __c)
+    {
+      if (__n > size_type(_S_local_capacity))
+ {
+   _M_data(_M_create(__n, size_type(0)));
+   _M_capacity(__n);
+ }
+      else
+ _M_init_local_buf();
+
+      if (__n)
+ this->_S_assign(_M_data(), __n, __c);
+
+      _M_set_length(__n);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_assign(const basic_string& __str)
+    {
+      if (this != std::__addressof(__str))
+ {
+   const size_type __rsize = __str.length();
+   const size_type __capacity = capacity();
+
+   if (__rsize > __capacity)
+     {
+       size_type __new_capacity = __rsize;
+       pointer __tmp = _M_create(__new_capacity, __capacity);
+       _M_dispose();
+       _M_data(__tmp);
+       _M_capacity(__new_capacity);
+     }
+
+   if (__rsize)
+     this->_S_copy(_M_data(), __str._M_data(), __rsize);
+
+   _M_set_length(__rsize);
+ }
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    reserve(size_type __res)
+    {
+      const size_type __capacity = capacity();
+
+
+
+
+      if (__res <= __capacity)
+ return;
+
+      pointer __tmp = _M_create(__res, __capacity);
+      this->_S_copy(__tmp, _M_data(), length() + 1);
+      _M_dispose();
+      _M_data(__tmp);
+      _M_capacity(__res);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_mutate(size_type __pos, size_type __len1, const _CharT* __s,
+       size_type __len2)
+    {
+      const size_type __how_much = length() - __pos - __len1;
+
+      size_type __new_capacity = length() + __len2 - __len1;
+      pointer __r = _M_create(__new_capacity, capacity());
+
+      if (__pos)
+ this->_S_copy(__r, _M_data(), __pos);
+      if (__s && __len2)
+ this->_S_copy(__r + __pos, __s, __len2);
+      if (__how_much)
+ this->_S_copy(__r + __pos + __len2,
+        _M_data() + __pos + __len1, __how_much);
+
+      _M_dispose();
+      _M_data(__r);
+      _M_capacity(__new_capacity);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_erase(size_type __pos, size_type __n)
+    {
+      const size_type __how_much = length() - __pos - __n;
+
+      if (__how_much && __n)
+ this->_S_move(_M_data() + __pos, _M_data() + __pos + __n, __how_much);
+
+      _M_set_length(length() - __n);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    reserve()
+    {
+      if (_M_is_local())
+ return;
+
+      const size_type __length = length();
+      const size_type __capacity = _M_allocated_capacity;
+
+      if (__length <= size_type(_S_local_capacity))
+ {
+   _M_init_local_buf();
+   this->_S_copy(_M_local_buf, _M_data(), __length + 1);
+   _M_destroy(__capacity);
+   _M_data(_M_local_data());
+ }
+
+      else if (__length < __capacity)
+ try
+   {
+     pointer __tmp = _S_allocate(_M_get_allocator(), __length + 1);
+     this->_S_copy(__tmp, _M_data(), __length + 1);
+     _M_dispose();
+     _M_data(__tmp);
+     _M_capacity(__length);
+   }
+ catch (const __cxxabiv1::__forced_unwind&)
+   { throw; }
+ catch (...)
+   { }
+
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    void
+    basic_string<_CharT, _Traits, _Alloc>::
+    resize(size_type __n, _CharT __c)
+    {
+      const size_type __size = this->size();
+      if (__size < __n)
+ this->append(__n - __size, __c);
+      else if (__n < __size)
+ this->_M_set_length(__n);
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    basic_string<_CharT, _Traits, _Alloc>&
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_append(const _CharT* __s, size_type __n)
+    {
+      const size_type __len = __n + this->size();
+
+      if (__len <= this->capacity())
+ {
+   if (__n)
+     this->_S_copy(this->_M_data() + this->size(), __s, __n);
+ }
+      else
+ this->_M_mutate(this->size(), size_type(0), __s, __n);
+
+      this->_M_set_length(__len);
+      return *this;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    template<typename _InputIterator>
+      constexpr
+      basic_string<_CharT, _Traits, _Alloc>&
+      basic_string<_CharT, _Traits, _Alloc>::
+      _M_replace_dispatch(const_iterator __i1, const_iterator __i2,
+     _InputIterator __k1, _InputIterator __k2,
+     std::__false_type)
+      {
+
+
+ const basic_string __s(__k1, __k2, this->get_allocator());
+ const size_type __n1 = __i2 - __i1;
+ return _M_replace(__i1 - begin(), __n1, __s._M_data(),
+     __s.size());
+      }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    basic_string<_CharT, _Traits, _Alloc>&
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_replace_aux(size_type __pos1, size_type __n1, size_type __n2,
+     _CharT __c)
+    {
+      _M_check_length(__n1, __n2, "basic_string::_M_replace_aux");
+
+      const size_type __old_size = this->size();
+      const size_type __new_size = __old_size + __n2 - __n1;
+
+      if (__new_size <= this->capacity())
+ {
+   pointer __p = this->_M_data() + __pos1;
+
+   const size_type __how_much = __old_size - __pos1 - __n1;
+   if (__how_much && __n1 != __n2)
+     this->_S_move(__p + __n2, __p + __n1, __how_much);
+ }
+      else
+ this->_M_mutate(__pos1, __n1, 0, __n2);
+
+      if (__n2)
+ this->_S_assign(this->_M_data() + __pos1, __n2, __c);
+
+      this->_M_set_length(__new_size);
+      return *this;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    __attribute__((__noinline__, __noclone__, __cold__)) void
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_replace_cold(pointer __p, size_type __len1, const _CharT* __s,
+      const size_type __len2, const size_type __how_much)
+    {
+
+      if (__len2 && __len2 <= __len1)
+ this->_S_move(__p, __s, __len2);
+      if (__how_much && __len1 != __len2)
+ this->_S_move(__p + __len2, __p + __len1, __how_much);
+      if (__len2 > __len1)
+ {
+   if (__s + __len2 <= __p + __len1)
+     this->_S_move(__p, __s, __len2);
+   else if (__s >= __p + __len1)
+     {
+
+
+       const size_type __poff = (__s - __p) + (__len2 - __len1);
+       this->_S_copy(__p, __p + __poff, __len2);
+     }
+   else
+     {
+       const size_type __nleft = (__p + __len1) - __s;
+       this->_S_move(__p, __s, __nleft);
+       this->_S_copy(__p + __nleft, __p + __len2, __len2 - __nleft);
+     }
+ }
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    basic_string<_CharT, _Traits, _Alloc>&
+    basic_string<_CharT, _Traits, _Alloc>::
+    _M_replace(size_type __pos, size_type __len1, const _CharT* __s,
+        const size_type __len2)
+    {
+      _M_check_length(__len1, __len2, "basic_string::_M_replace");
+
+      const size_type __old_size = this->size();
+      const size_type __new_size = __old_size + __len2 - __len1;
+
+      if (__new_size <= this->capacity())
+ {
+   pointer __p = this->_M_data() + __pos;
+
+   const size_type __how_much = __old_size - __pos - __len1;
+
+   if (std::is_constant_evaluated())
+     {
+       auto __newp = _S_allocate(_M_get_allocator(), __new_size);
+       _S_copy(__newp, this->_M_data(), __pos);
+       _S_copy(__newp + __pos, __s, __len2);
+       _S_copy(__newp + __pos + __len2, __p + __len1, __how_much);
+       _S_copy(this->_M_data(), __newp, __new_size);
+       this->_M_get_allocator().deallocate(__newp, __new_size);
+     }
+   else
+
+   if (__builtin_expect(_M_disjunct(__s), true))
+     {
+       if (__how_much && __len1 != __len2)
+  this->_S_move(__p + __len2, __p + __len1, __how_much);
+       if (__len2)
+  this->_S_copy(__p, __s, __len2);
+     }
+   else
+     _M_replace_cold(__p, __len1, __s, __len2, __how_much);
+ }
+      else
+ this->_M_mutate(__pos, __len1, __s, __len2);
+
+      this->_M_set_length(__new_size);
+      return *this;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    copy(_CharT* __s, size_type __n, size_type __pos) const
+    {
+      _M_check(__pos, "basic_string::copy");
+      __n = _M_limit(__pos, __n);
+      ;
+      if (__n)
+ _S_copy(__s, _M_data() + __pos, __n);
+
+      return __n;
+    }
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+  template<typename _Operation>
+    [[__gnu__::__always_inline__]]
+    constexpr void
+    basic_string<_CharT, _Traits, _Alloc>::
+    __resize_and_overwrite(const size_type __n, _Operation __op)
+    { resize_and_overwrite<_Operation&>(__n, __op); }
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+  template<typename _Operation>
+    constexpr void
+    basic_string<_CharT, _Traits, _Alloc>::
+
+    resize_and_overwrite(const size_type __n, _Operation __op)
+
+
+
+    {
+      reserve(__n);
+      _CharT* const __p = _M_data();
+
+      if (std::__is_constant_evaluated() && __n > size())
+ traits_type::assign(__p + size(), __n - size(), _CharT());
+
+      struct _Terminator {
+ constexpr ~_Terminator() { _M_this->_M_set_length(_M_r); }
+ basic_string* _M_this;
+ size_type _M_r;
+      };
+      _Terminator __term{this, 0};
+      auto __r = std::move(__op)(__p + 0, __n + 0);
+
+      static_assert(ranges::__detail::__is_integer_like<decltype(__r)>);
+
+
+
+
+      ;
+      __term._M_r = size_type(__r);
+      if (__term._M_r > __n)
+ __builtin_unreachable();
+    }
+# 623 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      const size_type __size = this->size();
+
+      if (__n == 0)
+ return __pos <= __size ? __pos : npos;
+      if (__pos >= __size)
+ return npos;
+
+      const _CharT __elem0 = __s[0];
+      const _CharT* const __data = data();
+      const _CharT* __first = __data + __pos;
+      const _CharT* const __last = __data + __size;
+      size_type __len = __size - __pos;
+
+      while (__len >= __n)
+ {
+
+   __first = traits_type::find(__first, __len - __n + 1, __elem0);
+   if (!__first)
+     return npos;
+
+
+
+   if (traits_type::compare(__first, __s, __n) == 0)
+     return __first - __data;
+   __len = __last - ++__first;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __ret = npos;
+      const size_type __size = this->size();
+      if (__pos < __size)
+ {
+   const _CharT* __data = _M_data();
+   const size_type __n = __size - __pos;
+   const _CharT* __p = traits_type::find(__data + __pos, __n, __c);
+   if (__p)
+     __ret = __p - __data;
+ }
+      return __ret;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    rfind(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      const size_type __size = this->size();
+      if (__n <= __size)
+ {
+   __pos = std::min(size_type(__size - __n), __pos);
+   const _CharT* __data = _M_data();
+   do
+     {
+       if (traits_type::compare(__data + __pos, __s, __n) == 0)
+  return __pos;
+     }
+   while (__pos-- > 0);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    rfind(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __size = this->size();
+      if (__size)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   for (++__size; __size-- > 0; )
+     if (traits_type::eq(_M_data()[__size], __c))
+       return __size;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_first_of(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      for (; __n && __pos < this->size(); ++__pos)
+ {
+   const _CharT* __p = traits_type::find(__s, __n, _M_data()[__pos]);
+   if (__p)
+     return __pos;
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_last_of(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      size_type __size = this->size();
+      if (__size && __n)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (traits_type::find(__s, __n, _M_data()[__size]))
+  return __size;
+     }
+   while (__size-- != 0);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_first_not_of(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      for (; __pos < this->size(); ++__pos)
+ if (!traits_type::find(__s, __n, _M_data()[__pos]))
+   return __pos;
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_first_not_of(_CharT __c, size_type __pos) const noexcept
+    {
+      for (; __pos < this->size(); ++__pos)
+ if (!traits_type::eq(_M_data()[__pos], __c))
+   return __pos;
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_last_not_of(const _CharT* __s, size_type __pos, size_type __n) const
+    noexcept
+    {
+      ;
+      size_type __size = this->size();
+      if (__size)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (!traits_type::find(__s, __n, _M_data()[__size]))
+  return __size;
+     }
+   while (__size--);
+ }
+      return npos;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    constexpr
+    typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    basic_string<_CharT, _Traits, _Alloc>::
+    find_last_not_of(_CharT __c, size_type __pos) const noexcept
+    {
+      size_type __size = this->size();
+      if (__size)
+ {
+   if (--__size > __pos)
+     __size = __pos;
+   do
+     {
+       if (!traits_type::eq(_M_data()[__size], __c))
+  return __size;
+     }
+   while (__size--);
+ }
+      return npos;
+    }
+
+
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    basic_istream<_CharT, _Traits>&
+    operator>>(basic_istream<_CharT, _Traits>& __in,
+        basic_string<_CharT, _Traits, _Alloc>& __str)
+    {
+      typedef basic_istream<_CharT, _Traits> __istream_type;
+      typedef basic_string<_CharT, _Traits, _Alloc> __string_type;
+      typedef typename __istream_type::ios_base __ios_base;
+      typedef typename __istream_type::int_type __int_type;
+      typedef typename __string_type::size_type __size_type;
+      typedef ctype<_CharT> __ctype_type;
+      typedef typename __ctype_type::ctype_base __ctype_base;
+
+      __size_type __extracted = 0;
+      typename __ios_base::iostate __err = __ios_base::goodbit;
+      typename __istream_type::sentry __cerb(__in, false);
+      if (__cerb)
+ {
+   try
+     {
+
+       __str.erase();
+       _CharT __buf[128];
+       __size_type __len = 0;
+       const streamsize __w = __in.width();
+       const __size_type __n = __w > 0 ? static_cast<__size_type>(__w)
+                                : __str.max_size();
+       const __ctype_type& __ct = use_facet<__ctype_type>(__in.getloc());
+       const __int_type __eof = _Traits::eof();
+       __int_type __c = __in.rdbuf()->sgetc();
+
+       while (__extracted < __n
+       && !_Traits::eq_int_type(__c, __eof)
+       && !__ct.is(__ctype_base::space,
+     _Traits::to_char_type(__c)))
+  {
+    if (__len == sizeof(__buf) / sizeof(_CharT))
+      {
+        __str.append(__buf, sizeof(__buf) / sizeof(_CharT));
+        __len = 0;
+      }
+    __buf[__len++] = _Traits::to_char_type(__c);
+    ++__extracted;
+    __c = __in.rdbuf()->snextc();
+  }
+       __str.append(__buf, __len);
+
+       if (__extracted < __n && _Traits::eq_int_type(__c, __eof))
+  __err |= __ios_base::eofbit;
+       __in.width(0);
+     }
+   catch(__cxxabiv1::__forced_unwind&)
+     {
+       __in._M_setstate(__ios_base::badbit);
+       throw;
+     }
+   catch(...)
+     {
+
+
+
+       __in._M_setstate(__ios_base::badbit);
+     }
+ }
+
+      if (!__extracted)
+ __err |= __ios_base::failbit;
+      if (__err)
+ __in.setstate(__err);
+      return __in;
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    basic_istream<_CharT, _Traits>&
+    getline(basic_istream<_CharT, _Traits>& __in,
+     basic_string<_CharT, _Traits, _Alloc>& __str, _CharT __delim)
+    {
+      typedef basic_istream<_CharT, _Traits> __istream_type;
+      typedef basic_string<_CharT, _Traits, _Alloc> __string_type;
+      typedef typename __istream_type::ios_base __ios_base;
+      typedef typename __istream_type::int_type __int_type;
+      typedef typename __string_type::size_type __size_type;
+
+      __size_type __extracted = 0;
+      const __size_type __n = __str.max_size();
+      typename __ios_base::iostate __err = __ios_base::goodbit;
+      typename __istream_type::sentry __cerb(__in, true);
+      if (__cerb)
+ {
+   try
+     {
+       __str.erase();
+       const __int_type __idelim = _Traits::to_int_type(__delim);
+       const __int_type __eof = _Traits::eof();
+       __int_type __c = __in.rdbuf()->sgetc();
+
+       while (__extracted < __n
+       && !_Traits::eq_int_type(__c, __eof)
+       && !_Traits::eq_int_type(__c, __idelim))
+  {
+    __str += _Traits::to_char_type(__c);
+    ++__extracted;
+    __c = __in.rdbuf()->snextc();
+  }
+
+       if (_Traits::eq_int_type(__c, __eof))
+  __err |= __ios_base::eofbit;
+       else if (_Traits::eq_int_type(__c, __idelim))
+  {
+    ++__extracted;
+    __in.rdbuf()->sbumpc();
+  }
+       else
+  __err |= __ios_base::failbit;
+     }
+   catch(__cxxabiv1::__forced_unwind&)
+     {
+       __in._M_setstate(__ios_base::badbit);
+       throw;
+     }
+   catch(...)
+     {
+
+
+
+       __in._M_setstate(__ios_base::badbit);
+     }
+ }
+      if (!__extracted)
+ __err |= __ios_base::failbit;
+      if (__err)
+ __in.setstate(__err);
+      return __in;
+    }
+# 985 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 3
+  extern template void
+    basic_string<char>::_M_replace_cold(char *, size_type, const char*,
+     const size_type, const size_type);
+
+
+  extern template
+    basic_istream<char>&
+    operator>>(basic_istream<char>&, string&);
+  extern template
+    basic_ostream<char>&
+    operator<<(basic_ostream<char>&, const string&);
+  extern template
+    basic_istream<char>&
+    getline(basic_istream<char>&, string&, char);
+  extern template
+    basic_istream<char>&
+    getline(basic_istream<char>&, string&);
+# 1011 "C:/msys64/mingw64/include/c++/14.2.0/bits/basic_string.tcc" 3
+  extern template void
+    basic_string<wchar_t>::_M_replace_cold(wchar_t*, size_type, const wchar_t*,
+        const size_type, const size_type);
+
+
+  extern template
+    basic_istream<wchar_t>&
+    operator>>(basic_istream<wchar_t>&, wstring&);
+  extern template
+    basic_ostream<wchar_t>&
+    operator<<(basic_ostream<wchar_t>&, const wstring&);
+  extern template
+    basic_istream<wchar_t>&
+    getline(basic_istream<wchar_t>&, wstring&, wchar_t);
+  extern template
+    basic_istream<wchar_t>&
+    getline(basic_istream<wchar_t>&, wstring&);
+
+
+
+
+}
+# 56 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+# 64 "C:/msys64/mingw64/include/c++/14.2.0/string" 3
+# 1 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 1 3
+# 47 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+       
+# 48 "C:/msys64/mingw64/include/c++/14.2.0/bits/version.h" 3
+# 65 "C:/msys64/mingw64/include/c++/14.2.0/string" 2 3
+
+
+
+namespace std
+{
+
+  namespace pmr {
+    template<typename _CharT, typename _Traits = char_traits<_CharT>>
+      using basic_string = std::basic_string<_CharT, _Traits,
+          polymorphic_allocator<_CharT>>;
+    using string = basic_string<char>;
+
+    using u8string = basic_string<char8_t>;
+
+    using u16string = basic_string<char16_t>;
+    using u32string = basic_string<char32_t>;
+    using wstring = basic_string<wchar_t>;
+  }
+
+}
+
+
+
+namespace std
+{
+
+
+  template<typename _CharT, typename _Traits, typename _Alloc,
+    typename _Predicate>
+    constexpr
+    inline typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    erase_if(basic_string<_CharT, _Traits, _Alloc>& __cont, _Predicate __pred)
+    {
+      using namespace __gnu_cxx;
+      const auto __osz = __cont.size();
+      const auto __end = __cont.end();
+      auto __removed = std::__remove_if(__cont.begin(), __end,
+     __ops::__pred_iter(std::ref(__pred)));
+      __cont.erase(__removed, __end);
+      return __osz - __cont.size();
+    }
+
+  template<typename _CharT, typename _Traits, typename _Alloc, typename _Up>
+    constexpr
+    inline typename basic_string<_CharT, _Traits, _Alloc>::size_type
+    erase(basic_string<_CharT, _Traits, _Alloc>& __cont, const _Up& __value)
+    {
+      using namespace __gnu_cxx;
+      const auto __osz = __cont.size();
+      const auto __end = __cont.end();
+      auto __removed = std::__remove_if(__cont.begin(), __end,
+     __ops::__iter_equals_val(__value));
+      __cont.erase(__removed, __end);
+      return __osz - __cont.size();
+    }
+
+}
+# 5 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h" 1
+# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
+
+# 10 "C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h"
+class Tile {
+private:
+    std::vector<std::vector<int>> shape;
+public:
+
+    explicit Tile(const std::vector<std::vector<int>> &shape);
+    [[nodiscard]] std::vector<std::vector<int>> getter_shape() const;
+    void setter_shape(const std::vector<std::vector<int>> &shape);
+
+    void rotate();
+    void flip();
+
+
+};
+# 6 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 2
+
+class Player {
+private:
+    std::string name;
+    char color;
+    int id;
+    int tile_exchange = 1;
+    std::vector<std::vector<int>> starting_tile;
+public:
+    Player(std::string name, char color, int id);
+
+    [[nodiscard]] std::string& getter_name();
+    [[nodiscard]] char getter_color() const;
+    [[nodiscard]] int getter_id() const;
+    [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
+
+    void setter_tile_exchange(int tile_exchange);
+};
+# 9 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
+
+
+
+class Game {
+private:
+    int nb_players = 0;
+    int player_turn = 1;
+    int nb_rounds = 0;
+    Board game_board;
+    std::vector<Player> players;
+    std::vector<Tile> tiles;
+public:
+    [[nodiscard]] int& getter_nb_players();
+    [[nodiscard]] int& getter_player_turn();
+    [[nodiscard]] int& getter_nb_rounds();
+    [[nodiscard]] Board& getter_game_board();
+    [[nodiscard]] Player& getter_players(int i);
+    Tile& getter_tiles(int i);
+    void setter_nb_players(int nb);
+    void setter_player_turn();
+    void setter_nb_rounds();
+    void setter_game_board();
+    void setter_players(const Player& player);
+    void setter_tiles(const Tile &tile);
+    void place_initial_stones();
+    void place_initial_tile_exchanges();
+    void place_initial_robberies();
+    void place_Rock(Player &player, int x, int y);
+    static void generate_tile(Game &game);
+    void initialize_game();
+    void remove_tile(int index);
+    void setter_stone();
+
+};
+# 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
 
 
 
@@ -28204,7 +37808,49 @@ void Board::setter_case(const int x, const int y, const char c) {
 }
 
 
-bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color) {
+
+
+
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
+
+    if (x < 0 || y < 0 || x + tile.size() > board.size() || y + tile[0].size() > board[0].size()) {
+        return false;
+    }
+
+    bool adjacent_to_player_tile = false;
+
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                if (board[x + i][y + j] != '.') {
+                    return false;
+                }
+
+                if ((x + i > 0 && board[x + i - 1][y + j] == '0' + player_id) ||
+                    (x + i < board.size() - 1 && board[x + i + 1][y + j] == '0' + player_id) ||
+                    (y + j > 0 && board[x + i][y + j - 1] == '0' + player_id) ||
+                    (y + j < board[0].size() - 1 && board[x + i][y + j + 1] == '0' + player_id)) {
+                    adjacent_to_player_tile = true;
+                    }
+            }
+        }
+    }
+
+    if (!adjacent_to_player_tile) {
+        return false;
+    }
+
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                board[x + i][y + j] = '0' + player_id;
+            }
+        }
+    }
+    return true;
+}
+
+bool Board::place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
@@ -28217,7 +37863,7 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
-                board[x + i][y + j] = player_color;
+                board[x + i][y + j] = '0' + player_id;
             }
         }
     }

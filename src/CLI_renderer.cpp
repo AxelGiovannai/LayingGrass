@@ -124,9 +124,10 @@ void CLI_renderer::display_game(Game &game) {
         do {
             std::cout << "Choice :" << std::endl;
             std::cin >> action;
-        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q');
+        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
         switch (action) {
+            case 'p':
             case 'P':
                 int x, y;
                 do {
@@ -137,20 +138,26 @@ void CLI_renderer::display_game(Game &game) {
                     std::cout << "Y :" << std::endl;
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_id());                    break;
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                game.remove_tile(0);
+            break;
+            case 'r':
             case 'R':
                 game.getter_tiles(0).rotate();
                 refresh_terminal();
                 display_game(game);
                     break;
+            case 'f':
             case 'F':
             game.getter_tiles(0).flip();
             refresh_terminal();
             display_game(game);
                     break;
+            case 'e':
             case 'E':
                 //exchange
                     break;
+            case 'q':
             case 'Q':
                 exit(0);
                     break;
@@ -177,12 +184,12 @@ void CLI_renderer::first_turn(Game &game) {
             std::cout << "Y: ";
             std::cin >> y;
         } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-        if (game.getter_game_board().place_tile(player.getter_starting_tile(), x - 1, y - 1, player.getter_id())) {
+        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), x - 1, y - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
             display_board(game);
         } else {
             std::cout << "Invalid placement. Try again." << std::endl;
-            --i; // Retry the same player
+            --i;
         }
     }
 }

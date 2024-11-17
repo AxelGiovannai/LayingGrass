@@ -37698,13 +37698,17 @@ class Player {
 private:
     std::string name;
     char color;
+    int id;
     int tile_exchange = 1;
+    std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color);
+    Player(std::string name, char color, int id);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
+    [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
 
     void setter_tile_exchange(int tile_exchange);
 };
@@ -72285,8 +72289,11 @@ namespace std
 
 
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/src/Player.cpp"
-Player::Player(std::string name, const char color) : name(std::move(name)), color(color) {}
-
+Player::Player(std::string name, const char color, int id) : name(std::move(name)), color(color), id(id) {
+    starting_tile = {
+        {1}
+    };
+}
 char Player::getter_color() const {
     return color;
 }
@@ -72295,10 +72302,18 @@ std::string& Player::getter_name(){
     return name;
 }
 
+int Player::getter_id() const {
+    return id;
+}
+
 int& Player::getter_tile_exchange(){
     return tile_exchange;
 }
 
 void Player::setter_tile_exchange(const int tile_exchange) {
     this->tile_exchange = tile_exchange -1;
+}
+
+std::vector<std::vector<int>> Player::getter_starting_tile() const {
+    return starting_tile;
 }

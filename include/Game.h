@@ -36,7 +36,9 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void remove_tile(int index);
     void setter_stone();
+
 };
 
 

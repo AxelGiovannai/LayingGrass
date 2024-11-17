@@ -79498,7 +79498,8 @@ public:
     [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
-    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -79528,13 +79529,17 @@ class Player {
 private:
     std::string name;
     char color;
+    int id;
     int tile_exchange = 1;
+    std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color);
+    Player(std::string name, char color, int id);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
+    [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
 
     void setter_tile_exchange(int tile_exchange);
 };
@@ -79569,7 +79574,9 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void remove_tile(int index);
     void setter_stone();
+
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
@@ -79656,7 +79663,7 @@ void Game::place_initial_stones() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'S');
+        game_board.setter_case(x, y, 'P');
     }
 }
 
@@ -79669,7 +79676,7 @@ void Game::place_initial_tile_exchanges() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'T');
+        game_board.setter_case(x, y, 'E');
     }
 }
 
@@ -79682,11 +79689,15 @@ void Game::place_initial_robberies() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'R');
+        game_board.setter_case(x, y, 'V');
     }
 }
 
-
+void Game::remove_tile(int index) {
+    if (index >= 0 && index < tiles.size()) {
+        tiles.erase(tiles.begin() + index);
+    }
+}
 
 void Game::generate_tile(Game &game) {
     std::vector<Tile> All_Shapes;

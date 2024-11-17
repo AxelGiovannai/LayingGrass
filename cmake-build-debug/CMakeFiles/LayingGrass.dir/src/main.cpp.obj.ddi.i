@@ -72113,7 +72113,8 @@ public:
     [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
-    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -72143,13 +72144,17 @@ class Player {
 private:
     std::string name;
     char color;
+    int id;
     int tile_exchange = 1;
+    std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color);
+    Player(std::string name, char color, int id);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
+    [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
 
     void setter_tile_exchange(int tile_exchange);
 };
@@ -72184,7 +72189,9 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void remove_tile(int index);
     void setter_stone();
+
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72219,14 +72226,12 @@ int main() {
     const int number_rounds = 10;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
-    while(game.getter_nb_rounds()< number_rounds){ {
+    while (game.getter_nb_rounds() < number_rounds) {
         CLI_renderer::refresh_terminal();
         CLI_renderer::display_game(game);
         game.setter_player_turn();
         game.setter_nb_rounds();
     }
-        std::cout << "PROUT FINI ! :p" << std::endl;
-
-        return 0;
-    }
+    std::cout << "PROUT FINI ! :p" << std::endl;
+    return 0;
 }

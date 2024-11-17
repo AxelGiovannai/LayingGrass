@@ -28193,7 +28193,8 @@ public:
     [[nodiscard]] char& getter_case(int x, int y);
     void setter_board(int x, int y);
     void setter_case(int x, int y, char c);
-    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_color);
+    bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -37741,13 +37742,17 @@ class Player {
 private:
     std::string name;
     char color;
+    int id;
     int tile_exchange = 1;
+    std::vector<std::vector<int>> starting_tile;
 public:
-    Player(std::string name, char color);
+    Player(std::string name, char color, int id);
 
     [[nodiscard]] std::string& getter_name();
     [[nodiscard]] char getter_color() const;
+    [[nodiscard]] int getter_id() const;
     [[nodiscard]] int& getter_tile_exchange();
+    [[nodiscard]] std::vector<std::vector<int>> getter_starting_tile() const;
 
     void setter_tile_exchange(int tile_exchange);
 };
@@ -37782,7 +37787,9 @@ public:
     void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
+    void remove_tile(int index);
     void setter_stone();
+
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
 
@@ -72470,7 +72477,7 @@ void CLI_renderer::display_menu(Game &game) {
         std::string name;
         std::cout << "Player " << i + 1 << " name: ";
         std::cin >> name;
-        game.setter_players(Player(name, colors[i]));
+        game.setter_players(Player(name, colors[i], i + 1));
     }
     game.setter_game_board();
     Game::generate_tile(game);
@@ -72531,9 +72538,10 @@ void CLI_renderer::display_game(Game &game) {
         do {
             std::cout << "Choice :" << std::endl;
             std::cin >> action;
-        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q');
+        } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
         switch (action) {
+            case 'p':
             case 'P':
                 int x, y;
                 do {
@@ -72544,21 +72552,26 @@ void CLI_renderer::display_game(Game &game) {
                     std::cout << "Y :" << std::endl;
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), x - 1, y - 1, current_player.getter_color());
-                    break;
+                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                game.remove_tile(0);
+            break;
+            case 'r':
             case 'R':
                 game.getter_tiles(0).rotate();
                 refresh_terminal();
                 display_game(game);
                     break;
+            case 'f':
             case 'F':
             game.getter_tiles(0).flip();
             refresh_terminal();
             display_game(game);
                     break;
+            case 'e':
             case 'E':
 
                     break;
+            case 'q':
             case 'Q':
                 exit(0);
                     break;
@@ -72567,6 +72580,30 @@ void CLI_renderer::display_game(Game &game) {
             break;
         }
     }
-void CLI_renderer::first_turn(Game &game) {
 
+
+void CLI_renderer::first_turn(Game &game) {
+    refresh_terminal();
+    display_board(game);
+
+    for (int i = 0; i < game.getter_nb_players(); ++i) {
+        Player &player = game.getter_players(i);
+        std::cout << "Player " << player.getter_name() << " (" << player.getter_id() << "), place your starting tile." << std::endl;
+        int x, y;
+        do {
+            std::cout << "X: ";
+            std::cin >> x;
+        } while (x < 1 || x > game.getter_game_board().getter_board().size());
+        do {
+            std::cout << "Y: ";
+            std::cin >> y;
+        } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), x - 1, y - 1, static_cast<char>(player.getter_id()))) {
+            refresh_terminal();
+            display_board(game);
+        } else {
+            std::cout << "Invalid placement. Try again." << std::endl;
+            --i;
+        }
+    }
 }
