@@ -184,7 +184,7 @@ void CLI_renderer::first_turn(Game &game) {
             std::cout << "Y: ";
             std::cin >> y;
         } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), x - 1, y - 1, static_cast<char>(player.getter_id()))) {
+        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), y - 1, x - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
             display_board(game);
         } else {
