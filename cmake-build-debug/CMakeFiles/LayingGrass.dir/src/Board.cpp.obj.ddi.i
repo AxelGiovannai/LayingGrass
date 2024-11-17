@@ -28181,6 +28181,7 @@ public:
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 6 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 1
@@ -37784,6 +37785,7 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
+    void player_turn_round();
 
 };
 # 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
@@ -37811,8 +37813,7 @@ void Board::setter_case(const int x, const int y, const char c) {
 
 
 
-bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
-
+bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
     if (x < 0 || y < 0 || x + tile.size() > board.size() || y + tile[0].size() > board[0].size()) {
         return false;
     }
@@ -37831,12 +37832,16 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
                     (y + j > 0 && board[x + i][y + j - 1] == '0' + player_id) ||
                     (y + j < board[0].size() - 1 && board[x + i][y + j + 1] == '0' + player_id)) {
                     adjacent_to_player_tile = true;
-                    }
+                }
             }
         }
     }
 
-    if (!adjacent_to_player_tile) {
+    return adjacent_to_player_tile;
+}
+
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
+    if (!can_place_tile(tile, x, y, player_id)) {
         return false;
     }
 

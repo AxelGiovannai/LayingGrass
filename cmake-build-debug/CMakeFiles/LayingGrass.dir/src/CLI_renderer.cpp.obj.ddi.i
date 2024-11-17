@@ -28195,6 +28195,7 @@ public:
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -37789,6 +37790,7 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
+    void player_turn_round();
 
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
@@ -72491,6 +72493,8 @@ void CLI_renderer::display_game(Game &game) {
         std::cerr << "Invalid player turn" << std::endl;
         return;
     }
+    std::cout << "player_turn: " << game.getter_nb_players() << std::endl;
+    std:: cout << "nb_turn: " << game.getter_nb_rounds() << std::endl;
 
     display_board(game);
     Player current_player = game.getter_players(player_turn - 1);
@@ -72533,10 +72537,10 @@ void CLI_renderer::display_game(Game &game) {
     }
 
         std::cout << std::endl;
-        std::cout <<"| [P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<") |" << std::endl;
+        std::cout <<"[P] Place | [R] Rotate | [F] Flip | [E] Exchange("<< current_player.getter_tile_exchange() <<")" << std::endl;
         char action;
         do {
-            std::cout << "Choice :" << std::endl;
+            std::cout << "Choice: ";
             std::cin >> action;
         } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
@@ -72545,15 +72549,20 @@ void CLI_renderer::display_game(Game &game) {
             case 'P':
                 int x, y;
                 do {
-                    std::cout << "X :" << std::endl;
+                    std::cout << "X: ";
                     std::cin >> x;
                 } while (x < 1 || x > game.getter_game_board().getter_board().size());
                 do {
-                    std::cout << "Y :" << std::endl;
+                    std::cout << "Y: ";
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
-                game.remove_tile(0);
+                if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
+                    game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                    game.remove_tile(0);
+                } else {
+                    refresh_terminal();
+                    display_game(game);
+                }
             break;
             case 'r':
             case 'R':
@@ -72598,7 +72607,7 @@ void CLI_renderer::first_turn(Game &game) {
             std::cout << "Y: ";
             std::cin >> y;
         } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), x - 1, y - 1, static_cast<char>(player.getter_id()))) {
+        if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), y - 1, x - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
             display_board(game);
         } else {
@@ -72606,4 +72615,5 @@ void CLI_renderer::first_turn(Game &game) {
             --i;
         }
     }
+
 }

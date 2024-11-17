@@ -72115,6 +72115,7 @@ public:
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -72191,6 +72192,7 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
+    void player_turn_round();
 
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
@@ -72229,8 +72231,7 @@ int main() {
     while (game.getter_nb_rounds() < number_rounds) {
         CLI_renderer::refresh_terminal();
         CLI_renderer::display_game(game);
-        game.setter_player_turn();
-        game.setter_nb_rounds();
+        game.player_turn_round();
     }
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;

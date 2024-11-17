@@ -79500,6 +79500,7 @@ public:
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h" 1
@@ -79576,6 +79577,7 @@ public:
     void initialize_game();
     void remove_tile(int index);
     void setter_stone();
+    void player_turn_round();
 
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
@@ -79609,15 +79611,25 @@ void Game::setter_nb_players(const int nb) {
 }
 
 void Game::setter_player_turn() {
-    player_turn = (player_turn % nb_players) + 1;
+    this->player_turn;
+
 }
 
 void Game::setter_nb_rounds() {
-    if ((nb_players = player_turn)) {
-        player_turn = 1;
+    this->nb_rounds;
+}
+
+void Game::player_turn_round() {
+
+    player_turn = (player_turn % nb_players) + 1;
+
+
+    if (player_turn == 1) {
         nb_rounds++;
     }
 }
+
+
 
 void Game::setter_game_board() {
    if (nb_players < 5) {

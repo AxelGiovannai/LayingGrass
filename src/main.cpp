@@ -13,8 +13,7 @@ int main() {
     while (game.getter_nb_rounds() < number_rounds) {
         CLI_renderer::refresh_terminal();
         CLI_renderer::display_game(game);
-        game.setter_player_turn();
-        game.setter_nb_rounds();
+        game.player_turn_round();
     }
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;
