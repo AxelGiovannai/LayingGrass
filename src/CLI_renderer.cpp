@@ -77,15 +77,18 @@ void CLI_renderer::display_game(Game &game) {
         std::cerr << "Invalid player turn" << std::endl;
         return;
     }
-    std::cout << "Player turn: " << player_turn << std::endl;
-    std::cout << "Number of rounds: " << game.getter_nb_rounds() << std::endl;
 
-    display_board(game);
+    const std::string RED = "\033[31m";
+    const std::string RESET = "\033[0m";
+
     Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
-    std::cout << "Player turn: " << player_name << std::endl;
+    std::cout << RED << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() << RESET << std::endl;
+    std::cout << " " << std::endl;
+    display_board(game);
 
-    std::cout << "playable Tile : " << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "Playable Tile: " << std::endl;
     for (const auto tile_shape = game.getter_tiles(0).getter_shape(); const auto &row : tile_shape) {
         for (const auto &cell : row) {
             if (cell == 1) {
@@ -96,7 +99,8 @@ void CLI_renderer::display_game(Game &game) {
         }
         std::cout << std::endl;
     }
-    std::cout << "Current Tile : " << std::endl;
+    std::cout << " " << std::endl;
+    std::cout << "Current Tile: " << std::endl;
     size_t max_height = 0;
     for (int i = 1; i < 6; ++i) {
         max_height = std::max(max_height, game.getter_tiles(i).getter_shape().size());
@@ -181,7 +185,7 @@ void CLI_renderer::first_turn(Game &game) {
 
     for (int i = 0; i < game.getter_nb_players(); ++i) {
         Player &player = game.getter_players(i);
-        std::cout << "Player " << player.getter_name() << " (" << player.getter_id() << "), place your starting tile." << std::endl;
+        std::cout << player.getter_name() << " (Player " << player.getter_id() << "), place your starting tile." << std::endl;
         int x, y;
         do {
             std::cout << "X: ";
