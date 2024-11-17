@@ -17,6 +17,7 @@ public:
     void setter_case(int x, int y, char c);
     bool place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
     bool place_first_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
+    bool can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id);
 };
 
 

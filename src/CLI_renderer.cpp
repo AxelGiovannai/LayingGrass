@@ -138,8 +138,13 @@ void CLI_renderer::display_game(Game &game) {
                     std::cout << "Y: ";
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
-                game.remove_tile(0);
+                if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
+                    game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                    game.remove_tile(0);
+                } else {
+                    refresh_terminal();
+                    display_game(game);
+                }
             break;
             case 'r':
             case 'R':

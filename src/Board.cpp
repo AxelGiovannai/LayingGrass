@@ -28,8 +28,7 @@ void Board::setter_case(const int x, const int y, const char c) {
 
 
 
-bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
-
+bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
     if (x < 0 || y < 0 || x + tile.size() > board.size() || y + tile[0].size() > board[0].size()) {
         return false;
     }
@@ -48,12 +47,16 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
                     (y + j > 0 && board[x + i][y + j - 1] == '0' + player_id) ||
                     (y + j < board[0].size() - 1 && board[x + i][y + j + 1] == '0' + player_id)) {
                     adjacent_to_player_tile = true;
-                    }
+                }
             }
         }
     }
 
-    if (!adjacent_to_player_tile) {
+    return adjacent_to_player_tile;
+}
+
+bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
+    if (!can_place_tile(tile, x, y, player_id)) {
         return false;
     }
 
