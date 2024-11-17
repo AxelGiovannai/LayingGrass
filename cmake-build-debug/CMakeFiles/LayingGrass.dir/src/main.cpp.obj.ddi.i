@@ -72234,6 +72234,7 @@ int main() {
     while (game.getter_nb_rounds() < number_rounds) {
         CLI_renderer::refresh_terminal();
         CLI_renderer::display_game(game);
+        game.apply_bonus_effects();
         game.setter_player_turn();
     }
     std::cout << "PROUT FINI ! :p" << std::endl;

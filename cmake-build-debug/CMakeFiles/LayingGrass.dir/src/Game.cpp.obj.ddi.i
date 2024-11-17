@@ -79707,19 +79707,28 @@ void Game::remove_tile(int index) {
 }
 
 void Game::use_tile_exchange(int tile_index) {
+    Player &current_player = getter_players(getter_player_turn() - 1);
+
+    if (current_player.getter_tile_exchange() <= 0) {
+        std::cout << "You don't have any tile exchange left!" << std::endl;
+        return;
+    }
+
     if (tile_index < 0 || tile_index >= tiles.size()) {
         std::cout << "Invalid tile index!" << std::endl;
         return;
     }
 
     std::vector<Tile> new_tiles;
-    for (int i = tile_index + 1; i < tiles.size(); ++i) {
+    for (int i = tile_index; i < tiles.size(); ++i) {
         new_tiles.push_back(tiles[i]);
     }
-    for (int i = 0; i <= tile_index; ++i) {
+    for (int i = 0; i < tile_index; ++i) {
         new_tiles.push_back(tiles[i]);
     }
     tiles = new_tiles;
+
+    current_player.setter_tile_exchange(current_player.getter_tile_exchange() - 1);
 }
 
 void Game::apply_bonus_effects() {

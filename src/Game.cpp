@@ -182,7 +182,7 @@ void Game::apply_bonus_effects() {
                             getter_players(surrounding_char - '0' - 1).increase_tile_exchange();
                             break;
                         case 'V':
-                            // Add logic for 'V' bonus if needed
+
                             break;
                         case 'P':
                             int x, y;
