@@ -34,7 +34,10 @@ std::string Board::get_color_code(char player_id) {
         {'6', "\033[36m"}, // Cyan
         {'7', "\033[93m"}, // Bright Yellow
         {'8', "\033[91m"}, // Bright Red
-        {'9', "\033[92m"}  // Bright Green
+        {'9', "\033[92m"}, // Bright Green
+        {'P', "\033[96m"}, // Bright Cyan for stones
+        {'E', "\033[96m"}, // Bright Cyan for tile exchanges
+        {'V', "\033[96m"}  // Bright Cyan for robberies
     };
     return color_map[player_id];
 }
