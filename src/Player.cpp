@@ -28,7 +28,7 @@ int& Player::getter_tile_exchange(){
 }
 
 void Player::setter_tile_exchange(const int tile_exchange) {
-    this->tile_exchange = tile_exchange -1;
+    this->tile_exchange = tile_exchange;
 }
 
 std::vector<std::vector<int>> Player::getter_starting_tile() const {
