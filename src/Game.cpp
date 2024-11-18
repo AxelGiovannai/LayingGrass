@@ -90,8 +90,8 @@ void Game::place_initial_stones() {
     for (int i = 0; i < num_stones; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'P'); // 'P' for stone
     }
@@ -103,8 +103,8 @@ void Game::place_initial_tile_exchanges() {
     for (int i = 0; i < num_tile_exchanges; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'E'); // 'E' for tile exchange
     }
@@ -116,8 +116,8 @@ void Game::place_initial_robberies() {
     for (int i = 0; i < num_robberies; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'V'); // 'V' for robbery
     }
@@ -157,8 +157,8 @@ void Game::use_tile_exchange(int tile_index) {
 void Game::apply_bonus_effects() {
     for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
         for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {
-            if (game_board.getter_case(i, j) == 'E' || game_board.getter_case(i, j) == 'V' || game_board.getter_case(i, j) == 'P') {
-                char bonus = game_board.getter_case(i, j);
+            char cell = game_board.getter_case(i, j);
+            if (cell == 'E' || cell == 'V' || cell == 'P') {
                 char surrounding_char = game_board.getter_case(i-1, j);
                 bool surrounded_by_same_char = true;
 
@@ -170,18 +170,53 @@ void Game::apply_bonus_effects() {
                     surrounded_by_same_char = false;
                 }
 
-                if (surrounded_by_same_char) {
+                if (surrounded_by_same_char && surrounding_char != '.') {
                     game_board.setter_case(i, j, surrounding_char);
 
-                    switch (bonus) {
+                    switch (cell) {
                         case 'E':
                             getter_players(surrounding_char - '0' - 1).increase_tile_exchange();
                             break;
                         case 'V':
-                            // Implement robbery bonus effect here
+                            int enemy_id, x, y;
+                            std::cout << "Enter the ID of the player to steal a tile from: ";
+                            std::cin >> enemy_id;
+                            if (enemy_id >= 1 && enemy_id <= nb_players && enemy_id != surrounding_char - '0') {
+                                Player &enemy_player = getter_players(enemy_id - 1);
+                                std::cout << "Enter the coordinates of the tile to steal:" << std::endl;
+                                do {
+                                    std::cout << "X: ";
+                                    std::cin >> x;
+                                } while (x < 1 || x > game_board.getter_board().size());
+                                do {
+                                    std::cout << "Y: ";
+                                    std::cin >> y;
+                                } while (y < 1 || y > game_board.getter_board()[0].size());
+                                if (game_board.getter_case(x-1, y-1) == '0' + enemy_id) {
+                                    game_board.setter_case(x-1, y-1, '.'); // Remove tile from enemy
+                                    int new_x, new_y;
+                                    std::cout << "Enter the coordinates to place the stolen tile:" << std::endl;
+                                    do {
+                                        std::cout << "X: ";
+                                        std::cin >> new_x;
+                                    } while (new_x < 1 || new_x > game_board.getter_board().size());
+                                    do {
+                                        std::cout << "Y: ";
+                                        std::cin >> new_y;
+                                    } while (new_y < 1 || new_y > game_board.getter_board()[0].size());
+                                    if (game_board.getter_case(new_x-1, new_y-1) == '.') {
+                                        game_board.setter_case(new_x-1, new_y-1, surrounding_char); // Place tile in player's territory
+                                    } else {
+                                        std::cout << "Invalid placement coordinates!" << std::endl;
+                                    }
+                                } else {
+                                    std::cout << "Invalid tile coordinates!" << std::endl;
+                                }
+                            } else {
+                                std::cout << "Invalid player ID!" << std::endl;
+                            }
                             break;
                         case 'P':
-                            int x, y;
                             std::cout << "Enter the coordinates of the empty cell to transform into 'P' (x y):" << std::endl;
                             do {
                                 std::cout << "X: ";
