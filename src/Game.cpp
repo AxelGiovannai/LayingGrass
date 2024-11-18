@@ -155,25 +155,19 @@ void Game::use_tile_exchange(int tile_index) {
 }
 
 void Game::apply_bonus_effects() {
-    for (int i = 0; i < game_board.getter_board().size(); ++i) {
-        for (int j = 0; j < game_board.getter_board()[i].size(); ++j) {
+    for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
+        for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {
             if (game_board.getter_case(i, j) == 'E' || game_board.getter_case(i, j) == 'V' || game_board.getter_case(i, j) == 'P') {
                 char bonus = game_board.getter_case(i, j);
-                char surrounding_char = game_board.getter_case(i, j);
+                char surrounding_char = game_board.getter_case(i-1, j);
                 bool surrounded_by_same_char = true;
 
-                // Check the four cardinal directions if they are within bounds
-                if ((i > 0 && game_board.getter_case(i-1, j) != surrounding_char) ||
-                    (i < game_board.getter_board().size() - 1 && game_board.getter_case(i+1, j) != surrounding_char) ||
-                    (j > 0 && game_board.getter_case(i, j-1) != surrounding_char) ||
-                    (j < game_board.getter_board()[i].size() - 1 && game_board.getter_case(i, j+1) != surrounding_char)) {
+                // Check the four cardinal directions
+                if (game_board.getter_case(i-1, j) != surrounding_char ||
+                    game_board.getter_case(i+1, j) != surrounding_char ||
+                    game_board.getter_case(i, j-1) != surrounding_char ||
+                    game_board.getter_case(i, j+1) != surrounding_char) {
                     surrounded_by_same_char = false;
-                }
-
-                // Check if the bonus is on the border and adjust the condition
-                if ((i == 0 || i == game_board.getter_board().size() - 1) ||
-                    (j == 0 || j == game_board.getter_board()[i].size() - 1)) {
-                    surrounded_by_same_char = true;
                 }
 
                 if (surrounded_by_same_char) {
@@ -197,7 +191,7 @@ void Game::apply_bonus_effects() {
                                 std::cout << "Y: ";
                                 std::cin >> y;
                             } while (y < 1 || y > game_board.getter_board()[0].size() || game_board.getter_case(x-1, y-1) != '.');
-                            game_board.setter_case(x-1, y-1, 'P');
+                            game_board.setter_case(y-1, x-1, 'P');
                             break;
                     }
                 }
