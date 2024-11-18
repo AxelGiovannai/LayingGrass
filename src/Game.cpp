@@ -162,13 +162,13 @@ void Game::apply_bonus_effects() {
                 char surrounding_char = game_board.getter_case(i-1, j);
                 bool surrounded_by_same_char = true;
 
-                // Check the four cardinal directions
-                if (game_board.getter_case(i-1, j) != surrounding_char ||
-                    game_board.getter_case(i+1, j) != surrounding_char ||
-                    game_board.getter_case(i, j-1) != surrounding_char ||
-                    game_board.getter_case(i, j+1) != surrounding_char) {
+
+                if ((i > 0 && game_board.getter_case(i-1, j) != surrounding_char) ||
+                    (i < game_board.getter_board().size() - 1 && game_board.getter_case(i+1, j) != surrounding_char) ||
+                    (j > 0 && game_board.getter_case(i, j-1) != surrounding_char) ||
+                    (j < game_board.getter_board()[0].size() - 1 && game_board.getter_case(i, j+1) != surrounding_char)) {
                     surrounded_by_same_char = false;
-                }
+                    }
 
                 if (surrounded_by_same_char && surrounding_char != '.') {
                     game_board.setter_case(i, j, surrounding_char);

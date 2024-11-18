@@ -178,7 +178,7 @@ void CLI_renderer::display_game(Game &game) {
         int tile_index;
         std::cout << "Enter the index of the tile to exchange: ";
         std::cin >> tile_index;
-        if (tile_index >= 0 && tile_index < game.getter_tiles(tile_index).getter_shape().size()) {
+        if (tile_index > 0 && tile_index < 6) {
             game.use_tile_exchange(tile_index);
         } else {
             std::cout << "Invalid tile index!" << std::endl;
