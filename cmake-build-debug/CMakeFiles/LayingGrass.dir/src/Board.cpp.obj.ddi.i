@@ -37786,6 +37786,9 @@ public:
     void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
+    int largest_square_covered(char player_id);
+    int count_grass_squares(char player_id);
+    void victory();
 };
 # 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/unordered_map" 1 3
@@ -78836,23 +78839,41 @@ std::string Board::get_color_code(char player_id) {
 
 
 bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int y, char player_id) {
-    if (x < 0 || y < 0 || x + tile.size() > board.size() || y + tile[0].size() > board[0].size()) {
-        return false;
-    }
-
     bool adjacent_to_player_tile = false;
+    int top_left_x = -1, top_left_y = -1;
+
 
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
-                if (board[x + i][y + j] != '.') {
+                top_left_x = i;
+                top_left_y = j;
+                break;
+            }
+        }
+        if (top_left_x != -1) break;
+    }
+
+    if (top_left_x == -1 || top_left_y == -1) return false;
+
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                int board_x = x + (i - top_left_x);
+                int board_y = y + (j - top_left_y);
+
+                if (board_x < 0 || board_y < 0 || board_x >= board.size() || board_y >= board[0].size()) {
+                    continue;
+                }
+
+                if (board[board_x][board_y] != '.') {
                     return false;
                 }
 
-                if ((x + i > 0 && board[x + i - 1][y + j] == '0' + player_id) ||
-                    (x + i < board.size() - 1 && board[x + i + 1][y + j] == '0' + player_id) ||
-                    (y + j > 0 && board[x + i][y + j - 1] == '0' + player_id) ||
-                    (y + j < board[0].size() - 1 && board[x + i][y + j + 1] == '0' + player_id)) {
+                if ((board_x > 0 && board[board_x - 1][board_y] == '0' + player_id) ||
+                    (board_x < board.size() - 1 && board[board_x + 1][board_y] == '0' + player_id) ||
+                    (board_y > 0 && board[board_x][board_y - 1] == '0' + player_id) ||
+                    (board_y < board[0].size() - 1 && board[board_x][board_y + 1] == '0' + player_id)) {
                     adjacent_to_player_tile = true;
                 }
             }
@@ -78867,10 +78888,29 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
         return false;
     }
 
+    int top_left_x = -1, top_left_y = -1;
+
+
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
-                board[x + i][y + j] = '0' + player_id;
+                top_left_x = i;
+                top_left_y = j;
+                break;
+            }
+        }
+        if (top_left_x != -1) break;
+    }
+
+    for (int i = 0; i < tile.size(); ++i) {
+        for (int j = 0; j < tile[i].size(); ++j) {
+            if (tile[i][j] == 1) {
+                int board_x = x + (i - top_left_x);
+                int board_y = y + (j - top_left_y);
+
+                if (board_x >= 0 && board_y >= 0 && board_x < board.size() && board_y < board[0].size()) {
+                    board[board_x][board_y] = '0' + player_id;
+                }
             }
         }
     }

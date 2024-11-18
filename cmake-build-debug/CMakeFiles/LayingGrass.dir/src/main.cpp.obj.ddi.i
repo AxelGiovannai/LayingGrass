@@ -72197,6 +72197,9 @@ public:
     void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
+    int largest_square_covered(char player_id);
+    int count_grass_squares(char player_id);
+    void victory();
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72237,6 +72240,7 @@ int main() {
         game.apply_bonus_effects();
         game.setter_player_turn();
     }
+    game.victory();
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;
 }

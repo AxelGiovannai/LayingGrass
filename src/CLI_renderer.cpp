@@ -142,7 +142,8 @@ void CLI_renderer::display_game(Game &game) {
 
     switch (action) {
         case 'p':
-        case 'P':
+            case 'P':
+            std::cout << "the coordinates are the top left corner " << std::endl;
             int x, y;
             do {
                 std::cout << "X: ";

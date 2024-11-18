@@ -37791,6 +37791,9 @@ public:
     void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
+    int largest_square_covered(char player_id);
+    int count_grass_squares(char player_id);
+    void victory();
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
 
@@ -72557,7 +72560,8 @@ void CLI_renderer::display_game(Game &game) {
 
     switch (action) {
         case 'p':
-        case 'P':
+            case 'P':
+            std::cout << "the coordinates are the top left corner " << std::endl;
             int x, y;
             do {
                 std::cout << "X: ";

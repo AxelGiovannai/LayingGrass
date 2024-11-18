@@ -16,6 +16,7 @@ int main() {
         game.apply_bonus_effects();
         game.setter_player_turn();
     }
+    game.victory();
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;
 }

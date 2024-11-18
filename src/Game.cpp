@@ -155,18 +155,18 @@ void Game::use_tile_exchange(int tile_index) {
 }
 
 void Game::apply_bonus_effects() {
-    for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
-        for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {
+    for (int i = 0; i < game_board.getter_board().size(); ++i) {
+        for (int j = 0; j < game_board.getter_board()[i].size(); ++j) {
             if (game_board.getter_case(i, j) == 'E' || game_board.getter_case(i, j) == 'V' || game_board.getter_case(i, j) == 'P') {
                 char bonus = game_board.getter_case(i, j);
-                char surrounding_char = game_board.getter_case(i-1, j);
+                char surrounding_char = game_board.getter_case(i, j);
                 bool surrounded_by_same_char = true;
 
-                // Check the four cardinal directions
-                if (game_board.getter_case(i-1, j) != surrounding_char ||
-                    game_board.getter_case(i+1, j) != surrounding_char ||
-                    game_board.getter_case(i, j-1) != surrounding_char ||
-                    game_board.getter_case(i, j+1) != surrounding_char) {
+                // Check the four cardinal directions if they are within bounds
+                if ((i > 0 && game_board.getter_case(i-1, j) != surrounding_char) ||
+                    (i < game_board.getter_board().size() - 1 && game_board.getter_case(i+1, j) != surrounding_char) ||
+                    (j > 0 && game_board.getter_case(i, j-1) != surrounding_char) ||
+                    (j < game_board.getter_board()[i].size() - 1 && game_board.getter_case(i, j+1) != surrounding_char)) {
                     surrounded_by_same_char = false;
                 }
 
@@ -199,6 +199,66 @@ void Game::apply_bonus_effects() {
         }
     }
 }
+
+int Game::largest_square_covered(char player_id) {
+    int max_square_size = 0;
+    const auto &board = game_board.getter_board();
+    int n = board.size();
+    int m = board[0].size();
+    std::vector<std::vector<int>> dp(n, std::vector<int>(m, 0));
+
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            if (board[i][j] == player_id) {
+                dp[i][j] = 1;
+                if (i > 0 && j > 0) {
+                    dp[i][j] += std::min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
+                }
+                max_square_size = std::max(max_square_size, dp[i][j]);
+            }
+        }
+    }
+    return max_square_size;
+}
+
+int Game::count_grass_squares(char player_id) {
+    int grass_count = 0;
+    const auto &board = game_board.getter_board();
+    for (const auto &row : board) {
+        for (const auto &cell : row) {
+            if (cell == player_id) {
+                grass_count++;
+            }
+        }
+    }
+    return grass_count;
+}
+
+void Game::victory() {
+    int max_square_size = 0;
+    int max_grass_count = 0;
+    int winner_id = -1;
+
+    for (int i = 0; i < nb_players; ++i) {
+        char player_id = static_cast<char>(i + 1);
+        int square_size = largest_square_covered(player_id);
+        int grass_count = count_grass_squares(player_id);
+
+        if (square_size > max_square_size || (square_size == max_square_size && grass_count > max_grass_count)) {
+            max_square_size = square_size;
+            max_grass_count = grass_count;
+            winner_id = i + 1;
+        }
+    }
+
+    if (winner_id != -1) {
+        std::cout << "Player " << winner_id << " wins!" << std::endl;
+    } else {
+        std::cout << "No winner!" << std::endl;
+    }
+}
+
+
 
 void Game::generate_tile(Game &game) {
     std::vector<Tile> All_Shapes;

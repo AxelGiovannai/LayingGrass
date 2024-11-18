@@ -40,6 +40,9 @@ public:
     void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
+    int largest_square_covered(char player_id);
+    int count_grass_squares(char player_id);
+    void victory();
 };
 
 
