@@ -8,6 +8,8 @@
 #include <ctime>
 #include "../include/Game.h"
 
+#include "../include/CLI_renderer.h"
+
 int& Game::getter_nb_players(){
     return nb_players;
 }
@@ -270,13 +272,12 @@ int Game::count_grass_squares(char player_id) {
 }
 
 void Game::victory() {
-
     int max_square_size = 0;
     int max_grass_count = 0;
     int winner_id = -1;
 
     for (int i = 0; i < nb_players; ++i) {
-        char player_id = static_cast<char>(i + 1);
+        char player_id = '0' + (i + 1);
         int square_size = largest_square_covered(player_id);
         int grass_count = count_grass_squares(player_id);
 
@@ -288,7 +289,8 @@ void Game::victory() {
     }
 
     if (winner_id != -1) {
-        std::cout << "Player " << winner_id << " wins!" << std::endl;
+        std::string color_code = game_board.get_color_code('0' + winner_id);
+        std::cout << color_code << "Player " << winner_id << "\033[0m" << " wins with a " << max_square_size << "x" << max_square_size << " square and " << max_grass_count << " grass squares!" << std::endl;
     } else {
         std::cout << "No winner!" << std::endl;
     }
@@ -303,8 +305,9 @@ void Game::use_final_exchange(Game &game) {
             std::cout << "Player " << player.getter_id() << " (" << player.getter_name() << "), you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
             std::cout << "Do you want to use a tile exchange? (y/n): ";
             std::cin >> choice;
+            std::cout << std::endl;
             if (choice == 'y' || choice == 'Y') {
-                std::cout << "Enter the coordinates of the cell to change (x y): ";
+                std::cout << "Enter the coordinates of the cell to change: " << std::endl;
                 do {
                     std::cout << "X: ";
                     std::cin >> x;
@@ -313,13 +316,15 @@ void Game::use_final_exchange(Game &game) {
                     std::cout << "Y: ";
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                char &cell = game.getter_game_board().getter_case(x - 1, y - 1);
+                char &cell = game.getter_game_board().getter_case(y - 1, x - 1);
                 if (cell == '.' || cell == 'P') {
                     cell = '0' + player.getter_id();
                     player.setter_tile_exchange(player.getter_tile_exchange() - 1);
                 } else {
                     std::cout << "Invalid cell. You can only change empty cells or stones." << std::endl;
                 }
+                CLI_renderer::refresh_terminal();
+                CLI_renderer::display_board(game);
             } else {
                 break;
             }

@@ -7,7 +7,7 @@
 
 int main() {
     Game game;
-    const int number_rounds = 2;
+    const int number_rounds = 9;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
     while (game.getter_nb_rounds() < number_rounds) {
@@ -16,10 +16,10 @@ int main() {
         game.apply_bonus_effects();
         game.setter_player_turn();
     }
-    Game::use_final_exchange(game);
+    CLI_renderer::refresh_terminal();
     CLI_renderer::display_board(game);
+    Game::use_final_exchange(game);
     game.victory();
-    std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;
 }
 

@@ -91,7 +91,7 @@ void CLI_renderer::display_game(Game &game) {
     Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
     const std::string player_color = current_player.getter_color();
-    std::cout << player_color << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() << RESET << std::endl;
+    std::cout << player_color << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() + 1 << RESET << std::endl;
     std::cout << " " << std::endl;
     display_board(game);
 
@@ -138,12 +138,13 @@ void CLI_renderer::display_game(Game &game) {
     do {
         std::cout << "Choice: ";
         std::cin >> action;
+        std::cout << std::endl;
     } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
     switch (action) {
         case 'p':
             case 'P':
-            std::cout << "the coordinates are the top left corner " << std::endl;
+            std::cout << "Coordinates of the most top-left '1' in the tile:" << std::endl;
             int x, y;
             do {
                 std::cout << "X: ";
@@ -201,11 +202,16 @@ void CLI_renderer::display_game(Game &game) {
 
 void CLI_renderer::first_turn(Game &game) {
     refresh_terminal();
-    display_board(game);
 
     for (int i = 0; i < game.getter_nb_players(); ++i) {
         Player &player = game.getter_players(i);
-        std::cout << player.getter_name() << " (Player " << player.getter_id() << "), place your starting tile." << std::endl;
+        const std::string RESET = "\033[0m";
+        const std::string player_name = player.getter_name();
+        const std::string player_color = player.getter_color();
+        std::cout << player_color << "Player " << player.getter_id() << " (" << player_name << ") - Placing first tile" << RESET << std::endl;
+        std::cout << std::endl;
+        display_board(game);
+        std::cout << "Enter the coordinates of your first tile:" << std::endl;
         int x, y;
         do {
             std::cout << "X: ";
@@ -217,11 +223,10 @@ void CLI_renderer::first_turn(Game &game) {
         } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
         if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), y - 1, x - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
-            display_board(game);
         } else {
             std::cout << "Invalid placement. Try again." << std::endl;
+            refresh_terminal();
             --i;
         }
     }
-
 }
