@@ -79750,6 +79750,12 @@ void Game::apply_bonus_effects() {
                     surrounded_by_same_char = false;
                 }
 
+
+                if ((i == 0 || i == game_board.getter_board().size() - 1) ||
+                    (j == 0 || j == game_board.getter_board()[i].size() - 1)) {
+                    surrounded_by_same_char = true;
+                }
+
                 if (surrounded_by_same_char) {
                     game_board.setter_case(i, j, surrounding_char);
 
@@ -79792,7 +79798,7 @@ int Game::largest_square_covered(char player_id) {
             if (board[i][j] == player_id) {
                 dp[i][j] = 1;
                 if (i > 0 && j > 0) {
-                    dp[i][j] += std::min({dp[i-1][j], dp[i][j-1], dp[i-1][j-1]});
+                    dp[i][j] += std::min(std::min(dp[i-1][j], dp[i][j-1]), dp[i-1][j-1]);
                 }
                 max_square_size = std::max(max_square_size, dp[i][j]);
             }

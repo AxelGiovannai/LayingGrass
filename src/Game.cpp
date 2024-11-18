@@ -170,6 +170,12 @@ void Game::apply_bonus_effects() {
                     surrounded_by_same_char = false;
                 }
 
+                // Check if the bonus is on the border and adjust the condition
+                if ((i == 0 || i == game_board.getter_board().size() - 1) ||
+                    (j == 0 || j == game_board.getter_board()[i].size() - 1)) {
+                    surrounded_by_same_char = true;
+                }
+
                 if (surrounded_by_same_char) {
                     game_board.setter_case(i, j, surrounding_char);
 
