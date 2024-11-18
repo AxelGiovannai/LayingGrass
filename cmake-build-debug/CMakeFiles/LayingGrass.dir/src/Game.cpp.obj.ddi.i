@@ -79585,6 +79585,7 @@ public:
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
     void victory();
+    static void use_final_exchange(Game &game);
 };
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
@@ -79850,6 +79851,7 @@ int Game::count_grass_squares(char player_id) {
 }
 
 void Game::victory() {
+
     int max_square_size = 0;
     int max_grass_count = 0;
     int winner_id = -1;
@@ -79873,7 +79875,38 @@ void Game::victory() {
     }
 }
 
-
+void Game::use_final_exchange(Game &game) {
+    for (int i = 0; i < game.nb_players; ++i) {
+        Player &player = game.getter_players(i);
+        while (player.getter_tile_exchange() > 0) {
+            int x, y;
+            char choice;
+            std::cout << "Player " << player.getter_id() << " (" << player.getter_name() << "), you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
+            std::cout << "Do you want to use a tile exchange? (y/n): ";
+            std::cin >> choice;
+            if (choice == 'y' || choice == 'Y') {
+                std::cout << "Enter the coordinates of the cell to change (x y): ";
+                do {
+                    std::cout << "X: ";
+                    std::cin >> x;
+                } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                do {
+                    std::cout << "Y: ";
+                    std::cin >> y;
+                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                char &cell = game.getter_game_board().getter_case(x - 1, y - 1);
+                if (cell == '.' || cell == 'P') {
+                    cell = '0' + player.getter_id();
+                    player.setter_tile_exchange(player.getter_tile_exchange() - 1);
+                } else {
+                    std::cout << "Invalid cell. You can only change empty cells or stones." << std::endl;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+}
 
 void Game::generate_tile(Game &game) {
     std::vector<Tile> All_Shapes;

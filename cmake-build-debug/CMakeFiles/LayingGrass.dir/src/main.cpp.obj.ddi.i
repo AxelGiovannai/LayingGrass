@@ -72200,6 +72200,7 @@ public:
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
     void victory();
+    static void use_final_exchange(Game &game);
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72231,7 +72232,7 @@ public:
 
 int main() {
     Game game;
-    const int number_rounds = 10;
+    const int number_rounds = 2;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
     while (game.getter_nb_rounds() < number_rounds) {
@@ -72240,6 +72241,8 @@ int main() {
         game.apply_bonus_effects();
         game.setter_player_turn();
     }
+    Game::use_final_exchange(game);
+    CLI_renderer::display_board(game);
     game.victory();
     std::cout << "PROUT FINI ! :p" << std::endl;
     return 0;

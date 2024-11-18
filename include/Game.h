@@ -43,6 +43,7 @@ public:
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
     void victory();
+    static void use_final_exchange(Game &game);
 };
 
 

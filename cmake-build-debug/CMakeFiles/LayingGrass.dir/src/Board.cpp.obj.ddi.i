@@ -37789,6 +37789,7 @@ public:
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
     void victory();
+    static void use_final_exchange(Game &game);
 };
 # 7 "C:/Users/Axel/CLionProjects/LayingGrass/src/Board.cpp" 2
 # 1 "C:/msys64/mingw64/include/c++/14.2.0/unordered_map" 1 3
