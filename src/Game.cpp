@@ -90,8 +90,8 @@ void Game::place_initial_stones() {
     for (int i = 0; i < num_stones; ++i) {
         int x, y;
         do {
-            x = std::rand() % game_board.getter_board().size();
-            y = std::rand() % game_board.getter_board()[0].size();
+            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'P'); // 'P' for stone
     }
@@ -103,8 +103,8 @@ void Game::place_initial_tile_exchanges() {
     for (int i = 0; i < num_tile_exchanges; ++i) {
         int x, y;
         do {
-            x = std::rand() % game_board.getter_board().size();
-            y = std::rand() % game_board.getter_board()[0].size();
+            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'E'); // 'E' for tile exchange
     }
@@ -116,8 +116,8 @@ void Game::place_initial_robberies() {
     for (int i = 0; i < num_robberies; ++i) {
         int x, y;
         do {
-            x = std::rand() % game_board.getter_board().size();
-            y = std::rand() % game_board.getter_board()[0].size();
+            x = std::rand() % (game_board.getter_board().size() - 1); // Avoid borders
+            y = std::rand() % (game_board.getter_board()[0].size() - 1); // Avoid borders
         } while (game_board.getter_case(x, y) != '.');
         game_board.setter_case(x, y, 'V'); // 'V' for robbery
     }
