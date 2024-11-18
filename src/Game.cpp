@@ -162,16 +162,12 @@ void Game::apply_bonus_effects() {
                 char surrounding_char = game_board.getter_case(i-1, j);
                 bool surrounded_by_same_char = true;
 
-                for (int x = -1; x <= 1; ++x) {
-                    for (int y = -1; y <= 1; ++y) {
-                        if (x != 0 || y != 0) {
-                            if (game_board.getter_case(i + x, j + y) != surrounding_char) {
-                                surrounded_by_same_char = false;
-                                break;
-                            }
-                        }
-                    }
-                    if (!surrounded_by_same_char) break;
+                // Check the four cardinal directions
+                if (game_board.getter_case(i-1, j) != surrounding_char ||
+                    game_board.getter_case(i+1, j) != surrounding_char ||
+                    game_board.getter_case(i, j-1) != surrounding_char ||
+                    game_board.getter_case(i, j+1) != surrounding_char) {
+                    surrounded_by_same_char = false;
                 }
 
                 if (surrounded_by_same_char) {
@@ -182,15 +178,20 @@ void Game::apply_bonus_effects() {
                             getter_players(surrounding_char - '0' - 1).increase_tile_exchange();
                             break;
                         case 'V':
-
+                            // Implement robbery bonus effect here
                             break;
                         case 'P':
                             int x, y;
+                            std::cout << "Enter the coordinates of the empty cell to transform into 'P' (x y):" << std::endl;
                             do {
-                                std::cout << "Enter the coordinates of the empty cell to transform into 'S' (x y): ";
-                                std::cin >> x >> y;
-                            } while (x < 1 || x > game_board.getter_board().size() || y < 1 || y > game_board.getter_board()[0].size() || game_board.getter_case(x-1, y-1) != '.');
-                            game_board.setter_case(x-1, y-1, 'S');
+                                std::cout << "X: ";
+                                std::cin >> x;
+                            } while (x < 1 || x > game_board.getter_board().size());
+                            do {
+                                std::cout << "Y: ";
+                                std::cin >> y;
+                            } while (y < 1 || y > game_board.getter_board()[0].size() || game_board.getter_case(x-1, y-1) != '.');
+                            game_board.setter_case(x-1, y-1, 'P');
                             break;
                     }
                 }
