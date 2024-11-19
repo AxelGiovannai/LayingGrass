@@ -213,7 +213,7 @@ void CLI_renderer::display_game(Game &game) {
                 std::cout << "Choice: ";
                 exchange_action = _getch();
                 std::cout << exchange_action << std::endl;
-            } while (exchange_action != 'E' && exchange_action != 'R' && exchange_action != 'e' && exchange_action != 'r');
+            } while (exchange_action != 'E' && exchange_action != 'R' && exchange_action != 'e' && exchange_action != 'r' && exchange_action != 'Q' && exchange_action != 'q');
             switch (exchange_action) {
                 case 'r':
                 case 'R':

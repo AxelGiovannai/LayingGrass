@@ -7,7 +7,7 @@
 
 int main() {
     Game game;
-    const int number_rounds = 4;
+    const int number_rounds = 9;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
     while (game.getter_nb_rounds() < number_rounds) {
