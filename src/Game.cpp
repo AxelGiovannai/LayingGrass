@@ -47,11 +47,6 @@ void Game::setter_player_turn() {
     }
 }
 
-void Game::setter_nb_rounds() {
-    this->nb_rounds;
-}
-
-
 
 void Game::setter_game_board() {
    if (nb_players < 5) {
