@@ -235,7 +235,10 @@ void CLI_renderer::display_game(Game &game) {
                     display_game(game);
                     break;
             }
+            refresh_terminal();
+            display_game(game);
             break;
+
         }
         case 'q':
         case 'Q':
