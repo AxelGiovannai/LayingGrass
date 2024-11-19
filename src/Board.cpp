@@ -62,10 +62,9 @@ bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int
 
     if (top_left_x == -1 || top_left_y == -1) return false;
 
-
     int tile_height = tile.size();
     int tile_width = tile[0].size();
-    if (x < 0 || y < 0 || x + tile_height > board.size() || y + tile_width > board[0].size()) {
+    if (x < 0 || y < 0 || x + tile_height > board.size() + 1 || y + tile_width > board[0].size() + 1) {
         return false;
     }
 
