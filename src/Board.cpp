@@ -26,18 +26,18 @@ void Board::setter_case(const int x, const int y, const char c) {
 
 std::string Board::get_color_code(char player_id) {
     static std::unordered_map<char, std::string> color_map = {
-        {'1', "\033[31m"}, // Red
-        {'2', "\033[32m"}, // Green
-        {'3', "\033[34m"}, // Blue
-        {'4', "\033[33m"}, // Yellow
-        {'5', "\033[35m"}, // Magenta
-        {'6', "\033[36m"}, // Cyan
-        {'7', "\033[93m"}, // Bright Yellow
-        {'8', "\033[91m"}, // Bright Red
-        {'9', "\033[92m"}, // Bright Green
-        {'P', "\033[96m"}, // Bright Cyan for stones
-        {'E', "\033[96m"}, // Bright Cyan for tile exchanges
-        {'V', "\033[96m"}  // Bright Cyan for robberies
+        {'1', "\033[31m"},
+        {'2', "\033[32m"},
+        {'3', "\033[34m"},
+        {'4', "\033[33m"},
+        {'5', "\033[35m"},
+        {'6', "\033[36m"},
+        {'7', "\033[93m"},
+        {'8', "\033[91m"},
+        {'9', "\033[92m"},
+        {'P', "\033[96m"},
+        {'E', "\033[96m"},
+        {'V', "\033[96m"}
     };
     return color_map[player_id];
 }
@@ -60,9 +60,9 @@ bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int
         if (top_left_x != -1) break;
     }
 
-    if (top_left_x == -1 || top_left_y == -1) return false; // No 1 found in the tile
+    if (top_left_x == -1 || top_left_y == -1) return false;
 
-    // Check if the tile fits within the board boundaries
+
     int tile_height = tile.size();
     int tile_width = tile[0].size();
     if (x < 0 || y < 0 || x + tile_height > board.size() || y + tile_width > board[0].size()) {
@@ -99,7 +99,7 @@ bool Board::place_tile(const std::vector<std::vector<int>> &tile, int x, int y, 
 
     int top_left_x = -1, top_left_y = -1;
 
-    // Find the top-left 1 in the tile
+
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {

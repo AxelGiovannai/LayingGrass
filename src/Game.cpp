@@ -78,7 +78,7 @@ void Game::initialize_game() {
             x = std::rand() % game_board.getter_board().size();
             y = std::rand() % game_board.getter_board()[0].size();
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, player.getter_color()[0]); // Use the first character of the color string
+        game_board.setter_case(x, y, player.getter_color()[0]);
     }
     generate_tile(*this);
 }
@@ -89,10 +89,10 @@ void Game::place_initial_stones() {
     for (int i = 0; i < num_stones; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1;
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1;
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'P'); // 'P' for stone
+        game_board.setter_case(x, y, 'P');
     }
 }
 
@@ -102,10 +102,10 @@ void Game::place_initial_tile_exchanges() {
     for (int i = 0; i < num_tile_exchanges; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1;
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1;
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'E'); // 'E' for tile exchange
+        game_board.setter_case(x, y, 'E');
     }
 }
 
@@ -115,10 +115,10 @@ void Game::place_initial_robberies() {
     for (int i = 0; i < num_robberies; ++i) {
         int x, y;
         do {
-            x = std::rand() % (game_board.getter_board().size() - 2) + 1; // Avoid borders
-            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1; // Avoid borders
+            x = std::rand() % (game_board.getter_board().size() - 2) + 1;
+            y = std::rand() % (game_board.getter_board()[0].size() - 2) + 1;
         } while (game_board.getter_case(x, y) != '.');
-        game_board.setter_case(x, y, 'V'); // 'V' for robbery
+        game_board.setter_case(x, y, 'V');
     }
 }
 
@@ -302,7 +302,7 @@ void Game::use_final_exchange(Game &game) {
         const std::string player_name = player.getter_name();
         const std::string player_color = player.getter_color();
 
-        // Clear the screen before displaying the message for each player
+
         CLI_renderer::refresh_terminal();
 
         std::cout << player_color << "Player " << player.getter_id() << " (" << player_name << ") - Final tile exchange" << RESET << std::endl;
@@ -322,7 +322,7 @@ void Game::use_final_exchange(Game &game) {
                     std::cout << "X: ";
                     std::cin >> x;
                     if (std::cin.fail()) {
-                        std::cin.clear(); // Clear the error state
+                        std::cin.clear();
                         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
                         std::cout << "Invalid input. Please enter a number." << std::endl;
                     } else if (x < 1 || x > game.getter_game_board().getter_board().size()) {
@@ -335,8 +335,8 @@ void Game::use_final_exchange(Game &game) {
                     std::cout << "Y: ";
                     std::cin >> y;
                     if (std::cin.fail()) {
-                        std::cin.clear(); // Clear the error state
-                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         std::cout << "Invalid input. Please enter a number." << std::endl;
                     } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
                         std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
