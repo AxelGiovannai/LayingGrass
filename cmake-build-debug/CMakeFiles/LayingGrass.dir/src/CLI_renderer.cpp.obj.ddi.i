@@ -72695,12 +72695,14 @@ void CLI_renderer::display_game(Game &game) {
                         std::cin >> y;
                     } while (y < 1 || y > game.getter_game_board().getter_board().size());
                     if (game.getter_game_board().getter_board()[y - 1][x - 1] == 'P') {
-                        game.remove_rock(game, x - 1, y - 1);
+                        game.remove_rock(game, y - 1, x - 1);
                     }else {
                         refresh_terminal();
                         display_game(game);
                     }
-                     break;
+                    refresh_terminal();
+                    display_game(game);
+                    break;
                 case 'e':
                 case 'E':
                     int tile_index;
@@ -72720,7 +72722,10 @@ void CLI_renderer::display_game(Game &game) {
                     display_game(game);
                     break;
             }
+            refresh_terminal();
+            display_game(game);
             break;
+
         }
         case 'q':
         case 'Q':
