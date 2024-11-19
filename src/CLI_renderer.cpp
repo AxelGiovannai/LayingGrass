@@ -8,6 +8,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <conio.h>
+#include <limits>
 
 
 void CLI_renderer::refresh_terminal() {
@@ -156,14 +157,32 @@ void CLI_renderer::display_game(Game &game) {
             while (!valid_placement) {
                 std::cout << "Coordinates of the most top-left '1' in the tile:" << std::endl;
                 int x, y;
-                do {
+                while (true) {
                     std::cout << "X: ";
                     std::cin >> x;
-                } while (x < 1 || x > game.getter_game_board().getter_board().size());
-                do {
+                    if (std::cin.fail()) {
+                        std::cin.clear(); // Clear the error state
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                        std::cout << "Invalid input. Please enter a number." << std::endl;
+                    } else if (x < 1 || x > game.getter_game_board().getter_board().size()) {
+                        std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board().size() << "." << std::endl;
+                    } else {
+                        break;
+                    }
+                }
+                while (true) {
                     std::cout << "Y: ";
                     std::cin >> y;
-                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                    if (std::cin.fail()) {
+                        std::cin.clear(); // Clear the error state
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                        std::cout << "Invalid input. Please enter a number." << std::endl;
+                    } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
+                        std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
+                    } else {
+                        break;
+                    }
+                }
                 if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
                     game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
                     game.remove_tile(0); // Remove the tile after placing it
@@ -199,17 +218,35 @@ void CLI_renderer::display_game(Game &game) {
                 case 'r':
                 case 'R':
                     int x, y;
-                    do {
+                    while (true) {
                         std::cout << "X: ";
                         std::cin >> x;
-                    } while (x < 1 || x > game.getter_game_board().getter_board().size());
-                    do {
+                        if (std::cin.fail()) {
+                            std::cin.clear(); // Clear the error state
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                            std::cout << "Invalid input. Please enter a number." << std::endl;
+                        } else if (x < 1 || x > game.getter_game_board().getter_board().size()) {
+                            std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board().size() << "." << std::endl;
+                        } else {
+                            break;
+                        }
+                    }
+                    while (true) {
                         std::cout << "Y: ";
                         std::cin >> y;
-                    } while (y < 1 || y > game.getter_game_board().getter_board().size());
+                        if (std::cin.fail()) {
+                            std::cin.clear(); // Clear the error state
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                            std::cout << "Invalid input. Please enter a number." << std::endl;
+                        } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
+                            std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
+                        } else {
+                            break;
+                        }
+                    }
                     if (game.getter_game_board().getter_board()[y - 1][x - 1] == 'P') {
                         game.remove_rock(game, y - 1, x - 1);
-                    }else {
+                    } else {
                         refresh_terminal();
                         display_game(game);
                     }
@@ -249,7 +286,6 @@ void CLI_renderer::display_game(Game &game) {
             break;
     }
 }
-
 void CLI_renderer::first_turn(Game &game) {
     refresh_terminal();
 
@@ -263,14 +299,32 @@ void CLI_renderer::first_turn(Game &game) {
         display_board(game);
         std::cout << "Enter the coordinates of your first tile:" << std::endl;
         int x, y;
-        do {
+        while (true) {
             std::cout << "X: ";
             std::cin >> x;
-        } while (x < 1 || x > game.getter_game_board().getter_board().size());
-        do {
+            if (std::cin.fail()) {
+                std::cin.clear(); // Clear the error state
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+            } else if (x < 1 || x > game.getter_game_board().getter_board().size()) {
+                std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board().size() << "." << std::endl;
+            } else {
+                break;
+            }
+        }
+        while (true) {
             std::cout << "Y: ";
             std::cin >> y;
-        } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+            if (std::cin.fail()) {
+                std::cin.clear(); // Clear the error state
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+                std::cout << "Invalid input. Please enter a number." << std::endl;
+            } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
+                std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
+            } else {
+                break;
+            }
+        }
         if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), y - 1, x - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
         } else {
