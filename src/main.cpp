@@ -19,7 +19,7 @@ int main() {
     CLI_renderer::refresh_terminal();
     CLI_renderer::display_board(game);
     Game::use_final_exchange(game);
-    game.victory();
+    game.victory(game);
     return 0;
 }
 

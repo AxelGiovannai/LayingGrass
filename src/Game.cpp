@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <conio.h>
 #include "../include/Game.h"
 
 #include "../include/CLI_renderer.h"
@@ -194,25 +195,10 @@ void Game::apply_bonus_effects() {
                                     std::cout << "Y: ";
                                     std::cin >> y;
                                 } while (y < 1 || y > game_board.getter_board()[0].size());
-                                if (game_board.getter_case(x-1, y-1) == '0' + enemy_id) {
-                                    game_board.setter_case(x-1, y-1, '.'); // Remove tile from enemy
-                                    int new_x, new_y;
-                                    std::cout << "Enter the coordinates to place the stolen tile:" << std::endl;
-                                    do {
-                                        std::cout << "X: ";
-                                        std::cin >> new_x;
-                                    } while (new_x < 1 || new_x > game_board.getter_board().size());
-                                    do {
-                                        std::cout << "Y: ";
-                                        std::cin >> new_y;
-                                    } while (new_y < 1 || new_y > game_board.getter_board()[0].size());
-                                    if (game_board.getter_case(new_x-1, new_y-1) == '.') {
-                                        game_board.setter_case(new_x-1, new_y-1, surrounding_char); // Place tile in player's territory
-                                    } else {
-                                        std::cout << "Invalid placement coordinates!" << std::endl;
-                                    }
+                                if (game_board.getter_case(y - 1, x - 1) == '0' + enemy_id) {
+                                    game_board.setter_case(y - 1, x - 1, surrounding_char);
                                 } else {
-                                    std::cout << "Invalid tile coordinates!" << std::endl;
+                                    std::cout << "Invalid coordinates or not owned by the selected player!" << std::endl;
                                 }
                             } else {
                                 std::cout << "Invalid player ID!" << std::endl;
@@ -271,7 +257,7 @@ int Game::count_grass_squares(char player_id) {
     return grass_count;
 }
 
-void Game::victory() {
+void Game::victory(Game &game) {
     int max_square_size = 0;
     int max_grass_count = 0;
     int winner_id = -1;
@@ -290,6 +276,8 @@ void Game::victory() {
 
     if (winner_id != -1) {
         std::string color_code = game_board.get_color_code('0' + winner_id);
+        CLI_renderer::refresh_terminal();
+        CLI_renderer::display_board(game);
         std::cout << color_code << "Player " << winner_id << "\033[0m" << " wins with a " << max_square_size << "x" << max_square_size << " square and " << max_grass_count << " grass squares!" << std::endl;
     } else {
         std::cout << "No winner!" << std::endl;
@@ -299,13 +287,24 @@ void Game::victory() {
 void Game::use_final_exchange(Game &game) {
     for (int i = 0; i < game.nb_players; ++i) {
         Player &player = game.getter_players(i);
+        const std::string RESET = "\033[0m";
+        const std::string player_name = player.getter_name();
+        const std::string player_color = player.getter_color();
+
+        // Effacer l'écran avant d'afficher le message pour chaque joueur
+        CLI_renderer::refresh_terminal();
+
+        std::cout << player_color << "Player " << player.getter_id() << " (" << player_name << ") - Final tile exchange" << RESET << std::endl;
+        std::cout << std::endl;
+        CLI_renderer::display_board(game);
+
         while (player.getter_tile_exchange() > 0) {
             int x, y;
             char choice;
-            std::cout << "Player " << player.getter_id() << " (" << player.getter_name() << "), you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
-            std::cout << "Do you want to use a tile exchange? (y/n): ";
-            std::cin >> choice;
-            std::cout << std::endl;
+            std::cout << player_color << "Player " << player.getter_id() << " (" << player.getter_name() << ")" << RESET << ", you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
+            std::cout << "Do you want to use a tile exchange? (Y/N): ";
+            choice = _getch();
+            std::cout << choice << std::endl;
             if (choice == 'y' || choice == 'Y') {
                 std::cout << "Enter the coordinates of the cell to change: " << std::endl;
                 do {

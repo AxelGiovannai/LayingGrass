@@ -42,7 +42,7 @@ public:
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
-    void victory();
+    void victory(Game &game);
     static void use_final_exchange(Game &game);
 };
 

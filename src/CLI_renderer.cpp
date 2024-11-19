@@ -54,8 +54,8 @@ void CLI_renderer::display_board(Game &game) {
 void CLI_renderer::display_menu(Game &game) {
     int x = 0;
     std::cout << "Welcome to Laying Grass!" << std::endl;
-    while (x < 1 || x > 9) {
-        std::cout << "Choose a number of players (1 to 9): ";
+    while (x < 2 || x > 9) {
+        std::cout << "Choose a number of players (2 to 9): ";
         std::cin >> x;
     }
     game.setter_nb_players(x);
@@ -151,23 +151,29 @@ void CLI_renderer::display_game(Game &game) {
 
     switch (action) {
         case 'p':
-        case 'P':
-            std::cout << "Coordinates of the most top-left '1' in the tile:" << std::endl;
-            int x, y;
-            do {
-                std::cout << "X: ";
-                std::cin >> x;
-            } while (x < 1 || x > game.getter_game_board().getter_board().size());
-            do {
-                std::cout << "Y: ";
-                std::cin >> y;
-            } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-            if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
-            } else {
-                std::cout << "Invalid placement" << std::endl;
+        case 'P': {
+            bool valid_placement = false;
+            while (!valid_placement) {
+                std::cout << "Coordinates of the most top-left '1' in the tile:" << std::endl;
+                int x, y;
+                do {
+                    std::cout << "X: ";
+                    std::cin >> x;
+                } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                do {
+                    std::cout << "Y: ";
+                    std::cin >> y;
+                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
+                    game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                    game.remove_tile(0); // Remove the tile after placing it
+                    valid_placement = true;
+                } else {
+                    std::cout << "Invalid placement. Try again." << std::endl;
+                }
             }
             break;
+        }
         case 'r':
         case 'R':
             game.getter_tiles(0).rotate();
@@ -203,7 +209,6 @@ void CLI_renderer::display_game(Game &game) {
             break;
     }
 }
-
 
 void CLI_renderer::first_turn(Game &game) {
     refresh_terminal();

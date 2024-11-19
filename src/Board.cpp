@@ -62,15 +62,18 @@ bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int
 
     if (top_left_x == -1 || top_left_y == -1) return false; // No 1 found in the tile
 
+    // Check if the tile fits within the board boundaries
+    int tile_height = tile.size();
+    int tile_width = tile[0].size();
+    if (x < 0 || y < 0 || x + tile_height > board.size() || y + tile_width > board[0].size()) {
+        return false;
+    }
+
     for (int i = 0; i < tile.size(); ++i) {
         for (int j = 0; j < tile[i].size(); ++j) {
             if (tile[i][j] == 1) {
                 int board_x = x + (i - top_left_x);
                 int board_y = y + (j - top_left_y);
-
-                if (board_x < 0 || board_y < 0 || board_x >= board.size() || board_y >= board[0].size()) {
-                    continue; // Allow zeros to be out of the board
-                }
 
                 if (board[board_x][board_y] != '.') {
                     return false;
@@ -81,7 +84,7 @@ bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int
                     (board_y > 0 && board[board_x][board_y - 1] == '0' + player_id) ||
                     (board_y < board[0].size() - 1 && board[board_x][board_y + 1] == '0' + player_id)) {
                     adjacent_to_player_tile = true;
-                }
+                    }
             }
         }
     }
