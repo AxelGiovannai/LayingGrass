@@ -74551,6 +74551,74 @@ namespace std
        
 # 40 "C:/msys64/mingw64/include/c++/14.2.0/ctime" 3
 # 9 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+# 1 "C:/msys64/mingw64/include/conio.h" 1 3
+# 11 "C:/msys64/mingw64/include/conio.h" 3
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 1 3 4
+# 1 "C:/msys64/mingw64/include/stddef.h" 1 3 4
+# 2 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 2 3 4
+# 12 "C:/msys64/mingw64/include/conio.h" 2 3
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) char *_cgets(char *_Buffer) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cputs(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getch(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getche(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _kbhit(void);
+# 103 "C:/msys64/mingw64/include/conio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf(const char * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf(const char * __restrict__ _Format,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_l(const char * __restrict__ _Format,_locale_t _Locale,...) ;
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf(const char * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_p(const char * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_p(const char * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_l(const char * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_l(const char * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_p_l(const char * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_p_l(const char * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+# 125 "C:/msys64/mingw64/include/conio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putch(int _Ch);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ungetch(int _Ch);
+# 246 "C:/msys64/mingw64/include/conio.h" 3
+  char *__attribute__((__cdecl__)) cgets(char *_Buffer) ;
+# 268 "C:/msys64/mingw64/include/conio.h" 3
+  int __attribute__((__cdecl__)) cprintf(const char * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) cscanf(const char * __restrict__ _Format,...) ;
+
+  int __attribute__((__cdecl__)) cputs(const char *_Str) ;
+  int __attribute__((__cdecl__)) getch(void) ;
+  int __attribute__((__cdecl__)) getche(void) ;
+  int __attribute__((__cdecl__)) kbhit(void) ;
+  int __attribute__((__cdecl__)) putch(int _Ch) ;
+  int __attribute__((__cdecl__)) ungetch(int _Ch) ;
+# 313 "C:/msys64/mingw64/include/conio.h" 3
+}
+
+
+# 1 "C:/msys64/mingw64/include/sec_api/conio_s.h" 1 3
+# 10 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+# 1 "C:/msys64/mingw64/include/conio.h" 1 3
+# 11 "C:/msys64/mingw64/include/sec_api/conio_s.h" 2 3
+# 22 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+extern "C" {
+
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _cgets_s (char *_Buffer,size_t _Size,size_t *_SizeRead);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _cgets_s(char (&_Buffer)[__size], size_t* _SizeRead) { return _cgets_s(_Buffer,__size,_SizeRead); } }
+
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cprintf_s (const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_s(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcprintf_s (const char *_Format,va_list _ArgList);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cprintf_s_l (const char *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcprintf_s_l (const char *_Format,_locale_t _Locale,va_list _ArgList);
+# 49 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+}
+# 317 "C:/msys64/mingw64/include/conio.h" 2 3
+# 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 1
 
 
@@ -79584,10 +79652,32 @@ public:
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
-    void victory();
+    void victory(Game &game);
     static void use_final_exchange(Game &game);
+    void remove_rock(Game &game,int x, int y);
 };
-# 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 1
+
+
+
+
+
+
+# 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 1
+# 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
+
+
+class CLI_renderer {
+public:
+    static void display_board(Game &game);
+    static void refresh_terminal();
+    static void display_menu(Game &game);
+    static void display_game(Game &game);
+    static void first_turn(Game &game);
+};
+# 13 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
 int& Game::getter_nb_players(){
     return nb_players;
@@ -79735,6 +79825,21 @@ void Game::use_tile_exchange(int tile_index) {
     current_player.setter_tile_exchange(current_player.getter_tile_exchange() - 1);
 }
 
+void Game::remove_rock(Game &game, int x, int y) {
+    if (x < 0 || x >= game.getter_game_board().getter_board().size() ||
+        y < 0 || y >= game.getter_game_board().getter_board()[0].size()) {
+        std::cout << "Invalid coordinates!" << std::endl;
+        }
+
+    char &cell = game.getter_game_board().getter_case(x, y);
+    if (cell == 'P') {
+        cell = '.';
+        std::cout << "Rock removed at (" << x + 1 << ", " << y + 1 << ")" << std::endl;
+    } else {
+        std::cout << "No rock at the specified coordinates!" << std::endl;
+    }
+}
+
 void Game::apply_bonus_effects() {
     for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
         for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {
@@ -79773,25 +79878,10 @@ void Game::apply_bonus_effects() {
                                     std::cout << "Y: ";
                                     std::cin >> y;
                                 } while (y < 1 || y > game_board.getter_board()[0].size());
-                                if (game_board.getter_case(x-1, y-1) == '0' + enemy_id) {
-                                    game_board.setter_case(x-1, y-1, '.');
-                                    int new_x, new_y;
-                                    std::cout << "Enter the coordinates to place the stolen tile:" << std::endl;
-                                    do {
-                                        std::cout << "X: ";
-                                        std::cin >> new_x;
-                                    } while (new_x < 1 || new_x > game_board.getter_board().size());
-                                    do {
-                                        std::cout << "Y: ";
-                                        std::cin >> new_y;
-                                    } while (new_y < 1 || new_y > game_board.getter_board()[0].size());
-                                    if (game_board.getter_case(new_x-1, new_y-1) == '.') {
-                                        game_board.setter_case(new_x-1, new_y-1, surrounding_char);
-                                    } else {
-                                        std::cout << "Invalid placement coordinates!" << std::endl;
-                                    }
+                                if (game_board.getter_case(y - 1, x - 1) == '0' + enemy_id) {
+                                    game_board.setter_case(y - 1, x - 1, surrounding_char);
                                 } else {
-                                    std::cout << "Invalid tile coordinates!" << std::endl;
+                                    std::cout << "Invalid coordinates or not owned by the selected player!" << std::endl;
                                 }
                             } else {
                                 std::cout << "Invalid player ID!" << std::endl;
@@ -79850,14 +79940,13 @@ int Game::count_grass_squares(char player_id) {
     return grass_count;
 }
 
-void Game::victory() {
-
+void Game::victory(Game &game) {
     int max_square_size = 0;
     int max_grass_count = 0;
     int winner_id = -1;
 
     for (int i = 0; i < nb_players; ++i) {
-        char player_id = static_cast<char>(i + 1);
+        char player_id = '0' + (i + 1);
         int square_size = largest_square_covered(player_id);
         int grass_count = count_grass_squares(player_id);
 
@@ -79869,7 +79958,10 @@ void Game::victory() {
     }
 
     if (winner_id != -1) {
-        std::cout << "Player " << winner_id << " wins!" << std::endl;
+        std::string color_code = game_board.get_color_code('0' + winner_id);
+        CLI_renderer::refresh_terminal();
+        CLI_renderer::display_board(game);
+        std::cout << color_code << "Player " << winner_id << "\033[0m" << " wins with a " << max_square_size << "x" << max_square_size << " square and " << max_grass_count << " grass squares!" << std::endl;
     } else {
         std::cout << "No winner!" << std::endl;
     }
@@ -79878,14 +79970,26 @@ void Game::victory() {
 void Game::use_final_exchange(Game &game) {
     for (int i = 0; i < game.nb_players; ++i) {
         Player &player = game.getter_players(i);
+        const std::string RESET = "\033[0m";
+        const std::string player_name = player.getter_name();
+        const std::string player_color = player.getter_color();
+
+
+        CLI_renderer::refresh_terminal();
+
+        std::cout << player_color << "Player " << player.getter_id() << " (" << player_name << ") - Final tile exchange" << RESET << std::endl;
+        std::cout << std::endl;
+        CLI_renderer::display_board(game);
+
         while (player.getter_tile_exchange() > 0) {
             int x, y;
             char choice;
-            std::cout << "Player " << player.getter_id() << " (" << player.getter_name() << "), you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
-            std::cout << "Do you want to use a tile exchange? (y/n): ";
-            std::cin >> choice;
+            std::cout << player_color << "Player " << player.getter_id() << " (" << player.getter_name() << ")" << RESET << ", you have " << player.getter_tile_exchange() << " tile exchanges left." << std::endl;
+            std::cout << "Do you want to use a tile exchange? (Y/N): ";
+            choice = _getch();
+            std::cout << choice << std::endl;
             if (choice == 'y' || choice == 'Y') {
-                std::cout << "Enter the coordinates of the cell to change (x y): ";
+                std::cout << "Enter the coordinates of the cell to change: " << std::endl;
                 do {
                     std::cout << "X: ";
                     std::cin >> x;
@@ -79894,13 +79998,15 @@ void Game::use_final_exchange(Game &game) {
                     std::cout << "Y: ";
                     std::cin >> y;
                 } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-                char &cell = game.getter_game_board().getter_case(x - 1, y - 1);
+                char &cell = game.getter_game_board().getter_case(y - 1, x - 1);
                 if (cell == '.' || cell == 'P') {
                     cell = '0' + player.getter_id();
                     player.setter_tile_exchange(player.getter_tile_exchange() - 1);
                 } else {
                     std::cout << "Invalid cell. You can only change empty cells or stones." << std::endl;
                 }
+                CLI_renderer::refresh_terminal();
+                CLI_renderer::display_board(game);
             } else {
                 break;
             }

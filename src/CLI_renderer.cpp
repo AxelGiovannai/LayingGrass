@@ -141,7 +141,7 @@ void CLI_renderer::display_game(Game &game) {
     }
 
     std::cout << std::endl;
-    std::cout << "[P] Place | [R] Rotate | [F] Flip | [E] Exchange (" << current_player.getter_tile_exchange() << ") " << "| (Q) Quit" << std::endl;
+    std::cout << "[P] Place | [R] Rotate | [F] Flip | [E] Exchange Coupon (" << current_player.getter_tile_exchange() << ") " << "| (Q) Quit" << std::endl;
     char action;
     do {
         std::cout << "Choice: ";
@@ -188,16 +188,51 @@ void CLI_renderer::display_game(Game &game) {
             break;
         case 'e':
         case 'E': {
-            int tile_index;
-            std::cout << "Enter the index of the tile to exchange: ";
-            std::cin >> tile_index;
-            if (tile_index > 0 && tile_index < 6) {
-                game.use_tile_exchange(tile_index);
-            } else {
-                std::cout << "Invalid tile index" << std::endl;
+            std::cout << "[E] Exchange Tile | [R] Remove Pierre | [Q] Return " << std::endl;
+            char exchange_action;
+            do {
+                std::cout << "Choice: ";
+                exchange_action = _getch();
+                std::cout << exchange_action << std::endl;
+            } while (exchange_action != 'E' && exchange_action != 'R' && exchange_action != 'e' && exchange_action != 'r');
+            switch (exchange_action) {
+                case 'r':
+                case 'R':
+                    int x, y;
+                    do {
+                        std::cout << "X: ";
+                        std::cin >> x;
+                    } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                    do {
+                        std::cout << "Y: ";
+                        std::cin >> y;
+                    } while (y < 1 || y > game.getter_game_board().getter_board().size());
+                    if (game.getter_game_board().getter_board()[y - 1][x - 1] == 'P') {
+                        game.remove_rock(game, x - 1, y - 1);
+                    }else {
+                        refresh_terminal();
+                        display_game(game);
+                    }
+                     break;
+                case 'e':
+                case 'E':
+                    int tile_index;
+                    std::cout << "Enter the index of the tile to exchange: ";
+                    std::cin >> tile_index;
+                    if (tile_index > 0 && tile_index < 6) {
+                        game.use_tile_exchange(tile_index);
+                    } else {
+                        std::cout << "Invalid tile index" << std::endl;
+                    }
+                    refresh_terminal();
+                    display_game(game);
+                    break;
+                case 'q':
+                case 'Q':
+                    refresh_terminal();
+                    display_game(game);
+                    break;
             }
-            refresh_terminal();
-            display_game(game);
             break;
         }
         case 'q':

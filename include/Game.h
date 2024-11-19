@@ -44,6 +44,7 @@ public:
     int count_grass_squares(char player_id);
     void victory(Game &game);
     static void use_final_exchange(Game &game);
+    void remove_rock(Game &game,int x, int y);
 };
 
 

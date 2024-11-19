@@ -37793,8 +37793,9 @@ public:
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
-    void victory();
+    void victory(Game &game);
     static void use_final_exchange(Game &game);
+    void remove_rock(Game &game,int x, int y);
 };
 # 8 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 2
 
@@ -72424,10 +72425,78 @@ namespace std
        
 # 40 "C:/msys64/mingw64/include/c++/14.2.0/cstdlib" 3
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
+# 1 "C:/msys64/mingw64/include/conio.h" 1 3
+# 11 "C:/msys64/mingw64/include/conio.h" 3
+# 1 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 1 3 4
+# 1 "C:/msys64/mingw64/include/stddef.h" 1 3 4
+# 2 "C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h" 2 3 4
+# 12 "C:/msys64/mingw64/include/conio.h" 2 3
+
+
+extern "C" {
+
+
+  __attribute__ ((__dllimport__)) char *_cgets(char *_Buffer) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cputs(const char *_Str);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getch(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _getche(void);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _kbhit(void);
+# 103 "C:/msys64/mingw64/include/conio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf(const char * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf(const char * __restrict__ _Format,...) ;
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_l(const char * __restrict__ _Format,_locale_t _Locale,...) ;
+
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf(const char * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_p(const char * __restrict__ _Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_p(const char * __restrict__ _Format,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_l(const char * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_l(const char * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cprintf_p_l(const char * __restrict__ _Format,_locale_t _Locale,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _vcprintf_p_l(const char * __restrict__ _Format,_locale_t _Locale,va_list _ArgList);
+# 125 "C:/msys64/mingw64/include/conio.h" 3
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _putch(int _Ch);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _ungetch(int _Ch);
+# 246 "C:/msys64/mingw64/include/conio.h" 3
+  char *__attribute__((__cdecl__)) cgets(char *_Buffer) ;
+# 268 "C:/msys64/mingw64/include/conio.h" 3
+  int __attribute__((__cdecl__)) cprintf(const char * __restrict__ _Format,...) ;
+  int __attribute__((__cdecl__)) cscanf(const char * __restrict__ _Format,...) ;
+
+  int __attribute__((__cdecl__)) cputs(const char *_Str) ;
+  int __attribute__((__cdecl__)) getch(void) ;
+  int __attribute__((__cdecl__)) getche(void) ;
+  int __attribute__((__cdecl__)) kbhit(void) ;
+  int __attribute__((__cdecl__)) putch(int _Ch) ;
+  int __attribute__((__cdecl__)) ungetch(int _Ch) ;
+# 313 "C:/msys64/mingw64/include/conio.h" 3
+}
+
+
+# 1 "C:/msys64/mingw64/include/sec_api/conio_s.h" 1 3
+# 10 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+# 1 "C:/msys64/mingw64/include/conio.h" 1 3
+# 11 "C:/msys64/mingw64/include/sec_api/conio_s.h" 2 3
+# 22 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+extern "C" {
+
+
+  __attribute__((dllimport)) errno_t __attribute__((__cdecl__)) _cgets_s (char *_Buffer,size_t _Size,size_t *_SizeRead);
+  extern "C++" { template <size_t __size> inline errno_t __attribute__((__cdecl__)) _cgets_s(char (&_Buffer)[__size], size_t* _SizeRead) { return _cgets_s(_Buffer,__size,_SizeRead); } }
+
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cprintf_s (const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_s(const char *_Format,...);
+  __attribute__ ((__dllimport__)) int __attribute__((__cdecl__)) _cscanf_s_l(const char *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcprintf_s (const char *_Format,va_list _ArgList);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _cprintf_s_l (const char *_Format,_locale_t _Locale,...);
+  __attribute__((dllimport)) int __attribute__((__cdecl__)) _vcprintf_s_l (const char *_Format,_locale_t _Locale,va_list _ArgList);
+# 49 "C:/msys64/mingw64/include/sec_api/conio_s.h" 3
+}
+# 317 "C:/msys64/mingw64/include/conio.h" 2 3
+# 11 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp" 2
 
 
 
-# 12 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp"
+# 13 "C:/Users/Axel/CLionProjects/LayingGrass/src/CLI_renderer.cpp"
 void CLI_renderer::refresh_terminal() {
 
     std::system("cls");
@@ -72472,8 +72541,8 @@ void CLI_renderer::display_board(Game &game) {
 void CLI_renderer::display_menu(Game &game) {
     int x = 0;
     std::cout << "Welcome to Laying Grass!" << std::endl;
-    while (x < 1 || x > 9) {
-        std::cout << "Choose a number of players (1 to 9): ";
+    while (x < 2 || x > 9) {
+        std::cout << "Choose a number of players (2 to 9): ";
         std::cin >> x;
     }
     game.setter_nb_players(x);
@@ -72498,6 +72567,7 @@ void CLI_renderer::display_menu(Game &game) {
     Game::generate_tile(game);
 }
 
+
 void CLI_renderer::display_game(Game &game) {
     const int player_turn = game.getter_player_turn();
     if (player_turn < 1 || player_turn > game.getter_nb_players()) {
@@ -72510,7 +72580,7 @@ void CLI_renderer::display_game(Game &game) {
     Player current_player = game.getter_players(player_turn - 1);
     const std::string player_name = current_player.getter_name();
     const std::string player_color = current_player.getter_color();
-    std::cout << player_color << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() << RESET << std::endl;
+    std::cout << player_color << "Player " << current_player.getter_id() << " (" << player_name << ") - Round " << game.getter_nb_rounds() + 1 << RESET << std::endl;
     std::cout << " " << std::endl;
     display_board(game);
 
@@ -72521,7 +72591,7 @@ void CLI_renderer::display_game(Game &game) {
             if (cell == 1) {
                 std::cout << "1 ";
             } else {
-                std::cout << cell << " ";
+                std::cout << "  ";
             }
         }
         std::cout << std::endl;
@@ -72539,47 +72609,58 @@ void CLI_renderer::display_game(Game &game) {
             const auto &tile_shape = game.getter_tiles(i).getter_shape();
             if (row < tile_shape.size()) {
                 for (const auto &cell : tile_shape[row]) {
-                    std::cout << cell << " ";
+                    if (cell == 1) {
+                        std::cout << "1 ";
+                    } else {
+                        std::cout << "  ";
+                    }
                 }
             } else {
                 for (size_t col = 0; col < tile_shape[0].size(); ++col) {
                     std::cout << "  ";
                 }
             }
-            std::cout << " ";
+            if (i < 5) {
+                std::cout << "  |  ";
+            }
         }
         std::cout << std::endl;
     }
 
     std::cout << std::endl;
-    std::cout << "[P] Place | [R] Rotate | [F] Flip | [E] Exchange(" << current_player.getter_tile_exchange() << ")" << std::endl;
+    std::cout << "[P] Place | [R] Rotate | [F] Flip | [E] Exchange Coupon (" << current_player.getter_tile_exchange() << ") " << "| (Q) Quit" << std::endl;
     char action;
     do {
         std::cout << "Choice: ";
-        std::cin >> action;
+        action = _getch();
+        std::cout << action << std::endl;
     } while (action != 'P' && action != 'R' && action != 'F' && action != 'E' && action != 'S' && action != 'V' && action != 'Q' && action != 'p' && action != 'r' && action != 'f' && action != 'e' && action != 's' && action != 'v' && action != 'q');
 
     switch (action) {
         case 'p':
-            case 'P':
-            std::cout << "the coordinates are the top left corner " << std::endl;
-            int x, y;
-            do {
-                std::cout << "X: ";
-                std::cin >> x;
-            } while (x < 1 || x > game.getter_game_board().getter_board().size());
-            do {
-                std::cout << "Y: ";
-                std::cin >> y;
-            } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
-            if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
-                game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
-                game.remove_tile(0);
-            } else {
-                refresh_terminal();
-                display_game(game);
+        case 'P': {
+            bool valid_placement = false;
+            while (!valid_placement) {
+                std::cout << "Coordinates of the most top-left '1' in the tile:" << std::endl;
+                int x, y;
+                do {
+                    std::cout << "X: ";
+                    std::cin >> x;
+                } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                do {
+                    std::cout << "Y: ";
+                    std::cin >> y;
+                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                if (game.getter_game_board().can_place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()))) {
+                    game.getter_game_board().place_tile(game.getter_tiles(0).getter_shape(), y - 1, x - 1, static_cast<char>(current_player.getter_id()));
+                    game.remove_tile(0);
+                    valid_placement = true;
+                } else {
+                    std::cout << "Invalid placement. Try again." << std::endl;
+                }
             }
             break;
+        }
         case 'r':
         case 'R':
             game.getter_tiles(0).rotate();
@@ -72593,20 +72674,54 @@ void CLI_renderer::display_game(Game &game) {
             display_game(game);
             break;
         case 'e':
-        case 'E':
-        int tile_index;
-        std::cout << "Enter the index of the tile to exchange: ";
-        std::cin >> tile_index;
-        if (tile_index > 0 && tile_index < 6) {
-            game.use_tile_exchange(tile_index);
-        } else {
-            std::cout << "Invalid tile index!" << std::endl;
-        }
-        refresh_terminal();
-        display_game(game);
-        break;
-        break;
+        case 'E': {
+            std::cout << "[E] Exchange Tile | [R] Remove Pierre | [Q] Return " << std::endl;
+            char exchange_action;
+            do {
+                std::cout << "Choice: ";
+                exchange_action = _getch();
+                std::cout << exchange_action << std::endl;
+            } while (exchange_action != 'E' && exchange_action != 'R' && exchange_action != 'e' && exchange_action != 'r');
+            switch (exchange_action) {
+                case 'r':
+                case 'R':
+                    int x, y;
+                    do {
+                        std::cout << "X: ";
+                        std::cin >> x;
+                    } while (x < 1 || x > game.getter_game_board().getter_board().size());
+                    do {
+                        std::cout << "Y: ";
+                        std::cin >> y;
+                    } while (y < 1 || y > game.getter_game_board().getter_board().size());
+                    if (game.getter_game_board().getter_board()[y - 1][x - 1] == 'P') {
+                        game.remove_rock(game, x - 1, y - 1);
+                    }else {
+                        refresh_terminal();
+                        display_game(game);
+                    }
+                     break;
+                case 'e':
+                case 'E':
+                    int tile_index;
+                    std::cout << "Enter the index of the tile to exchange: ";
+                    std::cin >> tile_index;
+                    if (tile_index > 0 && tile_index < 6) {
+                        game.use_tile_exchange(tile_index);
+                    } else {
+                        std::cout << "Invalid tile index" << std::endl;
+                    }
+                    refresh_terminal();
+                    display_game(game);
+                    break;
+                case 'q':
+                case 'Q':
+                    refresh_terminal();
+                    display_game(game);
+                    break;
+            }
             break;
+        }
         case 'q':
         case 'Q':
             exit(0);
@@ -72617,14 +72732,18 @@ void CLI_renderer::display_game(Game &game) {
     }
 }
 
-
 void CLI_renderer::first_turn(Game &game) {
     refresh_terminal();
-    display_board(game);
 
     for (int i = 0; i < game.getter_nb_players(); ++i) {
         Player &player = game.getter_players(i);
-        std::cout << player.getter_name() << " (Player " << player.getter_id() << "), place your starting tile." << std::endl;
+        const std::string RESET = "\033[0m";
+        const std::string player_name = player.getter_name();
+        const std::string player_color = player.getter_color();
+        std::cout << player_color << "Player " << player.getter_id() << " (" << player_name << ") - Placing first tile" << RESET << std::endl;
+        std::cout << std::endl;
+        display_board(game);
+        std::cout << "Enter the coordinates of your first tile:" << std::endl;
         int x, y;
         do {
             std::cout << "X: ";
@@ -72636,11 +72755,10 @@ void CLI_renderer::first_turn(Game &game) {
         } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
         if (game.getter_game_board().place_first_tile(player.getter_starting_tile(), y - 1, x - 1, static_cast<char>(player.getter_id()))) {
             refresh_terminal();
-            display_board(game);
         } else {
             std::cout << "Invalid placement. Try again." << std::endl;
+            refresh_terminal();
             --i;
         }
     }
-
 }

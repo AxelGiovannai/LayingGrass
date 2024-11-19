@@ -157,6 +157,21 @@ void Game::use_tile_exchange(int tile_index) {
     current_player.setter_tile_exchange(current_player.getter_tile_exchange() - 1);
 }
 
+void Game::remove_rock(Game &game, int x, int y) {
+    if (x < 0 || x >= game.getter_game_board().getter_board().size() ||
+        y < 0 || y >= game.getter_game_board().getter_board()[0].size()) {
+        std::cout << "Invalid coordinates!" << std::endl;
+        }
+
+    char &cell = game.getter_game_board().getter_case(x, y);
+    if (cell == 'P') {
+        cell = '.';
+        std::cout << "Rock removed at (" << x + 1 << ", " << y + 1 << ")" << std::endl;
+    } else {
+        std::cout << "No rock at the specified coordinates!" << std::endl;
+    }
+}
+
 void Game::apply_bonus_effects() {
     for (int i = 1; i < game_board.getter_board().size() - 1; ++i) {
         for (int j = 1; j < game_board.getter_board()[i].size() - 1; ++j) {

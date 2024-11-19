@@ -190,6 +190,8 @@ CMakeFiles\LayingGrass.dir\src\Game.cpp.obj.ddi: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/14.2.0/istream \
  C:/msys64/mingw64/include/c++/14.2.0/bits/istream.tcc \
+ C:/msys64/mingw64/include/conio.h \
+ C:/msys64/mingw64/include/sec_api/conio_s.h \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h \
  C:/msys64/mingw64/include/c++/14.2.0/vector \
@@ -198,4 +200,6 @@ CMakeFiles\LayingGrass.dir\src\Game.cpp.obj.ddi: \
  C:/msys64/mingw64/include/c++/14.2.0/bits/stl_bvector.h \
  C:/msys64/mingw64/include/c++/14.2.0/bits/vector.tcc \
  C:/Users/Axel/CLionProjects/LayingGrass/include/Player.h \
- C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h
+ C:/Users/Axel/CLionProjects/LayingGrass/include/Tile.h \
+ C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h \
+ C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h

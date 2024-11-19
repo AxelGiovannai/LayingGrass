@@ -72199,8 +72199,9 @@ public:
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
     int count_grass_squares(char player_id);
-    void victory();
+    void victory(Game &game);
     static void use_final_exchange(Game &game);
+    void remove_rock(Game &game,int x, int y);
 };
 # 3 "C:/Users/Axel/CLionProjects/LayingGrass/src/main.cpp" 2
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Board.h" 1
@@ -72232,7 +72233,7 @@ public:
 
 int main() {
     Game game;
-    const int number_rounds = 2;
+    const int number_rounds = 10;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
     while (game.getter_nb_rounds() < number_rounds) {
@@ -72241,9 +72242,9 @@ int main() {
         game.apply_bonus_effects();
         game.setter_player_turn();
     }
-    Game::use_final_exchange(game);
+    CLI_renderer::refresh_terminal();
     CLI_renderer::display_board(game);
-    game.victory();
-    std::cout << "PROUT FINI ! :p" << std::endl;
+    Game::use_final_exchange(game);
+    game.victory(game);
     return 0;
 }
