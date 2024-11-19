@@ -37772,18 +37772,15 @@ public:
     Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
-    void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
     void remove_tile(int index);
-    void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
@@ -78858,10 +78855,9 @@ bool Board::can_place_tile(const std::vector<std::vector<int>> &tile, int x, int
 
     if (top_left_x == -1 || top_left_y == -1) return false;
 
-
     int tile_height = tile.size();
     int tile_width = tile[0].size();
-    if (x < 0 || y < 0 || x + tile_height > board.size() || y + tile_width > board[0].size()) {
+    if (x < 0 || y < 0 || x + tile_height > board.size() + 1 || y + tile_width > board[0].size() + 1) {
         return false;
     }
 

@@ -74619,6 +74619,7 @@ extern "C" {
 }
 # 317 "C:/msys64/mingw64/include/conio.h" 2 3
 # 10 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/Game.h" 1
 
 
@@ -79636,18 +79637,15 @@ public:
     Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
-    void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
     void remove_tile(int index);
-    void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
@@ -79656,7 +79654,7 @@ public:
     static void use_final_exchange(Game &game);
     void remove_rock(Game &game,int x, int y);
 };
-# 11 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+# 12 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
 # 1 "C:/Users/Axel/CLionProjects/LayingGrass/include/CLI_renderer.h" 1
 
@@ -79677,7 +79675,7 @@ public:
     static void display_game(Game &game);
     static void first_turn(Game &game);
 };
-# 13 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
+# 14 "C:/Users/Axel/CLionProjects/LayingGrass/src/Game.cpp" 2
 
 int& Game::getter_nb_players(){
     return nb_players;
@@ -79713,11 +79711,6 @@ void Game::setter_player_turn() {
         nb_rounds++;
     }
 }
-
-void Game::setter_nb_rounds() {
-    this->nb_rounds;
-}
-
 
 
 void Game::setter_game_board() {
@@ -79990,14 +79983,32 @@ void Game::use_final_exchange(Game &game) {
             std::cout << choice << std::endl;
             if (choice == 'y' || choice == 'Y') {
                 std::cout << "Enter the coordinates of the cell to change: " << std::endl;
-                do {
+                while (true) {
                     std::cout << "X: ";
                     std::cin >> x;
-                } while (x < 1 || x > game.getter_game_board().getter_board().size());
-                do {
+                    if (std::cin.fail()) {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter a number." << std::endl;
+                    } else if (x < 1 || x > game.getter_game_board().getter_board().size()) {
+                        std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board().size() << "." << std::endl;
+                    } else {
+                        break;
+                    }
+                }
+                while (true) {
                     std::cout << "Y: ";
                     std::cin >> y;
-                } while (y < 1 || y > game.getter_game_board().getter_board()[0].size());
+                    if (std::cin.fail()) {
+                        std::cin.clear();
+                        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                        std::cout << "Invalid input. Please enter a number." << std::endl;
+                    } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
+                        std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
+                    } else {
+                        break;
+                    }
+                }
                 char &cell = game.getter_game_board().getter_case(y - 1, x - 1);
                 if (cell == '.' || cell == 'P') {
                     cell = '0' + player.getter_id();

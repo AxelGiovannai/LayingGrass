@@ -72183,18 +72183,15 @@ public:
     Tile& getter_tiles(int i);
     void setter_nb_players(int nb);
     void setter_player_turn();
-    void setter_nb_rounds();
     void setter_game_board();
     void setter_players(const Player& player);
     void setter_tiles(const Tile &tile);
     void place_initial_stones();
     void place_initial_tile_exchanges();
     void place_initial_robberies();
-    void place_Rock(Player &player, int x, int y);
     static void generate_tile(Game &game);
     void initialize_game();
     void remove_tile(int index);
-    void setter_stone();
     void use_tile_exchange(int tile_index);
     void apply_bonus_effects();
     int largest_square_covered(char player_id);
@@ -72233,7 +72230,7 @@ public:
 
 int main() {
     Game game;
-    const int number_rounds = 4;
+    const int number_rounds = 8;
     CLI_renderer::display_menu(game);
     CLI_renderer::first_turn(game);
     while (game.getter_nb_rounds() < number_rounds) {

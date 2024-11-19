@@ -117,7 +117,6 @@ void CLI_renderer::display_game(Game &game) {
         max_height = std::max(max_height, game.getter_tiles(i).getter_shape().size());
     }
 
-
     for (size_t row = 0; row < max_height; ++row) {
         for (int i = 1; i < 6; ++i) {
             const auto &tile_shape = game.getter_tiles(i).getter_shape();
@@ -239,7 +238,7 @@ void CLI_renderer::display_game(Game &game) {
                             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                             std::cout << "Invalid input. Please enter a number." << std::endl;
                         } else if (y < 1 || y > game.getter_game_board().getter_board()[0].size()) {
-                            std::cout << "Invalid coordinate. Please enter a number between 1 and " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
+                            std::cout << "Invalid coordinate. Please enter a number between 1 et " << game.getter_game_board().getter_board()[0].size() << "." << std::endl;
                         } else {
                             break;
                         }
@@ -286,6 +285,7 @@ void CLI_renderer::display_game(Game &game) {
             break;
     }
 }
+
 void CLI_renderer::first_turn(Game &game) {
     refresh_terminal();
 
